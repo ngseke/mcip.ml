@@ -1,0 +1,272 @@
+@import "variables"
+@import "functions"
+
+main
+  section:nth-child(odd)
+    background-color: rgba(#eee, .4)
+
+section
+  background-color: white
+  overflow: hidden
+  +py(4rem)
+  &.secondary
+    background-color: rgba(#eee, .4)
+  h3
+    font-size: 2.8rem
+    font-weight: 500
+    line-height: 1.2
+    margin-bottom: 2rem
+    &.big
+      font-size: 3.4rem
+
+  p
+    margin-bottom: 2rem
+    letter-spacing: .5px
+    line-height: 1.75rem
+
+  @media (max-width: 768px)
+    h3
+      font-size: 2.2rem
+
+.screenshot-area
+  position: relative
+  text-align: center
+  perspective: 700px
+  z-index: 100
+  img
+    width: 100%
+    height: auto
+    transition: all .7s
+    max-width: 15rem
+    width: 100%
+    height: auto
+    &.shrink
+      transform: scale(.9)
+    &.screenshot
+      border-radius: 15px
+      // transform: rotateX(0deg) rotateY(3deg)
+      // transform-style: preserve-3d
+      transition-duration: .5s
+      &.shrink
+        transform: scale(1) translateY(7rem)
+        opacity: 0
+
+    &.unlimited
+      max-width: none
+
+  img.avatar
+    +wh(7rem)
+    display: inline-block
+    border-radius: 100%
+    position: absolute
+    bottom: 0
+    right: -3rem
+    box-shadow: $big-btn-shadow
+
+.partners
+  .item
+    display: inline-flex
+    align-items: center
+    flex-direction: row
+    transition: all .3s
+    list-style: none
+    margin-bottom: 1.25rem
+    transform-origin: center center
+    +floating-link
+    img
+      height: auto
+      width: 3rem
+      margin-right: .75rem
+      border-radius: 10px
+      transition: box-shadow .7s
+    .info
+      h4
+        color: #333
+        font-size: 1rem
+        font-weight: 500
+        margin: 0
+        letter-spacing: .5px
+      .school
+        color: #333
+        opacity: .8
+
+
+.qrcode
+  width: 100%
+  height: auto
+  max-width: 10rem
+
+.align-center-article
+  +flex-center
+  height: 100%
+  flex-direction: column
+  align-items: stretch
+
+
+.count-to
+  +my(1rem)
+  margin-right: 2rem
+  text-align: center
+  .number
+    display: inline-block
+    font-size: 2.5rem
+    font-family: roboto, Helvetica, Arial
+    margin: 0
+    padding: 0
+  .label
+    margin-left: .5rem
+    font-size: 1.5rem
+    font-weight: 500
+  .info
+    font-weight: 500
+    margin-top: -.5rem
+
+#news
+  a.title
+    transition: all .2s
+    display: inline-block
+    color: #333
+    +floating-link
+    h3
+      display: inline-block
+    .icon
+      display: inline-block
+      transition: all .2s
+      
+  .card
+    margin-bottom: 1rem
+    overflow: hidden
+    transition: transform .5s, box-shadow .3s
+    border: 0
+    box-shadow: $big-btn-shadow
+    color: #333
+    &:hover
+      transform: scale(1.02)
+      cursor: pointer
+      box-shadow: $big-btn-hover-shadow
+
+    img.card-img-top
+      height: 10rem
+      background: #ddd
+      object-fit: cover
+      position: relative
+      border: 0
+
+    .card-img-overlay
+      background: linear-gradient(to top, rgba(black, 0) 0%, rgba(black, .75) 100%)
+      height: 10rem
+      color: white
+      border: 0
+
+    .card-body
+      height: 15rem
+      position: relative
+      font-size: .9rem
+      word-wrap: break-word
+      &::after
+        +bg-fade-out
+
+    //- 偽載入框架
+    &.loader
+      .card-img-overlay
+        background: transparent
+        .author
+          img.avatar
+            background: #ccc
+          .name, .date
+            +loader-text-bar
+          .date
+            height: .9rem
+            margin-bottom: 0
+            width: 70%
+      .card-text
+        display: flex
+        flex-direction: column
+        .bar
+          +loader-text-bar
+          width: 100%
+          &.short
+            width: 70%
+
+  .author
+    display: flex
+    flex-direction: row
+    align-items: center
+    text-align: left
+    img.avatar
+      border-radius: 100rem
+      object-fit: cover
+      +wh(3rem)
+    .info
+      margin-left: 1rem
+      flex-grow: 1
+    .name
+      font-weight: 500
+    .date
+      font-size: .9rem
+      opacity: .8
+
+  .big-close-btn
+    position: relative
+    width: 60px
+    height: 60px
+    opacity: 0.3
+    margin-top: 3rem
+    &:hover
+      opacity: 1
+    &:before, &:after
+      position: absolute
+      content: ' '
+      height: 64px
+      width: 1px
+      background-color: #333
+    &:before
+      transform: rotate(45deg)
+    &:after
+      transform: rotate(-45deg)
+
+$line-icon-size: 7rem
+$line-icon-number-offset: .4rem
+
+#payment
+  // LINE 圖標區域
+  .line-icon
+    user-select: none
+    position: absolute
+    top: 0
+    left: 0
+    +wh(100%)
+    +flex-center
+    // 圖標
+    img
+      +wh($line-icon-size)
+      transition: all .5s .2s
+      &.shrink
+        transform: scale(.8)
+        opacity: 0
+    // 通知數字
+    .number
+      position: absolute
+      top: 0
+      left: 0
+      +wh(100%)
+      +flex-center
+      span
+        background-color: #fa3e38
+        color: white
+        +wh(2.5rem)
+        +flex-center
+        border-radius: 100rem
+        font-family: arial
+        font-size: 1.5rem
+        transform-origin: center center
+        transform: translate($line-icon-size / 2 - $line-icon-number-offset, -($line-icon-size / 2 - $line-icon-number-offset)) scale(1)
+
+        transition: all .5s .4s
+        &.shrink
+          transform: translate($line-icon-size / 2 - $line-icon-number-offset, -($line-icon-size / 2 - $line-icon-number-offset)) scale(0)
+          opacity: 0
+  // 聊天訊息區域
+  .screenshot-area
+    img
+      transition: all .7s 1.2s

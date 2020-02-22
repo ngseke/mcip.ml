@@ -1,0 +1,47 @@
+@import "variables"
+@import "functions"
+
+html
+  height: 100%
+  body
+    min-height: 100%
+    display: flex
+    flex-direction: column
+    #app
+      flex: 1
+#news
+  header
+    +py(4rem)
+    padding-top: 5rem
+    background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%)
+  .news-title
+    h1
+      display: flex
+      align-items: center
+      color: white
+      font-size: 2rem
+  
+  .back-btn
+    +flex-center
+    +wh(4rem)
+    color: white
+    padding: .5rem
+    border: none
+    border-radius: 100rem
+    outline: none
+    transition: background-color .2s
+    font-size: 1.5rem
+    flex: 0 0 auto
+    &:active
+      background-color: rgba(white, .2)
+    @media (max-width: 575.98px)
+      +wh(3rem)
+  
+  section
+    font-family: serif
+        
+  .author
+    margin-bottom: 2.5rem
+    
+  p
+    margin-bottom: 1rem
