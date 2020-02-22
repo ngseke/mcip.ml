@@ -1,0 +1,90 @@
+@mixin flex-center
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+
+@mixin mx($n)
+  margin-left: $n
+  margin-right: $n
+
+@mixin my($n)
+  margin-top: $n
+  margin-bottom: $n
+
+@mixin px($n)
+  padding-left: $n
+  padding-right: $n
+
+@mixin py($n)
+  padding-top: $n
+  padding-bottom: $n
+
+@mixin wh($n)
+  width: $n
+  height: $n
+
+@mixin gradient-text($bg-img)
+  background-clip: text
+  color: transparent
+  background-image: $bg-img
+
+@mixin btn-common
+  box-shadow: $big-btn-shadow
+  border: 0
+  transition: $transition
+  &:not(.disabled)
+    &:hover
+      color: white
+      text-decoration: none
+      box-shadow: $big-btn-hover-shadow
+      cursor: pointer
+    &:active
+      transform: scale(.95)
+  &:focus
+    outline: none
+  &.disabled
+    opacity: .5
+    cursor: no-drop
+
+@mixin big-btn
+  +btn-common
+  background-color: white
+  border-radius: 15px
+
+@mixin input-common
+  border: 1px solid rgba(#aaa, .3)
+  background-color: white
+  color: $color2
+  transition: $transition
+  letter-spacing: .5px
+  text-align: left
+  outline: none
+  &:active, &:focus
+    outline: none
+
+@mixin bg-fade-out
+  position: absolute
+  content: ''
+  bottom: 0
+  left: 0
+  width: 100%
+  height: 5rem
+  background: linear-gradient(rgba(white, 0), white)
+
+=loader-text-bar
+  width: 50%
+  background: rgba(black, .1)
+  height: 1rem
+  border-radius: 10px
+  margin-bottom: .5rem
+
+=floating-link
+  transition: all .2s
+  &:hover
+    transform: translateY(-3px)
+    text-shadow: 0 5px 2px rgba(#555, .1)
+  &:active
+    opacity: .7
+    transform: none
+    text-shadow: none
