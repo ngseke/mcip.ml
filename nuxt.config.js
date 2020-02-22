@@ -22,8 +22,13 @@ export default {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
+  styleResources: {
+    sass: [
+      './assets/sass/_functions.sass',
+      './assets/sass/_variables.sass'
+    ]
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -40,6 +45,8 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
+    'nuxt-coffeescript-module'
   ],
   /*
   ** Axios module configuration
