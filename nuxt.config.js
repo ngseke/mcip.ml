@@ -46,7 +46,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
-    'nuxt-coffeescript-module'
+    'nuxt-coffeescript-module',
+    'vue-scrollto/nuxt'
   ],
   /*
   ** Axios module configuration
