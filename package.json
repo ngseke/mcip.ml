@@ -15,6 +15,7 @@
     "@nuxtjs/style-resources": "^1.0.0",
     "bootstrap": "^4.4.1",
     "dayjs": "^1.8.20",
+    "html-to-text": "^5.1.1",
     "marked": "^0.8.0",
     "mobile-detect": "^1.4.4",
     "node-sass": "^4.13.1",

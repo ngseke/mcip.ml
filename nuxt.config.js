@@ -5,6 +5,9 @@ export default {
   ** Headers of the page
   */
   head: {
+    htmlAttrs: {
+      lang: 'zh-Hant-TW'
+    },
     titleTemplate: titleChunk => (titleChunk)
       ? `${titleChunk} - 樂台計畫 - 大專院校民謠音樂比賽平台`
       : '樂台計畫 - 大專院校民謠音樂比賽平台',
@@ -42,7 +45,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/vue-scroll-reveal', ssr: false },
+    { src: '~/plugins/vue-scroll-reveal', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
