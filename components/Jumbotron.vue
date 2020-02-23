@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style scoped lang="sass">
 @import '~assets/sass/logo'
 $header-logo-size: 5rem
 

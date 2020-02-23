@@ -1,5 +1,5 @@
 <template lang="pug">
-section#line-app.line-app(ref='lineAppSection')
+section#line-app
   .container
     .row.justify-content-around
       .col-12.col-md-3.col-lg-3.order-2.order-md-1
