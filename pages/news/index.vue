@@ -37,9 +37,13 @@ export default {
       ],
     }
   },
-  async asyncData (context) {
-    const list = await news.fetchList(null, 9999)
-    return { list }
+  async asyncData ({ error }) {
+    try {
+      const list = await news.fetchList(null, 9999)
+      return { list }
+    } catch (e) {
+      error({ statusCode: 404 })
+    }
   },
   data () {
     return {

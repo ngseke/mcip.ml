@@ -27,7 +27,8 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,500,700,900&subset=chinese-traditional,japanese' }
     ],
     script: [
-      // { src: '//static.zotabox.com/9/f/9fccee64ff3ae80ada19da0e463cce9c/widgets.js', async: true }
+      { src: '//static.zotabox.com/9/f/9fccee64ff3ae80ada19da0e463cce9c/widgets.js', async: true },
+      { src: 'https://www.googletagmanager.com/gtag/js?id=UA-134521649-1', async: true },
     ]
   },
   /*
@@ -51,7 +52,8 @@ export default {
   */
   plugins: [
     { src: '~/plugins/vue-scroll-reveal', ssr: false },
-    '~/plugins/font-awesome'
+    '~/plugins/font-awesome',
+    { src: '~plugins/ga.js', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules

@@ -48,9 +48,13 @@ export default {
       ],
     }
   },
-  async asyncData ({ params }) {
-    const data = await news.fetch(params.id)
-    return { data }
+  async asyncData ({ params, error }) {
+    try {
+      const data = await news.fetch(params.id)
+      return { data }
+    } catch (e) {
+      error({ statusCode: 404 })
+    }
   },
   data () {
     return {
