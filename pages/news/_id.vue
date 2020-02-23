@@ -33,6 +33,20 @@ export default {
     Breadcrumb,
     Author,
   },
+  head () {
+    const { title, article } = this.data
+    const description = article.replace(title, '').replace(/\n/g, ' ').substr(0, 150).trim()
+    
+    return {
+      title: `${title} - 最新消息`,
+      meta: [
+        { hid: 'description', name: 'description', content: description },
+        { hid: 'og:description', property: 'og:description', content: description },
+        { hid: 'og:type', property: 'og:type', content: 'website' },
+        { hid: 'og:title', property: 'og:title', content: `${title} - 最新消息` },
+      ],
+    }
+  },
   async asyncData ({ params }) {
     const data = await news.fetch(params.id)
     return { data }
