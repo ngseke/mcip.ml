@@ -65,3 +65,28 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="sass">
+.qrcode
+  width: 100%
+  height: auto
+  max-width: 10rem
+    
+.count-to
+  +my(1rem)
+  margin-right: 2rem
+  text-align: center
+  .number
+    display: inline-block
+    font-size: 2.5rem
+    font-family: roboto, Helvetica, Arial
+    margin: 0
+    padding: 0
+  .label
+    margin-left: .5rem
+    font-size: 1.5rem
+    font-weight: 500
+  .info
+    font-weight: 500
+    margin-top: -.5rem
+</style>
