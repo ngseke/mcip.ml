@@ -12,6 +12,9 @@
 
 <script>
 export default {
+  head: {
+    title: '頁面不存在'
+  },
   props: ['error'],
   layout: 'default'
 }
