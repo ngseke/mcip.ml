@@ -35,7 +35,7 @@ export default {
     ContactUs,
   },
   async asyncData (context) {
-    const list = await news.fetch()
+    const list = await news.fetchList()
     return { list }
   },
   data () {

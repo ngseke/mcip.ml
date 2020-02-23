@@ -12,20 +12,20 @@ section
         nuxt-link.card(:to='`/news/${i.id}`' target='_blank')
           img.card-img-top(:src='i.image')
           .card-img-overlay
-            .author
-              img.avatar(src='https://i.imgur.com/INFIh4d.png')
-              .info
-                .name {{ i.author }}
-                .date {{ convertTime(i.timestamp) }}
+            Author(:name='i.author' :date='i.timestamp')
           .card-body(v-html='convertMarkdown(i.article)')
 </template>
 
 <script>
-const dayjs = require('dayjs')
 const marked = require('marked')
 const htmlToText = require('html-to-text')
 
+import Author from '~/components/Author.vue'
+
 export default {
+  components: {
+    Author
+  },
   props: {
     list: {
       default: null,
@@ -33,10 +33,6 @@ export default {
     }
   },
   methods: {
-    // 將 timestamp 轉換為字串
-    convertTime (_) {
-      return dayjs(_).format('YYYY年MM月DD日')
-    },
     // 將 md 語法轉換為 html
     convertMarkdown (_) {
       return htmlToText.fromString(marked(_))
@@ -91,24 +87,5 @@ a.title
     line-height: 1.75
     &::after
       +bg-fade-out
-    
-.author
-  display: flex
-  flex-direction: row
-  align-items: center
-  text-align: left
-  img.avatar
-    border-radius: 100rem
-    object-fit: cover
-    +wh(3rem)
-  .info
-    margin-left: 1rem
-    flex-grow: 1
-  .name
-    font-weight: 500
-  .date
-    font-size: .9rem
-    opacity: .8
- 
 
 </style>

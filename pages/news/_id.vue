@@ -1,0 +1,90 @@
+<template lang="pug">
+main
+  Jumbotron
+    .container.news-title
+      h1(v-if='data' v-cloak)
+        nuxt-link.back-btn(to='/news' title='返回最新消息列表'): fa(icon='angle-left')
+        span(itemprop='headline') {{ data.title }}
+        
+  section(v-if='data' v-cloak)
+    .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
+      Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `最新消息`, url: `/news` }, { name: data.title }]')
+        
+      Author(:name='data.author' :date='data.timestamp')
+        
+      img.img-fluid.mb-3(:src='data.image' v-if='data.image' itemprop='image')
+      article(v-html='convertMarkdown(data.article)' itemprop='articleBody')
+</template>
+
+<script>
+import Jumbotron from '~/components/Jumbotron.vue'
+import Breadcrumb from '~/components/Breadcrumb.vue'
+
+import Author from '~/components/Author.vue'
+
+import * as news from '~/plugins/news.js'
+
+const marked = require('marked')
+
+export default {
+  layout: 'news',
+  components: {
+    Jumbotron,
+    Breadcrumb,
+    Author,
+  },
+  async asyncData ({ params }) {
+    const data = await news.fetch(params.id)
+    return { data }
+  },
+  data () {
+    return {
+      data: null,
+    }
+  },
+  methods: {
+    convertMarkdown (_) {
+      return marked(_)
+    },
+  }
+}
+</script>
+
+<style scoped lang="sass">
+header
+  +py(4rem)
+  padding-top: 5rem
+  background-image: $news-gradient
+  
+.news-title
+  h1
+    display: flex
+    align-items: center
+    color: white
+    font-size: 2rem
+
+.back-btn
+  +flex-center
+  +wh(4rem)
+  color: white
+  padding: .5rem
+  border: none
+  border-radius: 100rem
+  outline: none
+  transition: background-color .2s
+  font-size: 1.5rem
+  flex: 0 0 auto
+  &:active
+    background-color: rgba(white, .2)
+  @media (max-width: 575.98px)
+    +wh(3rem)
+
+section
+  font-family: serif
+      
+.author
+  margin-bottom: 2.5rem
+  
+p
+  margin-bottom: 1rem
+</style>
