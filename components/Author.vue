@@ -17,8 +17,8 @@ export default {
     'date'
   ],
   methods: {
-    convertTime (_) {
-      return dayjs(_).format('YYYY年MM月DD日')
+    convertTime (_, f) {
+      return dayjs(_).format(f)
     },
   }
 }

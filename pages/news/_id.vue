@@ -1,5 +1,5 @@
 <template lang="pug">
-main
+main(itemscope itemtype='http://schema.org/Article' )
   Jumbotron(:isNews='true')
     .container.news-title
       h1(v-if='data' v-cloak)
