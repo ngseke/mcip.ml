@@ -1,7 +1,7 @@
 <template lang="pug">
-header(:style='headerStyle')
+header(:style='headerStyle' :class='{ news: isNews }')
   slot
-    .logo(:class='className')
+    .logo(:class='logoClass')
       .box
       h1
         each _, i in '樂台計畫'
@@ -20,13 +20,17 @@ export default {
       default: true,
       type: Boolean,
     },
+    isNews: {
+      default: false,
+      type: Boolean,
+    },
     background: {
       default: null,
       type: String,
     }
   },
   computed: {
-    className () {
+    logoClass () {
       const { isAnimation, isHorizontal } = this
       
       return {
@@ -60,6 +64,12 @@ header
     .box
       width: $header-logo-size
       height: $header-logo-size
+  &.news
+    +py(4rem)
+    padding-top: 5rem
+    background-image: $news-gradient
+      
+    
   h2
     color: rgba(white, .8)
     text-align: center

@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  Jumbotron
+  Jumbotron(:isNews='true')
     .container.news-title
       h1(v-if='data' v-cloak)
         nuxt-link.back-btn(to='/news' title='返回最新消息列表'): fa(icon='angle-left')
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-header
+header.news
   +py(4rem)
   padding-top: 5rem
   background-image: $news-gradient

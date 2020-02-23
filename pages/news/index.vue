@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  Jumbotron
+  Jumbotron(:isNews='true')
     .container.news-title
       h1
         | 最新消息
@@ -50,8 +50,4 @@ export default {
 </script>
 
 <style scoped lang="sass">
-header
-  +py(4rem)
-  padding-top: 5rem
-  background-image: $news-gradient
 </style>
