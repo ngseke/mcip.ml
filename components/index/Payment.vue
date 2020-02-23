@@ -38,7 +38,7 @@ export default {
       screenshot: {
         opacity: 0,
         distance: '50px',
-        delay: 1200,
+        delay: 1500,
         duration: 700,
       },
     }

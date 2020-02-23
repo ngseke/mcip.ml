@@ -19,7 +19,6 @@ main(itemscope itemtype='http://schema.org/Article' )
 <script>
 import Jumbotron from '~/components/Jumbotron.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
-
 import Author from '~/components/Author.vue'
 
 import * as news from '~/plugins/news.js'
@@ -42,16 +41,18 @@ export default {
       meta: [
         { hid: 'description', name: 'description', content: description },
         { hid: 'og:description', property: 'og:description', content: description },
-        { hid: 'og:type', property: 'og:type', content: 'website' },
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:url', property: 'og:url', content: `https://${this.host}${this.$nuxt.$route.path}` },
         { hid: 'og:image', property: 'og:image', content: image },
         { hid: 'og:title', property: 'og:title', content: `${title} - 最新消息` },
       ],
     }
   },
-  async asyncData ({ params, error }) {
+  async asyncData ({ params, error, req }) {
     try {
       const data = await news.fetch(params.id)
-      return { data }
+      const host = process.server ? req.headers.host : window.location.host
+      return { data, host }
     } catch (e) {
       error({ statusCode: 404 })
     }

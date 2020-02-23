@@ -13,7 +13,7 @@ header(:style='headerStyle' :class='{ news: isNews }')
 export default {
   props: {
     isAnimation: {
-      default: true,
+      default: false,
       type: Boolean,
     },
     isHorizontal: {
@@ -68,7 +68,7 @@ header
     +py(4rem)
     padding-top: 5rem
     background-image: $news-gradient
-      
+
     
   h2
     color: rgba(white, .8)

@@ -61,7 +61,7 @@ export default
 </script>
 
 <style lang="sass" scoped>
-$shrink-bg-color: rgba(#fff, .97)
+$shrink-bg-color: rgba(#fff, .95)
 $shrink-border-color: rgba(#ddd, .8)
 
 $time-function: cubic-bezier(0.47,0,.4,.99)
@@ -96,6 +96,7 @@ $time-function: cubic-bezier(0.47,0,.4,.99)
     min-height: 4rem
     position: fixed
     background-color: $shrink-bg-color
+    backdrop-filter: blur(5px)
     transition: transform .3s
     transform: none
     top: 0

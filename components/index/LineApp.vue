@@ -4,7 +4,7 @@ section#line-app
     .row.justify-content-around
       .col-12.col-md-3.col-lg-3.order-2.order-md-1
         .screenshot-area
-          img.mockup(src='~/assets/img/screenshot/line-app-mockup.png' alt='Line App 畫面截圖' v-scroll-reveal)
+          img.mockup(src='~/assets/img/screenshot/line-app-mockup.png' alt='Line App 畫面截圖' v-scroll-reveal.reset={ scale: .9, opacity: 1 })
         
       .col-12.col-md-8.col-lg-6.order-1.order-md-2
         .align-center-article

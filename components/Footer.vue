@@ -27,7 +27,6 @@ footer
   a
     color: lighten(grey, 10%)
     font-weight: bold
-    +floating-link
     &:hover
       color: lighten(grey, 20%)
   ul

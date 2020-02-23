@@ -5,6 +5,7 @@ section
       .col-12.col-lg-12.mb-3
         nuxt-link.title(to='/news' title='查看所有最新消息')
           h3
+            fa.mr-3(icon='newspaper')
             | 最新消息
             span.icon.ml-3 ➔
 

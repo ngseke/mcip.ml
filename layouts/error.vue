@@ -3,7 +3,7 @@
   .row.justify-content-center.align-items-center
     .col-12.col-md-8.text-center
       .not-found
-        h1 404
+        h1 {{ error.statusCode }}
         h2 頁面不存在
         nuxt-link.gradient-btn.secondary(to='/')
           fa.mr-3(icon='arrow-left')
@@ -39,7 +39,4 @@ export default {
     font-weight: 600
     background-image: linear-gradient(to right, #434343 0%, black 100%)
     margin-bottom: 3rem
-    
-  a
-    // font-size: 1.5rem
 </style>

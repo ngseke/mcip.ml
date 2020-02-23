@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  Navbar(:items='[{ name: `首頁`, url: `/` }, { name: `最新消息`, url: `/news`, active: true }]')
+  Navbar(:items='navbar')
   nuxt
   Footer
 </template>
@@ -13,6 +13,13 @@ export default {
   components: {
     Navbar,
     Footer,
+  },
+  data () {
+    this.navbar = [
+      { name: `首頁`, url: `/` },
+      { name: `最新消息`, url: `/news`, active: true }
+    ]
+    return {}
   }
 }
 </script>

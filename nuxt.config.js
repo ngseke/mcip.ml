@@ -14,13 +14,15 @@ export default {
     title: '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
       { name: 'author', content: 'Huang Xingqiao' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
       { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description || '' },
       { hid: 'og:image', property: 'og:image', content: '/favicon.png' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:title', property: 'og:title', content: '樂台計畫 - 大專院校民謠音樂比賽平台' },
+      { hid: 'og:locale', property: 'og:locale', content: 'zh_tw' },
+      
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' },

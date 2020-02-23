@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  Navbar()
+  Navbar
   Jumbotron
   LineApp
   Payment
@@ -45,6 +45,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="sass">
-</style>

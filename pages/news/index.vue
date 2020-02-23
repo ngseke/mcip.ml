@@ -39,7 +39,7 @@ export default {
   },
   async asyncData ({ error }) {
     try {
-      const list = await news.fetchList(null, 9999)
+      const list = await news.fetchListBrief(null, 9999)
       return { list }
     } catch (e) {
       error({ statusCode: 404 })
@@ -52,6 +52,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="sass">
-</style>

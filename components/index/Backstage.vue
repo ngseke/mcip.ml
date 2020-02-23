@@ -4,7 +4,7 @@ section
     .row.justify-content-around
       .col-12.col-md-6.col-lg-5.order-2.order-md-1
         .screenshot-area
-          img.mockup.unlimited(src='~/assets/img/screenshot/backstage.png' alt='後台管理介面' v-scroll-reveal)
+          img.mockup.unlimited(src='~/assets/img/screenshot/backstage.png' alt='後台管理介面' v-scroll-reveal.reset='{ scale: .9, opacity: 1 }')
       .col-12.col-md.col-lg.order-1.order-md-2.offset-lg-1
         .align-center-article
           h3 為賽事而生的管理後台

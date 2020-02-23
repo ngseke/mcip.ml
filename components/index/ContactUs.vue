@@ -2,8 +2,11 @@
 section#contact
   .container
     .row.justify-content-center.align-items-center
+      .col-12.col-lg-7
+        h3
+          fa.mr-3(icon='paper-plane')
+          | 聯絡我們
       .col-12.col-lg-6
-        h3 聯絡我們
         transition(name='contact' mode='out-in')
           form(@submit.prevent='submit' v-if='status !== statusEnum.success')
             input(placeholder='姓名' maxlength=50 required v-model.trim='contact.name')
@@ -21,10 +24,8 @@ section#contact
               
             small.text-danger(v-if='errorMessage') {{ errorMessage }}
           .success(v-else)
-            img(src='~/assets/img/check.svg')
+            fa.icon(icon='clipboard-check')
             span 謝謝您的來信，我們將會盡快與您聯繫!
-      .col-3.d-none.d-lg-flex
-        .envelope
 </template>
 
 <script>
@@ -128,10 +129,10 @@ form
   margin-top: 3rem
   padding: 2rem
   border-radius: 15px
-  img
-    height: 3rem
-    width: auto
+  .icon
+    font-size: 2.5rem
     margin-right: 1rem
+    color: #555
   span
     color: #777
 
@@ -147,30 +148,4 @@ form
   &-enter-to, &-leave
     transform: none
     opacity: 1
-
-.envelope
-  +wh(200px)
-  position: relative
-  opacity: .2
-  margin: auto
-  &::after, &::before
-    content: ''
-    position: absolute
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-    background: url('~assets/img/envelope/envelope-a.svg')
-    background-size: contain
-    transition: all .5s
-    transform: none
-    transition-delay: .2s
-  &::before
-    background: url('~assets/img/envelope/envelope-b.svg')
-    transition-delay: .4s
-
-  &.shrink
-    &::after, &::before
-      transform: translate(1.5rem, 1rem)
-      opacity: 0
 </style>
