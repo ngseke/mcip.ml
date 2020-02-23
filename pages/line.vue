@@ -15,7 +15,7 @@ export default {
         { hid: 'og:type', property: 'og:type', content: 'website' },
         { hid: 'og:title', property: 'og:title', content: title },
         { hid: 'og:description', property: 'og:description', content: description },
-        // { 'http-equiv': 'refresh', content: '0;url=https://line.me/R/ti/p/11FZvoRuwx'}
+        { 'http-equiv': 'refresh', content: '0;url=https://line.me/R/ti/p/11FZvoRuwx' }
       ]
     }
   }
