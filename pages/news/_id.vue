@@ -34,7 +34,7 @@ export default {
     Author,
   },
   head () {
-    const { title, article } = this.data
+    const { title, article, image } = this.data
     const description = article.replace(title, '').replace(/\n/g, ' ').substr(0, 150).trim()
     
     return {
@@ -43,6 +43,7 @@ export default {
         { hid: 'description', name: 'description', content: description },
         { hid: 'og:description', property: 'og:description', content: description },
         { hid: 'og:type', property: 'og:type', content: 'website' },
+        { hid: 'og:image', property: 'og:image', content: image },
         { hid: 'og:title', property: 'og:title', content: `${title} - 最新消息` },
       ],
     }
