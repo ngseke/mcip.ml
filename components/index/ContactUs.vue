@@ -43,7 +43,6 @@ export default {
     
     return {
       contact: { name: '',  email: '', phone: '', content: '' },
-      contact: { name: '黃省喬',  email: '123@test.com', phone: '', content: '黃省喬測試' },
       isCaptchaShow: false,
       captchaCode: null,
       captchaAnswer: null,
