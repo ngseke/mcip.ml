@@ -35,7 +35,7 @@ export default {
   },
   head () {
     const { title, article, image } = this.data
-    const description = article.replace(title, '').replace(/\n/g, ' ').substr(0, 150).trim()
+    const description = article.replace(title, '').replace(/\n/g, ' ').replace(/【/g, '').replace(/】/g, '').substr(0, 150).trim()
     
     return {
       title: `${title} - 最新消息`,
