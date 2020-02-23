@@ -37,7 +37,9 @@ export default {
   /*
   ** Global CSS
   */
-  css: [],
+  css: [
+    './assets/sass/style.sass'
+  ],
   styleResources: {
     sass: [
       './assets/sass/_functions.sass',
