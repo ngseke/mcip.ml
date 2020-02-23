@@ -38,10 +38,12 @@ export default {
     return {}
   },
   props: {
+    // 總用戶數
     userCount: {
       default: 3500,
       type: Number,
     },
+    // 合作院校數
     partnerCount: {
       default: 23,
       type: Number,
@@ -58,13 +60,8 @@ export default {
       refs.forEach(ref => ref && ref.start())
     },
   },
-  computed: {
-  },
   components: {
     countTo
   }
 }
 </script>
-
-  <style lang="sass">
-  </style>
