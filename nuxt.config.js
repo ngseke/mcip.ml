@@ -5,14 +5,23 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    titleTemplate: titleChunk => (titleChunk)
+      ? `${titleChunk} - 樂台計畫 - 大專院校民謠音樂比賽平台`
+      : '樂台計畫 - 大專院校民謠音樂比賽平台',
+    title: '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { name: 'author', content: 'Huang Xingqiao' },
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description || '' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:title', property: 'og:title', content: '樂台計畫 - 大專院校民謠音樂比賽平台' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,500,700,900&subset=chinese-traditional,japanese' }
+      
     ]
   },
   /*
@@ -33,6 +42,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/vue-scroll-reveal', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules

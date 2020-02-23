@@ -1,7 +1,7 @@
 {
   "name": "mcip.ml",
   "version": "1.0.0",
-  "description": "MCIP official website",
+  "description": "立刻加入樂台計畫 Line App，輕鬆快速報名各個大專院校音樂比賽，亦可關注即時賽況、查看第一手賽事資訊與參加抽獎活動，精彩訊息不漏接！",
   "author": "Huang Xingqiao",
   "private": true,
   "scripts": {
@@ -12,23 +12,22 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/style-resources": "^1.0.0",
     "bootstrap": "^4.4.1",
     "dayjs": "^1.8.20",
     "marked": "^0.8.0",
     "mobile-detect": "^1.4.4",
+    "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",
     "nuxt-coffeescript-module": "^2.1.0",
     "nuxt-sass-resources-loader": "^2.0.5",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^8.0.2",
     "throttle-debounce": "^2.1.0",
     "vue-count-to": "^1.0.13",
-    "vue-scrollto": "^2.17.1",
-    "@nuxtjs/style-resources": "^1.0.0",
-    "node-sass": "^4.13.1",
-    "sass-loader": "^8.0.2"
+    "vue-scroll-reveal": "^1.0.11",
+    "vue-scrollto": "^2.17.1"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
