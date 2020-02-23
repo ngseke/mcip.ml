@@ -1,5 +1,6 @@
 <template lang="pug">
 main
+  Navbar()
   Jumbotron
   LineApp
   Payment
@@ -10,6 +11,7 @@ main
 </template>
 
 <script>
+import Navbar from '~/components/Navbar.vue'
 import Jumbotron from '~/components/Jumbotron.vue'
 
 import LineApp from '~/components/index/LineApp.vue'
@@ -23,6 +25,7 @@ import * as news from '~/plugins/news.js'
 
 export default {
   components: {
+    Navbar,
     Jumbotron,
     LineApp,
     Payment,

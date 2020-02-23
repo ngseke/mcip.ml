@@ -45,7 +45,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/vue-scroll-reveal', ssr: false }
+    { src: '~/plugins/vue-scroll-reveal', ssr: false },
+    '~/plugins/font-awesome'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -60,8 +61,21 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     'nuxt-coffeescript-module',
-    'vue-scrollto/nuxt'
+    'vue-scrollto/nuxt',
+    'nuxt-fontawesome',
   ],
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['fab']
+      },
+    ]
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
