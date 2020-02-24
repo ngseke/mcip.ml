@@ -18,7 +18,7 @@ export default {
       { name: 'author', content: 'Huang Xingqiao' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
       { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description || '' },
-      { hid: 'og:image', property: 'og:image', content: '/favicon.png' },
+      { hid: 'og:image', property: 'og:image', content: '/og-image.png' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:title', property: 'og:title', content: '樂台計畫 - 大專院校民謠音樂比賽平台' },
       { hid: 'og:locale', property: 'og:locale', content: 'zh_tw' },
