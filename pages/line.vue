@@ -1,5 +1,7 @@
 <template lang="pug">
 main
+  fa.icon(icon='circle-notch' spin)
+  | Redirecting...
 </template>
 
 <script>
@@ -22,4 +24,10 @@ export default {
 </script>
 
 <style scoped lang="sass">
+main
+  min-height: 70vh
+  color: #666
+  +flex-center
+  .icon
+    margin-bottom: .5rem
 </style>

@@ -1,20 +1,19 @@
 <template lang="pug">
-section
-  .container
-    .row
-      .col-12.col-lg-12.mb-3
-        nuxt-link.title(to='/news' title='查看所有最新消息')
-          h3
-            fa.mr-3(icon='newspaper')
-            | 最新消息
-            span.icon.ml-3 ➔
+section: .container
+  .row
+    .col-12.col-lg-12.mb-3
+      nuxt-link.title(to='/news' title='查看所有最新消息')
+        h3
+          fa.mr-3(icon='newspaper')
+          | 最新消息
+          span.icon.ml-3 ➔
 
-      .col-12.col-md-6.col-lg-4(v-for='(i, index) in list')
-        nuxt-link.card(:to='`/news/${i.id}`' target='_blank')
-          img.card-img-top(:src='i.image')
-          .card-img-overlay
-            Author(:name='i.author' :date='i.timestamp')
-          .card-body(v-html='convertMarkdown(i.article)')
+    .col-12.col-md-6.col-lg-4(v-for='(i, index) in list')
+      nuxt-link.card(:to='`/news/${i.id}`' target='_blank')
+        img.card-img-top(:src='i.image')
+        .card-img-overlay
+          Author(:name='i.author' :date='i.timestamp')
+        .card-body(v-html='convertMarkdown(i.article)')
 </template>
 
 <script>

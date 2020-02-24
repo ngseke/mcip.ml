@@ -1,22 +1,21 @@
 <template lang="pug">
-section#payment
-  .container
-    .row.justify-content-around
-      .col-12.col-md.col-lg-5.offset-lg-1
-        .align-center-article
-          h3 自動化金流服務系統
-          p.pl-1
-            | 主動以 LINE 即時推播繳費狀態
-            br
-            | 取代以往人工查核與撰寫訊息方式
-            br
-            | 大幅降低時間成本與風險
-      .col-10.col-md-6.col-lg-4.d-flex.justify-content-center.align-items-center
-        .screenshot-area
-          img.screenshot.unlimited(src='~/assets/img/screenshot/payment-message.png' alt='金流繳費狀態訊通知' v-scroll-reveal='reveal.screenshot')
-        .line-icon
-          img(src='~/assets/img/screenshot/line-logo.svg' v-scroll-reveal='reveal.lineIcon')
-          .number: span(v-scroll-reveal='reveal.number') 1
+section: .container
+  .row.justify-content-around
+    .col-12.col-md.col-lg-5.offset-lg-1
+      .align-center-article
+        h3 自動化金流服務系統
+        p.pl-1
+          | 主動以 LINE 即時推播繳費狀態
+          br
+          | 取代以往人工查核與撰寫訊息方式
+          br
+          | 大幅降低時間成本與風險
+    .col-10.col-md-6.col-lg-4.d-flex.justify-content-center.align-items-center
+      .screenshot-area
+        img.screenshot.unlimited(src='~/assets/img/screenshot/payment-message.png' alt='金流繳費狀態訊通知' v-scroll-reveal='reveal.screenshot')
+      .line-icon
+        img(src='~/assets/img/screenshot/line-logo.svg' v-scroll-reveal='reveal.lineIcon')
+        .number: span(v-scroll-reveal='reveal.number') 1
 </template>
 
 <script>

@@ -1,19 +1,18 @@
 <template lang="pug">
-section#partner
-  .container
-    .row.justify-content-center
-      .col-12
-        h3
-          fa.mr-3(icon='handshake')
-          | 合作夥伴
-      .col-12
-        .row.partners(name='list' tag='div')
-          .col-6.col-md-4.col-lg-3(v-for='_ in partners' :key='_.name')
-            a.item(:href='getFacebookLink(_.facebookId)' target='_blank')
-              img(:src='getImage(_)')
-              .info
-                h4 {{ _.name }}
-                small.school {{ _.schoolName }}
+section#partner: .container
+  .row.justify-content-center
+    .col-12
+      h3
+        fa.mr-3(icon='handshake')
+        | 合作夥伴
+    .col-12
+      .row.partners(name='list' tag='div')
+        .col-6.col-md-4.col-lg-3(v-for='_ in partners' :key='_.name')
+          a.item(:href='getFacebookLink(_.facebookId)' target='_blank')
+            img(:src='getImage(_)')
+            .info
+              h4 {{ _.name }}
+              small.school {{ _.schoolName }}
 </template>
 
 <script>

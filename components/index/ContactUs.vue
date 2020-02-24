@@ -1,31 +1,30 @@
 <template lang="pug">
-section#contact
-  .container
-    .row.justify-content-center.align-items-center
-      .col-12.col-lg-7
-        h3
-          fa.mr-3(icon='paper-plane')
-          | 聯絡我們
-      .col-12.col-lg-6
-        transition(name='contact' mode='out-in')
-          form(@submit.prevent='submit' v-if='status !== statusEnum.success')
-            input(placeholder='姓名' maxlength=50 required v-model.trim='contact.name')
-            input(type='email' placeholder='Email' maxlength=100 required v-model.trim='contact.email')
-            input(type='tel' placeholder='聯絡電話 (可留空)' maxlength=50 v-model.trim='contact.phone')
-            textarea(placeholder='內容' required rows=4 maxlength=1000 v-model.trim='contact.content')
-            transition(name='contact')
-              .d-flex.align-items-center(v-if='isCaptchaShow')
-                canvas.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
-                input.flex-grow-1.mb-0(type='text' placeholder='驗證碼 (請輸入阿拉伯數字)' maxlength=10 v-model.trim='captchaCode')
-                
-            button.gradient-btn.submit(type='submit' :disabled='isSubmitDisabled')
-              span(v-if='status === statusEnum.submitting') 傳送中...
-              span(v-else) 送出
+section: .container
+  .row.justify-content-center.align-items-center
+    .col-12.col-lg-7
+      h3
+        fa.mr-3(icon='paper-plane')
+        | 聯絡我們
+    .col-12.col-lg-6
+      transition(name='contact' mode='out-in')
+        form(@submit.prevent='submit' v-if='status !== statusEnum.success')
+          input(placeholder='姓名' maxlength=50 required v-model.trim='contact.name')
+          input(type='email' placeholder='Email' maxlength=100 required v-model.trim='contact.email')
+          input(type='tel' placeholder='聯絡電話 (可留空)' maxlength=50 v-model.trim='contact.phone')
+          textarea(placeholder='內容' required rows=4 maxlength=1000 v-model.trim='contact.content')
+          transition(name='contact')
+            .d-flex.align-items-center(v-if='isCaptchaShow')
+              canvas.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
+              input.flex-grow-1.mb-0(type='text' placeholder='驗證碼 (請輸入阿拉伯數字)' maxlength=10 v-model.trim='captchaCode')
               
-            small.text-danger(v-if='errorMessage') {{ errorMessage }}
-          .success(v-else)
-            fa.icon(icon='clipboard-check')
-            span 謝謝您的來信，我們將會盡快與您聯繫!
+          button.gradient-btn.submit(type='submit' :disabled='isSubmitDisabled')
+            span(v-if='status === statusEnum.submitting') 傳送中...
+            span(v-else) 送出
+            
+          small.text-danger(v-if='errorMessage') {{ errorMessage }}
+        .success(v-else)
+          fa.icon(icon='clipboard-check')
+          span 謝謝您的來信，我們將會盡快與您聯繫!
 </template>
 
 <script>
