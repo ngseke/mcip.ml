@@ -40,7 +40,7 @@ export default {
     getImage (_) {
       return _.isUsingCustomImg
         ? _.img
-        : `http://graph.facebook.com/${_.facebookId}/picture?height=200&width=200`
+        : `https://graph.facebook.com/${_.facebookId}/picture?height=200&width=200`
     }
   },
 }
