@@ -8,14 +8,14 @@ section: .container
     .col-12.col-lg-6
       transition(name='contact' mode='out-in')
         form(@submit.prevent='submit' v-if='status !== statusEnum.success')
-          input(placeholder='姓名' maxlength=50 required v-model.trim='contact.name')
-          input(type='email' placeholder='Email' maxlength=100 required v-model.trim='contact.email')
-          input(type='tel' placeholder='聯絡電話 (可留空)' maxlength=50 v-model.trim='contact.phone')
-          textarea(placeholder='內容' required rows=4 maxlength=1000 v-model.trim='contact.content')
+          TextField(label='姓名' :max='50' :required='true' v-model.trim='contact.name')
+          TextField(type='email' label='Email' :max='100' :required='true' v-model.trim='contact.email')
+          TextField(type='tel' label='聯絡電話 (可留空)' :max='15' v-model.trim='contact.phone')
+          TextField(:multiline='true' label='內容' :rows='5' :max='3000' v-model.trim='contact.content')
           transition(name='contact')
             .d-flex.align-items-center(v-if='isCaptchaShow')
-              canvas.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
-              input.flex-grow-1.mb-0(type='text' placeholder='驗證碼 (請輸入阿拉伯數字)' maxlength=10 v-model.trim='captchaCode')
+              canvas.captcha.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
+              TextField.flex-grow-1.mb-0(label='驗證碼 (請輸入阿拉伯數字)' :max='4' v-model.trim='captchaCode')
               
           button.gradient-btn.submit(type='submit' :disabled='isSubmitDisabled')
             span(v-if='status === statusEnum.submitting') 傳送中...
@@ -29,8 +29,12 @@ section: .container
 
 <script>
 import { create } from '~/assets/js/captcha.js'
+import TextField from '~/components/TextField.vue'
 
 export default {
+  components: {
+    TextField
+  },
   data () {
     this.fieldNames = [`name`, `email`, `phone`, `content`]
     
@@ -97,31 +101,16 @@ export default {
 <style lang="sass" scoped>
 h3
   font-size: 2rem
-.name
-  margin-bottom: .2rem
-.email
-  +gradient-text($btn-gradient)
-  transition: opacity .2s
-  font-size: .9rem
-  &:hover
-    opacity: .7
     
 form
   display: flex
   flex-direction: column
 
-  input, textarea
-    border-radius: 0
-    margin-bottom: 1rem
-    padding: .5rem
-    border: 0
-    border-bottom: solid #ddd 3px
-    &:focus
-      outline: none
-      border-color: #ccc
-    color: #1e1e1e
-    background-color: transparent
-
+.captcha
+  border: solid #ddd 1px
+  border-radius: 5px
+  cursor: pointer
+  
 .success
   +flex-center
   flex-direction: row
