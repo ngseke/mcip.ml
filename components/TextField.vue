@@ -89,6 +89,7 @@ $border-width: 3px
   width: 100%
   border: 0
   border-bottom: solid $gray $border-width
+  border-radius: 0
   outline: 0
   font-size: $font-size
   color: #333
@@ -96,6 +97,8 @@ $border-width: 3px
   background: transparent
   z-index:  10
   font-weight: bold
+  appearance: none
+  
   &::placeholder
     color: transparent
   &:placeholder-shown ~ label.form__label
@@ -111,12 +114,15 @@ label.form__label
   transition: transform .2s, font-size .2s
   font-size: $font-size-sm
   color: darken($gray, 10%)
-  z-index: -1
+  z-index: 1
+  pointer-events: none
   transform: translateY(0)
 
 .form__field:focus
   font-weight: 700
-  border-width: $border-width
+  border: 0
+  border-bottom-width: $border-width
+  border-style: solid
   border-image: $btn-gradient
   border-image-slice: 1
   ~ label.form__label
