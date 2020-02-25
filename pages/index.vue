@@ -1,13 +1,14 @@
 <template lang="pug">
-main
+div
   Navbar
-  Jumbotron
-  LineApp
-  Payment
-  Backstage
-  News(:list='list')
-  Partner
-  ContactUs
+  main
+    Jumbotron
+    LineApp
+    Payment
+    Backstage
+    News(:list='list')
+    Partner
+    ContactUs
 </template>
 
 <script>

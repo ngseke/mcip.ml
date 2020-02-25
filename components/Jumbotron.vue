@@ -1,5 +1,5 @@
 <template lang="pug">
-header(:style='headerStyle' :class='{ news: isNews }')
+header(:style='headerStyle' :class='{ news: isNews, dense: isDense }')
   slot
     .logo(:class='logoClass')
       .box
@@ -24,10 +24,14 @@ export default {
       default: false,
       type: Boolean,
     },
+    isDense: {
+      default: false,
+      type: Boolean,
+    },
     background: {
       default: null,
       type: String,
-    }
+    },
   },
   computed: {
     logoClass () {
@@ -55,8 +59,7 @@ $header-logo-size: 5rem
 
 header
   background: $bg-gradient
-  padding: 5rem 0
-  padding-top: 7rem
+  padding: 7rem 0 5rem
   .logo
     margin-bottom: 2rem
     h1
@@ -64,12 +67,11 @@ header
     .box
       width: $header-logo-size
       height: $header-logo-size
+  &.dense
+    padding: 5rem 0 4rem
   &.news
-    +py(4rem)
-    padding-top: 5rem
     background-image: $news-gradient
 
-    
   h2
     color: rgba(white, .8)
     text-align: center

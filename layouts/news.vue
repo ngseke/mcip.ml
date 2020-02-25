@@ -16,22 +16,11 @@ export default {
   },
   data () {
     this.navbar = [
-      { name: `首頁`, url: `/` },
-      { name: `最新消息`, url: `/news`, active: true }
+      { name: `首頁`, to: `/` },
+      { name: `最新消息`, to: `/news`, active: true },
+      { name: '常見問題', to: '/faq' }
     ]
     return {}
   }
 }
 </script>
-
-<style lang="sass">
-@import "@/assets/sass/style"
-
-.news-title
-  h1
-    color: white
-    font-size: 3rem
-    small
-      font-size: 70%
-      margin-left: .5rem
-</style>

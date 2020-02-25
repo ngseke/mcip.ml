@@ -1,7 +1,7 @@
 <template lang="pug">
 main
-  Jumbotron(:isNews='true')
-    .container.news-title
+  Jumbotron(:isNews='true' :isDense='true')
+    .container.sub-page-title
       h1
         | 最新消息
         small News
@@ -32,7 +32,6 @@ export default {
       meta: [
         { hid: 'description', name: 'description', content: description },
         { hid: 'og:description', property: 'og:description', content: description },
-        { hid: 'og:type', property: 'og:type', content: 'website' },
         { hid: 'og:title', property: 'og:title', content: '最新消息 - 樂台計畫 - 大專院校民謠音樂比賽平台' },
       ],
     }

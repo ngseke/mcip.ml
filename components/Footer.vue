@@ -4,10 +4,9 @@ footer.py-5
   .container
       .row.justify-content-between
         .col-12.col-sm-auto
-          ul
-            li: n-link(to='/news') 最新消息
-            li: a(target='_blank' href='https://www.facebook.com/mcipApp/' title='樂台計畫 Facebook 粉絲專頁') Facebook 粉絲專頁
-            li: n-link(target='_blank' to='/line') LINE 官方帳號
+          ul: li(v-for='(i, key) in list' :key='key')
+            n-link(v-if='i.to' :to='i.to' :target='i.target') {{ i.name }}
+            a(v-else :href='i.href' :target='i.target') {{ i.name }}
           ul
             li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理 #[fa.mx-1(icon='external-link-alt')]
             
@@ -18,6 +17,15 @@ footer.py-5
 
 <script>
 export default {
+  data () {
+    this.list = [
+      { name: '最新消息', to: '/news' },
+      { name: '常見問題', to: '/faq' },
+      { name: 'Facebook 粉絲專頁', href: 'https://www.facebook.com/mcipApp/', target: '_blank' },
+      { name: 'LINE 官方帳號', to: '/line', target: '_blank' }
+    ]
+    return {}
+  }
 }
 </script>
 

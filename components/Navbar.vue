@@ -9,7 +9,7 @@ nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDar
     .navbar-content(:class='{ hide: !isShow }' ref='navbarContent')
       ul.navbar-nav
         li.nav-item(v-for='_ in items')
-          nuxt-link.nav-link(:to='_.url' @click='isShow = false' :class='{ active: _.active }') {{ _.name }}
+          nuxt-link.nav-link(:to='_.to' @click='isShow = false' :class='{ active: _.active }') {{ _.name }}
         li.d-flex.align-items-center(v-if="items.length"): .divider
         li.nav-item
           a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
@@ -31,7 +31,8 @@ export default
   props:
     items:
       default: => [
-        { name: '最新消息', url: '/news' }
+        { name: '最新消息', to: '/news' }
+        { name: '常見問題', to: '/faq' }
       ]
     
   mounted: ->
