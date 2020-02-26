@@ -15,10 +15,10 @@ div
       .row.justify-content-center.align-items-start
         .col-12.col-lg-9.col-xl-8
           section(v-for='group in faqs' ref='sections')
-            h2(:id='group.title.replace(/ +/g, "-")')
+            h2(:id='getIdString(group.title)')
               | {{ group.title }}
             .item(v-for='faq in group.faqs' itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
-              h3(:id='faq.question.replace(/ +/g, "-")' itemprop='name') {{ faq.question }}
+              h3(:id='getIdString(faq.question)' itemprop='name') {{ faq.question }}
               div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
                 div(v-html='convertMarkdown(faq.answer)' itemprop='text')
         .col.col-xl-3.d-none.d-lg-flex.sticky-top
@@ -57,8 +57,8 @@ export default {
       { name: `最新消息`, to: '/news' },
       { name: '常見問題', to: '/faq', active: true }
     ]
+    this.faqs = faqs
     return {
-      faqs,
       list: null,
     }
   },
@@ -71,30 +71,30 @@ export default {
     },
     setScrollEvent () {
       const { sections } = this.$refs
-      
-      const handler = () => {
-        const list = sections.map(section => {
-          const h2 = section.querySelector('h2')
-          const id = `#${h2.getAttribute('id')}`
-          const title = h2.innerText
-          const top = h2.getBoundingClientRect().top - 95
-          
-          const children = Array.from(section.querySelectorAll('.item h3')).map(h3 => {
-            const id = `#${h3.getAttribute('id')}`
-            const title = h3.innerText
-            const top = h3.getBoundingClientRect().top - 95
-            return { id, title, top }
-          })
 
-          return { id, title, top, children }
+      const throttled = throttle(50, () => {
+        this.list = sections.map(section => {
+          const el = section.querySelector('h2')
+          const children = Array.from(section.querySelectorAll('h3')).map(this.getSidebarItem)
+
+          return { ...this.getSidebarItem(el), children }
         })
-        this.list = list
-      }
-      const throttled = throttle(50, handler)
+        return throttled
+      })
       
-      window.addEventListener('scroll', throttled)
+      window.addEventListener('scroll', throttled())
       this.$once('hook:beforeDestroy', () => window.removeEventListener('scroll', throttled))
-    }
+    },
+    getSidebarItem (el) {
+      return {
+        id: `#${el.getAttribute('id')}`,
+        title: el.innerText,
+        top: el.getBoundingClientRect().top - 95,
+      }
+    },
+    getIdString (_) {
+      return _.replace(/ +/g, "-").replace(/\/+/g, "-")
+    },
   }
 }
 </script>
