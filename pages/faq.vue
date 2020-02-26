@@ -7,28 +7,33 @@ div
         h1
           | 常見問題
           small FAQs
-          
     .meta
-      .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
+      .container: .row: .col-12
         Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
           
-    section(v-for='group in faqs')
-      .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
-        h2(:id='group.title')
-          | {{ group.title }}
-        .item(v-for='faq in group.faqs' itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
-          h3(itemprop='name') {{ faq.question }}
-          div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
-            div(v-html='convertMarkdown(faq.answer)' itemprop='text')
+    .container
+      .row.justify-content-center.align-items-start
+        .col-12.col-lg-9.col-xl-8
+          section(v-for='group in faqs' ref='sections')
+            h2(:id='group.title.replace(/ +/g, "-")')
+              | {{ group.title }}
+            .item(v-for='faq in group.faqs' itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
+              h3(:id='faq.question.replace(/ +/g, "-")' itemprop='name') {{ faq.question }}
+              div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
+                div(v-html='convertMarkdown(faq.answer)' itemprop='text')
+        .col.col-xl-3.d-none.d-lg-flex.sticky-top
+          ArticleNavbar.scroll-spy-navbar(:value='list')
 </template>
 
 <script>
 import Navbar from '~/components/Navbar.vue'
 import Jumbotron from '~/components/Jumbotron.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
- 
+import ArticleNavbar from '~/components/ArticleNavbar.vue'
+
 import faqs from '~/assets/json/faqs.json'
 
+import { throttle } from 'throttle-debounce'
 const marked = require('marked')
 
 export default {
@@ -36,6 +41,7 @@ export default {
     Navbar,
     Jumbotron,
     Breadcrumb,
+    ArticleNavbar,
   },
   head () {
     return {
@@ -51,14 +57,44 @@ export default {
       { name: `最新消息`, to: '/news' },
       { name: '常見問題', to: '/faq', active: true }
     ]
-    return { faqs }
+    return {
+      faqs,
+      list: null,
+    }
   },
   mounted () {
+    this.setScrollEvent()
   },
   methods: {
     convertMarkdown (_) {
       return marked(_)
     },
+    setScrollEvent () {
+      const { sections } = this.$refs
+      
+      const handler = () => {
+        const list = sections.map(section => {
+          const h2 = section.querySelector('h2')
+          const id = `#${h2.getAttribute('id')}`
+          const title = h2.innerText
+          const top = h2.getBoundingClientRect().top - 95
+          
+          const children = Array.from(section.querySelectorAll('.item h3')).map(h3 => {
+            const id = `#${h3.getAttribute('id')}`
+            const title = h3.innerText
+            const top = h3.getBoundingClientRect().top - 95
+            return { id, title, top }
+          })
+
+          return { id, title, top, children }
+        })
+        this.list = list
+      }
+      const throttled = throttle(50, handler)
+      
+      window.addEventListener('scroll', throttled)
+      this.$once('hook:beforeDestroy', () => window.removeEventListener('scroll', throttled))
+    }
   }
 }
 </script>
@@ -68,7 +104,7 @@ main.faq
   background-color: #f8f8f8
   .meta
     padding-top: 4rem
-  > section
+  section
     background-color: #f8f8f8
     +py(2rem)
     
@@ -86,4 +122,7 @@ main.faq
       margin-bottom: .75rem
     ::v-deep li
       margin-bottom: .5rem
+      
+.sticky-top
+  top: 5rem
 </style>
