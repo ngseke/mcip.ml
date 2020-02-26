@@ -74,7 +74,7 @@ $time-function: cubic-bezier(0.47,0,.4,.99)
   position: absolute
   left: 0
   right: 0
-  z-index: 1000
+  z-index: 2000
   top: 4.5rem
   transform: translateY(-100%)
   letter-spacing: 2px
