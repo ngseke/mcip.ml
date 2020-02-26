@@ -72,17 +72,18 @@ export default {
     setScrollEvent () {
       const { sections } = this.$refs
 
-      const throttled = throttle(50, () => {
+      const throttled = throttle(100, () => {
         this.list = sections.map(section => {
           const el = section.querySelector('h2')
           const children = Array.from(section.querySelectorAll('h3')).map(this.getSidebarItem)
 
           return { ...this.getSidebarItem(el), children }
         })
-        return throttled
       })
       
-      window.addEventListener('scroll', throttled())
+      throttled()
+      
+      window.addEventListener('scroll', throttled)
       this.$once('hook:beforeDestroy', () => window.removeEventListener('scroll', throttled))
     },
     getSidebarItem (el) {
