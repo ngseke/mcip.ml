@@ -16,14 +16,14 @@ section#partner: .container
 </template>
 
 <script>
-import { partners } from '~/assets/js/partner.js'
-
 const MobileDetect = require('mobile-detect')
 
 export default {
-  data () {
-    this.partners = partners
-    return {}
+  props: {
+    partners: {
+      default: null,
+      type: Array,
+    }
   },
   methods: {
     // 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟)

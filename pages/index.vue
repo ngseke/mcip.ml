@@ -6,8 +6,8 @@ div
     LineApp
     Payment
     Backstage
-    News(:list='list')
-    Partner
+    News(:list='newsList')
+    Partner(:partners='partners')
     ContactUs
 </template>
 
@@ -23,6 +23,7 @@ import Partner from '~/components/index/Partner.vue'
 import ContactUs from '~/components/index/ContactUs.vue'
 
 import * as news from '~/plugins/news.js'
+import * as staticData from '~/plugins/static-data'
 
 export default {
   components: {
@@ -35,13 +36,16 @@ export default {
     Partner,
     ContactUs,
   },
-  async asyncData (context) {
-    const list = await news.fetchList()
-    return { list }
-  },
-  data () {
-    return {
-      list: null,
+  async asyncData ({ error }) {
+    try {
+      const [newsList, partners] = await Promise.all([
+        news.fetchList(),
+        staticData.get('json/partner.json')
+      ])
+      
+      return { newsList, partners }
+    } catch (e) {
+      error({ statusCode: e.response.status })
     }
   },
 }

@@ -17,10 +17,10 @@ div
           section(v-for='group in faqs' ref='sections')
             h2(:id='getIdString(group.title)')
               | {{ group.title }}
-            .item(v-for='faq in group.faqs' itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
-              h3(:id='getIdString(faq.question)' itemprop='name') {{ faq.question }}
+            .item(v-for='content in group.content' itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
+              h3(:id='getIdString(content.question)' itemprop='name') {{ content.question }}
               div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
-                div(v-html='convertMarkdown(faq.answer)' itemprop='text')
+                div(v-html='convertMarkdown(content.answer)' itemprop='text')
         .col.col-xl-3.d-none.d-lg-flex.sticky-top
           ArticleNavbar.scroll-spy-navbar(:value='list')
 </template>
@@ -31,7 +31,7 @@ import Jumbotron from '~/components/Jumbotron.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
 import ArticleNavbar from '~/components/ArticleNavbar.vue'
 
-import faqs from '~/assets/json/faqs.json'
+import * as staticData from '~/plugins/static-data'
 
 import { throttle } from 'throttle-debounce'
 const marked = require('marked')
@@ -51,15 +51,24 @@ export default {
       ],
     }
   },
+  async asyncData ({ error }) {
+    try {
+      const faqs = await staticData.get('json/faq.json')
+      
+      return { faqs }
+    } catch (e) {
+      error({ statusCode: e.response.status })
+    }
+  },
   data () {
     this.navbar = [
       { name: `首頁`, to: `/` },
       { name: `最新消息`, to: '/news' },
       { name: '常見問題', to: '/faq', active: true }
     ]
-    this.faqs = faqs
     return {
       list: null,
+      faqs: null,
     }
   },
   mounted () {
@@ -124,6 +133,8 @@ main.faq
     ::v-deep li
       margin-bottom: .5rem
       
+      
 .sticky-top
+  
   top: 5rem
 </style>
