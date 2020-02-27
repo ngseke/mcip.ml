@@ -111,7 +111,7 @@ label.form__label
   position: absolute
   top: 0
   display: block
-  transition: transform .2s, font-size .2s
+  transition: transform .2s, font-size .2s, color .2s
   font-size: $font-size-sm
   color: darken($gray, 10%)
   z-index: 1
@@ -126,10 +126,6 @@ label.form__label
   border-image: $btn-gradient
   border-image-slice: 1
   ~ label.form__label
-    position: absolute
-    top: 0
-    display: block
-    transition: 0.2s
     font-size: $font-size-sm
     color: $primary
     transform: translateY(0)

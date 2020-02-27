@@ -13,7 +13,7 @@ section: .container
           img.qrcode.d-none.d-md-inline-block.mr-3(src='~/assets/img/line-app-qrcode.svg' alt='樂台計畫 LINE App QRCode')
           nuxt-link.gradient-btn.line(target='_blank' to="/line") 加入 LINE 官方帳號
         
-        .d-flex.justify-content-center.justify-content-md-start(v-cloak v-scroll-reveal='{ afterReveal: onCountReveal, opacity: 1, viewOffset: { bottom: 0 } }')
+        .d-flex.justify-content-center.justify-content-md-start(v-scroll-reveal='{ beforeReveal: onCountReveal, opacity: 0, duration: 500, viewOffset: { bottom: 0 } }')
           .count-to.text-center.text-md-left
             countTo.number(:end-val='userCount' suffix='+' ref='userCount' v-cloak v-bind='countToOptions') {{ userCount }}+
             .info 樂台計畫總用戶數

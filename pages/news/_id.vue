@@ -98,9 +98,6 @@ header.news
     background-color: rgba(white, .2)
   @media (max-width: 575.98px)
     +wh(3rem)
-
-section
-  font-family: serif
       
 .author
   margin-bottom: 2.5rem

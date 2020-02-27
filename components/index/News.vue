@@ -10,10 +10,10 @@ section: .container
 
     .col-12.col-md-6.col-lg-4(v-for='(i, index) in list')
       nuxt-link.card(:to='`/news/${i.id}`' target='_blank')
-        img.card-img-top(:src='i.image')
+        .card-img-top(:style='getImgStyle(i.image)')
         .card-img-overlay
           Author(:name='i.author' :date='i.timestamp')
-        .card-body(v-html='convert(i.article)')
+        .card-body {{ toPlainText(i.article) }}
 </template>
 
 <script>
@@ -27,8 +27,13 @@ export default {
   props: ['list'],
   methods: {
     // 將 md 格式文字轉為純文字
-    convert (_) {
+    toPlainText (_) {
       return htmlToText.fromString(marked(_))
+    },
+    getImgStyle (_) {
+      return {
+        backgroundImage: `url(${_})`
+      }
     },
   }
 }
@@ -57,13 +62,18 @@ a.title
     transform: scale(1.02)
     cursor: pointer
     box-shadow: $big-btn-hover-shadow
+    .card-img-top
+      background-size: 100% auto
 
-  img.card-img-top
+  .card-img-top
+    transition: all .5s
     height: 10rem
     background: #ddd
     object-fit: cover
     position: relative
-    border: 0
+    background-size: 105% auto
+    background-position: center center
+    background-repeat: no-repeat
 
   .card-img-overlay
     background: linear-gradient(to top, rgba(black, 0) 0%, rgba(black, .75) 100%)
@@ -72,12 +82,11 @@ a.title
     border: 0
 
   .card-body
-    height: 15rem
+    height: 13rem
     position: relative
     font-size: .9rem
     white-space: pre-wrap
     line-height: 1.75
     &::after
       +bg-fade-out
-
 </style>
