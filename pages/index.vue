@@ -6,8 +6,8 @@ div
     LineApp
     Payment
     Backstage
-    News(:list='newsList')
-    Partner(:partners='partners')
+    News(:list='newsList' v-if='newsList')
+    Partner(:partners='partners' v-if='partners')
     ContactUs
 </template>
 
@@ -37,16 +37,15 @@ export default {
     ContactUs,
   },
   async asyncData ({ error }) {
-    try {
-      const [newsList, partners] = await Promise.all([
-        news.fetchList(),
-        staticData.get('json/partner.json')
-      ])
-      
-      return { newsList, partners }
-    } catch (e) {
-      error({ statusCode: e.response.status })
-    }
+    const [newsList, partners] = (await Promise.allSettled([
+      news.fetchList(),
+      staticData.get('json/partner.json')
+    ])).map(({ status, value }) => (status === 'fulfilled')
+      ? value   // 若 api 呼叫成功返回值
+      : false   // 否則返回 false，直接隱藏該區塊
+    )
+
+    return { newsList, partners }
   },
 }
 </script>

@@ -13,7 +13,7 @@ section: .container
         img.card-img-top(:src='i.image')
         .card-img-overlay
           Author(:name='i.author' :date='i.timestamp')
-        .card-body(v-html='convertMarkdown(i.article)')
+        .card-body(v-html='convert(i.article)')
 </template>
 
 <script>
@@ -23,18 +23,11 @@ const htmlToText = require('html-to-text')
 import Author from '~/components/Author.vue'
 
 export default {
-  components: {
-    Author
-  },
-  props: {
-    list: {
-      default: null,
-      type: Array,
-    }
-  },
+  components: { Author },
+  props: ['list'],
   methods: {
-    // 將 md 語法轉換為 html
-    convertMarkdown (_) {
+    // 將 md 格式文字轉為純文字
+    convert (_) {
       return htmlToText.fromString(marked(_))
     },
   }
@@ -42,7 +35,6 @@ export default {
 </script>
   
 <style scoped lang="sass">
- 
 a.title
   transition: all .2s
   display: inline-block
