@@ -1,7 +1,7 @@
 <template lang="pug">
 main
   fa.icon(icon='circle-notch' spin)
-  | Redirecting...
+  | 正在導向至 LINE...
 </template>
 
 <script>

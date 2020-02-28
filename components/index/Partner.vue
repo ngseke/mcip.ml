@@ -23,9 +23,9 @@ export default {
   methods: {
     // 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟)
     getFacebookLink (id) {
-      const device = process.client
-        ? new MobileDetect(window.navigator.userAgent)
-        : new MobileDetect('')
+      const device = new MobileDetect(process.client
+        ? window.navigator.userAgent
+        : '')
 
       if (device.is('iOS')) return `fb://page/?id=${id}`
       else if (device.is('AndroidOS')) return `fb://page/${id}`

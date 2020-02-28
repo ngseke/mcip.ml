@@ -14,11 +14,3 @@ section: .container
           br
           | 同步技術解決各單位資訊不對稱問題
 </template>
-
-<script>
-export default {
-  data () {
-    return {}
-  },
-}
-</script>

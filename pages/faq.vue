@@ -68,7 +68,6 @@ export default {
     ]
     return {
       list: null,
-      faqs: null,
     }
   },
   mounted () {
