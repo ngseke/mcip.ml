@@ -13,12 +13,12 @@ section: .container
           img.qrcode.d-none.d-md-inline-block.mr-3(src='~/assets/img/line-app-qrcode.svg' alt='樂台計畫 LINE App QRCode')
           nuxt-link.gradient-btn.line(target='_blank' to="/line") 加入 LINE 官方帳號
         
-        .d-flex.justify-content-center.justify-content-md-start(v-scroll-reveal='{ beforeReveal: onCountReveal, opacity: 0, duration: 500, viewOffset: { bottom: 0 } }')
+        .d-flex.justify-content-center.justify-content-md-start(v-scroll-reveal='{ beforeReveal: onCountReveal, opacity: 0, duration: 500, viewOffset: { bottom: 0 } }' v-cloak)
           .count-to.text-center.text-md-left
-            countTo.number(:end-val='userCount' suffix='+' ref='userCount' v-cloak v-bind='countToOptions') {{ userCount }}+
+            countTo.number(:start-val='1000' :end-val='userCount' suffix='+' ref='userCount' v-bind='countToOptions') {{ userCount }}+
             .info 樂台計畫總用戶數
           .count-to.text-center.text-md-left
-            countTo.number(:end-val='partnerCount' ref='partnerCount' v-cloak v-bind='countToOptions') {{ partnerCount }}
+            countTo.number(:start-val='10' :end-val='partnerCount' ref='partnerCount' v-cloak v-bind='countToOptions') {{ partnerCount }}
             span.label 所
             .info
               | 合作院校 #[sup: a(v-scroll-to='{ el: `#partner`, offset: -60 }' href='#') *]
@@ -31,7 +31,7 @@ import countTo from 'vue-count-to'
 export default {
   data () {
     this.countToOptions = {
-      duration: 3000,
+      duration: 2000,
       autoplay: false,
     }
     return {}

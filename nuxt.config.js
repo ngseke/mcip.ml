@@ -22,7 +22,6 @@ export default {
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:title', property: 'og:title', content: '樂台計畫 - 大專院校民謠音樂比賽平台' },
       { hid: 'og:locale', property: 'og:locale', content: 'zh_tw' },
-      
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' },
