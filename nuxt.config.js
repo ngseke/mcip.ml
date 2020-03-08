@@ -9,8 +9,8 @@ export default {
       lang: 'zh-Hant-TW'
     },
     titleTemplate: titleChunk => (titleChunk)
-      ? `${titleChunk} - 樂台計畫 - 大專院校民謠音樂比賽平台`
-      : '樂台計畫 - 大專院校民謠音樂比賽平台',
+      ? `${titleChunk} - 樂台計畫 - 大專院校音樂賽事平台`
+      : '樂台計畫 - 大專院校音樂賽事平台',
     title: '',
     meta: [
       { charset: 'utf-8' },
@@ -20,7 +20,7 @@ export default {
       { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description || '' },
       { hid: 'og:image', property: 'og:image', content: '/og-image.png' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:title', property: 'og:title', content: '樂台計畫 - 大專院校民謠音樂比賽平台' },
+      { hid: 'og:title', property: 'og:title', content: '樂台計畫 - 大專院校音樂賽事平台' },
       { hid: 'og:locale', property: 'og:locale', content: 'zh_tw' },
     ],
     link: [

@@ -32,7 +32,7 @@ export default {
       meta: [
         { hid: 'description', name: 'description', content: description },
         { hid: 'og:description', property: 'og:description', content: description },
-        { hid: 'og:title', property: 'og:title', content: '最新消息 - 樂台計畫 - 大專院校民謠音樂比賽平台' },
+        { hid: 'og:title', property: 'og:title', content: '最新消息 - 樂台計畫 - 大專院校音樂賽事平台' },
       ],
     }
   },

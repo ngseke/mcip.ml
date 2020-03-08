@@ -6,7 +6,7 @@ header(:style='headerStyle' :class='{ news: isNews, dense: isDense }')
       h1
         each _, i in '樂台計畫'
           span(style=`animation-delay: ${i * .08 + .65}s`)=_
-    h2 大專院校民謠音樂比賽平台
+    h2 大專院校音樂賽事平台
 </template>
 
 <script>
