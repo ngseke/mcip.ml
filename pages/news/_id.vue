@@ -13,7 +13,7 @@ main(itemscope itemtype='http://schema.org/Article' )
       Author(:name='data.author' :date='data.timestamp')
         
       img.img-fluid.mb-3(:src='data.image' v-if='data.image' itemprop='image')
-      article(v-html='convertMarkdown(data.article)' itemprop='articleBody')
+      article.markdown-body.octicon(v-html='convertMarkdown(data.article)' itemprop='articleBody')
 </template>
 
 <script>
@@ -37,14 +37,20 @@ export default {
     const description = article.replace(title, '').replace(/\n/g, ' ').replace(/【/g, '').replace(/】/g, '').substr(0, 150).trim()
     
     return {
-      title: `${title} - 最新消息`,
+      title: `${title}`,
+      titleTemplate: titleChunk => (titleChunk)
+        ? `${titleChunk} - 樂台計畫`
+        : '樂台計畫 - 大專院校音樂賽事平台',
       meta: [
         { hid: 'description', name: 'description', content: description },
         { hid: 'og:description', property: 'og:description', content: description },
         { hid: 'og:type', property: 'og:type', content: 'article' },
         { hid: 'og:url', property: 'og:url', content: `https://${this.host}${this.$nuxt.$route.path}` },
         { hid: 'og:image', property: 'og:image', content: image },
-        { hid: 'og:title', property: 'og:title', content: `${title} - 最新消息` },
+        { hid: 'og:title', property: 'og:title', content: `${title}` },
+      ],
+      link: [
+        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css' }
       ],
     }
   },
@@ -101,7 +107,4 @@ header.news
       
 .author
   margin-bottom: 2.5rem
-  
-p
-  margin-bottom: 1rem
 </style>
