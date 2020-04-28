@@ -1,10 +1,10 @@
 <template lang="pug">
 main
-  Jumbotron(:isNews='true' :isDense='true')
+  Jumbotron(className='news' :isDense='true')
     .container.sub-page-title
       h1
-        | 最新消息
-        small News
+        span.zh: span 最新消息
+        small.en: span News
   section
     .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
       Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `最新消息` }]')

@@ -2,8 +2,7 @@
 nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }' v-cloak)
   .container
     nuxt-link.navbar-brand(to='/')
-      img(src='~/assets/img/logo/logo-black.svg' alt='MCIP Logo White')
-      .text 樂台計畫
+      img(src='~/assets/img/logo/logo_panel-black.svg' alt='樂台計畫')
     button.navbar-toggler(type='button' @click.stop='isShow = !isShow')
       fa(icon='bars')
     .navbar-content(:class='{ hide: !isShow }' ref='navbarContent')
@@ -31,8 +30,8 @@ export default
   props:
     items:
       default: => [
-        { name: '最新消息', to: '/news' }
-        { name: '常見問題', to: '/faq' }
+        { name: 'News', to: '/news' }
+        { name: 'FAQs', to: '/faq' }
       ]
     
   mounted: ->
@@ -84,13 +83,15 @@ $time-function: cubic-bezier(0.47,0,.4,.99)
     +px(.5rem)
     font-size: 14px
     font-weight: 500
+    text-transform: uppercase
   .container
     position: relative
   .navbar-brand
     visibility: hidden
     img
-      +wh(2rem)
       margin-right: .75rem
+      width: auto
+      height: 2.25rem
     span
       font-weight: 400
   &.shrink

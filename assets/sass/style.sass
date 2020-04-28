@@ -3,6 +3,7 @@
 
 @import "button"
 @import "section"
+@import "sub-page-title"
 
 @media (max-width: 576px)
   html
@@ -10,17 +11,16 @@
 
 body
   font-family: $font-family
+  color: $black
 
-a:hover
-  text-decoration: none
+a
+  color: nth($secondary-list, 3)
+  &:hover
+    text-decoration: none
 
 [v-cloak]
   display: none !important
   
-.sub-page-title
-  h1
-    color: white
-    font-size: 3rem
-    small
-      font-size: 70%
-      margin-left: .75rem
+::selection
+  color: $black
+  background: rgba($primary, .5)

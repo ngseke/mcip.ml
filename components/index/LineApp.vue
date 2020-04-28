@@ -10,7 +10,7 @@ section: .container
         h3.text-center.text-md-left 三分鐘快速完成報名
         p.text-center.text-md-left 不需下載 App，用 LINE 就能加入樂台計畫
         .mb-3.text-center.text-md-left
-          img.qrcode.d-none.d-md-inline-block.mr-3(src='~/assets/img/line-app-qrcode.svg' alt='樂台計畫 LINE App QRCode')
+          img.qrcode.d-none.d-md-inline-block(src='~/assets/img/line-app-qrcode-shorthand.png' alt='樂台計畫 LINE App QRCode')
           nuxt-link.gradient-btn.line(target='_blank' to="/line") 加入 LINE 官方帳號
         
         .d-flex.justify-content-center.justify-content-md-start(v-scroll-reveal='{ beforeReveal: onCountReveal, opacity: 0, duration: 500, viewOffset: { bottom: 0 } }' v-cloak)
@@ -69,7 +69,8 @@ export default {
 .qrcode
   width: 100%
   height: auto
-  max-width: 10rem
+  max-width: 7rem
+  margin-right: 2rem
     
 .count-to
   +my(1rem)

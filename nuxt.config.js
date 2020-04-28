@@ -25,7 +25,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,500,700,900&subset=chinese-traditional,japanese' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,500,700,900&subset=chinese-traditional,japanese' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Overpass:300,400,600&display=swap' }
     ],
     script: [
       { src: '//static.zotabox.com/9/f/9fccee64ff3ae80ada19da0e463cce9c/widgets.js', async: true },
@@ -35,7 +36,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#45bdfa' },
+  loading: { color: '#00B9E6' },
   /*
   ** Global CSS
   */

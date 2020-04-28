@@ -1,12 +1,11 @@
 <template lang="pug">
-header(:style='headerStyle' :class='{ news: isNews, dense: isDense }')
+header(:style='headerStyle' :class='headerClass')
   slot
-    .logo(:class='logoClass')
-      .box
-      h1
-        each _, i in '樂台計畫'
-          span(style=`animation-delay: ${i * .08 + .65}s`)=_
-    h2 大專院校音樂賽事平台
+    .container: .row.no-gutters.justify-content-center
+      .col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5.text-center
+        .logo(:class='logoClass')
+          img(src='~/assets/img/logo/logo_primary-white.svg' alt='樂台計畫: 大專院校音樂賽事平台')
+        //- span.ad #[b 樂台計畫]現已更新至全新風貌!
 </template>
 
 <script>
@@ -16,13 +15,9 @@ export default {
       default: false,
       type: Boolean,
     },
-    isHorizontal: {
-      default: true,
-      type: Boolean,
-    },
-    isNews: {
-      default: false,
-      type: Boolean,
+    className: {
+      default: null,
+      type: String,
     },
     isDense: {
       default: false,
@@ -34,12 +29,17 @@ export default {
     },
   },
   computed: {
+    headerClass () {
+      return {
+        dense: this.isDense,
+        [this.className]: true
+      }
+    },
     logoClass () {
-      const { isAnimation, isHorizontal } = this
+      const { isAnimation } = this
       
       return {
         "no-animation": !isAnimation,
-        horizontal: isHorizontal,
       }
     },
     headerStyle () {
@@ -48,27 +48,24 @@ export default {
       return background
         ? { backgroundImage: `url('${this.background}')` }
         : {}
-    }
+    },
   },
 }
 </script>
 
 <style scoped lang="sass">
 @import '~assets/sass/logo'
-$header-logo-size: 5rem
 
 header
-  background: $bg-gradient
+  position: relative
+  background: url('https://images.unsplash.com/photo-1546437744-529610df132e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80') center center / cover
   padding: 7rem 0 5rem
   .logo
     margin-bottom: 2rem
-    h1
-      font-size: $header-logo-size * .5
-    .box
-      width: $header-logo-size
-      height: $header-logo-size
   &.dense
     padding: 5rem 0 4rem
+  &.faq
+    background: $bg-gradient
   &.news
     background-image: $news-gradient
 
@@ -80,4 +77,15 @@ header
     letter-spacing: 5px
     +gradient-text(linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%))
     opacity: .95
+  
+  .ad
+    display: inline-block
+    color: nth($secondary-list, 1)
+    text-align: center
+    letter-spacing: 2px
+    // border: solid nth($secondary-list, 1) 1px
+    // border-radius: 10px
+    // padding: 5px 10px
+    b
+      font-weight: bold
 </style>

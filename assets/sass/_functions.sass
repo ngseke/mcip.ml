@@ -20,9 +20,9 @@
   padding-top: $n
   padding-bottom: $n
 
-@mixin wh($n)
-  width: $n
-  height: $n
+@mixin wh($w, $h: $w)
+  width: $w
+  height: $h
 
 @mixin gradient-text($bg-img)
   background-clip: text
@@ -88,3 +88,22 @@
     opacity: .7
     transform: none
     text-shadow: none
+    
+=no-select
+  user-select: none
+  -webkit-user-drag: none
+  user-drag: none
+
+=text-ellipsis
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  
+=line-ellipsis($lines: 2)
+  display: -webkit-box
+  line-clamp: $lines
+  box-orient: vertical
+  overflow: hidden
+  -webkit:
+    line-clamp: $lines
+    box-orient: vertical
