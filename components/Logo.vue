@@ -3,7 +3,6 @@
     <defs>
       <style>.cls-1 { fill: #fff; }</style>
     </defs>
-
     <g class="shape">
       <polygon class="cls-1" points="254.36 31.12 40.42 31.12 31.12 31.12 31.12 40.42 31.12 86.93 40.42 86.93 40.42 40.42 254.36 40.42 254.36 31.12" />
       <circle class="cls-1" cx="71.43" cy="74.53" r="12.4" />
@@ -45,16 +44,16 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-$short: 100
+$short: 90
 $long: 570
-$duration: 4s
+$duration: 5s
 
 =keyframes-generator($name, $length)
   @keyframes #{$name}
     0%, 5%
       fill: rgba(nth($secondary-list, 3), 0)
       stroke-dashoffset: $length
-      stroke-dasharray: $length / 4
+      stroke-dasharray: $length / 5
       stroke-opacity: 0
     20%
       fill: rgba(nth($secondary-list, 3), 0)
@@ -66,25 +65,17 @@ $duration: 4s
       stroke-dasharray: $length
       stroke-opacity: 0
       
-
 +keyframes-generator('short', $short)
 +keyframes-generator('long', $long)
     
-svg
-  .c, .s, .l
-    transform-origin: center center
-    transform-box: fill-box
+
+.shape
+  rect, circle, polygon
+    fill: #fff
+    stroke: nth($secondary-list, 1)
+    stroke-width: 1px
+    animation: short $duration ease-in infinite alternate both
     
-  .shape
-    rect, circle, polygon
-      fill: #fff
-      stroke: nth($secondary-list, 1)
-      stroke-width: 1px
-      stroke-dasharray: $short
-      animation: short $duration ease-in infinite alternate both
-      
-    polygon
-      stroke-dasharray: $long
-      animation-name: long
-      animation-duration: $duration
+  polygon
+    animation-name: long
 </style>
