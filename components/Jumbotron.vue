@@ -4,12 +4,17 @@ header(:style='headerStyle' :class='headerClass')
     .container: .row.no-gutters.justify-content-center
       .col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5.text-center
         .logo(:class='logoClass')
-          img(src='~/assets/img/logo/logo_primary-white.svg' alt='樂台計畫: 大專院校音樂賽事平台')
+          Logo(alt='樂台計畫: 大專院校音樂賽事平台')
         //- span.ad #[b 樂台計畫]現已更新至全新風貌!
 </template>
 
 <script>
+import Logo from '~/components/Logo.vue'
+
 export default {
+  components: {
+    Logo
+  },
   props: {
     isAnimation: {
       default: false,
@@ -60,8 +65,10 @@ header
   position: relative
   background: url('https://images.unsplash.com/photo-1546437744-529610df132e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80') center center / cover
   padding: 7rem 0 5rem
+  +flex-center
+  flex-direction: column
   .logo
-    margin-bottom: 2rem
+    margin-bottom: 1rem
   &.dense
     padding: 5rem 0 4rem
   &.faq
@@ -83,9 +90,7 @@ header
     color: nth($secondary-list, 1)
     text-align: center
     letter-spacing: 2px
-    // border: solid nth($secondary-list, 1) 1px
-    // border-radius: 10px
-    // padding: 5px 10px
+    margin-bottom: 1rem
     b
       font-weight: bold
 </style>
