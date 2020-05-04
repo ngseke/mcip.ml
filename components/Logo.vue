@@ -1,7 +1,7 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318.27 165.98">
     <defs>
-      <style>.cls-1 { fill: #fff; }</style>
+      <svg:style>.cls-1 { fill: #fff; }</svg:style>
     </defs>
     <g class="shape">
       <polygon class="cls-1" points="254.36 31.12 40.42 31.12 31.12 31.12 31.12 40.42 31.12 86.93 40.42 86.93 40.42 40.42 254.36 40.42 254.36 31.12" />
