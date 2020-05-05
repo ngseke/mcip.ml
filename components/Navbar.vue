@@ -1,19 +1,29 @@
 <template lang="pug">
-nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }' v-cloak)
-  .container
-    nuxt-link.navbar-brand(to='/')
-      img(src='~/assets/img/logo/logo_panel-black.svg' alt='樂台計畫')
-    button.navbar-toggler(type='button' @click.stop='isShow = !isShow')
-      fa(icon='bars')
-    .navbar-content(:class='{ hide: !isShow }' ref='navbarContent')
-      ul.navbar-nav
-        li.nav-item(v-for='_ in items')
-          nuxt-link.nav-link(:to='_.to' @click='isShow = false' :class='{ active: _.active }') {{ _.name }}
-        li.d-flex.align-items-center(v-if="items.length"): .divider
-        li.nav-item
-          a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
-            fa.facebook-icon(:icon='["fab", "facebook"]')
-            span.d-span.d-md-none.ml-3 Facebook 粉絲專頁
+div
+  nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }' v-cloak)
+    .container
+      nuxt-link.navbar-brand(to='/')
+        img(src='~/assets/img/logo/logo_panel-black.svg' alt='樂台計畫')
+      button.navbar-toggler(type='button' @click.stop='isShow = !isShow')
+        fa(icon='bars')
+      .navbar-content(ref='navbarContent')
+        ul.navbar-nav
+          li.nav-item(v-for='_ in items')
+            nuxt-link.nav-link(:to='_.to' @click='isShow = false' :class='{ active: _.active }') {{ _.name }}
+          li.d-flex.align-items-center(v-if="items.length"): .divider
+          li.nav-item
+            a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
+              fa.facebook-icon(:icon='["fab", "facebook"]')
+              span.d-span.d-md-none.ml-3 Facebook 粉絲專頁
+  .overlay(:class='{ hide: !isShow }')
+    a.close(@click.prevent='isShow = false' href='#') ╳
+    ul
+      li(v-for='_ in items')
+        nuxt-link.link(:to='_.to' @click='isShow = false' :class='{ active: _.active }') {{ _.name }}
+    .divider
+    ul
+      li: a.link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
+        fa.facebook-icon(:icon='["fab", "facebook"]')
 </template>
 
 <script lang="coffee">
@@ -36,7 +46,7 @@ export default
     
   mounted: ->
     @setShrink()
-    @setOnBodyClick()
+    # @setOnBodyClick()
 
   methods:
     setShrink: ->
@@ -66,14 +76,21 @@ $shrink-border-color: rgba(#ddd, .8)
 
 $time-function: cubic-bezier(0.47,0,.4,.99)
 
+$height: 4.5rem
+$height-shrink: $height - .5rem
+
+=shrink-bg
+  background-color: $shrink-bg-color
+  backdrop-filter: blur(5px)
+
 #nav
   +py(0)
-  min-height: 4.5rem
+  min-height: $height
   background-color: transparent
   position: absolute
   left: 0
   right: 0
-  z-index: 2000
+  z-index: 10
   top: 4.5rem
   transform: translateY(-100%)
   letter-spacing: 2px
@@ -95,18 +112,15 @@ $time-function: cubic-bezier(0.47,0,.4,.99)
     span
       font-weight: 400
   &.shrink
-    min-height: 4rem
+    min-height: $height-shrink
     position: fixed
-    background-color: $shrink-bg-color
-    backdrop-filter: blur(5px)
-    transition: transform .3s
+    +shrink-bg
+    transition: transform .3s $time-function
     transform: none
     top: 0
     .navbar-brand
       visibility: visible
-      .text
-        display: inline-block
-        letter-spacing: 1px
+      
     &.navbar-light
       background-color: $shrink-bg-color
       border-bottom: solid 1px $shrink-border-color
@@ -138,41 +152,43 @@ $time-function: cubic-bezier(0.47,0,.4,.99)
     &:active
       background-color: rgba(white, .2)
 
+.overlay
+  display: none
+    
 @media (max-width: 767.98px)
   #nav
-    font-size: 1rem
-    &.navbar-dark
-      .navbar-content
-        background-color: rgba(#1e1e1e, .97)
-        border: none
-    .divider
-      height: 0
-      width: 100%
-      border-bottom: 1px solid rgba(#eee, .3)
-      margin: .5rem 0
     .navbar-content
-      z-index: 2000
-      transition: all .25s $time-function
-      transform-origin: right top
-      position: absolute
-      top: 3rem
-      right: 0
-      background-color: $shrink-bg-color
-      border: solid 1px $shrink-border-color
-      padding: .5rem
-      overflow: hidden
-        
-      ul.navbar-nav
-        transition: all .2s $time-function .05s
-        padding: .5rem
-      // 隱藏漢堡選單
-      &.hide
-        transform: scaleY(0)
-        opacity: 0
-        ul.navbar-nav
-          opacity: 0
-          transform: translateY(-25%)
-          transform-origin: top center
+      display: none
     button.navbar-toggler
       +flex-center
+        
+  .overlay
+    +shrink-bg
+    overscroll-behavior: contain
+    z-index: 2000
+    position: fixed
+    top: 0
+    left: 0
+    +wh(100%)
+    +flex-center
+    transition: transform .2s $time-function
+    &.hide
+      transform: translateX(100%)
+    .link
+      font-size: 3rem
+      font-weight: bold
+    ul
+      list-style: none
+      padding: 0
+      margin-bottom: 2.5rem
+    a.close
+      position: absolute
+      top: 5%
+      right: 5%
+      display: flex
+      align-items: center
+      font-size: 3rem
+      font-weight: 100
+      padding: 1rem
+      outline: none
 </style>

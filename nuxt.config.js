@@ -1,4 +1,3 @@
-
 export default {
   mode: 'universal',
   /*
@@ -68,6 +67,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
+    '@nuxtjs/sitemap',
     'nuxt-coffeescript-module',
     'vue-scrollto/nuxt',
     'nuxt-fontawesome',
@@ -99,5 +99,17 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  sitemap: {
+    gzip: true,
+    exclude: [
+      '/news.html',
+      '/l'
+    ],
+    // // dynamic routes
+    // routes: async () => {
+    //   const list = await news.fetchListBrief(null, 9999)
+    //   return list.map(_ => `/news/${_.id}`)
+    // }
   }
 }
