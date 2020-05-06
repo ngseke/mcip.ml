@@ -63,7 +63,7 @@ export default {
 
 header
   position: relative
-  background: url('https://images.unsplash.com/photo-1546437744-529610df132e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80') center center / cover
+  background: url('~assets/img/bg.jpg') center center / cover
   padding: 7rem 0 5rem
   +flex-center
   flex-direction: column
