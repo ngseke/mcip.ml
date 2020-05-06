@@ -18,8 +18,8 @@ div
   .overlay(:class='{ hide: !isShow }')
     a.close(@click.prevent='isShow = false' href='#') ╳
     ul
-      li(v-for='_ in items')
-        nuxt-link.link(:to='_.to' @click='isShow = false' :class='{ active: _.active }') {{ _.name }}
+      li(v-for='(_, key) in items' @click='isShow = false' )
+        nuxt-link.link(:to='_.to' :class='{ active: _.active }' :style='getLinkStyle(key)') {{ _.name }}
     .divider
     ul
       li: a.link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
@@ -65,13 +65,16 @@ export default
       
       document.addEventListener 'click', handler
       @$once('hook:beforeDestroy', => document.removeEventListener('click', handler))
-  
+    
+    getLinkStyle: (i) ->
+      transitionDelay: "#{i * .15 + .3}s"
+      
   computed:
     isDark: -> !@isShrink
 </script>
 
 <style lang="sass" scoped>
-$shrink-bg-color: rgba(#fff, .95)
+$shrink-bg-color: rgba(#fff, .9)
 $shrink-border-color: rgba(#ddd, .8)
 
 $time-function: cubic-bezier(0.47,0,.4,.99)
@@ -163,7 +166,9 @@ $height-shrink: $height - .5rem
       +flex-center
         
   .overlay
+    +hide-scroll-bar
     +shrink-bg
+    overflow-y: scroll
     overscroll-behavior: contain
     z-index: 2000
     position: fixed
@@ -171,23 +176,34 @@ $height-shrink: $height - .5rem
     left: 0
     +wh(100%)
     +flex-center
-    transition: transform .2s $time-function
+    transition: transform .4s cubic-bezier(.7,0,.3,1)
+
     &.hide
       transform: translateX(100%)
+      .link
+        transform: translateY(100%)
+        
     .link
-      font-size: 3rem
+      display: inline-block
+      font-size: 2.5rem
       font-weight: bold
+      transition: transform .3s
+      
     ul
       list-style: none
       padding: 0
       margin-bottom: 2.5rem
+      li
+        padding: .25rem 1rem
+        overflow: hidden
+        
     a.close
       position: absolute
       top: 5%
       right: 5%
       display: flex
       align-items: center
-      font-size: 3rem
+      font-size: 2rem
       font-weight: 100
       padding: 1rem
       outline: none

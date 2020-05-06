@@ -6,8 +6,8 @@ div
     Attention
     LineApp
     Divider
-    Payment
-    Backstage
+    //- Payment
+    //- Backstage
     News(:list='newsList' v-if='newsList')
     Partner(:partners='partners' v-if='partners')
     ContactUs

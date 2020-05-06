@@ -107,3 +107,9 @@
   -webkit:
     line-clamp: $lines
     box-orient: vertical
+    
+=hide-scroll-bar
+  &::-webkit-scrollbar
+    width: 0 !important
+  -ms-overflow-style: none
+  overflow: -moz-scrollbars-none

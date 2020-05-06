@@ -6,7 +6,7 @@ section.attention-section: .container
         .col-12.col-md-auto.text-center
           fa.primary-icon(icon='shield-virus')
         .col
-          h3 有關新型冠狀病毒 (COVID-19) 造成相關影響之通知
+          h3 有關新型冠狀病毒 (COVID-19) 造成影響之通知
           p 受疫情影響，今年部分賽事已決議延期或停止舉辦，更多相關訊息請參考各賽事之 Facebook 粉絲專頁公告
 </template>
 
