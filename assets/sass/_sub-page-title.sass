@@ -1,0 +1,35 @@
+@keyframes y-move
+  from
+    transform: translateY(130%)
+  to
+    transform: none
+    
+$delay: .3s
+
+.sub-page-title
+  h1
+    color: white
+    font-size: 3rem
+    display: flex
+    align-items: baseline
+    span, small
+      display: inline-block
+    .zh, .en
+      overflow: hidden
+      span
+        animation: y-move .5s $delay backwards
+        animation-fill-mode: backwards
+    .zh
+      letter-spacing: 1px
+      margin-right: 1rem
+    .en
+      font-size: 70%
+      
+      span
+        animation-delay: $delay + .15s
+
+.news-title
+  h1
+    overflow: hidden
+    span
+      // animation: y-move .5s $delay backwards

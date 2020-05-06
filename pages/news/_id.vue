@@ -1,6 +1,6 @@
 <template lang="pug">
 main(itemscope itemtype='http://schema.org/Article' )
-  Jumbotron(:isNews='true' :isDense='true')
+  Jumbotron(className='news' :isDense='true')
     .container.news-title
       h1(v-if='data' v-cloak)
         nuxt-link.back-btn(to='/news' title='返回最新消息列表'): fa(icon='angle-left')

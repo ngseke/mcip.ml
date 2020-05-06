@@ -1,4 +1,3 @@
-
 export default {
   mode: 'universal',
   /*
@@ -25,7 +24,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,500,700,900&subset=chinese-traditional,japanese' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,500,700,900|Overpass:400,400i,600,700,900&display=swap&subset=chinese-traditional' },
     ],
     script: [
       { src: '//static.zotabox.com/9/f/9fccee64ff3ae80ada19da0e463cce9c/widgets.js', async: true },
@@ -35,7 +34,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#45bdfa' },
+  loading: { color: '#00B9E6' },
   /*
   ** Global CSS
   */
@@ -68,6 +67,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
+    '@nuxtjs/sitemap',
     'nuxt-coffeescript-module',
     'vue-scrollto/nuxt',
     'nuxt-fontawesome',
@@ -99,5 +99,17 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  sitemap: {
+    gzip: true,
+    exclude: [
+      '/news.html',
+      '/l'
+    ],
+    // // dynamic routes
+    // routes: async () => {
+    //   const list = await news.fetchListBrief(null, 9999)
+    //   return list.map(_ => `/news/${_.id}`)
+    // }
   }
 }

@@ -1,7 +1,8 @@
 <template lang="pug">
 .author
   slot
-    img.avatar(:src='avatar || "https://i.imgur.com/INFIh4d.png"')
+    img.avatar(v-if='avatar' :src='avatar')
+    img.avatar(v-else src='~/assets/img/logo/logo-avatar.png')
     .info
       .name(itemprop='author') {{ name }}
       .date(itemprop='datePublished' :content='convertTime(date, `YYYY-MM-DD`)') {{ convertTime(date) }}

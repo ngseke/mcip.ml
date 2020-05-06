@@ -3,26 +3,39 @@
 footer.py-5
   .container
       .row.justify-content-between
-        .col-12.col-sm-auto
-          ul: li(v-for='(i, key) in list' :key='key')
-            n-link(v-if='i.to' :to='i.to' :target='i.target') {{ i.name }}
-            a(v-else :href='i.href' :target='i.target') {{ i.name }}
+        .col-12.col-sm-auto.block
+          ul(v-for='(links, lIndex) in list' :key='lIndex')
+            li(v-for='(i, key) in links' :key='key')
+              n-link(v-if='i.to' :to='i.to' :target='i.target')
+                fa.mr-2(:icon='["fab", i.icon]' v-if='i.icon')
+                | {{ i.name }}
+              a(v-else :href='i.href' :target='i.target')
+                fa.mr-2(:icon='["fab", i.icon]' v-if='i.icon')
+                | {{ i.name }}
           ul
             li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理 #[fa.mx-1(icon='external-link-alt')]
             
-        .col-12.col-sm-auto.text-md-right
-          div Icons made by #[a(href='https://www.flaticon.com/authors/freepik' title='Freepik') Freepik] from #[a(href='https://www.flaticon.com/' title='Flaticon') www.flaticon.com]
+        .col-12.col-lg-auto.text-lg-right
           div Copyright © 2018 - #[=year]  #[n-link(to='/') 樂台計畫].  All rights reserved
+          img.logo(src='~/assets/img/logo/logo_symbol-no-gutter-black.svg')
 </template>
 
 <script>
 export default {
   data () {
     this.list = [
-      { name: '最新消息', to: '/news' },
-      { name: '常見問題', to: '/faq' },
-      { name: 'Facebook 粉絲專頁', href: 'https://www.facebook.com/mcipApp/', target: '_blank' },
-      { name: 'LINE 官方帳號', to: '/line', target: '_blank' }
+      [
+        { name: '首頁', to: '/' },
+        { name: '最新消息', to: '/news' },
+        { name: '常見問題', to: '/faq' },
+      ],
+      [
+        { name: 'Facebook 粉絲專頁', href: 'https://www.facebook.com/mcipApp/', target: '_blank', icon: 'facebook' },
+        { name: 'LINE 官方帳號', to: '/line', target: '_blank', icon: 'line' }
+      ]
+    ]
+    this.links = [
+      
     ]
     return {}
   }
@@ -31,22 +44,44 @@ export default {
 
 <style scoped lang="sass">
 footer
+  $border: 1px solid lighten(grey, 40%)
   color: grey
   font-size: .85rem
   a
     color: lighten(grey, 10%)
-    font-weight: bold
+    font-weight: normal
     &:hover
       color: lighten(grey, 20%)
-  ul
-    vertical-align: top
-    list-style: none
+  .block
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-start
+    align-items: stretch
+    margin-bottom: 1rem
+    ul
+      vertical-align: top
+      list-style: none
+      display: inline-block
+      padding: 0 1.5rem
+      min-width: 7rem
+      li
+        margin-bottom: .2rem
+      &:not(:last-child)
+        border-right: $border
+      &:first-child
+        padding-left: 0
+      @media (max-width: 575.98px)
+        width: 50%
+        padding: 0
+        padding-right: 1rem
+        &:not(:last-child)
+          border: none
+        &:first-child
+      
+  img.logo
     display: inline-block
-    padding: 0 1.5rem
-    li
-      margin-bottom: .2rem
-    &:not(:last-child)
-      border-right: 1px solid lighten(grey, 40%)
-    &:first-child
-      padding-left: 0
+    +wh(auto, 2rem)
+    margin-top: 1rem
+    opacity: .45
+    +no-select
 </style>

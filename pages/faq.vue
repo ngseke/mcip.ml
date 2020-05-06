@@ -2,11 +2,11 @@
 div
   Navbar(:items='navbar')
   main.faq(itemscope itemtype='https://schema.org/FAQPage')
-    Jumbotron(:isDense='true')
+    Jumbotron(className='faq' :isDense='true')
       .container.sub-page-title
         h1
-          | 常見問題
-          small FAQs
+          span.zh: span 常見問題
+          small.en: span FAQs
     .meta
       .container: .row: .col-12
         Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
@@ -62,9 +62,9 @@ export default {
   },
   data () {
     this.navbar = [
-      { name: `首頁`, to: `/` },
-      { name: `最新消息`, to: '/news' },
-      { name: '常見問題', to: '/faq', active: true }
+      { name: `Home`, to: `/` },
+      { name: 'News', to: '/news' },
+      { name: 'FAQs', to: '/faq', active: true },
     ]
     return {
       list: null,

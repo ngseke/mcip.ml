@@ -16,9 +16,9 @@ export default {
   },
   data () {
     this.navbar = [
-      { name: `首頁`, to: `/` },
-      { name: `最新消息`, to: `/news`, active: true },
-      { name: '常見問題', to: '/faq' }
+      { name: `Home`, to: `/` },
+      { name: 'News', to: '/news', active: true },
+      { name: 'FAQs', to: '/faq' },
     ]
     return {}
   }
