@@ -93,7 +93,7 @@ $height-shrink: $height - .5rem
   position: absolute
   left: 0
   right: 0
-  z-index: 10
+  z-index: 1000
   top: 4.5rem
   transform: translateY(-100%)
   letter-spacing: 2px
