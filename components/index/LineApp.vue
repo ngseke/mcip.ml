@@ -6,7 +6,7 @@ section: .container
       .screenshot-area
         img.mockup.ml-lg-5(src='~/assets/img/screenshot/line-app-mockup.png' alt='Line App 畫面截圖' v-scroll-reveal.reset={ scale: .9, opacity: 1 })
       
-    .col-12.col-md-8.col-lg-6.order-1.order-md-2
+    .col-12.col-md-8.col-lg-5.order-1.order-md-2
       .align-center-article
         h3.text-center.text-md-left 三分鐘快速完成報名
         p.text-center.text-md-left 不需下載 App，用 LINE 就能加入樂台計畫
