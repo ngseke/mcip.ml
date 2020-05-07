@@ -1,11 +1,11 @@
 <template lang="pug">
 section: .container
   .row.justify-content-center.align-items-center
-    .col-12.col-lg-7
+    .col-12.col-lg-9
       h3
         fa.mr-3(icon='paper-plane')
         | 聯絡我們
-    .col-12.col-lg-6
+    .col-12.col-lg-6.offset-lg-1
       transition(name='contact' mode='out-in')
         form(@submit.prevent='submit' v-if='status !== statusEnum.success')
           TextField(label='姓名' :max='50' :required='true' v-model.trim='contact.name')
@@ -25,6 +25,8 @@ section: .container
         .success(v-else)
           fa.icon(icon='clipboard-check')
           span 謝謝您的來信，我們將會盡快與您聯繫!
+    .col-12.col-lg-auto
+      img.peep(src='~/assets/img/peep/woman-explaining.svg')
 </template>
 
 <script>
@@ -136,4 +138,12 @@ form
   &-enter-to, &-leave
     transform: none
     opacity: 1
+    
+.peep
+  +wh(14rem, auto)
+  margin-left: 3rem
+  @media (max-width: 991.98px)
+    display: none
+
+
 </style>

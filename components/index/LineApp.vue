@@ -2,8 +2,9 @@
 section: .container
   .row.justify-content-around
     .col-12.col-md-3.col-lg-3.order-2.order-md-1
+      img.peep.d-block.d-md-none.d-lg-block(src='~/assets/img/peep/man-with-phone.svg')
       .screenshot-area
-        img.mockup(src='~/assets/img/screenshot/line-app-mockup.png' alt='Line App 畫面截圖' v-scroll-reveal.reset={ scale: .9, opacity: 1 })
+        img.mockup.ml-lg-5(src='~/assets/img/screenshot/line-app-mockup.png' alt='Line App 畫面截圖' v-scroll-reveal.reset={ scale: .9, opacity: 1 })
       
     .col-12.col-md-8.col-lg-6.order-1.order-md-2
       .align-center-article
@@ -66,12 +67,38 @@ export default {
 </script>
 
 <style scoped lang="sass">
+section
+  position: relative
+  overflow: hidden
+    
 .qrcode
   width: 100%
   height: auto
   max-width: 7rem
   margin-right: 2rem
     
+.peep
+  position: absolute
+  left: -11rem
+  bottom: -4.5rem
+  +wh(16rem, auto)
+  @media (max-width: 767.98px)
+    +wh(12rem, auto)
+    left: 0rem
+  @media (max-width: 470px)
+    +wh(11rem, auto)
+    left: -2rem
+    
+.mockup
+  border-radius: 10px
+  @media (max-width: 767.98px)
+    max-width: 12rem
+    margin-left: 0
+    
+  @media (max-width: 400px)
+    max-width: 12rem
+    margin-left: 5rem
+  
 .count-to
   +my(1rem)
   margin-right: 2rem
