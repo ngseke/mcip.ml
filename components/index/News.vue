@@ -9,7 +9,7 @@ section: .container
           span.icon.ml-3 ➔
 
     .col-12.col-md-6.col-lg-4(v-for='(i, index) in list')
-      nuxt-link.news-card(:to='`/news/${i.id}`' target='_blank')
+      nuxt-link.news-card(:to='`/news/${i.id}`')
         .row.no-gutters.align-items-center
           .col-auto
             img.img(:src='i.image')
@@ -20,9 +20,6 @@ section: .container
               | {{ i.author }}
               span.divider
               | {{ convertTime(i.timestamp) }}
-        //- .card-img-top(:style='getImgStyle(i.image)')
-        //- Author(:name='i.author' :date='i.timestamp')
-        //- .card-body {{ toPlainText(i.article) }}
 </template>
 
 <script>
@@ -100,5 +97,4 @@ a.title
           content: '•'
       &::before
         content: '—— '
-      
 </style>
