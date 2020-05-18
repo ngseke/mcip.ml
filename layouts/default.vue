@@ -6,7 +6,8 @@ div
 
 <script>
 import Footer from '~/components/Footer.vue'
- 
+import '~/assets/sass/style.sass'
+
 export default {
   components: { Footer }
 }
