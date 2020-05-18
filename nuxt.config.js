@@ -39,7 +39,7 @@ export default {
   ** Global CSS
   */
   css: [
-    // './assets/sass/style.sass'
+    './assets/sass/style.sass'
   ],
   styleResources: {
     sass: [
@@ -97,6 +97,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    extractCSS: true,
     extend (config, ctx) {
     }
   },
