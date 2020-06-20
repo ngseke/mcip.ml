@@ -18,7 +18,7 @@ ol
   list-style: none
   display: flex
   flex-wrap: wrap
-  padding: 0 .5rem
+  padding: 0
   margin-bottom: 2rem
   font-size: .9rem
   li

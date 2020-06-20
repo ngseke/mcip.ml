@@ -47,7 +47,7 @@ export default {
     return {
       title: '常見問題',
       meta: [
-        { hid: 'og:title', property: 'og:title', content: '常見問題 - 樂台計畫 - 大專院校音樂賽事平台' },
+        { hid: 'og:title', property: 'og:title', content: '常見問題 - 樂台計畫' },
       ],
     }
   },

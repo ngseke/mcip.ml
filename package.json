@@ -20,6 +20,7 @@
     "dayjs": "^1.8.20",
     "html-to-text": "^5.1.1",
     "marked": "^0.8.0",
+    "medium-zoom": "^1.0.5",
     "mobile-detect": "^1.4.4",
     "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",

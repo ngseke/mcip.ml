@@ -1,5 +1,5 @@
 <template lang="pug">
-nav
+nav.article-navbar
   ul
     li(v-for='(i, iIndex) in value')
       a(
@@ -37,7 +37,7 @@ export default {
 $link-color: #666
 $link-active-color: #1e1e1e
 
-nav
+nav.article-navbar
   ul
     list-style: none
     font-size: 13px

@@ -14,7 +14,6 @@ div
           li.nav-item
             a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
               fa.facebook-icon(:icon='["fab", "facebook"]')
-              span.d-span.d-md-none.ml-3 Facebook 粉絲專頁
   .overlay(:class='{ hide: !isShow }')
     a.close(@click.prevent='isShow = false' href='#') ╳
     ul
