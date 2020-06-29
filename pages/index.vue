@@ -3,7 +3,7 @@ div
   Navbar
   main
     Jumbotron
-    Attention
+    //- Attention
     LineApp
     Divider
     //- Payment
