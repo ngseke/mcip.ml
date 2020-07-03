@@ -1,3 +1,5 @@
+const description = '立刻加入樂台計畫 Line App，輕鬆快速報名各個大專院校音樂比賽，亦可關注即時賽況、查看第一手賽事資訊與參加抽獎活動，精彩訊息不漏接！'
+
 export default {
   mode: 'universal',
   /*
@@ -15,8 +17,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
       { name: 'author', content: 'Huang Xingqiao' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
-      { hid: 'og:description', property: 'og:description', content: process.env.npm_package_description || '' },
+      { hid: 'description', name: 'description', content: description },
+      { hid: 'og:description', property: 'og:description', content: description },
       { hid: 'og:image', property: 'og:image', content: '/og-image.png' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:title', property: 'og:title', content: '樂台計畫: 大專院校音樂賽事平台' },
