@@ -8,7 +8,7 @@ section: .container
     .col-12.col-lg-6.offset-lg-1
       transition(name='contact' mode='out-in')
         form(@submit.prevent='submit' v-if='status !== statusEnum.success')
-          TextField(label='姓名' :max='50' :required='true' v-model.trim='contact.name')
+          TextField(label='你的大名' :max='50' :required='true' v-model.trim='contact.name')
           TextField(type='email' label='Email' :max='100' :required='true' v-model.trim='contact.email')
           TextField(type='tel' label='聯絡電話 (可留空)' :max='15' v-model.trim='contact.phone')
           TextField(:multiline='true' label='內容' :rows='5' :max='3000' v-model.trim='contact.content')
@@ -144,6 +144,4 @@ form
   margin-left: 3rem
   @media (max-width: 991.98px)
     display: none
-
-
 </style>
