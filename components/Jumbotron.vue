@@ -42,14 +42,14 @@ export default {
     },
     logoClass () {
       const { isAnimation } = this
-      
+
       return {
         "no-animation": !isAnimation,
       }
     },
     headerStyle () {
       const { background } = this
-      
+
       return background
         ? { backgroundImage: `url('${this.background}')` }
         : {}
@@ -64,13 +64,12 @@ export default {
 header
   position: relative
   background: url('~assets/img/bg.jpg') center center / cover
-  padding: 7rem 0 5rem
+  min-height: 460px
   +flex-center
   flex-direction: column
-  .logo
-    margin-bottom: 1rem
   &.dense
     padding: 5rem 0 4rem
+    min-height: auto
   &.faq
     background: $bg-gradient
   &.news
@@ -84,7 +83,7 @@ header
     letter-spacing: 5px
     +gradient-text(linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%))
     opacity: .95
-  
+
   .ad
     display: inline-block
     color: nth($secondary-list, 1)
