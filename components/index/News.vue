@@ -10,6 +10,9 @@ section: .container
 
     .col-12.col-md-6.col-lg-4(v-for='(i, index) in list')
       NewsCard(:value='i')
+    .col-12
+      nuxt-link.more(to='/news' title='查看更多最新消息')
+        fa(icon='chevron-down')
 </template>
 
 <script>
@@ -39,4 +42,15 @@ a.title
   .icon
     display: inline-block
     transition: all .2s
+
+.more
+  display: block
+  padding: .25rem
+  border-radius: 1rem
+  font-size: 1.2rem
+  text-align: center
+  transition: $transition
+  &:hover
+    background-color: white
+    box-shadow: $big-btn-shadow
 </style>
