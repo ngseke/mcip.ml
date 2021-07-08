@@ -8,7 +8,7 @@ div
 <script>
 import Navbar from '~/components/Navbar.vue'
 import Footer from '~/components/Footer.vue'
- 
+
 export default {
   components: {
     Navbar,
@@ -16,11 +16,11 @@ export default {
   },
   data () {
     this.navbar = [
-      { name: `Home`, to: `/` },
+      { name: 'Home', to: '/' },
       { name: 'News', to: '/news', active: true },
       { name: 'FAQs', to: '/faq' },
     ]
     return {}
-  }
+  },
 }
 </script>

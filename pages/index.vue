@@ -42,13 +42,13 @@ export default {
     ContactUs,
     Attention,
   },
-  async asyncData ({ error }) {
+  async asyncData () {
     const [newsList, partners] = (await Promise.allSettled([
       news.fetchList(),
-      staticData.get('json/partner.json')
+      staticData.get('json/partner.json'),
     ])).map(({ status, value }) => (status === 'fulfilled')
-      ? value   // 若 api 呼叫成功返回值
-      : false   // 否則返回 false，直接隱藏該區塊
+      ? value // 若 api 呼叫成功返回值
+      : false // 否則返回 false，直接隱藏該區塊
     )
 
     return { newsList, partners }

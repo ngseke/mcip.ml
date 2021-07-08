@@ -7,10 +7,16 @@ ol(itemscope itemtype='http://schema.org/BreadcrumbList')
     meta(itemprop='position' :content='index + 1')
 </template>
 
-<script lang="coffee">
-export default
-  name: 'Breadcrumb'
-  props: ['items']
+<script>
+export default {
+  name: 'Breadcrumb',
+  props: {
+    items: {
+      type: Array,
+      default: null,
+    },
+  },
+}
 </script>
 
 <style lang="sass" scoped>

@@ -13,7 +13,7 @@ import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
-    Logo
+    Logo,
   },
   props: {
     isAnimation: {
@@ -37,14 +37,14 @@ export default {
     headerClass () {
       return {
         dense: this.isDense,
-        [this.className]: true
+        [this.className]: true,
       }
     },
     logoClass () {
       const { isAnimation } = this
 
       return {
-        "no-animation": !isAnimation,
+        'no-animation': !isAnimation,
       }
     },
     headerStyle () {

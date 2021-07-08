@@ -14,13 +14,13 @@ export default {
     list: {
       default: null,
       type: Array,
-    }
+    },
   },
   methods: {
     convertTime (_) {
       return dayjs(_).format('YYYY年MM月DD日')
     },
-  }
+  },
 }
 </script>
 

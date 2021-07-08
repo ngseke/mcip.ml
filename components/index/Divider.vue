@@ -18,13 +18,12 @@ $duration: 30s
     transform: translateX(0)
   to
     transform: translateX(-$width * 8)
-    
+
 @keyframes scroll-small
   from
     transform: translateX(0)
   to
     transform: translateX(-$width-small * 8)
-  
 
 @keyframes hue
   to
@@ -39,7 +38,7 @@ $duration: 30s
     animation: scroll $duration linear infinite
     @media (max-width: 767.98px)
       animation: scroll-small $duration linear infinite
-  
+
   .a, .b, .c, .d
     +flex-center
     +wh($width)
@@ -50,18 +49,16 @@ $duration: 30s
       +wh($width * .5, auto)
       @media (max-width: 767.98px)
         +wh($width-small * .5)
-      
+
   .c
     background-color: $black
   .d
     background-color: nth($secondary-list, 1)
     animation: hue $duration linear infinite backwards
-    
+
   .c, .d
     img
       +wh($width * .7, auto)
       @media (max-width: 767.98px)
         +wh($width-small * .7)
-      
-  
 </style>

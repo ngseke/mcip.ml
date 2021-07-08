@@ -14,13 +14,20 @@ section: .container
 
 <script>
 import NewsCard from '~/components/NewsCard.vue'
- 
+
 export default {
-  props: ['list'],
-  components: { NewsCard },
+  components: {
+    NewsCard,
+  },
+  props: {
+    list: {
+      type: Array,
+      default: null,
+    },
+  },
 }
 </script>
-  
+
 <style scoped lang="sass">
 a.title
   transition: all .2s

@@ -47,12 +47,12 @@ export default {
           href: 'mailto:mcip.app@gmail.com',
           target: '_blank',
           icon: ['fas', 'envelope'],
-        }
-      ]
+        },
+      ],
     ]
 
     return {}
-  }
+  },
 }
 </script>
 

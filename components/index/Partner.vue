@@ -19,7 +19,12 @@ section#partner: .container
 const MobileDetect = require('mobile-detect')
 
 export default {
-  props: ['partners'],
+  props: {
+    partners: {
+      type: Array,
+      default: null,
+    },
+  },
   methods: {
     // 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟)
     getFacebookLink (id) {
@@ -35,7 +40,7 @@ export default {
       return _.isUsingCustomImg
         ? _.img
         : `https://graph.facebook.com/${_.facebookId}/picture?height=200&width=200`
-    }
+    },
   },
 }
 </script>
