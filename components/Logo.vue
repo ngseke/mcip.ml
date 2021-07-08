@@ -1,6 +1,6 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318.27 165.98">
-    <g class="shape" :class="{ play: isPlaying }">
+    <g class="shape play">
       <polygon class="cls-1" points="254.36 31.12 40.42 31.12 31.12 31.12 31.12 40.42 31.12 86.93 40.42 86.93 40.42 40.42 254.36 40.42 254.36 31.12" />
       <circle class="cls-1" cx="71.43" cy="74.53" r="12.4" />
       <rect
@@ -42,14 +42,6 @@
 <script>
 export default {
   name: 'Logo',
-  data: () => ({
-    isPlaying: false,
-  }),
-  mounted () {
-    setInterval(() => {
-      this.isPlaying = true
-    }, 1000)
-  },
 }
 </script>
 <style lang="sass" scoped>

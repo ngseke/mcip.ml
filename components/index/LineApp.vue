@@ -2,7 +2,7 @@
 section: .container
   .row.justify-content-around
     .col-12.col-md-3.col-lg-3.order-2.order-md-1
-      img.peep.d-block.d-md-none.d-lg-block(src='~/assets/img/peep/man-with-phone.svg')
+      .peep.d-block.d-md-none.d-lg-block
       .screenshot-area
         img.mockup.ml-lg-5(src='~/assets/img/screenshot/line-app-mockup.png' alt='Line App 畫面截圖' v-scroll-reveal.reset={ scale: .9, opacity: 1 })
 
@@ -81,12 +81,13 @@ section
   position: absolute
   left: -11rem
   bottom: -4.5rem
-  +wh(16rem, auto)
+  background: center / contain no-repeat url('~assets/img/peep/man-with-phone.svg')
+  +wh(16rem, 100%)
   @media (max-width: 767.98px)
-    +wh(12rem, auto)
+    +wh(12rem, 100%)
     left: 0rem
   @media (max-width: 470px)
-    +wh(11rem, auto)
+    +wh(11rem, 100%)
     left: -2rem
 
 .mockup

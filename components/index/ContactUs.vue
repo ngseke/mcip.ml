@@ -1,6 +1,6 @@
 <template lang="pug">
 section: .container
-  .row.justify-content-center.align-items-center
+  .row.justify-content-center.align-items-stretch
     .col-12.col-lg-9
       h3
         fa.mr-3(icon='paper-plane')
@@ -26,7 +26,7 @@ section: .container
           fa.icon(icon='clipboard-check')
           span 謝謝您的來信，我們將會盡快與您聯繫!
     .col-12.col-lg-auto
-      img.peep(src='~/assets/img/peep/woman-explaining.svg')
+      .peep
 </template>
 
 <script>
@@ -140,7 +140,8 @@ form
     opacity: 1
 
 .peep
-  +wh(14rem, auto)
+  +wh(14rem, 100%)
+  background: center / contain no-repeat url('~assets/img/peep/woman-explaining.svg')
   margin-left: 3rem
   @media (max-width: 991.98px)
     display: none
