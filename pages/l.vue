@@ -5,6 +5,6 @@ main
 
 <script>
 export default {
-  asyncData: async ({ redirect }) => redirect('/line'),
+  asyncData: ({ redirect }) => redirect('/line'),
 }
 </script>

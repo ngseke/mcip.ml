@@ -19,6 +19,14 @@ const dayjs = require('dayjs')
 
 export default {
   props: ['value'],
+  computed: {
+    title   () { return this.value.title },
+    image   () { return this.value.image },
+    link    () { return `/news/${this.value.id}` },
+    article () { return this.toPlainText(this.value.article) },
+    author  () { return this.value.author },
+    time    () { return this.convertTime(this.value.timestamp) },
+  },
   methods: {
     // 將 md 格式文字轉為純文字
     toPlainText (_) {
@@ -29,17 +37,9 @@ export default {
       return dayjs(_).format(f)
     },
   },
-  computed: {
-    title   () { return this.value.title },
-    image   () { return this.value.image },
-    link    () { return `/news/${this.value.id}` },
-    article () { return this.toPlainText(this.value.article) },
-    author  () { return this.value.author  },
-    time    () { return this.convertTime(this.value.timestamp)  },
-  },
 }
 </script>
-  
+
 <style scoped lang="sass">
 .news-card
   display: inline-flex
@@ -58,13 +58,13 @@ export default {
     transform: scale(.97)
     box-shadow: $big-btn-shadow
     filter: grayscale(20%)
-  
+
   img.img
     +wh(4rem)
     border-radius: 1rem
     object-fit: cover
     margin-right: 1rem
-    
+
   .body
     display: flex
     flex-direction: column

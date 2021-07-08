@@ -30,19 +30,19 @@ import { throttle } from 'throttle-debounce'
 
 export default
   name: 'Navbar'
-  
+
   data: ->
     top: null
     isShrink: false
     isShow: false
-    
+
   props:
     items:
       default: => [
         { name: 'News', to: '/news' }
         { name: 'FAQs', to: '/faq' }
       ]
-    
+
   mounted: ->
     @setShrink()
     # @setOnBodyClick()
@@ -53,21 +53,21 @@ export default
         prev = @top
         @top = document.scrollingElement.scrollTop ? document.documentElement.scrollTop
         @isShrink = @top > 250
-      
+
       window.addEventListener('scroll', throttled)
       @$once 'hook:beforeDestroy', => window.removeEventListener 'scroll', throttled
- 
+
     setOnBodyClick: ->
       handler = (e) =>
         { navbarContent } = @$refs
         @isShow = false if !navbarContent.contains e.target
-      
+
       document.addEventListener 'click', handler
       @$once('hook:beforeDestroy', => document.removeEventListener('click', handler))
-    
+
     getLinkStyle: (i) ->
       transitionDelay: "#{i * .15 + .3}s"
-      
+
   computed:
     isDark: -> !@isShrink
 </script>
@@ -122,13 +122,13 @@ $height-shrink: $height - .5rem
     top: 0
     .navbar-brand
       visibility: visible
-      
+
     &.navbar-light
       background-color: $shrink-bg-color
       border-bottom: solid 1px $shrink-border-color
       .divider
         border-color: rgba(#333, .3)
-      
+
   .divider
     height: .8rem
     width: 0
@@ -138,11 +138,11 @@ $height-shrink: $height - .5rem
     vertical-align: middle
   .facebook-icon
     font-size: 1rem
-    
+
   a
     cursor: pointer
     display: inline-block
-    
+
   button.navbar-toggler
     +wh(3rem)
     padding: .5rem
@@ -156,14 +156,14 @@ $height-shrink: $height - .5rem
 
 .overlay
   display: none
-    
+
 @media (max-width: 767.98px)
   #nav
     .navbar-content
       display: none
     button.navbar-toggler
       +flex-center
-        
+
   .overlay
     +hide-scroll-bar
     +shrink-bg
@@ -181,13 +181,13 @@ $height-shrink: $height - .5rem
       transform: translateX(100%)
       .link
         transform: translateY(100%)
-        
+
     .link
       display: inline-block
       font-size: 2.5rem
       font-weight: bold
       transition: transform .3s
-      
+
     ul
       list-style: none
       padding: 0
@@ -195,7 +195,7 @@ $height-shrink: $height - .5rem
       li
         padding: .25rem 1rem
         overflow: hidden
-        
+
     a.close
       position: absolute
       top: 5%

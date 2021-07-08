@@ -5,13 +5,13 @@ main(itemscope itemtype='http://schema.org/Article' )
       h1(v-if='data' v-cloak)
         nuxt-link.back-btn(to='/news' title='返回最新消息列表'): fa(icon='angle-left')
         span(itemprop='headline') {{ data.title }}
-        
+
   section(v-if='data' v-cloak)
     .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
       Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `最新消息`, url: `/news` }, { name: data.title }]')
-        
+
       Author(:name='data.author' :date='data.timestamp')
-        
+
       img.img-fluid.mb-3(:src='data.image' v-if='data.image' itemprop='image')
       article.markdown-body.octicon(v-html='convertMarkdown(data.article)' itemprop='articleBody')
 </template>
@@ -26,34 +26,12 @@ import * as news from '~/plugins/news.js'
 const marked = require('marked')
 
 export default {
-  layout: 'news',
   components: {
     Jumbotron,
     Breadcrumb,
     Author,
   },
-  head () {
-    const { title, article, image } = this.data
-    const description = article.replace(title, '').replace(/\n/g, ' ').replace(/【/g, '').replace(/】/g, '').substr(0, 150).trim()
-    
-    return {
-      title: `${title}`,
-      titleTemplate: titleChunk => (titleChunk)
-        ? `${titleChunk} - 樂台計畫`
-        : '樂台計畫 - 大專院校音樂賽事平台',
-      meta: [
-        { hid: 'description', name: 'description', content: description },
-        { hid: 'og:description', property: 'og:description', content: description },
-        { hid: 'og:type', property: 'og:type', content: 'article' },
-        { hid: 'og:url', property: 'og:url', content: `https://${this.host}${this.$nuxt.$route.path}` },
-        { hid: 'og:image', property: 'og:image', content: image },
-        { hid: 'og:title', property: 'og:title', content: `${title}` },
-      ],
-      link: [
-        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css' }
-      ],
-    }
-  },
+  layout: 'news',
   async asyncData ({ params, error, req }) {
     try {
       const data = await news.fetch(params.id)
@@ -68,11 +46,33 @@ export default {
       data: null,
     }
   },
+  head () {
+    const { title, article, image } = this.data
+    const description = article.replace(title, '').replace(/\n/g, ' ').replace(/【/g, '').replace(/】/g, '').substr(0, 150).trim()
+
+    return {
+      title: `${title}`,
+      titleTemplate: titleChunk => (titleChunk)
+        ? `${titleChunk} - 樂台計畫`
+        : '樂台計畫 - 大專院校音樂賽事平台',
+      meta: [
+        { hid: 'description', name: 'description', content: description },
+        { hid: 'og:description', property: 'og:description', content: description },
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:url', property: 'og:url', content: `https://${this.host}${this.$nuxt.$route.path}` },
+        { hid: 'og:image', property: 'og:image', content: image },
+        { hid: 'og:title', property: 'og:title', content: `${title}` },
+      ],
+      link: [
+        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css' },
+      ],
+    }
+  },
   methods: {
     convertMarkdown (_) {
       return marked(_)
     },
-  }
+  },
 }
 </script>
 
@@ -81,7 +81,7 @@ header.news
   +py(4rem)
   padding-top: 5rem
   background-image: $news-gradient
-  
+
 .news-title
   h1
     display: flex
@@ -104,7 +104,7 @@ header.news
     background-color: rgba(white, .2)
   @media (max-width: 575.98px)
     +wh(3rem)
-      
+
 .author
   margin-bottom: 2.5rem
 </style>

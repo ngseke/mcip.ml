@@ -15,13 +15,13 @@ export default {
   props: [
     'avatar',
     'name',
-    'date'
+    'date',
   ],
   methods: {
     convertTime (_, f = 'YYYY年MM月DD日') {
       return dayjs(_).format(f)
     },
-  }
+  },
 }
 </script>
 

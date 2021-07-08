@@ -1,9 +1,16 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318.27 165.98">
-    <g class="shape" :class='{ play: isPlaying }'>
+    <g class="shape" :class="{ play: isPlaying }">
       <polygon class="cls-1" points="254.36 31.12 40.42 31.12 31.12 31.12 31.12 40.42 31.12 86.93 40.42 86.93 40.42 40.42 254.36 40.42 254.36 31.12" />
       <circle class="cls-1" cx="71.43" cy="74.53" r="12.4" />
-      <rect class="cls-1" x="107.42" y="50.42" width="9.79" height="35.87" transform="translate(26.14 -30.94) rotate(17.72)" />
+      <rect
+        class="cls-1"
+        x="107.42"
+        y="50.42"
+        width="9.79"
+        height="35.87"
+        transform="translate(26.14 -30.94) rotate(17.72)"
+      />
     </g>
     <path class="cls-1" d="M202.09,109a17.94,17.94,0,0,0,.19-2.48v-.87h.42v.77a17.43,17.43,0,0,1-.2,2.58h5.29v.41h-5a11.34,11.34,0,0,0,5.2,6.89l-.24.34a11.69,11.69,0,0,1-5.31-7.16,9.71,9.71,0,0,1-5.19,7.21l-.26-.34a9.13,9.13,0,0,0,5-6.94h-4.82V109Z" />
     <path class="cls-1" d="M218.16,107.81v-1h-4.95v-.36h4.95v-.87h.42v.87h4.95v.36h-4.95v1h3.81V111h-3.81v1.15l3.62-.18c-.22-.24-.45-.47-.67-.69l.29-.19a15.34,15.34,0,0,1,1.7,1.84l-.32.23a9.36,9.36,0,0,0-.68-.85l-1.53.07v1.37h2.75v.38H221v1.79a.68.68,0,0,1-.78.76h-1.32l-.07-.39,1.27,0a.44.44,0,0,0,.49-.48v-1.71H213v-.38h7.58v-1.34c-2.2.09-4.51.18-6.92.25l-.09-.35,4.59-.15V111h-3.81v-3.21Zm0,1.45v-1.1h-3.4v1.1Zm0,.33h-3.4v1.08h3.4ZM217.6,116l-.29.29a14.59,14.59,0,0,0-2.11-1.75l.26-.24A13.22,13.22,0,0,1,217.6,116Zm1-6.77H222v-1.1h-3.4Zm3.4.33h-3.4v1.08H222Z" />
@@ -42,7 +49,7 @@ export default {
     setInterval(() => {
       this.isPlaying = true
     }, 1000)
-  }
+  },
 }
 </script>
 <style lang="sass" scoped>
@@ -66,7 +73,7 @@ $duration: 5s
       stroke-dashoffset: 0
       stroke-dasharray: $length
       stroke-opacity: 0
-      
+
 +keyframes-generator('short', $short)
 +keyframes-generator('long', $long)
 
@@ -79,7 +86,7 @@ $duration: 5s
     stroke: nth($secondary-list, 1)
     stroke-width: 1px
     animation: short $duration ease-in infinite alternate both
-    
+
   polygon
     animation-name: long
 </style>

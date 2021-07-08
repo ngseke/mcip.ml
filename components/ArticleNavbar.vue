@@ -20,16 +20,18 @@ nav.article-navbar
 export default {
   name: 'ArticleNavbar',
   props: {
-    value: { default: null },
+    value: {
+      default: null,
+    },
   },
   methods: {
     getIsActive (index, list) {
       const current = list[index]
       const next = list[index + 1]
-      
+
       return current.top < 0 && ((next && next.top > 0) || !next)
-    }
-  }
+    },
+  },
 }
 </script>
 

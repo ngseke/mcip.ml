@@ -10,7 +10,7 @@ div
     .meta
       .container: .row: .col-12
         Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
-          
+
     .container
       .row.justify-content-center.align-items-start
         .col-12.col-lg-9.col-xl-8
@@ -26,6 +26,7 @@ div
 </template>
 
 <script>
+import { throttle } from 'throttle-debounce'
 import Navbar from '~/components/Navbar.vue'
 import Jumbotron from '~/components/Jumbotron.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
@@ -33,7 +34,6 @@ import ArticleNavbar from '~/components/ArticleNavbar.vue'
 
 import * as staticData from '~/plugins/static-data'
 
-import { throttle } from 'throttle-debounce'
 const marked = require('marked')
 
 export default {
@@ -43,18 +43,10 @@ export default {
     Breadcrumb,
     ArticleNavbar,
   },
-  head () {
-    return {
-      title: '常見問題',
-      meta: [
-        { hid: 'og:title', property: 'og:title', content: '常見問題 - 樂台計畫' },
-      ],
-    }
-  },
   async asyncData ({ error }) {
     try {
       const faqs = await staticData.get('json/faq.json')
-      
+
       return { faqs }
     } catch (e) {
       error({ statusCode: e.response.status })
@@ -62,12 +54,20 @@ export default {
   },
   data () {
     this.navbar = [
-      { name: `Home`, to: `/` },
+      { name: 'Home', to: '/' },
       { name: 'News', to: '/news' },
       { name: 'FAQs', to: '/faq', active: true },
     ]
     return {
       list: null,
+    }
+  },
+  head () {
+    return {
+      title: '常見問題',
+      meta: [
+        { hid: 'og:title', property: 'og:title', content: '常見問題 - 樂台計畫' },
+      ],
     }
   },
   mounted () {
@@ -81,16 +81,16 @@ export default {
       const { sections } = this.$refs
 
       const throttled = throttle(100, () => {
-        this.list = sections.map(section => {
+        this.list = sections.map((section) => {
           const el = section.querySelector('h2')
           const children = Array.from(section.querySelectorAll('h3')).map(this.getSidebarItem)
 
           return { ...this.getSidebarItem(el), children }
         })
       })
-      
+
       throttled()
-      
+
       window.addEventListener('scroll', throttled)
       this.$once('hook:beforeDestroy', () => window.removeEventListener('scroll', throttled))
     },
@@ -102,9 +102,9 @@ export default {
       }
     },
     getIdString (_) {
-      return _.replace(/ +/g, "-").replace(/\/+/g, "-")
+      return _.replace(/ +/g, '-').replace(/\/+/g, '-')
     },
-  }
+  },
 }
 </script>
 
@@ -116,14 +116,14 @@ main.faq
   section
     background-color: #f8f8f8
     +py(2rem)
-    
+
   h2
     border-bottom: solid 1px #ddd
     padding-bottom: 1rem
     margin-bottom: 3rem
     .anchor
       margin-left: .5rem
-      
+
   .item
     margin-bottom: 3rem
     h3
@@ -131,9 +131,8 @@ main.faq
       margin-bottom: .75rem
     ::v-deep li
       margin-bottom: .5rem
-      
-      
+
 .sticky-top
-  
+
   top: 5rem
 </style>

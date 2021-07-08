@@ -23,13 +23,13 @@ export default {
   data () {
     this.reveal = {
       lineIcon: {
-        scale: .8,
+        scale: 0.8,
         opacity: 0,
         delay: 200,
         duration: 500,
       },
       number: {
-        scale: .8,
+        scale: 0.8,
         opacity: 0,
         delay: 500,
         duration: 500,
@@ -72,7 +72,7 @@ $line-icon-size: 7rem
       font-family: arial
       font-size: 1.5rem
       transform-origin: center center
-        
+
 // 聊天訊息區域
 .screenshot-area
   z-index: 20

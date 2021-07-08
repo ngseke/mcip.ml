@@ -22,57 +22,57 @@ export default {
     value: { default: null },
     label: {
       type: String,
-      default: ''
+      default: '',
     },
     type: {
       type: String,
-      default: 'text'
+      default: 'text',
     },
     required: {
       type: Boolean,
-      default: false
+      default: false,
     },
     max: {
       type: Number,
-      default: null
+      default: null,
     },
     rows: {
       type: Number,
-      default: null
+      default: null,
     },
     multiline: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
   computed: {
     inputBind () {
       const { label, type, required, max } = this
-      
+
       return {
         placeholder: label,
         type,
         required,
-        maxlength: max
+        maxlength: max,
       }
     },
     textareaBind () {
       const { label, required, max, rows } = this
-      
+
       return {
         placeholder: label,
         required,
         rows,
-        maxlength: max
+        maxlength: max,
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped lang="sass">
 // ref. https://codepen.io/lucasyem/pen/ZEEYKdj
-  
+
 $primary: #26e1a5
 $gray: #ddd
 $font-size: 1.1rem
@@ -98,7 +98,7 @@ $border-width: 3px
   z-index:  10
   font-weight: bold
   appearance: none
-  
+
   &::placeholder
     color: transparent
   &:placeholder-shown ~ label.form__label

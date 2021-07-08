@@ -12,11 +12,11 @@
 
 <script>
 export default {
-  head: {
-    title: '頁面不存在'
-  },
+  layout: 'default',
   props: ['error'],
-  layout: 'default'
+  head: {
+    title: '頁面不存在',
+  },
 }
 </script>
 
@@ -33,7 +33,7 @@ export default {
     font-size: 10rem
     font-weight: 900
     background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%)
-    
+
   h2
     font-size: 2rem
     font-weight: 600
