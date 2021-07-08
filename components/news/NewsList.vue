@@ -40,6 +40,7 @@ ul.article-list
         font-size: 1.3rem
         color: transparent
         background-clip: text
+        -webkit-background-clip: text
         background-image: $news-gradient
       small
         font-size: .7
