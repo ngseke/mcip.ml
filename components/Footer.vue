@@ -7,14 +7,14 @@ footer.py-5
           ul(v-for='(links, lIndex) in list' :key='lIndex')
             li(v-for='(i, key) in links' :key='key')
               n-link(v-if='i.to' :to='i.to' :target='i.target')
-                fa.mr-2(:icon='["fab", i.icon]' v-if='i.icon')
+                fa.mr-2(:icon='i.icon' v-if='i.icon')
                 | {{ i.name }}
               a(v-else :href='i.href' :target='i.target')
-                fa.mr-2(:icon='["fab", i.icon]' v-if='i.icon')
+                fa.mr-2(:icon='i.icon' v-if='i.icon')
                 | {{ i.name }}
           ul
             li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理 #[fa.mx-1(icon='external-link-alt')]
-            
+
         .col-12.col-lg-auto.text-lg-right
           div Copyright © 2018 - #[=year]  #[n-link(to='/') 樂台計畫].  All rights reserved
           img.logo(src='~/assets/img/logo/logo_symbol-no-gutter-black.svg')
@@ -30,13 +30,27 @@ export default {
         { name: '常見問題', to: '/faq' },
       ],
       [
-        { name: 'Facebook 粉絲專頁', href: 'https://www.facebook.com/mcipApp/', target: '_blank', icon: 'facebook' },
-        { name: 'LINE 官方帳號', to: '/line', target: '_blank', icon: 'line' }
+        {
+          name: 'Facebook 粉絲專頁',
+          href: 'https://www.facebook.com/mcipApp/',
+          target: '_blank',
+          icon: ['fab', 'facebook'],
+        },
+        {
+          name: 'LINE 官方帳號',
+          to: '/line',
+          target: '_blank',
+          icon: ['fab', 'line'],
+        },
+        {
+          name: 'mcip.app@gmail.com',
+          href: 'mailto:mcip.app@gmail.com',
+          target: '_blank',
+          icon: ['fas', 'envelope'],
+        }
       ]
     ]
-    this.links = [
-      
-    ]
+
     return {}
   }
 }
@@ -77,7 +91,7 @@ footer
         &:not(:last-child)
           border: none
         &:first-child
-      
+
   img.logo
     display: inline-block
     +wh(auto, 2rem)
