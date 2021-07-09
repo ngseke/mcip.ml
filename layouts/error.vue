@@ -29,6 +29,7 @@ export default {
     display: inline-block
     color: transparent
     background-clip: text
+    -webkit-background-clip: text
   h1
     font-size: 10rem
     font-weight: 900
