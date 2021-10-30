@@ -36,12 +36,12 @@ export default {
   props: {
     // 總用戶數
     userCount: {
-      default: 4000,
+      default: 6000,
       type: Number,
     },
     // 合作院校數
     partnerCount: {
-      default: 24,
+      default: 25,
       type: Number,
     },
   },
