@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  Navbar
+  Navbar(hide-logo)
   main
     Jumbotron
     //- Attention

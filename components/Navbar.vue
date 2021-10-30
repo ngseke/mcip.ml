@@ -3,7 +3,9 @@ div
   nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }' v-cloak)
     .container
       nuxt-link.navbar-brand(to='/')
-        img(src='~/assets/img/logo/logo_panel-black.svg' alt='樂台計畫')
+        template(v-if='!hideLogo')
+          img(src='~/assets/img/logo/logo_panel-white.svg' alt='樂台計畫' v-if='isDark')
+        img(src='~/assets/img/logo/logo_panel-black.svg' alt='樂台計畫' v-if='!isDark')
       button.navbar-toggler(type='button' @click.stop='isShow = !isShow')
         fa(icon='bars')
       .navbar-content(ref='navbarContent')
@@ -42,6 +44,7 @@ export default
         { name: 'News', to: '/news' }
         { name: 'FAQs', to: '/faq' }
       ]
+    hideLogo: Boolean
 
   mounted: ->
     @setShrink()
@@ -106,7 +109,6 @@ $height-shrink: $height - .5rem
   .container
     position: relative
   .navbar-brand
-    visibility: hidden
     img
       margin-right: .75rem
       width: auto
