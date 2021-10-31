@@ -8,7 +8,7 @@ header(:style='headerStyle' :class='headerClass')
       .col-12.col-lg.position-relative
         .text-center.text-lg-left
           h2
-            | 凝聚並點燃熱情溫度的
+            | 凝聚熱情溫度的
             br
             | 音樂賽事大平台
           .mt-3
