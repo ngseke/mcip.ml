@@ -2,35 +2,51 @@
 section: .container
   .row.justify-content-around
     .col-12.col-md-3.col-lg-3.order-2.order-md-1
-      .peep.d-block.d-md-none.d-lg-block
+      div(:class='peepClass')
       .screenshot-area
-        img.mockup.ml-lg-5(src='~/assets/img/screenshot/line-app-mockup.png' alt='Line App 畫面截圖' v-scroll-reveal.reset={ scale: .9, opacity: 1 })
+        img.mockup-1.ml-lg-5(v-if='type === 1' src='~/assets/img/screenshot/mockup-line-app.png' alt='Line App 畫面截圖' v-scroll-reveal.reset={ scale: .9, opacity: 1 })
+        img.mockup-2(v-else src='~/assets/img/screenshot/mockup-backstage.png' alt='管理後台截圖' v-scroll-reveal.reset={ scale: .9, opacity: 1 })
 
-    .col-12.col-md-8.col-lg-5.order-1.order-md-2
+    .col-12.col-md-8.col-lg-6.order-1.order-md-2
       .align-center-article
-        h3.text-center.text-md-left 三分鐘快速完成報名
-        p.text-center.text-md-left 不需下載 App，用 LINE 就能加入樂台計畫
-        .mb-3.text-center.text-md-left
-          img.qrcode.d-none.d-md-inline-block(src='~/assets/img/line-app-qrcode-shorthand.png' alt='樂台計畫 LINE App QRCode')
-          nuxt-link.gradient-btn.line(target='_blank' to="/line") 加入 LINE 官方帳號
+        RoleSwitcher(v-model='type')
+        template(v-if='type === 1')
+          h3 透過樂台計畫#[br]3 分鐘即完成報名
+          p.mb-3
+            | 不需額外下載 App，用 LINE 就能立刻加入
 
-        .d-flex.justify-content-center.justify-content-md-start(v-scroll-reveal='{ beforeReveal: onCountReveal, opacity: 0, duration: 500, viewOffset: { bottom: 0 } }' v-cloak)
-          .count-to.text-center.text-md-left
-            countTo.number(:start-val='1000' :end-val='userCount' suffix='+' ref='userCount' v-bind='countToOptions') {{ userCount }}+
-            .info 樂台計畫總用戶數
-          .count-to.text-center.text-md-left
-            countTo.number(:start-val='10' :end-val='partnerCount' ref='partnerCount' v-cloak v-bind='countToOptions') {{ partnerCount }}
-            span.label 所
-            .info
-              | 合作院校 #[sup: a(v-scroll-to='{ el: `#partner`, offset: -60 }' href='#') *]
+          .mb-4.d-flex.flex-column.d-md-block
+            nuxt-link.gradient-btn.line(target='_blank' to="/line") 加入 LINE 官方帳號
+          .mb-3.d-none.d-md-inline-block
+            img.qrcode(src='~/assets/img/line-app-qrcode-shorthand.png' alt='樂台計畫 LINE App QRCode')
+
+          .row(v-scroll-reveal='{ beforeReveal: onCountReveal, opacity: 0, duration: 500, viewOffset: { bottom: 0 } }' v-cloak)
+            .col-auto: .count-to
+              countTo.number(:start-val='1000' :end-val='userCount' suffix='+' ref='userCount' v-bind='countToOptions') {{ userCount }}+
+              .info 樂台計畫總用戶數
+            .col-auto: .count-to
+              countTo.number(:start-val='10' :end-val='partnerCount' ref='partnerCount' v-cloak v-bind='countToOptions') {{ partnerCount }}
+              span.label 所
+              .info
+                | 合作院校 #[sup: a(v-scroll-to='{ el: `#partner`, offset: -60 }' href='#') *]
+            .col-12: small 截自 2021 年 11 月
+        template(v-else)
+          h3 為音樂賽事量身打造的#[br]解決方案
+          ul.pl-4
+            li 眾多賽事齊聚一堂，大幅增加活動曝光
+            li 金流代收服務，即時向參賽者推播繳費結果
+            li 跨平台系統，隨時隨地掌握報名狀況
+          .pl-1.mb-3
+            a(href='https://manage.mcip.ml/' target='_blank') 前往社團管理後台 #[fa.mx-1(icon='external-link-alt')]
 </template>
 
 <script>
-
 import countTo from 'vue-count-to'
+import RoleSwitcher from '@/components/RoleSwitcher'
 
 export default {
   components: {
+    RoleSwitcher,
     countTo,
   },
   props: {
@@ -50,7 +66,18 @@ export default {
       duration: 2000,
       autoplay: false,
     }
-    return {}
+
+    return {
+      type: 1,
+    }
+  },
+  computed: {
+    peepClass () {
+      return {
+        'peep-1 d-block d-md-none d-lg-block': this.type === 1,
+        'peep-2 d-none d-lg-block ': this.type === 2,
+      }
+    },
   },
   methods: {
     onCountReveal (el) {
@@ -77,7 +104,13 @@ section
   max-width: 7rem
   margin-right: 2rem
 
-.peep
+.align-center-article
+  +flex-center
+  height: 100%
+  align-items: stretch
+  justify-content: flex-start
+
+.peep-1
   position: absolute
   left: -11rem
   bottom: -4.5rem
@@ -90,20 +123,44 @@ section
     +wh(11rem, 100%)
     left: -2rem
 
-.mockup
-  border-radius: 10px
+.peep-2
+  position: absolute
+  left: -13rem
+  bottom: -9rem
+  background: center / contain no-repeat url('~assets/img/peep/man-using-notebook.svg')
+  +wh(21rem, 30rem)
   @media (max-width: 767.98px)
-    max-width: 12rem
-    margin-left: 0
+    +wh(14rem, 100%)
+    left: 0rem
 
-  @media (max-width: 400px)
-    max-width: 12rem
-    margin-left: 5rem
+.screenshot-area
+  .mockup-1
+    @media (max-width: 767.98px)
+      max-width: 15rem
+
+    @media (max-width: 400px)
+      margin-left: 5rem
+
+  .mockup-2
+    height: 16rem
+    width: auto
+    max-width: none
+    margin-left: 0
+    @media (max-width: 1199.98px)
+      margin-left: -2rem
+
+    @media (max-width: 991.98px)
+      height: 9rem
+
+    @media (max-width: 767.98px)
+      max-width: 20rem
+      height: auto
+
+    @media (max-width: 400px)
+      height: auto
 
 .count-to
   +my(1rem)
-  margin-right: 2rem
-  text-align: center
   .number
     display: inline-block
     font-size: 2.5rem
@@ -117,4 +174,8 @@ section
   .info
     font-weight: 500
     margin-top: -.5rem
+
+ul
+  li
+    margin-bottom: .3rem
 </style>

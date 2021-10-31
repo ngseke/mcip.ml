@@ -93,6 +93,16 @@ header
     em
       font-style: normal
       position: relative
+      &::after
+        content: ''
+        position: absolute
+        background: $bg-gradient
+        height: 8px
+        width: 100%
+        left: 0
+        bottom: 10%
+        z-index: -1
+
   .ad
     display: inline-block
     color: nth($secondary-list, 1)
