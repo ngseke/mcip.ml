@@ -1,11 +1,16 @@
 <template lang="pug">
 header(:style='headerStyle' :class='headerClass')
   slot
-    .container: .row.no-gutters.justify-content-center
-      .col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5.text-center
+    .container: .row.no-gutters.justify-content-around
+      .col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5
         .logo(:class='logoClass')
           Logo(alt='樂台計畫: 大專院校音樂賽事平台')
         //- span.ad #[b 樂台計畫]現已更新至全新風貌!
+      .col.col-xl-5
+        h2.text-center.text-md-left
+          | 即刻透過 LINE
+          br
+          | 加入#[strong 樂台計畫]！
 </template>
 
 <script>
@@ -64,7 +69,10 @@ export default {
 header
   position: relative
   background: url('~assets/img/bg.jpg') center center / cover
-  min-height: 460px
+  color: white
+  min-height: 100vh
+  @media (max-width: 767.98px)
+    min-height: 460px
   +flex-center
   flex-direction: column
   &.dense
@@ -78,9 +86,10 @@ header
   h2
     color: rgba(white, .8)
     text-align: center
-    font-size: 1.2rem
+    font-size: 2.25rem
     font-weight: 500
-    letter-spacing: 5px
+    letter-spacing: 1px
+    line-height: 1.4
     +gradient-text(linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%))
     opacity: .95
 
