@@ -1,20 +1,22 @@
 <template lang="pug">
 header(:style='headerStyle' :class='headerClass')
   slot
-    .container: .row.justify-content-start.align-items-center
-      .col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5
-        .logo(:class='logoClass')
-          Logo(alt='樂台計畫: 大專院校音樂賽事平台')
-      .col-12.col-lg.position-relative
-        .text-center.text-lg-left
-          h2
-            | 凝聚熱情溫度的
-            br
-            | 音樂賽事大平台
-          .mt-3
-            Hashtags
-        //- .circle
-          img(src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29uY2VydHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')
+    .container
+      .row.justify-content-start.justify-content-between.align-items-center
+        .col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5
+          .mb-5
+            .logo
+              Logo(alt='樂台計畫: 大專院校音樂賽事平台')
+          .text-left.text-lg-left
+            h2
+              | 凝聚熱情溫度的
+              br
+              | 音樂賽事#[em 大平台]
+            .mt-3
+              Hashtags
+        .col-12.col-lg.position-relative
+          //- .circle
+            img(src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29uY2VydHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')
 </template>
 
 <script>
@@ -27,10 +29,6 @@ export default {
     Hashtags,
   },
   props: {
-    isAnimation: {
-      default: false,
-      type: Boolean,
-    },
     className: {
       default: null,
       type: String,
@@ -51,13 +49,6 @@ export default {
         [this.className]: true,
       }
     },
-    logoClass () {
-      const { isAnimation } = this
-
-      return {
-        'no-animation': !isAnimation,
-      }
-    },
     headerStyle () {
       const { background } = this
 
@@ -70,10 +61,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import '~assets/sass/logo'
-
 header
-  overflow-x: hidden
+  overflow: hidden auto
   position: relative
   background: url('~assets/img/bg.jpg') center center / cover
   background-color: nth($secondary-list, 3)
@@ -81,7 +70,7 @@ header
   min-height: 100vh
   +py(3rem)
   @media (max-width: 767.98px)
-    min-height: 480px
+    min-height: 500px
   +flex-center
   flex-direction: column
   &.dense
@@ -93,16 +82,17 @@ header
     background-image: $news-gradient
 
   h2
-    color: rgba(white, .8)
+    color: white
     font-size: 2.5rem
     font-weight: 900
     letter-spacing: 1px
     line-height: 1.4
-    +gradient-text(linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%))
     opacity: .95
     @media (max-width: 767.98px)
       font-size: 2rem
-
+    em
+      font-style: normal
+      position: relative
   .ad
     display: inline-block
     color: nth($secondary-list, 1)
@@ -112,10 +102,19 @@ header
     b
       font-weight: bold
 
+.logo
+  margin: -9.5%
+  @media (max-width: 575.98px)
+    $width: 350px
+    max-width: $width
+    margin: $width * -.095
+
 .circle
-  $size: 40rem
-  position: relative
-  transform: translate(2rem, 2rem)
+  $size: 35rem
+  position: absolute
+  top: 50%
+  right: -3rem
+  transform: translateY(-50%)
   +wh($size)
   img
     +wh(100%)
