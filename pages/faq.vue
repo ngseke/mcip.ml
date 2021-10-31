@@ -6,7 +6,7 @@ div
       .container.sub-page-title
         h1
           span.zh: span 常見問題
-          small.en: span FAQs
+          small.en: span FAQ
     .meta
       .container: .row: .col-12
         Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
@@ -54,9 +54,8 @@ export default {
   },
   data () {
     this.navbar = [
-      { name: 'Home', to: '/' },
       { name: 'News', to: '/news' },
-      { name: 'FAQs', to: '/faq', active: true },
+      { name: 'FAQ', to: '/faq', active: true },
     ]
     return {
       list: null,

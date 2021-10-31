@@ -16,9 +16,8 @@ export default {
   },
   data () {
     this.navbar = [
-      { name: 'Home', to: '/' },
       { name: 'News', to: '/news', active: true },
-      { name: 'FAQs', to: '/faq' },
+      { name: 'FAQ', to: '/faq' },
     ]
     return {}
   },

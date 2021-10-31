@@ -42,7 +42,7 @@ export default
     items:
       default: => [
         { name: 'News', to: '/news' }
-        { name: 'FAQs', to: '/faq' }
+        { name: 'FAQ', to: '/faq' }
       ]
     hideLogo: Boolean
 
