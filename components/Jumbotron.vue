@@ -14,9 +14,8 @@ header(:style='headerStyle' :class='headerClass')
               | 音樂賽事#[em 大平台]
             .mt-3
               Hashtags
-        .col-12.col-lg.position-relative
-          //- .circle
-            img(src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29uY2VydHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')
+        .col-12.col-lg.d-flex.justify-content-end
+          .peep
 </template>
 
 <script>
@@ -119,34 +118,11 @@ header
     max-width: $width
     margin: $width * -.095
 
-.circle
-  $size: 35rem
-  position: absolute
-  top: 50%
-  right: -3rem
-  transform: translateY(-50%)
-  +wh($size)
-  img
-    +wh(100%)
-    object-fit: cover
-    z-index: 1
-    border-radius: 100rem
-    position: relative
-  &::after
-    $offset: 1.5rem
-    $dot-size: 20%
-    $dot-color: nth($secondary-list, 1)
-    content: ''
-    background-image: radial-gradient($dot-color $dot-size, transparent 11%), radial-gradient($dot-color $dot-size, transparent 11%)
-    background-size: 20px 20px
-    background-position: 0 0, 30px 30px
-    background-repeat: repeat
-    +wh($size)
-    border-radius: 100rem
-    z-index: 0
-    position: absolute
-    left: 0
-    top: 0
-    transform: translate(-$offset, $offset)
-    opacity: .7
+.peep
+  +wh(35rem)
+  background: center / contain no-repeat url('~assets/img/peep/dancing.svg')
+  @media (max-width: 1199.98px)
+    +wh(28rem)
+  @media (max-width: 991.98px)
+    display: none
 </style>
