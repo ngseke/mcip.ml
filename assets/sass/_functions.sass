@@ -26,6 +26,7 @@
 
 @mixin gradient-text($bg-img)
   background-clip: text
+  -webkit-background-clip: text
   color: transparent
   background-image: $bg-img
 
@@ -88,7 +89,7 @@
     opacity: .7
     transform: none
     text-shadow: none
-    
+
 =no-select
   user-select: none
   -webkit-user-drag: none
@@ -98,7 +99,7 @@
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
-  
+
 =line-ellipsis($lines: 2)
   display: -webkit-box
   line-clamp: $lines
@@ -107,7 +108,7 @@
   -webkit:
     line-clamp: $lines
     box-orient: vertical
-    
+
 =hide-scroll-bar
   &::-webkit-scrollbar
     width: 0 !important
