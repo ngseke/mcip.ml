@@ -2,7 +2,7 @@
 div
   Navbar(hide-logo)
   main
-    Jumbotron
+    Header
     //- Attention
     Introduction
     CountTo
@@ -16,7 +16,7 @@ div
 
 <script>
 import Navbar from '~/components/Navbar.vue'
-import Jumbotron from '~/components/Jumbotron.vue'
+import Header from '~/components/index/Header.vue'
 
 import Introduction from '~/components/index/Introduction.vue'
 import CountTo from '~/components/index/CountTo.vue'
@@ -34,7 +34,7 @@ import * as staticData from '~/plugins/static-data'
 export default {
   components: {
     Navbar,
-    Jumbotron,
+    Header,
     Divider,
     Introduction,
     CountTo,
