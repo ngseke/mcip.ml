@@ -17,19 +17,9 @@ section: .container
 
           .mb-4.d-flex.flex-column.d-md-block
             nuxt-link.gradient-btn.line(target='_blank' to="/line") 加入 LINE 官方帳號
-          .mb-3.d-none.d-md-inline-block
+          .d-none.d-md-inline-block
             img.qrcode(src='~/assets/img/line-app-qrcode-shorthand.png' alt='樂台計畫 LINE App QRCode')
 
-          .row(v-scroll-reveal='{ beforeReveal: onCountReveal, opacity: 0, duration: 500, viewOffset: { bottom: 0 } }' v-cloak)
-            .col-auto: .count-to
-              countTo.number(:start-val='1000' :end-val='userCount' suffix='+' ref='userCount' v-bind='countToOptions') {{ userCount }}+
-              .info 樂台計畫總用戶數
-            .col-auto: .count-to
-              countTo.number(:start-val='10' :end-val='partnerCount' ref='partnerCount' v-cloak v-bind='countToOptions') {{ partnerCount }}
-              span.label 所
-              .info
-                | 合作院校 #[sup: a(v-scroll-to='{ el: `#partner`, offset: -60 }' href='#') *]
-            .col-12: small 截自 2021 年 11 月
         template(v-else)
           h3 為音樂賽事量身打造的#[br]解決方案
           ul.pl-4
@@ -41,32 +31,13 @@ section: .container
 </template>
 
 <script>
-import countTo from 'vue-count-to'
 import RoleSwitcher from '@/components/RoleSwitcher'
 
 export default {
   components: {
     RoleSwitcher,
-    countTo,
-  },
-  props: {
-    // 總用戶數
-    userCount: {
-      default: 6000,
-      type: Number,
-    },
-    // 合作院校數
-    partnerCount: {
-      default: 25,
-      type: Number,
-    },
   },
   data () {
-    this.countToOptions = {
-      duration: 2000,
-      autoplay: false,
-    }
-
     return {
       type: 1,
     }
@@ -77,17 +48,6 @@ export default {
         'peep-1 d-block d-md-none d-lg-block': this.type === 1,
         'peep-2 d-none d-lg-block ': this.type === 2,
       }
-    },
-  },
-  methods: {
-    onCountReveal (el) {
-      this.startCountTo()
-    },
-    startCountTo () {
-      const { userCount, partnerCount } = this.$refs
-      const refs = [userCount, partnerCount]
-
-      refs.forEach(ref => ref && ref.start())
     },
   },
 }
@@ -158,22 +118,6 @@ section
 
     @media (max-width: 400px)
       height: auto
-
-.count-to
-  +my(1rem)
-  .number
-    display: inline-block
-    font-size: 2.5rem
-    font-family: roboto, Helvetica, Arial
-    margin: 0
-    padding: 0
-  .label
-    margin-left: .5rem
-    font-size: 1.5rem
-    font-weight: 500
-  .info
-    font-weight: 500
-    margin-top: -.5rem
 
 ul
   li

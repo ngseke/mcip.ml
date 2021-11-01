@@ -5,6 +5,7 @@ div
     Jumbotron
     //- Attention
     Introduction
+    CountTo
     Divider
     //- Payment
     //- Backstage
@@ -18,6 +19,7 @@ import Navbar from '~/components/Navbar.vue'
 import Jumbotron from '~/components/Jumbotron.vue'
 
 import Introduction from '~/components/index/Introduction.vue'
+import CountTo from '~/components/index/CountTo.vue'
 import Divider from '~/components/index/Divider.vue'
 import Payment from '~/components/index/Payment.vue'
 import Backstage from '~/components/index/Backstage.vue'
@@ -35,6 +37,7 @@ export default {
     Jumbotron,
     Divider,
     Introduction,
+    CountTo,
     Payment,
     Backstage,
     News,
