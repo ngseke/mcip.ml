@@ -9,7 +9,7 @@ header(:style='headerStyle' :class='headerClass')
               Logo(alt='樂台計畫: 大專院校音樂賽事平台')
           .text-left.text-lg-left
             h2
-              | 凝聚熱情溫度的
+              | 由熱情驅動的
               br
               | 音樂賽事#[em 大平台]
             .mt-3
@@ -95,7 +95,8 @@ header
       &::after
         content: ''
         position: absolute
-        background: $bg-gradient
+        background: center / cover no-repeat url('https://images.unsplash.com/photo-1610523978474-73d8a3bacf08?ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NzJ8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60')
+
         height: 8px
         width: 100%
         left: 0
