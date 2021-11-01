@@ -1,5 +1,5 @@
 <template lang="pug">
-section.container(v-scroll-reveal='{ beforeReveal: onCountReveal }')
+section.container(v-scroll-reveal='{ beforeReveal: onCountReveal, duration: 0 }')
   .row.justify-content-around(v-cloak)
     .col-auto
       .count-to
