@@ -16,67 +16,74 @@ div
           li.nav-item
             a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
               fa.facebook-icon(:icon='["fab", "facebook"]')
-  .overlay(:class='{ hide: !isShow }')
+  .mobile-navbar(:class='{ hide: !isShow }')
     a.close(@click.prevent='isShow = false' href='#') ╳
     ul
-      li(v-for='(_, key) in items' @click='isShow = false' )
-        nuxt-link.link(:to='_.to' :class='{ active: _.active }' :style='getLinkStyle(key)') {{ _.name }}
+      li(v-for='(_, key) in mobileItems' @click='isShow = false' )
+        nuxt-link.link(:to='_.to' :class='{ active: _.active }') {{ _.name }}
     .divider
     ul
+      li: nuxt-link.link(to='/line') LINE App
       li: a.link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
         fa.facebook-icon(:icon='["fab", "facebook"]')
+  transition(name='fade')
+    .overlay(v-if='isShow' @click='isShow = false')
 </template>
 
-<script lang="coffee">
+<script>
 import { throttle } from 'throttle-debounce'
 
-export default
-  name: 'Navbar'
-
-  data: ->
-    top: null
-    isShrink: false
-    isShow: false
-
-  props:
-    items:
-      default: => [
-        { name: 'News', to: '/news' }
-        { name: 'FAQ', to: '/faq' }
+export default {
+  name: 'Navbar',
+  props: {
+    items: {
+      type: Array,
+      default: () => [
+        { name: 'News', to: '/news' },
+        { name: 'FAQ', to: '/faq' },
+      ],
+    },
+    hideLogo: Boolean,
+  },
+  data () {
+    return {
+      top: null,
+      isShrink: false,
+      isShow: false,
+    }
+  },
+  computed: {
+    isDark () {
+      return !this.isShrink
+    },
+    mobileItems () {
+      return [
+        { name: 'Home', to: '/', active: this.$route.name === 'index' },
+        ...this.items,
       ]
-    hideLogo: Boolean
-
-  mounted: ->
-    @setShrink()
-    # @setOnBodyClick()
-
-  methods:
-    setShrink: ->
-      throttled = throttle 300, =>
-        prev = @top
-        @top = document.scrollingElement.scrollTop ? document.documentElement.scrollTop
-        @isShrink = @top > 250
-
+    },
+  },
+  mounted () {
+    this.setShrink()
+  },
+  methods: {
+    setShrink () {
+      const throttled = throttle(300, () => {
+        const ref = document.scrollingElement.scrollTop
+        this.top = ref != null ? ref : document.documentElement.scrollTop
+        this.isShrink = this.top > 250
+      })
       window.addEventListener('scroll', throttled)
-      @$once 'hook:beforeDestroy', => window.removeEventListener 'scroll', throttled
-
-    setOnBodyClick: ->
-      handler = (e) =>
-        { navbarContent } = @$refs
-        @isShow = false if !navbarContent.contains e.target
-
-      document.addEventListener 'click', handler
-      @$once('hook:beforeDestroy', => document.removeEventListener('click', handler))
-
-    getLinkStyle: (i) ->
-      transitionDelay: "#{i * .15 + .3}s"
-
-  computed:
-    isDark: -> !@isShrink
+      this.$once('hook:beforeDestroy', () => {
+        window.removeEventListener('scroll', throttled)
+      })
+    },
+  },
+}
 </script>
 
 <style lang="sass" scoped>
-$shrink-bg-color: rgba(#fff, .9)
+$shrink-bg-color: rgba(#fff, .95)
 $shrink-border-color: rgba(#ddd, .8)
 
 $time-function: cubic-bezier(0.47,0,.4,.99)
@@ -87,6 +94,7 @@ $height-shrink: $height - .5rem
 =shrink-bg
   background-color: $shrink-bg-color
   backdrop-filter: blur(5px)
+  -webkit-backdrop-filter: blur(5px)
 
 #nav
   +py(0)
@@ -156,7 +164,8 @@ $height-shrink: $height - .5rem
     &:active
       background-color: rgba(white, .2)
 
-.overlay
+.mobile-navbar
+  z-index: 2
   display: none
 
 @media (max-width: 767.98px)
@@ -166,46 +175,70 @@ $height-shrink: $height - .5rem
     button.navbar-toggler
       +flex-center
 
-  .overlay
+  .mobile-navbar
     +hide-scroll-bar
     +shrink-bg
+    box-shadow: $big-btn-shadow
+    background-color: rgba($black, .98)
     overflow-y: scroll
     overscroll-behavior: contain
     z-index: 2000
+    padding: .25rem 1.75rem
     position: fixed
     top: 0
-    left: 0
-    +wh(100%)
+    right: 0
+    +wh(80% ,100%)
+    max-width: 20rem
     +flex-center
     transition: transform .4s cubic-bezier(.7,0,.3,1)
-
     &.hide
       transform: translateX(100%)
-      .link
-        transform: translateY(100%)
 
     .link
       display: inline-block
       font-size: 2.5rem
       font-weight: bold
       transition: transform .3s
+      color: white
+      &.active
+        color: $primary
 
     ul
       list-style: none
+      margin: .75rem 0
       padding: 0
-      margin-bottom: 2.5rem
+      width: 100%
       li
-        padding: .25rem 1rem
         overflow: hidden
 
     a.close
       position: absolute
-      top: 5%
-      right: 5%
+      top: .5rem
+      right: .5rem
       display: flex
       align-items: center
       font-size: 2rem
       font-weight: 100
       padding: 1rem
       outline: none
+
+    .divider
+      width: 100%
+      border-bottom: rgba(white, .7) solid 1px
+
+.overlay
+  z-index: 1
+  position: fixed
+  top: 0
+  right: 0
+  +wh(100% ,100%)
+  background: rgba($black, .5)
+
+.fade
+  &-enter, &-leave-to
+    opacity: 0
+  &-leave, &-enter-to
+    opacity: 1
+  &-enter-active, &-leave-active
+    transition: all .3s
 </style>

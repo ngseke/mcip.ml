@@ -2,9 +2,10 @@
 div
   Navbar(hide-logo)
   main
-    Jumbotron
+    Header
     //- Attention
-    LineApp
+    Introduction
+    CountTo
     Divider
     //- Payment
     //- Backstage
@@ -15,9 +16,10 @@ div
 
 <script>
 import Navbar from '~/components/Navbar.vue'
-import Jumbotron from '~/components/Jumbotron.vue'
+import Header from '~/components/index/Header.vue'
 
-import LineApp from '~/components/index/LineApp.vue'
+import Introduction from '~/components/index/Introduction.vue'
+import CountTo from '~/components/index/CountTo.vue'
 import Divider from '~/components/index/Divider.vue'
 import Payment from '~/components/index/Payment.vue'
 import Backstage from '~/components/index/Backstage.vue'
@@ -32,9 +34,10 @@ import * as staticData from '~/plugins/static-data'
 export default {
   components: {
     Navbar,
-    Jumbotron,
+    Header,
     Divider,
-    LineApp,
+    Introduction,
+    CountTo,
     Payment,
     Backstage,
     News,

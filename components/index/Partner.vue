@@ -75,4 +75,24 @@ h3
       .school
         color: #333
         opacity: .8
+
+section
+  position: relative
+  overflow: visible
+  &::after, &::before
+    content: ''
+    position: absolute
+    background-size: cover
+    background-position: center
+    background-repeat: no-repeat
+    +wh(10rem)
+  &::before
+    right: .5rem
+    bottom: 1rem
+    background-image: url('~assets/img/peep/deco2.svg')
+    z-index: 0
+    @media (max-width: 575.98px)
+      +wh(8rem)
+      right: 0
+      bottom: -1rem
 </style>

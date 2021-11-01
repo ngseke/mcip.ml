@@ -1,6 +1,6 @@
 <template lang="pug">
 main
-  Jumbotron(className='news' :isDense='true')
+  Header(className='news')
     .container.sub-page-title
       h1
         span.zh: span 最新消息
@@ -12,7 +12,7 @@ main
 </template>
 
 <script>
-import Jumbotron from '~/components/Jumbotron.vue'
+import Header from '~/components/Header.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
 import NewsList from '~/components/news/NewsList.vue'
 
@@ -20,7 +20,7 @@ import * as news from '~/plugins/news.js'
 
 export default {
   components: {
-    Jumbotron,
+    Header,
     NewsList,
     Breadcrumb,
   },

@@ -7,7 +7,7 @@ export default {
   */
   head: {
     htmlAttrs: {
-      lang: 'zh-Hant-TW'
+      lang: 'zh-Hant-TW',
     },
     titleTemplate: titleChunk => (titleChunk)
       ? `${titleChunk} - 樂台計畫`
@@ -31,7 +31,7 @@ export default {
     script: [
       { src: '//static.zotabox.com/9/f/9fccee64ff3ae80ada19da0e463cce9c/widgets.js', async: true },
       { src: 'https://www.googletagmanager.com/gtag/js?id=UA-134521649-1', async: true },
-    ]
+    ],
   },
   /*
   ** Customize the progress-bar color
@@ -41,13 +41,13 @@ export default {
   ** Global CSS
   */
   css: [
-    './assets/sass/style.sass'
+    './assets/sass/style.sass',
   ],
   styleResources: {
     sass: [
       './assets/sass/_functions.sass',
-      './assets/sass/_variables.sass'
-    ]
+      './assets/sass/_variables.sass',
+    ],
   },
   /*
   ** Plugins to load before mounting the App
@@ -55,7 +55,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue-scroll-reveal', ssr: false },
     '~/plugins/font-awesome',
-    { src: '~plugins/ga.js', mode: 'client' }
+    { src: '~plugins/ga.js', mode: 'client' },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -78,13 +78,13 @@ export default {
     imports: [
       {
         set: '@fortawesome/free-solid-svg-icons',
-        icons: ['fas']
+        icons: ['fas'],
       },
       {
         set: '@fortawesome/free-brands-svg-icons',
-        icons: ['fab']
+        icons: ['fab'],
       },
-    ]
+    ],
   },
   /*
   ** Axios module configuration
@@ -101,18 +101,13 @@ export default {
     */
     extractCSS: true,
     extend (config, ctx) {
-    }
+    },
   },
   sitemap: {
     gzip: true,
     exclude: [
       '/news.html',
-      '/l'
+      '/l',
     ],
-    // // dynamic routes
-    // routes: async () => {
-    //   const list = await news.fetchListBrief(null, 9999)
-    //   return list.map(_ => `/news/${_.id}`)
-    // }
-  }
+  },
 }

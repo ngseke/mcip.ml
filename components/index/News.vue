@@ -51,6 +51,5 @@ a.title
   text-align: center
   transition: $transition
   &:hover
-    background-color: white
-    box-shadow: $big-btn-shadow
+    background-color: #e9ecef
 </style>

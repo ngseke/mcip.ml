@@ -13,11 +13,11 @@ footer.py-5
                 fa.mr-2(:icon='i.icon' v-if='i.icon')
                 | {{ i.name }}
           ul
-            li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理 #[fa.mx-1(icon='external-link-alt')]
+            li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理後台 #[fa.mx-1(icon='external-link-alt')]
 
         .col-12.col-lg-auto.text-lg-right
-          div Copyright © 2018 - #[=year]  #[n-link(to='/') 樂台計畫].  All rights reserved
           img.logo(src='~/assets/img/logo/logo_symbol-no-gutter-black.svg')
+          div Copyright © 2018 - #[=year]  #[n-link(to='/') 樂台計畫].  All rights reserved
 </template>
 
 <script>
@@ -95,7 +95,7 @@ footer
   img.logo
     display: inline-block
     +wh(auto, 2rem)
-    margin-top: 1rem
+    margin-bottom: 1rem
     opacity: .45
     +no-select
 </style>

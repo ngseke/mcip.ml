@@ -2,7 +2,7 @@
 div
   Navbar(:items='navbar')
   main.faq(itemscope itemtype='https://schema.org/FAQPage')
-    Jumbotron(className='faq' :isDense='true')
+    Header(className='faq')
       .container.sub-page-title
         h1
           span.zh: span 常見問題
@@ -28,7 +28,7 @@ div
 <script>
 import { throttle } from 'throttle-debounce'
 import Navbar from '~/components/Navbar.vue'
-import Jumbotron from '~/components/Jumbotron.vue'
+import Header from '~/components/Header.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
 import ArticleNavbar from '~/components/ArticleNavbar.vue'
 
@@ -39,7 +39,7 @@ const marked = require('marked')
 export default {
   components: {
     Navbar,
-    Jumbotron,
+    Header,
     Breadcrumb,
     ArticleNavbar,
   },

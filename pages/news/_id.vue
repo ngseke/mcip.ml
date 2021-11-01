@@ -1,6 +1,6 @@
 <template lang="pug">
 main(itemscope itemtype='http://schema.org/Article' )
-  Jumbotron(className='news' :isDense='true')
+  Header(className='news')
     .container.news-title
       h1(v-if='data' v-cloak)
         nuxt-link.back-btn(to='/news' title='返回最新消息列表'): fa(icon='angle-left')
@@ -17,7 +17,7 @@ main(itemscope itemtype='http://schema.org/Article' )
 </template>
 
 <script>
-import Jumbotron from '~/components/Jumbotron.vue'
+import Header from '~/components/Header.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
 import Author from '~/components/Author.vue'
 
@@ -27,7 +27,7 @@ const marked = require('marked')
 
 export default {
   components: {
-    Jumbotron,
+    Header,
     Breadcrumb,
     Author,
   },
