@@ -63,22 +63,20 @@ export default {
 header
   overflow: hidden auto
   position: relative
-  background: url('~assets/img/bg.jpg') center center / cover
+  background: url('~assets/img/background/index.jpg') center center / cover
   background-color: nth($secondary-list, 3)
   color: white
   min-height: 100vh
   +py(3rem)
-  @media (max-width: 767.98px)
-    min-height: 500px
   +flex-center
   flex-direction: column
   &.dense
     padding: 5rem 0 4rem
-    min-height: auto
-  &.faq
-    background: $bg-gradient
+    min-height: 50vh
   &.news
-    background-image: $news-gradient
+    background-image: url('~assets/img/background/news.jpg')
+  &.faq
+    background-image: url('~assets/img/background/faq.jpg')
 
   h2
     color: white
