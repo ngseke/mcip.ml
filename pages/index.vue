@@ -4,7 +4,7 @@ div
   main
     Jumbotron
     //- Attention
-    LineApp
+    Introduction
     Divider
     //- Payment
     //- Backstage
@@ -17,7 +17,7 @@ div
 import Navbar from '~/components/Navbar.vue'
 import Jumbotron from '~/components/Jumbotron.vue'
 
-import LineApp from '~/components/index/LineApp.vue'
+import Introduction from '~/components/index/Introduction.vue'
 import Divider from '~/components/index/Divider.vue'
 import Payment from '~/components/index/Payment.vue'
 import Backstage from '~/components/index/Backstage.vue'
@@ -34,7 +34,7 @@ export default {
     Navbar,
     Jumbotron,
     Divider,
-    LineApp,
+    Introduction,
     Payment,
     Backstage,
     News,
