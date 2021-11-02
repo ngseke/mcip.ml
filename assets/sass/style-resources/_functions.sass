@@ -82,9 +82,10 @@
 
 =floating-link
   transition: all .2s
-  &:hover
-    transform: translateY(-3px)
-    text-shadow: 0 5px 3px rgba(#555, .1)
+  @media (hover: hover)
+    &:hover
+      transform: translateY(-3px)
+      text-shadow: 0 5px 3px rgba(#555, .1)
   &:active
     opacity: .7
     transform: none

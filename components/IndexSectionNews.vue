@@ -8,11 +8,13 @@ section: .container
           | 最新消息
           span.icon.ml-3 ➔
 
-    .col-12.col-md-6.col-lg-4(v-for='(i, index) in list')
-      NewsCard(:value='i')
-    .col-12
-      nuxt-link.more(to='/news' title='查看更多最新消息')
-        fa(icon='chevron-down')
+    .col-12.col-md-6.col-lg-4(v-for='item in list')
+      NewsItem(:value='item')
+
+    .col-12.text-right
+      nuxt-link(to='/news')
+        | 查看更多
+        fa.ml-3(icon='chevron-right')
 </template>
 
 <script>
