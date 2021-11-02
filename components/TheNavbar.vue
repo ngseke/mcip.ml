@@ -11,15 +11,15 @@ div
       .navbar-content(ref='navbarContent')
         ul.navbar-nav
           li.nav-item(v-for='_ in items')
-            nuxt-link.nav-link(:to='_.to' @click='isShow = false' :class='{ active: _.active }') {{ _.name }}
+            nuxt-link.nav-link(:to='_.to' :class='{ active: _.active }') {{ _.name }}
           li.d-flex.align-items-center(v-if="items.length"): .divider
           li.nav-item
             a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
               fa.facebook-icon(:icon='["fab", "facebook"]')
   .mobile-navbar(:class='{ hide: !isShow }')
-    a.close(@click.prevent='isShow = false' href='#') ╳
+    a.close(@click.prevent='hide' href='#') ╳
     ul
-      li(v-for='(_, key) in mobileItems' @click='isShow = false' )
+      li(v-for='(_, key) in mobileItems')
         nuxt-link.link(:to='_.to' :class='{ active: _.active }') {{ _.name }}
     .divider
     ul
@@ -27,7 +27,7 @@ div
       li: a.link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
         fa.facebook-icon(:icon='["fab", "facebook"]')
   transition(name='fade')
-    .overlay(v-if='isShow' @click='isShow = false')
+    .overlay(v-if='isShow' @click='hide')
 </template>
 
 <script>
@@ -63,6 +63,11 @@ export default {
       ]
     },
   },
+  watch: {
+    '$route.path' () {
+      this.hide()
+    },
+  },
   mounted () {
     this.setShrink()
   },
@@ -77,6 +82,9 @@ export default {
       this.$once('hook:beforeDestroy', () => {
         window.removeEventListener('scroll', throttled)
       })
+    },
+    hide () {
+      this.isShow = false
     },
   },
 }
