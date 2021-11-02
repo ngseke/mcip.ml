@@ -36,9 +36,7 @@ section.introduction: .container
         section.second(v-else-if='isBackstage' key=2)
           h3 為音樂賽事量身打造的#[br]解決方案
           ul.pl-4
-            li 眾多賽事齊聚一堂，大幅增加活動曝光
-            li 金流代收服務，即時向參賽者推播繳費結果
-            li 跨平台系統，隨時隨地掌握報名狀況
+            li(v-for='feature in backstageFeatures') {{ feature }}
           .pl-1.mb-3
             a(href='https://manage.mcip.ml/' target='_blank') 前往社團管理後台 #[fa.mx-1(icon='external-link-alt')]
 </template>
@@ -46,6 +44,11 @@ section.introduction: .container
 <script>
 export default {
   data () {
+    this.backstageFeatures = [
+      '眾多賽事齊聚一堂，大幅增加活動曝光',
+      '金流代收服務，即時向參賽者推播繳費結果',
+      '跨平台系統，隨時隨地掌握報名狀況',
+    ]
     return {
       type: 1,
     }
