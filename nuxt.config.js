@@ -46,8 +46,10 @@ export default {
   ],
   styleResources: {
     sass: [
-      './assets/sass/_functions.sass',
-      './assets/sass/_variables.sass',
+      './assets/sass/style-resources/_variables.sass',
+      './assets/sass/style-resources/_functions.sass',
+      './assets/sass/style-resources/_custom.sass',
+      './assets/sass/style-resources/_bootstrap.sass',
     ],
   },
   /*
