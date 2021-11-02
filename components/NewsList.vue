@@ -74,7 +74,7 @@ ul.article-list
       small
         font-size: .7
         color: rgba(#666, 1)
-      &.load-more
+
   li:not(:last-child)
     border-bottom: solid 1px rgba(#ccc, .5)
 

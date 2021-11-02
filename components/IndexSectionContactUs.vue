@@ -30,7 +30,7 @@ section: .container
 </template>
 
 <script>
-import { create } from '~/assets/js/captcha.js'
+import { create } from '~/modules/captcha'
 
 export default {
   data () {
