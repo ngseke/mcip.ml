@@ -93,7 +93,7 @@ header.news
   flex: 0 0 auto
   &:active
     background-color: rgba(white, .2)
-  @media (max-width: 575.98px)
+  @include media-breakpoint-down(xs)
     +wh(3rem)
 
 .author

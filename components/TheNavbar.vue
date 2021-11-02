@@ -176,7 +176,7 @@ $height-shrink: $height - .5rem
   z-index: 2
   display: none
 
-@media (max-width: 767.98px)
+@include media-breakpoint-down(sm)
   #nav
     .navbar-content
       display: none

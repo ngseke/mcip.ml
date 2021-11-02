@@ -84,7 +84,7 @@ footer
         border-right: $border
       &:first-child
         padding-left: 0
-      @media (max-width: 575.98px)
+      @include media-breakpoint-down(xs)
         width: 50%
         padding: 0
         padding-right: 1rem

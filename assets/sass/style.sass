@@ -1,11 +1,17 @@
-@import "custom"
-@import "~bootstrap/scss/bootstrap"
-
 @import "button"
 @import "section"
 @import "sub-page-title"
 
-@media (max-width: 576px)
+@import "~bootstrap/scss/reboot"
+@import "~bootstrap/scss/utilities"
+@import "~bootstrap/scss/grid"
+@import "~bootstrap/scss/type"
+@import "~bootstrap/scss/images"
+@import "~bootstrap/scss/nav"
+@import "~bootstrap/scss/navbar"
+
+
+@include media-breakpoint-down(xs)
   html
     font-size: 14px
 
@@ -20,7 +26,7 @@ a
 
 [v-cloak]
   display: none !important
-  
+
 ::selection
   color: $black
   background: rgba($primary, .5)

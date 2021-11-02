@@ -71,7 +71,7 @@ section
   bottom: -4.5rem
   background: center / contain no-repeat url('~assets/img/peep/man-with-phone.svg')
   +wh(16rem, 100%)
-  @media (max-width: 767.98px)
+  @include media-breakpoint-down(sm)
     +wh(12rem, 100%)
     left: 0rem
   @media (max-width: 470px)
@@ -84,13 +84,13 @@ section
   bottom: -9rem
   background: center / contain no-repeat url('~assets/img/peep/man-using-notebook.svg')
   +wh(21rem, 30rem)
-  @media (max-width: 767.98px)
+  @include media-breakpoint-down(sm)
     +wh(14rem, 100%)
     left: 0rem
 
 .screenshot-area
   .mockup-1
-    @media (max-width: 767.98px)
+    @include media-breakpoint-down(sm)
       max-width: 15rem
 
     @media (max-width: 400px)
@@ -101,13 +101,13 @@ section
     width: auto
     max-width: none
     margin-left: 0
-    @media (max-width: 1199.98px)
+    @include media-breakpoint-down(lg)
       margin-left: -2rem
 
-    @media (max-width: 991.98px)
+    @include media-breakpoint-down(md)
       height: 9rem
 
-    @media (max-width: 767.98px)
+    @include media-breakpoint-down(sm)
       max-width: 20rem
       height: auto
 

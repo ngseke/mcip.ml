@@ -91,7 +91,7 @@ section
     bottom: 1rem
     background-image: url('~assets/img/peep/deco2.svg')
     z-index: 0
-    @media (max-width: 575.98px)
+    @include media-breakpoint-down(xs)
       +wh(8rem)
       right: 0
       bottom: -1rem
