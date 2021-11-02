@@ -54,7 +54,7 @@ $duration: 5s
     0%, 5%
       fill: rgba(nth($secondary-list, 3), 0)
       stroke-dashoffset: $length
-      stroke-dasharray: $length * .5
+      stroke-dasharray: $length * .2
       stroke-opacity: 0
     20%
       fill: rgba(nth($secondary-list, 3), 0)
