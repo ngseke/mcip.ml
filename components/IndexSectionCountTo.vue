@@ -86,7 +86,7 @@ section
     left: -6rem
     top: .5rem
     background-image: url('~assets/img/peep/deco1.svg')
-    @media (max-width: 575.98px)
+    @include media-breakpoint-down(xs)
       display: none
 
 .date

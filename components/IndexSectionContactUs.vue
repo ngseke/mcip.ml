@@ -139,6 +139,6 @@ form
   +wh(14rem, 100%)
   background: center / contain no-repeat url('~assets/img/peep/woman-explaining.svg')
   margin-left: 3rem
-  @media (max-width: 991.98px)
+  @include media-breakpoint-down(md)
     display: none
 </style>

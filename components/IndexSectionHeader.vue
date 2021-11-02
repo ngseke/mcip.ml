@@ -40,7 +40,7 @@ header
     letter-spacing: 1px
     line-height: 1.4
     opacity: .95
-    @media (max-width: 767.98px)
+    @include media-breakpoint-down(sm)
       font-size: 2rem
     em
       font-style: normal
@@ -57,7 +57,7 @@ header
 
 .logo
   margin: -9.5%
-  @media (max-width: 575.98px)
+  @include media-breakpoint-down(xs)
     $width: 350px
     max-width: $width
     margin: $width * -.095
@@ -65,8 +65,8 @@ header
 .peep
   +wh(35rem)
   background: center / contain no-repeat url('~assets/img/peep/dancing.svg')
-  @media (max-width: 1199.98px)
+  @include media-breakpoint-down(lg)
     +wh(28rem)
-  @media (max-width: 991.98px)
+  @include media-breakpoint-down(md)
     display: none
 </style>

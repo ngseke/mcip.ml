@@ -36,18 +36,18 @@ $duration: 30s
     flex-wrap: nowrap
     will-change: transform
     animation: scroll $duration linear infinite
-    @media (max-width: 767.98px)
+    @include media-breakpoint-down(sm)
       animation: scroll-small $duration linear infinite
 
   .a, .b, .c, .d
     +flex-center
     +wh($width)
-    @media (max-width: 767.98px)
+    @include media-breakpoint-down(sm)
       +wh($width-small)
     img
       +no-select
       +wh($width * .5, auto)
-      @media (max-width: 767.98px)
+      @include media-breakpoint-down(sm)
         +wh($width-small * .5)
 
   .c
@@ -59,6 +59,6 @@ $duration: 30s
   .c, .d
     img
       +wh($width * .7, auto)
-      @media (max-width: 767.98px)
+      @include media-breakpoint-down(sm)
         +wh($width-small * .7)
 </style>
