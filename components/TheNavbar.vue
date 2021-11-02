@@ -96,8 +96,7 @@ $shrink-border-color: rgba(#ddd, .8)
 
 $time-function: cubic-bezier(0.47,0,.4,.99)
 
-$height: 4.5rem
-$height-shrink: $height - .5rem
+$height: 4rem
 
 =shrink-bg
   background-color: $shrink-bg-color
@@ -107,12 +106,12 @@ $height-shrink: $height - .5rem
 #nav
   +py(0)
   min-height: $height
-  background-color: transparent
+  background-color: rgba(#fff, 0)
   position: absolute
   left: 0
   right: 0
-  z-index: 1000
-  top: 4.5rem
+  top: $height
+  z-index: 2000
   transform: translateY(-100%)
   letter-spacing: 2px
   li.nav-item
@@ -132,7 +131,6 @@ $height-shrink: $height - .5rem
     span
       font-weight: 400
   &.shrink
-    min-height: $height-shrink
     position: fixed
     +shrink-bg
     transition: transform .3s $time-function
@@ -146,6 +144,8 @@ $height-shrink: $height - .5rem
       border-bottom: solid 1px $shrink-border-color
       .divider
         border-color: rgba(#333, .3)
+      button.navbar-toggler
+        color: $black
 
   .divider
     height: .8rem
@@ -169,6 +169,7 @@ $height-shrink: $height - .5rem
     outline: none
     transition: background-color .2s
     font-size: 1.5rem
+    color: white
     &:active
       background-color: rgba(white, .2)
 
