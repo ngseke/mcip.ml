@@ -12,7 +12,7 @@ main
 </template>
 
 <script>
-import * as news from '~/plugins/news.js'
+import * as news from '~/modules/news.js'
 
 export default {
   layout: 'news',

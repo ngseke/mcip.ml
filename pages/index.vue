@@ -15,8 +15,8 @@ div
 </template>
 
 <script>
-import * as news from '~/plugins/news.js'
-import * as staticData from '~/plugins/static-data'
+import * as news from '~/modules/news.js'
+import * as staticData from '~/modules/static-data'
 
 export default {
   async asyncData () {
