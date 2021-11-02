@@ -70,7 +70,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     '@nuxtjs/sitemap',
-    'nuxt-coffeescript-module',
     'vue-scrollto/nuxt',
     'nuxt-fontawesome',
   ],
