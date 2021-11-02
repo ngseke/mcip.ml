@@ -17,9 +17,8 @@ main(itemscope itemtype='http://schema.org/Article' )
 </template>
 
 <script>
+import marked from 'marked'
 import * as news from '~/plugins/news.js'
-
-const marked = require('marked')
 
 export default {
   layout: 'news',

@@ -26,10 +26,9 @@ div
 </template>
 
 <script>
+import marked from 'marked'
 import { throttle } from 'throttle-debounce'
 import * as staticData from '~/plugins/static-data'
-
-const marked = require('marked')
 
 export default {
   async asyncData ({ error }) {
