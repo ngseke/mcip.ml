@@ -2,17 +2,17 @@
 section.introduction: .container
   .row.justify-content-around
     .col-12.col-md-5.col-lg-5.order-2.order-md-1.position-relative
-      div(:class='peepClass')
+      .peep-mobile(v-show='isLineApp')
+      .peep-notebook(v-show='isBackstage')
+
       .screenshot-area
         img.mockup-line-app(
-          v-show='type === 1'
-          key=1
+          v-show='isLineApp'
           src='~/assets/img/screenshot/mockup-line-app.png'
           alt='Line App 畫面截圖'
         )
         img.mockup-backstage(
-          v-show='type === 2'
-          key=2
+          v-show='isBackstage'
           src='~/assets/img/screenshot/mockup-backstage.png'
           alt='管理後台截圖'
         )
@@ -21,7 +21,7 @@ section.introduction: .container
       RoleSwitcher(v-model='type')
 
       transition(name='slide')
-        section.first(v-if='type === 1' key=1)
+        section.first(v-if='isLineApp' key=1)
           h3 透過樂台計畫#[br]3 分鐘即完成報名
           p.mb-3
             | 不需額外下載 App，用 LINE 就能立刻加入
@@ -33,7 +33,7 @@ section.introduction: .container
               src='~/assets/img/line-app-qrcode-shorthand.png'
               alt='樂台計畫 LINE App QRCode'
             )
-        section.second(v-else-if='type === 2' key=2)
+        section.second(v-else-if='isBackstage' key=2)
           h3 為音樂賽事量身打造的#[br]解決方案
           ul.pl-4
             li 眾多賽事齊聚一堂，大幅增加活動曝光
@@ -51,13 +51,11 @@ export default {
     }
   },
   computed: {
-    peepClass () {
-      const { type } = this
-
-      return {
-        'peep-1 d-block d-md-none d-lg-block': type === 1,
-        'peep-2 d-none d-lg-block': type === 2,
-      }
+    isLineApp () {
+      return this.type === 1
+    },
+    isBackstage () {
+      return this.type === 2
     },
   },
 }
@@ -74,17 +72,20 @@ export default {
   max-width: 7rem
   margin-right: 2rem
 
-.peep-1
+.peep-mobile
   position: absolute
   left: -9rem
   bottom: -4.5rem
   background: center / contain no-repeat url('~assets/img/peep/man-with-phone.svg')
   +wh(16rem, 100%)
+  @include media-breakpoint-down(md)
+    display: none
   @include media-breakpoint-down(sm)
+    display: block
     +wh(12rem, 100%)
     left: 0rem
 
-.peep-2
+.peep-notebook
   position: absolute
   left: -11rem
   bottom: -9rem
@@ -92,9 +93,8 @@ export default {
   +wh(21rem, 30rem)
   @include media-breakpoint-down(lg)
     left: -13rem
-  @include media-breakpoint-down(sm)
-    +wh(14rem, 100%)
-    left: 0rem
+  @include media-breakpoint-down(md)
+    display: none
 
 .screenshot-area
   position: relative
@@ -143,10 +143,4 @@ ul
       transform: translateX(-$distance)
     &.second
       transform: translateX($distance)
-
-.fade
-  &-enter-active, &-leave-active
-    transition: $transition
-  &-enter, &-leave-to
-    opacity: 0
 </style>
