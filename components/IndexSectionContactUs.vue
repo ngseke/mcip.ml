@@ -8,10 +8,10 @@ section: .container
     .col-12.col-lg-6.offset-lg-1
       transition(name='contact' mode='out-in')
         form(@submit.prevent='submit' v-if='status !== statusEnum.success')
-          TextField(label='你的大名' :max='50' :required='true' v-model.trim='contact.name')
-          TextField(type='email' label='Email' :max='100' :required='true' v-model.trim='contact.email')
+          TextField(label='你的大名' required :max='50' v-model.trim='contact.name')
+          TextField(type='email' label='Email' required :max='100' v-model.trim='contact.email')
           TextField(type='tel' label='聯絡電話 (可留空)' :max='15' v-model.trim='contact.phone')
-          TextField(:multiline='true' label='內容' :rows='5' :max='3000' v-model.trim='contact.content')
+          TextField(label='內容' multiline required :rows='5' :max='3000' v-model.trim='contact.content')
           transition(name='contact')
             .d-flex.align-items-center(v-if='isCaptchaShow')
               canvas.captcha.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
@@ -30,70 +30,87 @@ section: .container
 </template>
 
 <script>
+import { computed, defineComponent, nextTick, reactive, ref, watch, useContext } from '@nuxtjs/composition-api'
+
 import { create } from '~/modules/captcha'
 
-export default {
-  data () {
-    this.fieldNames = ['name', 'email', 'phone', 'content']
+const fieldNames = ['name', 'email', 'phone', 'content']
 
-    // 枚舉狀態
-    this.statusEnum = Object.freeze({
-      default: Symbol('default'),
-      submitting: Symbol('submitting'),
-      success: Symbol('success'),
+/** 枚舉狀態 */
+const statusEnum = Object.freeze({
+  default: Symbol('default'),
+  submitting: Symbol('submitting'),
+  success: Symbol('success'),
+})
+
+export default defineComponent({
+  setup () {
+    const contact = reactive({ name: '', email: '', phone: '', content: '' })
+    const isCaptchaShow = ref(false)
+    const captchaCode = ref(null)
+    const captchaAnswer = ref(null)
+    const status = ref(statusEnum.default)
+    const errorMessage = ref(null)
+
+    const isSubmitDisabled = computed(() => {
+      return (
+        status.value === statusEnum.submitting ||
+        captchaCode.value !== captchaAnswer.value
+      )
     })
 
-    return {
-      contact: { name: '', email: '', phone: '', content: '' },
-      isCaptchaShow: false,
-      captchaCode: null,
-      captchaAnswer: null,
-      status: this.statusEnum.default,
-      errorMessage: null,
+    const captcha = ref()
+    const createCaptcha = () => {
+      captchaAnswer.value = create(captcha.value)
     }
-  },
-  computed: {
-    isSubmitDisabled () {
-      return this.status === this.statusEnum.submitting || this.captchaCode !== this.captchaAnswer
-    },
-  },
-  watch: {
-    contact: {
-      async handler (value) {
-        if (this.isCaptchaShow) return
-        if (this.fieldNames.filter(i => i !== 'phone').every(i => value[i])) {
-          this.isCaptchaShow = true
-          await this.$nextTick()
-          this.createCaptcha()
+
+    watch(
+      contact,
+      async (value) => {
+        if (isCaptchaShow.value) return
+        if (fieldNames.filter(i => i !== 'phone').every(i => value[i])) {
+          isCaptchaShow.value = true
+          await nextTick().value
+          createCaptcha()
         }
       },
-      deep: true,
-    },
-  },
-  methods: {
-    createCaptcha () {
-      this.captchaAnswer = create(this.$refs.captcha)
-    },
-    // 送出聯絡我們表單
-    async submit () {
-      const url = 'https://us-central1-mc-integration-platform.cloudfunctions.net/firestoreContact'
-      const { statusEnum } = this
+      { deep: true }
+    )
 
-      this.errorMessage = null
-      this.status = statusEnum.submitting
+    const { $axios } = useContext()
+    /** 送出聯絡我們表單 */
+    const submit = async () => {
+      const url = 'https://us-central1-mc-integration-platform.cloudfunctions.net/firestoreContact'
+
+      errorMessage.value = null
+      status.value = statusEnum.submitting
 
       try {
-        await this.$axios.$post(url, { ...this.contact, source: 2, type: 2 })
+        await $axios.$post(url, { ...contact, source: 2, type: 2 })
         // await (new Promise(x => setTimeout(x, 5000)))
-        this.status = statusEnum.success
+        status.value = statusEnum.success
       } catch (e) {
-        console.log(e)
-        this.errorMessage = '發生了一些問題，請稍後再試'
-        this.status = statusEnum.error
+        errorMessage.value = '發生了一些問題，請稍後再試'
+        status.value = statusEnum.error
       }
-    },
+    }
+
+    return {
+      fieldNames,
+      statusEnum,
+      contact,
+      isCaptchaShow,
+      captchaCode,
+      captchaAnswer,
+      status,
+      errorMessage,
+      isSubmitDisabled,
+      captcha,
+      createCaptcha,
+      submit,
+    }
   },
-}
+})
 </script>
 
 <style lang="sass" scoped>

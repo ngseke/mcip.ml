@@ -9,20 +9,23 @@
 </template>
 
 <script>
+import { defineComponent } from '@nuxtjs/composition-api'
 import dayjs from 'dayjs'
 
-export default {
-  props: [
-    'avatar',
-    'name',
-    'date',
-  ],
-  methods: {
-    convertTime (_, f = 'YYYY年MM月DD日') {
-      return dayjs(_).format(f)
-    },
+export default defineComponent({
+  props: {
+    avatar: { type: String, default: null },
+    name: { type: String, default: null },
+    date: { type: Number, default: null },
   },
-}
+  setup () {
+    const convertTime = (_, f = 'YYYY年MM月DD日') => dayjs(_).format(f)
+
+    return {
+      convertTime,
+    }
+  },
+})
 </script>
 
 <style scoped lang="sass">

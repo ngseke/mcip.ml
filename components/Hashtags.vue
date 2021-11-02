@@ -4,12 +4,16 @@
 </template>
 
 <script>
-export default {
-  data () {
-    this.list = ['報名繳費', '即時賽況', '賽事資訊']
-    return {}
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  setup () {
+    const list = ['報名繳費', '即時賽況', '賽事資訊']
+    return {
+      list,
+    }
   },
-}
+})
 </script>
 
 <style scoped lang="sass">

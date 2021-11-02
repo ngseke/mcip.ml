@@ -4,14 +4,16 @@ header(:class='className')
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   props: {
     className: {
       default: null,
       type: String,
     },
   },
-}
+})
 </script>
 
 <style scoped lang="sass">

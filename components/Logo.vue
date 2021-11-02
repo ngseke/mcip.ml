@@ -39,11 +39,15 @@
     <rect class="cls-1" x="109.75" y="111.09" width="11.7" height="1.93" />
   </svg>
 </template>
+
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'Logo',
-}
+})
 </script>
+
 <style lang="sass" scoped>
 $short: 90
 $long: 570

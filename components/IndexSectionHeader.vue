@@ -14,10 +14,6 @@ header
         .peep
 </template>
 
-<script>
-export default {}
-</script>
-
 <style scoped lang="sass">
 header
   +flex-center

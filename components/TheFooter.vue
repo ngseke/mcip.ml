@@ -24,39 +24,43 @@ footer.py-5
 </template>
 
 <script>
-export default {
-  data () {
-    this.list = [
-      [
-        { name: '首頁', to: '/' },
-        { name: '最新消息', to: '/news' },
-        { name: '常見問題', to: '/faq' },
-      ],
-      [
-        {
-          name: 'Facebook 粉絲專頁',
-          href: 'https://www.facebook.com/mcipApp/',
-          target: '_blank',
-          icon: ['fab', 'facebook'],
-        },
-        {
-          name: 'LINE 官方帳號',
-          to: '/line',
-          target: '_blank',
-          icon: ['fab', 'line'],
-        },
-        {
-          name: 'mcip.app@gmail.com',
-          href: 'mailto:mcip.app@gmail.com',
-          target: '_blank',
-          icon: ['fas', 'envelope'],
-        },
-      ],
-    ]
+import { defineComponent } from '@nuxtjs/composition-api'
 
-    return {}
+const list = [
+  [
+    { name: '首頁', to: '/' },
+    { name: '最新消息', to: '/news' },
+    { name: '常見問題', to: '/faq' },
+  ],
+  [
+    {
+      name: 'Facebook 粉絲專頁',
+      href: 'https://www.facebook.com/mcipApp/',
+      target: '_blank',
+      icon: ['fab', 'facebook'],
+    },
+    {
+      name: 'LINE 官方帳號',
+      to: '/line',
+      target: '_blank',
+      icon: ['fab', 'line'],
+    },
+    {
+      name: 'mcip.app@gmail.com',
+      href: 'mailto:mcip.app@gmail.com',
+      target: '_blank',
+      icon: ['fas', 'envelope'],
+    },
+  ],
+]
+
+export default defineComponent({
+  setup () {
+    return {
+      list,
+    }
   },
-}
+})
 </script>
 
 <style scoped lang="sass">

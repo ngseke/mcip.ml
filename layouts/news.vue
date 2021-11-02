@@ -1,18 +1,23 @@
 <template lang="pug">
 div
-  TheNavbar(:items='navbar')
+  TheNavbar(:items='navbarItems')
   nuxt
   TheFooter
 </template>
 
 <script>
-export default {
-  data () {
-    this.navbar = [
-      { name: 'News', to: '/news', active: true },
-      { name: 'FAQ', to: '/faq' },
-    ]
-    return {}
+import { defineComponent } from '@nuxtjs/composition-api'
+
+const navbarItems = [
+  { name: 'News', to: '/news', active: true },
+  { name: 'FAQ', to: '/faq' },
+]
+
+export default defineComponent({
+  setup () {
+    return {
+      navbarItems,
+    }
   },
-}
+})
 </script>
