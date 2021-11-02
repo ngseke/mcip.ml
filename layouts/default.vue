@@ -1,18 +1,9 @@
 <template lang="pug">
 div
   nuxt
-  Footer
+  TheFooter
 </template>
 
 <script>
-import Footer from '~/components/Footer.vue'
-
-export default {
-  components: {
-    Footer,
-  },
-}
+export default {}
 </script>
-
-<style scoped lang="sass">
-</style>

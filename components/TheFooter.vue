@@ -90,7 +90,6 @@ footer
         padding-right: 1rem
         &:not(:last-child)
           border: none
-        &:first-child
 
   img.logo
     display: inline-block

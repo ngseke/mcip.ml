@@ -12,18 +12,9 @@ main
 </template>
 
 <script>
-import Header from '~/components/Header.vue'
-import Breadcrumb from '~/components/Breadcrumb.vue'
-import NewsList from '~/components/news/NewsList.vue'
-
 import * as news from '~/plugins/news.js'
 
 export default {
-  components: {
-    Header,
-    NewsList,
-    Breadcrumb,
-  },
   layout: 'news',
   async asyncData ({ error }) {
     try {

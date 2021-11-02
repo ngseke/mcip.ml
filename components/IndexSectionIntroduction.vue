@@ -31,12 +31,7 @@ section: .container
 </template>
 
 <script>
-import RoleSwitcher from '@/components/RoleSwitcher'
-
 export default {
-  components: {
-    RoleSwitcher,
-  },
   data () {
     return {
       type: 1,
