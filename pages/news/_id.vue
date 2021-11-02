@@ -17,20 +17,11 @@ main(itemscope itemtype='http://schema.org/Article' )
 </template>
 
 <script>
-import Header from '~/components/Header.vue'
-import Breadcrumb from '~/components/Breadcrumb.vue'
-import Author from '~/components/Author.vue'
-
 import * as news from '~/plugins/news.js'
 
 const marked = require('marked')
 
 export default {
-  components: {
-    Header,
-    Breadcrumb,
-    Author,
-  },
   layout: 'news',
   async asyncData ({ params, error, req }) {
     try {

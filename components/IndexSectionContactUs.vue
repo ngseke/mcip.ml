@@ -31,12 +31,8 @@ section: .container
 
 <script>
 import { create } from '~/assets/js/captcha.js'
-import TextField from '~/components/TextField.vue'
 
 export default {
-  components: {
-    TextField,
-  },
   data () {
     this.fieldNames = ['name', 'email', 'phone', 'content']
 

@@ -16,12 +16,7 @@ section: .container
 </template>
 
 <script>
-import NewsCard from '~/components/NewsCard.vue'
-
 export default {
-  components: {
-    NewsCard,
-  },
   props: {
     list: {
       type: Array,

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  Navbar(:items='navbar')
+  TheNavbar(:items='navbar')
   main.faq(itemscope itemtype='https://schema.org/FAQPage')
     Header(className='faq')
       .container.sub-page-title
@@ -27,22 +27,11 @@ div
 
 <script>
 import { throttle } from 'throttle-debounce'
-import Navbar from '~/components/Navbar.vue'
-import Header from '~/components/Header.vue'
-import Breadcrumb from '~/components/Breadcrumb.vue'
-import ArticleNavbar from '~/components/ArticleNavbar.vue'
-
 import * as staticData from '~/plugins/static-data'
 
 const marked = require('marked')
 
 export default {
-  components: {
-    Navbar,
-    Header,
-    Breadcrumb,
-    ArticleNavbar,
-  },
   async asyncData ({ error }) {
     try {
       const faqs = await staticData.get('json/faq.json')

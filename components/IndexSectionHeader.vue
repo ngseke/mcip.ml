@@ -18,15 +18,7 @@ header
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import Hashtags from '~/components/Hashtags.vue'
-
-export default {
-  components: {
-    Logo,
-    Hashtags,
-  },
-}
+export default {}
 </script>
 
 <style scoped lang="sass">

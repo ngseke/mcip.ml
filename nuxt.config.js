@@ -2,6 +2,7 @@ const description = '立刻加入樂台計畫 Line App，輕鬆快速報名各�
 
 export default {
   mode: 'universal',
+  components: true,
   /*
   ** Headers of the page
   */

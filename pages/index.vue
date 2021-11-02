@@ -1,50 +1,24 @@
 <template lang="pug">
 div
-  Navbar(hide-logo)
+  TheNavbar(hide-logo)
   main
-    Header
-    //- Attention
-    Introduction
-    CountTo
-    Divider
-    //- Payment
-    //- Backstage
-    News(:list='newsList' v-if='newsList')
-    Partner(:partners='partners' v-if='partners')
-    ContactUs
+    IndexSectionHeader
+    //- IndexSectionAttention
+    IndexSectionIntroduction
+    IndexSectionCountTo
+    IndexSectionDivider
+    //- IndexSectionPayment
+    //- IndexSectionBackstage
+    IndexSectionNews(:list='newsList' v-if='newsList')
+    IndexSectionPartner(:partners='partners' v-if='partners')
+    IndexSectionContactUs
 </template>
 
 <script>
-import Navbar from '~/components/Navbar.vue'
-import Header from '~/components/index/Header.vue'
-
-import Introduction from '~/components/index/Introduction.vue'
-import CountTo from '~/components/index/CountTo.vue'
-import Divider from '~/components/index/Divider.vue'
-import Payment from '~/components/index/Payment.vue'
-import Backstage from '~/components/index/Backstage.vue'
-import News from '~/components/index/News.vue'
-import Partner from '~/components/index/Partner.vue'
-import ContactUs from '~/components/index/ContactUs.vue'
-import Attention from '~/components/index/Attention.vue'
-
 import * as news from '~/plugins/news.js'
 import * as staticData from '~/plugins/static-data'
 
 export default {
-  components: {
-    Navbar,
-    Header,
-    Divider,
-    Introduction,
-    CountTo,
-    Payment,
-    Backstage,
-    News,
-    Partner,
-    ContactUs,
-    Attention,
-  },
   async asyncData () {
     const [newsList, partners] = (await Promise.allSettled([
       news.fetchList(),
