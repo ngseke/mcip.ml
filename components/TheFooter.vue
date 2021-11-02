@@ -1,23 +1,26 @@
 <template lang="pug">
-- const year = new Date().getFullYear()
 footer.py-5
   .container
-      .row.justify-content-between
-        .col-12.col-sm-auto.block
-          ul(v-for='(links, lIndex) in list' :key='lIndex')
-            li(v-for='(i, key) in links' :key='key')
-              n-link(v-if='i.to' :to='i.to' :target='i.target')
-                fa.mr-2(:icon='i.icon' v-if='i.icon')
-                | {{ i.name }}
-              a(v-else :href='i.href' :target='i.target')
-                fa.mr-2(:icon='i.icon' v-if='i.icon')
-                | {{ i.name }}
-          ul
-            li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理後台 #[fa.mx-1(icon='external-link-alt')]
+    .row.justify-content-between.align-items-end
+      .col-12.col-sm-auto.block
+        ul(v-for='(links, lIndex) in list' :key='lIndex')
+          li(v-for='(i, key) in links' :key='key')
+            n-link(v-if='i.to' :to='i.to' :target='i.target')
+              fa.mr-2(:icon='i.icon' v-if='i.icon')
+              | {{ i.name }}
+            a(v-else :href='i.href' :target='i.target')
+              fa.mr-2(:icon='i.icon' v-if='i.icon')
+              | {{ i.name }}
+        ul
+          li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理後台 #[fa.mx-1(icon='external-link-alt')]
 
-        .col-12.col-lg-auto.text-lg-right
-          img.logo(src='~/assets/img/logo/logo_symbol-no-gutter-black.svg')
-          div Copyright © 2018 - #[=year]  #[n-link(to='/') 樂台計畫].  All rights reserved
+      .col-12.col-lg-auto.text-lg-right.mt-4
+        .logo(src='~assets/img/logo/logo_symbol-no-gutter-black.svg')
+        div
+          | Copyright © 2018 - {{ new Date().getFullYear() }}
+          |
+          nuxt-link(to='/') 樂台計畫
+          | .  All rights reserved
 </template>
 
 <script>
@@ -71,12 +74,12 @@ footer
     flex-wrap: wrap
     justify-content: flex-start
     align-items: stretch
-    margin-bottom: 1rem
     ul
       vertical-align: top
       list-style: none
       display: inline-block
       padding: 0 1.5rem
+      margin-bottom: 0
       min-width: 7rem
       li
         margin-bottom: .2rem
@@ -85,16 +88,16 @@ footer
       &:first-child
         padding-left: 0
       @include media-breakpoint-down(xs)
-        width: 50%
+        width: 50%ott
         padding: 0
         padding-right: 1rem
         &:not(:last-child)
           border: none
 
-  img.logo
-    display: inline-block
-    +wh(auto, 2rem)
-    margin-bottom: 1rem
-    opacity: .45
-    +no-select
+.logo
+  +wh(3rem, 2rem)
+  background: url('~assets/img/logo/logo_symbol-no-gutter-black.svg') center center / contain no-repeat
+  display: inline-block
+  opacity: .45
+  margin-bottom: .5rem
 </style>
