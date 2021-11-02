@@ -1,21 +1,18 @@
 <template lang="pug">
 section.container(v-scroll-reveal='{ beforeReveal: onCountReveal, duration: 0 }')
   .row.justify-content-around(v-cloak)
-    .col-auto
+    .col-auto(v-for='item in list')
       .count-to
-        countTo.number(:start-val='1000' :end-val='userCount' suffix='+' ref='userCount' v-bind='countToOptions') {{ userCount }}+
-        .info 樂台計畫總用戶數
-    .col-auto
-      .count-to
-        countTo.number(:start-val='10' :end-val='partnerCount' ref='partnerCount' v-cloak v-bind='countToOptions') {{ partnerCount }}
-        span.label 所
-        .info
-          | 合作院校社團 #[sup: a(v-scroll-to='{ el: `#partner`, offset: -60 }' href='#') *]
-    .col-auto
-      .count-to
-        countTo.number(:start-val='10' :end-val='sessionCount' suffix='+' ref='sessionCount' v-cloak v-bind='countToOptions') {{ sessionCount }}+
-        .info
-          | 累計協辦賽次
+        countTo.number(
+          :start-val='10'
+          :end-val='item.value'
+          :suffix='item.isApproximate ? "+" : ""'
+          ref='countTo'
+          v-bind='countToOptions'
+          v-cloak
+        ) {{ item.value }}{{ item.isApproximate ? "+" : "" }}
+        span.suffix(v-if='item.suffix') {{ item.suffix }}
+        .label {{ item.label }}
 
     .col-12.text-right
       small.date 截至 2021 年 11 月
@@ -29,13 +26,25 @@ export default {
     countTo,
   },
   data () {
-    this.countToOptions = {
-      duration: 2000,
-      autoplay: false,
-    }
-    this.userCount = 6000
-    this.partnerCount = 25
-    this.sessionCount = 60
+    this.countToOptions = { duration: 1500, autoplay: false }
+
+    this.list = [
+      {
+        label: '樂台計畫總用戶數',
+        value: 6000,
+        isApproximate: true,
+      },
+      {
+        label: '合作院校社團',
+        value: 25,
+        suffix: '所',
+      },
+      {
+        label: '累計協辦賽次',
+        value: 60,
+        isApproximate: true,
+      },
+    ]
 
     return {}
   },
@@ -44,34 +53,13 @@ export default {
       this.startCountTo()
     },
     startCountTo () {
-      const { userCount, partnerCount, sessionCount } = this.$refs
-      const refs = [userCount, partnerCount, sessionCount]
-
-      refs.forEach(ref => ref?.start?.())
+      this.$refs.countTo?.forEach(ref => ref?.start?.())
     },
   },
 }
 </script>
 
 <style scoped lang="sass">
-.count-to
-  margin-bottom: 1rem
-  .number
-    display: inline-block
-    font-size: 3.5rem
-    font-family: roboto, Helvetica, Arial
-    font-weight: 900
-    margin: 0
-    padding: 0
-  .label
-    margin-left: .5rem
-    font-size: 1.5rem
-    font-weight: 500
-  .info
-    font-weight: 500
-    margin-top: -.5rem
-    text-align: center
-
 section
   position: relative
   overflow: visible
@@ -88,6 +76,25 @@ section
     background-image: url('~assets/img/peep/deco1.svg')
     @include media-breakpoint-down(xs)
       display: none
+
+.count-to
+  margin-bottom: 1rem
+
+.number
+  display: inline-block
+  font-size: 3.5rem
+  font-family: roboto, Helvetica, Arial
+  font-weight: 900
+  margin: 0
+  padding: 0
+.suffix
+  margin-left: .5rem
+  font-size: 1.5rem
+  font-weight: 500
+.label
+  font-weight: 500
+  margin-top: -.5rem
+  text-align: center
 
 .date
   opacity: .7

@@ -18,5 +18,5 @@ export const fetchListBrief = async function (after = null, limit = 9999) {
 }
 
 export const fetch = async function (id) {
-  return (await axios.get(url, { params: { id } }).catch(this.goToIndex)).data
+  return (await axios.get(url, { params: { id } })).data
 }

@@ -13,19 +13,18 @@ main(itemscope itemtype='http://schema.org/Article' )
       Author(:name='data.author' :date='data.timestamp')
 
       img.img-fluid.mb-3(:src='data.image' v-if='data.image' itemprop='image')
-      article.markdown-body.octicon(v-html='convertMarkdown(data.article)' itemprop='articleBody')
+      article.markdown-body(v-html='convertMarkdown(data.article)' itemprop='articleBody')
 </template>
 
 <script>
-import * as news from '~/plugins/news.js'
-
-const marked = require('marked')
+import marked from 'marked'
+import { fetch } from '~/modules/news'
 
 export default {
   layout: 'news',
   async asyncData ({ params, error, req }) {
     try {
-      const data = await news.fetch(params.id)
+      const data = await fetch(params.id)
       const host = process.server ? req.headers.host : window.location.host
       return { data, host }
     } catch (e) {

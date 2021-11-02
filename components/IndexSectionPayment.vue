@@ -77,4 +77,14 @@ $line-icon-size: 7rem
 .screenshot-area
   z-index: 20
   padding: 0 1.5rem
+  position: relative
+  text-align: center
+  perspective: 700px
+  z-index: 100
+  img
+    +wh(100%, auto)
+    transition: transform .7s
+    border-radius: 15px
+    transition-duration: .5s
+    max-width: none
 </style>

@@ -13,12 +13,17 @@ nuxt-link.news-card(:to='link')
 </template>
 
 <script>
-const marked = require('marked')
-const htmlToText = require('html-to-text')
-const dayjs = require('dayjs')
+import marked from 'marked'
+import htmlToText from 'html-to-text'
+import dayjs from 'dayjs'
 
 export default {
-  props: ['value'],
+  props: {
+    value: {
+      type: Object,
+      default: null,
+    },
+  },
   computed: {
     title   () { return this.value.title },
     image   () { return this.value.image },
@@ -43,21 +48,16 @@ export default {
 <style scoped lang="sass">
 .news-card
   display: inline-flex
-  margin-bottom: 1rem
+  margin-bottom: 1.5rem
   overflow: hidden
   transition: all .3s
-  border: none
-  box-shadow: $big-btn-shadow
   color: $black
   border-radius: 1.5rem
-  padding: 1rem 1.25rem
   background-color: white
   &:hover
-    box-shadow: $big-btn-hover-shadow
+    +floating-link
   &:active
     transform: scale(.97)
-    box-shadow: $big-btn-shadow
-    filter: grayscale(20%)
 
   img.img
     +wh(4rem)
@@ -72,6 +72,8 @@ export default {
       +line-ellipsis(1)
       margin-bottom: .25rem
       color: nth($secondary-list, 3)
+      font-weight: 500
+
     .paragraph
       +line-ellipsis
       margin-bottom: .3rem

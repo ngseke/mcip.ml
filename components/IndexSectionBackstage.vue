@@ -14,3 +14,17 @@ section: .container
           br
           | 同步技術解決各單位資訊不對稱問題
 </template>
+
+<style scoped lang="sass">
+.screenshot-area
+  position: relative
+  text-align: center
+  perspective: 700px
+  z-index: 100
+  img
+    +wh(100%, auto)
+    transition: transform .7s
+    border-radius: 15px
+    transition-duration: .5s
+    max-width: none
+</style>

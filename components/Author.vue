@@ -9,7 +9,7 @@
 </template>
 
 <script>
-const dayjs = require('dayjs')
+import dayjs from 'dayjs'
 
 export default {
   props: [
