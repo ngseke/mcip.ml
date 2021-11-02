@@ -12,13 +12,13 @@ main
 </template>
 
 <script>
-import * as news from '~/modules/news.js'
+import { fetchListBrief } from '~/modules/news'
 
 export default {
   layout: 'news',
   async asyncData ({ error }) {
     try {
-      const list = await news.fetchListBrief(null, 9999)
+      const list = await fetchListBrief(null, 9999)
       return { list }
     } catch (e) {
       error({ statusCode: 404 })

@@ -28,12 +28,12 @@ div
 <script>
 import marked from 'marked'
 import { throttle } from 'throttle-debounce'
-import * as staticData from '~/modules/static-data'
+import { fetch } from '~/modules/static-data'
 
 export default {
   async asyncData ({ error }) {
     try {
-      const faqs = await staticData.get('json/faq.json')
+      const faqs = await fetch('json/faq.json')
 
       return { faqs }
     } catch (e) {
