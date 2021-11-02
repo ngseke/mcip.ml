@@ -1,0 +1,64 @@
+<template lang="pug">
+a.item(:href='getFacebookLink(value.facebookId)' target='_blank')
+  img(:src='getImage(value)')
+  .info
+    .name {{ value.name }}
+    small.school {{ value.schoolName }}
+</template>
+
+<script>
+import MobileDetect from 'mobile-detect'
+
+export default {
+  props: {
+    value: {
+      type: Object,
+      default: null,
+    },
+  },
+  methods: {
+    // 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟)
+    getFacebookLink (id) {
+      const device = new MobileDetect(
+        process.client
+          ? window.navigator.userAgent
+          : ''
+      )
+
+      if (device.is('iOS')) return `fb://page/?id=${id}`
+      else if (device.is('AndroidOS')) return `fb://page/${id}`
+      else return `https://www.facebook.com/${id}`
+    },
+    getImage (_) {
+      return _.isUsingCustomImg
+        ? _.img
+        : `https://graph.facebook.com/${_.facebookId}/picture?height=200&width=200`
+    },
+  },
+}
+</script>
+
+<style scoped lang="sass">
+.item
+  display: inline-flex
+  align-items: center
+  flex-direction: row
+  transition: all .3s
+  list-style: none
+  margin-bottom: 1.5rem
+  transform-origin: center center
+  +floating-link
+  img
+    +wh(3rem, auto)
+    margin-right: .75rem
+    border-radius: 10px
+    transition: box-shadow .7s
+  .info
+    color: $black
+    .name
+      line-height: 1.2
+      font-weight: 500
+      letter-spacing: .5px
+    .school
+      opacity: .8
+</style>
