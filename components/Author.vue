@@ -5,12 +5,13 @@
     img.avatar(v-else src='~/assets/img/logo/logo-avatar.png')
     .info
       .name(itemprop='author') {{ name }}
-      .date(itemprop='datePublished' :content='convertTime(date, `YYYY-MM-DD`)') {{ convertTime(date) }}
+      .date(itemprop='datePublished' :content='formatDate(date)')
+        | {{ formatDate(date, 'YYYY年MM月DD日') }}
 </template>
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import dayjs from 'dayjs'
+import { formatDate } from '~/modules/date'
 
 export default defineComponent({
   props: {
@@ -19,10 +20,8 @@ export default defineComponent({
     date: { type: Number, default: null },
   },
   setup () {
-    const convertTime = (_, f = 'YYYY年MM月DD日') => dayjs(_).format(f)
-
     return {
-      convertTime,
+      formatDate,
     }
   },
 })

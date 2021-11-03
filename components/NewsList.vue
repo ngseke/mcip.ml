@@ -3,14 +3,14 @@ ul.article-list
   li(v-for='i in list')
     nuxt-link(:to='`/news/${i.id}`')
       .title {{ i.title }}
-      small {{ convertTime(i.timestamp) }}
+      small {{ formatDate(i.timestamp, 'YYYY年MM月DD日') }}
   li(ref='loadMore' v-if='!isEnd')
     fa.icon(icon='circle-notch' spin v-if='isLoading')
     a(href='#' @click.prevent='loadMore' v-else) 載入更多
 </template>
 
 <script>
-import dayjs from 'dayjs'
+import { formatDate } from '~/modules/date'
 
 export default {
   props: {
@@ -31,9 +31,6 @@ export default {
     this.observeLoadMore()
   },
   methods: {
-    convertTime (_) {
-      return dayjs(_).format('YYYY年MM月DD日')
-    },
     loadMore () {
       if (this.isLoading) return
       this.$emit('loadMore')
@@ -49,6 +46,7 @@ export default {
         observer.disconnect()
       })
     },
+    formatDate,
   },
 }
 </script>

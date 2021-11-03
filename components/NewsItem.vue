@@ -17,15 +17,14 @@ import { computed, defineComponent } from '@nuxtjs/composition-api'
 
 import marked from 'marked'
 import htmlToText from 'html-to-text'
-import dayjs from 'dayjs'
+
+import { formatDate } from '~/modules/date'
 
 /** 將 markdown 格式文字轉為純文字 */
 const toPlainText = (_) => {
   _ = _.substring(_.indexOf('\n') + 1)
   return htmlToText.fromString(marked(_))
 }
-
-const convertTime = (_, f = 'YYYY-MM-DD') => dayjs(_).format(f)
 
 export default defineComponent({
   props: {
@@ -40,7 +39,7 @@ export default defineComponent({
     const link = computed(() => `/news/${props.value.id}`)
     const article = computed(() => toPlainText(props.value.article))
     const author = computed(() => props.value.author)
-    const time = computed(() => convertTime(props.value.timestamp))
+    const time = computed(() => formatDate(props.value.timestamp))
 
     return { title, image, link, article, author, time }
   },
