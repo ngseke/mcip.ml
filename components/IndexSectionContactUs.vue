@@ -153,7 +153,7 @@ form
     opacity: 1
 
 .peep
-  +wh(14rem, 100%)
+  +wh(14rem, 26rem)
   background: center / contain no-repeat url('~assets/img/peep/woman-explaining.svg')
   margin-left: 3rem
   @include media-breakpoint-down(md)
