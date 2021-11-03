@@ -120,6 +120,6 @@ main.faq
       margin-bottom: .5rem
 
 .sticky-top
-
+  position: sticky
   top: 5rem
 </style>

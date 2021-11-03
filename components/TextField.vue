@@ -16,10 +16,15 @@
 </template>
 
 <script>
-export default {
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'TextField',
   props: {
-    value: { default: null },
+    value: {
+      type: String,
+      default: null,
+    },
     label: {
       type: String,
       default: '',
@@ -45,29 +50,27 @@ export default {
       default: false,
     },
   },
-  computed: {
-    inputBind () {
-      const { label, type, required, max } = this
+  setup (props) {
+    const inputBind = computed(() => ({
+      placeholder: props.label,
+      type: props.type,
+      required: props.required,
+      maxlength: props.max,
+    }))
 
-      return {
-        placeholder: label,
-        type,
-        required,
-        maxlength: max,
-      }
-    },
-    textareaBind () {
-      const { label, required, max, rows } = this
+    const textareaBind = computed(() => ({
+      placeholder: props.label,
+      required: props.required,
+      rows: props.rows,
+      maxlength: props.max,
+    }))
 
-      return {
-        placeholder: label,
-        required,
-        rows,
-        maxlength: max,
-      }
-    },
+    return {
+      inputBind,
+      textareaBind,
+    }
   },
-}
+})
 </script>
 
 <style scoped lang="sass">

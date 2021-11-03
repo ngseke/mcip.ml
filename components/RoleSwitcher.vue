@@ -11,24 +11,26 @@
 </template>
 
 <script>
+import { defineComponent } from '@nuxtjs/composition-api'
+
 const list = [
   { name: '參賽者', value: 1 },
   { name: '學校社團', value: 2 },
 ]
 
-export default {
+export default defineComponent({
   props: {
     value: {
       default: list[0].value,
       type: Number,
     },
   },
-  data () {
+  setup () {
     return {
       list,
     }
   },
-}
+})
 </script>
 
 <style scoped lang="sass">

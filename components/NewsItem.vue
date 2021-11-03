@@ -13,36 +13,37 @@ nuxt-link.news-card(:to='link')
 </template>
 
 <script>
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+
 import marked from 'marked'
 import htmlToText from 'html-to-text'
-import dayjs from 'dayjs'
 
-export default {
+import { formatDate } from '~/modules/date'
+
+/** 將 markdown 格式文字轉為純文字 */
+const toPlainText = (_) => {
+  _ = _.substring(_.indexOf('\n') + 1)
+  return htmlToText.fromString(marked(_))
+}
+
+export default defineComponent({
   props: {
     value: {
       type: Object,
       default: null,
     },
   },
-  computed: {
-    title   () { return this.value.title },
-    image   () { return this.value.image },
-    link    () { return `/news/${this.value.id}` },
-    article () { return this.toPlainText(this.value.article) },
-    author  () { return this.value.author },
-    time    () { return this.convertTime(this.value.timestamp) },
+  setup (props) {
+    const title = computed(() => props.value.title)
+    const image = computed(() => props.value.image)
+    const link = computed(() => `/news/${props.value.id}`)
+    const article = computed(() => toPlainText(props.value.article))
+    const author = computed(() => props.value.author)
+    const time = computed(() => formatDate(props.value.timestamp))
+
+    return { title, image, link, article, author, time }
   },
-  methods: {
-    // 將 md 格式文字轉為純文字
-    toPlainText (_) {
-      _ = _.substring(_.indexOf('\n') + 1)
-      return htmlToText.fromString(marked(_))
-    },
-    convertTime (_, f = 'YYYY-MM-DD') {
-      return dayjs(_).format(f)
-    },
-  },
-}
+})
 </script>
 
 <style scoped lang="sass">

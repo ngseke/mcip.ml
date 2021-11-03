@@ -42,26 +42,28 @@ section.introduction: .container
 </template>
 
 <script>
-export default {
-  data () {
-    this.backstageFeatures = [
-      '眾多賽事齊聚一堂，大幅增加活動曝光',
-      '金流代收服務，即時向參賽者推播繳費結果',
-      '跨平台系統，隨時隨地掌握報名狀況',
-    ]
+import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
+
+const backstageFeatures = [
+  '眾多賽事齊聚一堂，大幅增加活動曝光',
+  '金流代收服務，即時向參賽者推播繳費結果',
+  '跨平台系統，隨時隨地掌握報名狀況',
+]
+
+export default defineComponent({
+  setup () {
+    const type = ref(1)
+    const isLineApp = computed(() => type.value === 1)
+    const isBackstage = computed(() => type.value === 2)
+
     return {
-      type: 1,
+      backstageFeatures,
+      type,
+      isLineApp,
+      isBackstage,
     }
   },
-  computed: {
-    isLineApp () {
-      return this.type === 1
-    },
-    isBackstage () {
-      return this.type === 2
-    },
-  },
-}
+})
 </script>
 
 <style scoped lang="sass">

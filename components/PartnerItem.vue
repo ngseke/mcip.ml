@@ -7,35 +7,43 @@ a.item(:href='getFacebookLink(value.facebookId)' target='_blank')
 </template>
 
 <script>
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import MobileDetect from 'mobile-detect'
 
-export default {
+/** 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟) */
+const getFacebookLink = (id) => {
+  const device = new MobileDetect(
+    process.client
+      ? window.navigator.userAgent
+      : ''
+  )
+
+  if (device.is('iOS')) return `fb://page/?id=${id}`
+  else if (device.is('AndroidOS')) return `fb://page/${id}`
+  else return `https://www.facebook.com/${id}`
+}
+
+const getImage = _ => (
+  _.isUsingCustomImg
+    ? _.img
+    : `https://graph.facebook.com/${_.facebookId}/picture?height=200&width=200`
+)
+
+export default defineComponent({
   props: {
     value: {
       type: Object,
       default: null,
     },
   },
-  methods: {
-    // 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟)
-    getFacebookLink (id) {
-      const device = new MobileDetect(
-        process.client
-          ? window.navigator.userAgent
-          : ''
-      )
-
-      if (device.is('iOS')) return `fb://page/?id=${id}`
-      else if (device.is('AndroidOS')) return `fb://page/${id}`
-      else return `https://www.facebook.com/${id}`
-    },
-    getImage (_) {
-      return _.isUsingCustomImg
-        ? _.img
-        : `https://graph.facebook.com/${_.facebookId}/picture?height=200&width=200`
-    },
+  setup () {
+    return {
+      getFacebookLink,
+      getImage,
+    }
   },
-}
+})
 </script>
 
 <style scoped lang="sass">

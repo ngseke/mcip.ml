@@ -8,7 +8,9 @@ ol(itemscope itemtype='http://schema.org/BreadcrumbList')
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'Breadcrumb',
   props: {
     items: {
@@ -16,7 +18,7 @@ export default {
       default: null,
     },
   },
-}
+})
 </script>
 
 <style lang="sass" scoped>

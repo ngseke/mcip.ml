@@ -1,5 +1,5 @@
 <template lang="pug">
-section.container(v-scroll-reveal='{ beforeReveal: onCountReveal, duration: 0 }')
+section.container(v-scroll-reveal='{ beforeReveal: startCountTo, duration: 0 }')
   .row.justify-content-around(v-cloak)
     .col-auto(v-for='item in list')
       .count-to
@@ -7,7 +7,7 @@ section.container(v-scroll-reveal='{ beforeReveal: onCountReveal, duration: 0 }'
           :start-val='10'
           :end-val='item.value'
           :suffix='item.isApproximate ? "+" : ""'
-          ref='countTo'
+          ref='countToElements'
           v-bind='countToOptions'
           v-cloak
         ) {{ item.value }}{{ item.isApproximate ? "+" : "" }}
@@ -19,44 +19,46 @@ section.container(v-scroll-reveal='{ beforeReveal: onCountReveal, duration: 0 }'
 </template>
 
 <script>
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 import countTo from 'vue-count-to'
 
-export default {
+const countToOptions = { duration: 1500, autoplay: false }
+const list = [
+  {
+    label: '樂台計畫總用戶數',
+    value: 6000,
+    isApproximate: true,
+  },
+  {
+    label: '合作院校社團',
+    value: 25,
+    suffix: '所',
+  },
+  {
+    label: '累計協辦賽次',
+    value: 60,
+    isApproximate: true,
+  },
+]
+
+export default defineComponent({
   components: {
     countTo,
   },
-  data () {
-    this.countToOptions = { duration: 1500, autoplay: false }
+  setup () {
+    const countToElements = ref()
+    const startCountTo = () => {
+      countToElements.value?.forEach(ref => ref?.start?.())
+    }
 
-    this.list = [
-      {
-        label: '樂台計畫總用戶數',
-        value: 6000,
-        isApproximate: true,
-      },
-      {
-        label: '合作院校社團',
-        value: 25,
-        suffix: '所',
-      },
-      {
-        label: '累計協辦賽次',
-        value: 60,
-        isApproximate: true,
-      },
-    ]
-
-    return {}
+    return {
+      countToOptions,
+      list,
+      countToElements,
+      startCountTo,
+    }
   },
-  methods: {
-    onCountReveal () {
-      this.startCountTo()
-    },
-    startCountTo () {
-      this.$refs.countTo?.forEach(ref => ref?.start?.())
-    },
-  },
-}
+})
 </script>
 
 <style scoped lang="sass">

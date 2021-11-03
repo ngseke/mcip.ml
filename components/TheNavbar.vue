@@ -31,9 +31,10 @@ div
 </template>
 
 <script>
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref, useRoute, watch } from '@nuxtjs/composition-api'
 import { throttle } from 'throttle-debounce'
 
-export default {
+export default defineComponent({
   name: 'Navbar',
   props: {
     items: {
@@ -43,51 +44,52 @@ export default {
         { name: 'FAQ', to: '/faq' },
       ],
     },
-    hideLogo: Boolean,
-  },
-  data () {
-    return {
-      top: null,
-      isShrink: false,
-      isShow: false,
-    }
-  },
-  computed: {
-    isDark () {
-      return !this.isShrink
-    },
-    mobileItems () {
-      return [
-        { name: 'Home', to: '/', active: this.$route.name === 'index' },
-        ...this.items,
-      ]
+    hideLogo: {
+      type: Boolean,
+      default: false,
     },
   },
-  watch: {
-    '$route.path' () {
-      this.hide()
-    },
-  },
-  mounted () {
-    this.setShrink()
-  },
-  methods: {
-    setShrink () {
+  setup (props) {
+    const top = ref(null)
+    const isShow = ref(false)
+    const isShrink = ref(false)
+
+    const isDark = computed(() => !isShrink.value)
+
+    const route = useRoute()
+    const mobileItems = computed(() => [
+      {
+        name: 'Home',
+        to: '/',
+        active: route.value.name === 'index',
+      },
+      ...props.items,
+    ])
+
+    const hide = () => { isShow.value = false }
+
+    watch(() => route.value.path, hide)
+
+    onMounted(() => {
       const throttled = throttle(300, () => {
         const ref = document.scrollingElement.scrollTop
-        this.top = ref != null ? ref : document.documentElement.scrollTop
-        this.isShrink = this.top > 250
+        top.value = ref != null ? ref : document.documentElement.scrollTop
+        isShrink.value = top.value > 250
       })
+
       window.addEventListener('scroll', throttled)
-      this.$once('hook:beforeDestroy', () => {
-        window.removeEventListener('scroll', throttled)
-      })
-    },
-    hide () {
-      this.isShow = false
-    },
+      onBeforeUnmount(() => window.removeEventListener('scroll', throttled))
+    })
+    return {
+      top,
+      isShow,
+      isShrink,
+      isDark,
+      mobileItems,
+      hide,
+    }
   },
-}
+})
 </script>
 
 <style lang="sass" scoped>

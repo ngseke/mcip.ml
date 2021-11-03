@@ -3,16 +3,17 @@ ul.article-list
   li(v-for='i in list')
     nuxt-link(:to='`/news/${i.id}`')
       .title {{ i.title }}
-      small {{ convertTime(i.timestamp) }}
-  li(ref='loadMore' v-if='!isEnd')
+      small {{ formatDate(i.timestamp, 'YYYY年MM月DD日') }}
+  li(ref='loadMoreElement' v-if='!isEnd')
     fa.icon(icon='circle-notch' spin v-if='isLoading')
     a(href='#' @click.prevent='loadMore' v-else) 載入更多
 </template>
 
 <script>
-import dayjs from 'dayjs'
+import { defineComponent, onBeforeUnmount, onMounted, ref } from '@nuxtjs/composition-api'
+import { formatDate } from '~/modules/date'
 
-export default {
+export default defineComponent({
   props: {
     list: {
       default: null,
@@ -27,30 +28,25 @@ export default {
       type: Boolean,
     },
   },
-  mounted () {
-    this.observeLoadMore()
-  },
-  methods: {
-    convertTime (_) {
-      return dayjs(_).format('YYYY年MM月DD日')
-    },
-    loadMore () {
-      if (this.isLoading) return
-      this.$emit('loadMore')
-    },
-    observeLoadMore () {
-      const target = this.$refs.loadMore
-      const observer = new IntersectionObserver(() => {
-        this.loadMore()
-      }, { threshold: 1 })
-      observer.observe(target)
+  setup (props, { emit }) {
+    const loadMore = () => {
+      if (!props.isLoading) emit('loadMore')
+    }
 
-      this.$once('hook:beforeDestroy', function () {
-        observer.disconnect()
-      })
-    },
+    const loadMoreElement = ref()
+    onMounted(() => {
+      const observer = new IntersectionObserver(loadMore, { threshold: 1 })
+      observer.observe(loadMoreElement.value)
+      onBeforeUnmount(() => observer.disconnect())
+    })
+
+    return {
+      loadMoreElement,
+      loadMore,
+      formatDate,
+    }
   },
-}
+})
 </script>
 
 <style lang="sass" scoped>

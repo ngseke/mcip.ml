@@ -5,24 +5,26 @@
     img.avatar(v-else src='~/assets/img/logo/logo-avatar.png')
     .info
       .name(itemprop='author') {{ name }}
-      .date(itemprop='datePublished' :content='convertTime(date, `YYYY-MM-DD`)') {{ convertTime(date) }}
+      .date(itemprop='datePublished' :content='formatDate(date)')
+        | {{ formatDate(date, 'YYYY年MM月DD日') }}
 </template>
 
 <script>
-import dayjs from 'dayjs'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { formatDate } from '~/modules/date'
 
-export default {
-  props: [
-    'avatar',
-    'name',
-    'date',
-  ],
-  methods: {
-    convertTime (_, f = 'YYYY年MM月DD日') {
-      return dayjs(_).format(f)
-    },
+export default defineComponent({
+  props: {
+    avatar: { type: String, default: null },
+    name: { type: String, default: null },
+    date: { type: Number, default: null },
   },
-}
+  setup () {
+    return {
+      formatDate,
+    }
+  },
+})
 </script>
 
 <style scoped lang="sass">

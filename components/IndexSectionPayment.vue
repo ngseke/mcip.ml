@@ -19,31 +19,36 @@ section: .container
 </template>
 
 <script>
-export default {
-  data () {
-    this.reveal = {
-      lineIcon: {
-        scale: 0.8,
-        opacity: 0,
-        delay: 200,
-        duration: 500,
-      },
-      number: {
-        scale: 0.8,
-        opacity: 0,
-        delay: 500,
-        duration: 500,
-      },
-      screenshot: {
-        opacity: 0,
-        distance: '50px',
-        delay: 1500,
-        duration: 700,
-      },
-    }
-    return {}
+import { defineComponent } from '@nuxtjs/composition-api'
+
+const reveal = {
+  lineIcon: {
+    scale: 0.8,
+    opacity: 0,
+    delay: 200,
+    duration: 500,
+  },
+  number: {
+    scale: 0.8,
+    opacity: 0,
+    delay: 500,
+    duration: 500,
+  },
+  screenshot: {
+    opacity: 0,
+    distance: '50px',
+    delay: 1500,
+    duration: 700,
   },
 }
+
+export default defineComponent({
+  setup () {
+    return {
+      reveal,
+    }
+  },
+})
 </script>
 
 <style scoped lang="sass">

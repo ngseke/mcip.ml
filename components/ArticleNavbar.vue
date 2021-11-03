@@ -17,22 +17,28 @@ nav.article-navbar
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'ArticleNavbar',
   props: {
     value: {
       default: null,
+      type: Array,
     },
   },
-  methods: {
-    getIsActive (index, list) {
+  setup () {
+    const getIsActive = (index, list) => {
       const current = list[index]
       const next = list[index + 1]
 
       return current.top < 0 && ((next && next.top > 0) || !next)
-    },
+    }
+    return {
+      getIsActive,
+    }
   },
-}
+})
 </script>
 
 <style scoped lang="sass">

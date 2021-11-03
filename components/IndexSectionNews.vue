@@ -18,14 +18,16 @@ section: .container
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   props: {
     list: {
       type: Array,
       default: null,
     },
   },
-}
+})
 </script>
 
 <style scoped lang="sass">
