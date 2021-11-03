@@ -8,7 +8,9 @@ main
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   head () {
     const description = '請在LINE應用程式上開啟「好友」分頁，點選畫面右上方用來加入好友的圖示，接著點選「行動條碼」，然後掃描此行動條碼'
     const title = '加入樂台計畫 LINE App'
@@ -23,7 +25,7 @@ export default {
       ],
     }
   },
-}
+})
 </script>
 
 <style scoped lang="sass">
