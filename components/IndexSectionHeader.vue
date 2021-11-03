@@ -5,7 +5,7 @@ header
       .col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5
         .mb-5
           .logo
-            Logo(alt='樂台計畫: 大專院校音樂賽事平台')
+            Logo(alt='樂台計畫 | 大專院校音樂賽事平台')
         h2
           | 由熱情驅動的#[br]音樂賽事#[em 大平台]
         .mt-3

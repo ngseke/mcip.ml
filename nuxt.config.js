@@ -11,8 +11,8 @@ export default {
       lang: 'zh-Hant-TW',
     },
     titleTemplate: titleChunk => (titleChunk)
-      ? `${titleChunk} - 樂台計畫`
-      : '樂台計畫: 大專院校音樂賽事平台',
+      ? `${titleChunk} | 樂台計畫`
+      : '樂台計畫 | 大專院校音樂賽事平台',
     title: '',
     meta: [
       { charset: 'utf-8' },
