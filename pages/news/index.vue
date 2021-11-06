@@ -1,10 +1,8 @@
 <template lang="pug">
 main
   Header(className='news')
-    .container.sub-page-title
-      h1
-        span.zh: span 最新消息
-        small.en: span News
+    SubpageTitle(zh='最新消息' en='News')
+
   section
     .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
       Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `最新消息` }]')
@@ -18,8 +16,12 @@ main
 
 <script>
 import { fetchListBrief } from '~/modules/news'
+import SubpageTitle from '~/components/SubpageTitle.vue'
 
 export default {
+  components: {
+    SubpageTitle,
+  },
   layout: 'news',
   async asyncData ({ error }) {
     try {

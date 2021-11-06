@@ -73,11 +73,13 @@ header.news
   background-image: $news-gradient
 
 .news-title
+  +text-shadow
   h1
     display: flex
     align-items: center
     color: white
     font-size: 2rem
+    overflow: hidden
 
 .back-btn
   +flex-center

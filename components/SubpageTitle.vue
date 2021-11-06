@@ -1,3 +1,28 @@
+<template lang="pug">
+.container.subpage-title
+  h1
+    span.zh: span {{ zh }}
+    small.en: span {{ en }}
+</template>
+
+<script>
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  props: {
+    zh: {
+      default: null,
+      type: String,
+    },
+    en: {
+      default: null,
+      type: String,
+    },
+  },
+})
+</script>
+
+<style scoped lang="sass">
 @keyframes y-move
   from
     transform: translateY(130%)
@@ -6,7 +31,7 @@
 
 $delay: .3s
 
-.sub-page-title
+.subpage-title
   h1
     +text-shadow
     color: white
@@ -29,8 +54,4 @@ $delay: .3s
       font-size: 60%
       span
         animation-delay: $delay + .15s
-
-.news-title
-  +text-shadow
-  h1
-    overflow: hidden
+</style>

@@ -3,10 +3,8 @@ div
   TheNavbar(:items='navbar')
   main.faq(itemscope itemtype='https://schema.org/FAQPage')
     Header(className='faq')
-      .container.sub-page-title
-        h1
-          span.zh: span 常見問題
-          small.en: span FAQ
+      SubpageTitle(zh='常見問題' en='FAQ')
+
     .meta
       .container: .row: .col-12
         Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
@@ -28,9 +26,13 @@ div
 <script>
 import marked from 'marked'
 import { throttle } from 'throttle-debounce'
+import SubpageTitle from '~/components/SubpageTitle.vue'
 import { fetch } from '~/modules/static-data'
 
 export default {
+  components: {
+    SubpageTitle,
+  },
   async asyncData ({ error }) {
     try {
       const faqs = await fetch('json/faq.json')
