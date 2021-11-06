@@ -13,29 +13,23 @@
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
 
-const list = [
-  { name: '參賽者', value: 1 },
-  { name: '學校社團', value: 2 },
-]
-
 export default defineComponent({
   props: {
     value: {
-      default: list[0].value,
+      default: null,
       type: Number,
     },
-  },
-  setup () {
-    return {
-      list,
-    }
+    list: {
+      default: () => [],
+      type: Array,
+    },
   },
 })
 </script>
 
 <style scoped lang="sass">
 .switcher
-  display: flex
+  display: inline-flex
   align-items: center
   margin-bottom: 2rem
 
