@@ -5,7 +5,7 @@
       .not-found
         h1 {{ error.statusCode }}
         h2 頁面不存在
-        nuxt-link.gradient-btn.secondary(to='/')
+        GradientButton(className='secondary' to='/')
           fa.mr-3(icon='arrow-left')
           | 返回首頁
 </template>

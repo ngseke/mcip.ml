@@ -17,7 +17,7 @@ section: .container
               canvas.captcha.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
               TextField.flex-grow-1.mb-0(label='驗證碼 (請輸入阿拉伯數字)' :max='4' v-model.trim='captchaCode')
 
-          button.gradient-btn.submit(type='submit' :disabled='isSubmitDisabled')
+          GradientButton(className='submit' :disabled='isSubmitDisabled')
             span(v-if='status === statusEnum.submitting') 傳送中...
             span(v-else) 送出
 

@@ -31,7 +31,7 @@ section.introduction: .container
             | 不需額外下載 App，用 LINE 就能立刻加入
 
           .mb-4.d-flex.flex-column.d-md-block
-            nuxt-link.gradient-btn.line(target='_blank' to="/line") 加入 LINE 官方帳號
+            GradientButton(className='line' target='_blank' to="/line") 加入 LINE 官方帳號
           .d-none.d-md-inline-block
             img.qrcode(
               src='~/assets/img/line-app-qrcode-shorthand.png'

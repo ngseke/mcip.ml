@@ -34,7 +34,7 @@
   box-shadow: $big-btn-shadow
   border: 0
   transition: $transition
-  &:not(.disabled)
+  &:not([disabled])
     &:hover
       color: white
       text-decoration: none
@@ -42,16 +42,9 @@
       cursor: pointer
     &:active
       transform: scale(.95)
-  &:focus
-    outline: none
-  &.disabled
+  &[disabled]
     opacity: .5
-    cursor: no-drop
-
-@mixin big-btn
-  +btn-common
-  background-color: white
-  border-radius: 15px
+    cursor: not-allowed
 
 @mixin input-common
   border: 1px solid rgba(#aaa, .3)
@@ -72,13 +65,6 @@
   width: 100%
   height: 5rem
   background: linear-gradient(rgba(white, 0), white)
-
-=loader-text-bar
-  width: 50%
-  background: rgba(black, .1)
-  height: 1rem
-  border-radius: 10px
-  margin-bottom: .5rem
 
 =floating-link
   transition: all .2s
