@@ -30,6 +30,7 @@ export default defineComponent({
 <style scoped lang="sass">
 .switcher
   display: inline-flex
+  flex-wrap: wrap
   align-items: center
   margin-bottom: 2rem
 
