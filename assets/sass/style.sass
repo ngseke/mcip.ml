@@ -1,5 +1,3 @@
-@import "section"
-
 @import "~bootstrap/scss/reboot"
 @import "~bootstrap/scss/utilities"
 @import "~bootstrap/scss/grid"
@@ -8,19 +6,9 @@
 @import "~bootstrap/scss/nav"
 @import "~bootstrap/scss/navbar"
 
-
 @include media-breakpoint-down(xs)
   html
     font-size: 14px
-
-body
-  font-family: $font-family
-  color: $black
-
-a
-  color: nth($secondary-list, 3)
-  &:hover
-    text-decoration: none
 
 [v-cloak]
   display: none !important
@@ -28,3 +16,7 @@ a
 ::selection
   color: $black
   background: rgba($primary, .5)
+
+p
+  letter-spacing: .5px
+  line-height: 1.75rem

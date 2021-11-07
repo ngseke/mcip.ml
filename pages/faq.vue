@@ -5,9 +5,8 @@ div
     Header(className='faq')
       SubpageTitle(zh='常見問題' en='FAQ')
 
-    .meta
-      .container: .row: .col-12
-        Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
+    .container
+      Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
 
     .container
       .row.justify-content-center.align-items-start
@@ -26,13 +25,9 @@ div
 <script>
 import marked from 'marked'
 import { throttle } from 'throttle-debounce'
-import SubpageTitle from '~/components/SubpageTitle.vue'
 import { fetch } from '~/modules/static-data'
 
 export default {
-  components: {
-    SubpageTitle,
-  },
   async asyncData ({ error }) {
     try {
       const faqs = await fetch('json/faq.json')
@@ -100,8 +95,6 @@ export default {
 <style scoped lang="sass">
 main.faq
   background-color: #f8f8f8
-  .meta
-    padding-top: 4rem
   section
     background-color: #f8f8f8
     +py(2rem)
@@ -118,6 +111,7 @@ main.faq
     h3
       font-size: 1.5rem
       margin-bottom: .75rem
+      font-weight: 700
     ::v-deep li
       margin-bottom: .5rem
 

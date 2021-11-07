@@ -30,6 +30,7 @@ export default defineComponent({
 <style scoped lang="sass">
 .switcher
   display: inline-flex
+  flex-wrap: wrap
   align-items: center
   margin-bottom: 2rem
 
@@ -44,7 +45,7 @@ a
   font-size: 1.25rem
   &.active
     color: $primary
-    color: nth($secondary-list, 3)
+    color: $secondary3
     text-decoration: underline
 
 .divider

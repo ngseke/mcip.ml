@@ -1,13 +1,12 @@
 <template lang="pug">
 section: .container
-  .row
-    .col-12.col-lg-12.mb-3
-      h3
-        nuxt-link.title(to='/news' title='查看更多最新消息')
-          fa.mr-3(icon='newspaper')
-          | 最新消息
-          span.icon.ml-3 ➔
+  SectionTitle.mb-5
+    nuxt-link.title(to='/news' title='查看更多最新消息')
+      fa.mr-3(icon='newspaper')
+      | 最新消息
+      span.icon.ml-3 ➔
 
+  .row
     .col-12.col-md-6.col-lg-4(v-for='item in list')
       NewsItem(:value='item')
 
@@ -36,6 +35,4 @@ a.title
   display: inline-block
   color: $black
   +floating-link
-  h3
-    display: inline-block
 </style>

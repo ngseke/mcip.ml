@@ -16,12 +16,8 @@ main
 
 <script>
 import { fetchListBrief } from '~/modules/news'
-import SubpageTitle from '~/components/SubpageTitle.vue'
 
 export default {
-  components: {
-    SubpageTitle,
-  },
   layout: 'news',
   async asyncData ({ error }) {
     try {

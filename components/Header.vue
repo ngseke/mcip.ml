@@ -19,7 +19,7 @@ export default defineComponent({
 <style scoped lang="sass">
 header
   background: url('~assets/img/background/index.jpg') center center / cover
-  background-color: nth($secondary-list, 3)
+  background-color: $secondary3
   color: white
   +flex-center
   flex-direction: column

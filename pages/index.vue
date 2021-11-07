@@ -7,8 +7,6 @@ div
     IndexSectionIntroduction
     IndexSectionCountTo
     IndexSectionDivider
-    //- IndexSectionPayment
-    //- IndexSectionBackstage
     IndexSectionNews(:list='newsList' v-if='newsList')
     IndexSectionPartner(:partners='partners' v-if='partners')
     IndexSectionContactUs
@@ -32,3 +30,17 @@ export default {
   },
 }
 </script>
+
+<style lang="sass" scoped>
+main::v-deep
+  > section
+    &:nth-child(even)
+      background-color: #f8f8f8
+
+    background-color: white
+    overflow: hidden
+
+    +py(4rem)
+    @include media-breakpoint-down(sm)
+      +py(3rem)
+</style>

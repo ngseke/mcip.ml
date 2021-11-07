@@ -53,7 +53,7 @@ $duration: 30s
   .c
     background-color: $black
   .d
-    background-color: nth($secondary-list, 1)
+    background-color: $secondary1
     animation: hue $duration linear infinite backwards
 
   .c, .d

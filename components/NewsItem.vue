@@ -72,7 +72,7 @@ export default defineComponent({
     .title
       +line-ellipsis(1)
       margin-bottom: .25rem
-      color: nth($secondary-list, 3)
+      color: $secondary3
       font-weight: 500
 
     .paragraph
