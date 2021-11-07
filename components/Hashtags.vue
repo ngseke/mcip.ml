@@ -28,6 +28,6 @@ export default defineComponent({
     display: inline-block
     font-weight: bold
     opacity: .5
-    color: nth($secondary-list, 1)
+    color: $secondary1
     transform: scale(1.3)
 </style>

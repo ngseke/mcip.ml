@@ -14,7 +14,7 @@ section.attention-section: .container
 .attention-section
   position: relative
   color: white
-  background-color: nth($secondary-list, 3)
+  background-color: $secondary3 !important
   .primary-icon
     font-size: 3rem
     display: inline-block
@@ -24,6 +24,4 @@ section.attention-section: .container
     margin-bottom: .75rem
   p
     margin: 0
-  .no-wrap
-    flex-wrap: nowrap
 </style>

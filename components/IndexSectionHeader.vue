@@ -20,7 +20,7 @@ header
   overflow: hidden auto
   position: relative
   background: url('~assets/img/background/index.jpg') center center / cover
-  background-color: nth($secondary-list, 3)
+  background-color: $secondary3
   color: white
   padding-top: 7rem
   padding-bottom: 4rem

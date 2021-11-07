@@ -44,7 +44,7 @@ a
   font-size: 1.25rem
   &.active
     color: $primary
-    color: nth($secondary-list, 3)
+    color: $secondary3
     text-decoration: underline
 
 .divider

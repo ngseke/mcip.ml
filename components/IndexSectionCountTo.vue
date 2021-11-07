@@ -64,18 +64,14 @@ export default defineComponent({
 <style scoped lang="sass">
 section
   position: relative
-  overflow: visible
-  &::after, &::before
+  overflow: visible !important
+  &::before
     content: ''
     position: absolute
-    background-size: cover
-    background-position: center
-    background-repeat: no-repeat
+    background: center / contain no-repeat url('~assets/img/peep/deco1.svg')
     +wh(8rem)
-  &::before
     left: -6rem
     top: .5rem
-    background-image: url('~assets/img/peep/deco1.svg')
     @include media-breakpoint-down(xs)
       display: none
 

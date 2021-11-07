@@ -15,7 +15,10 @@ footer.py-5
           li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理後台 #[fa.mx-1(icon='external-link-alt')]
 
       .col-12.col-lg-auto.text-lg-right.mt-4
-        .logo(src='~assets/img/logo/logo_symbol-no-gutter-black.svg')
+        .logo(
+          src='~assets/img/logo/logo_symbol-no-gutter-black.svg'
+          @click='easterEggCount += 1'
+        )
         div
           | Copyright © 2018 - {{ new Date().getFullYear() }}
           |
@@ -24,7 +27,7 @@ footer.py-5
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRoute, useRouter, watch } from '@nuxtjs/composition-api'
 
 const list = [
   [
@@ -56,8 +59,19 @@ const list = [
 
 export default defineComponent({
   setup () {
+    const easterEggCount = ref(0)
+    const router = useRouter()
+
+    watch(easterEggCount, (value) => {
+      if (value >= 5) {
+        router.push({ query: { capybara: null } })
+        easterEggCount.value = 0
+      }
+    })
+
     return {
       list,
+      easterEggCount,
     }
   },
 })

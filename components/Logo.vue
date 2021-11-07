@@ -56,12 +56,12 @@ $duration: 5s
 =keyframes-generator($name, $length)
   @keyframes #{$name}
     0%, 5%
-      fill: rgba(nth($secondary-list, 3), 0)
+      fill: rgba($secondary3, 0)
       stroke-dashoffset: $length
       stroke-dasharray: $length * .2
       stroke-opacity: 0
     20%
-      fill: rgba(nth($secondary-list, 3), 0)
+      fill: rgba($secondary3, 0)
       stroke-opacity: 1
 
     50%, 100%
@@ -79,7 +79,7 @@ $duration: 5s
 .shape.play
   rect, circle, polygon
     fill: #fff
-    stroke: nth($secondary-list, 1)
+    stroke: $secondary1
     stroke-width: 1px
     animation: short $duration ease-in infinite alternate both
 

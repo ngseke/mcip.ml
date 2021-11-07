@@ -27,11 +27,13 @@ ol
   display: flex
   flex-wrap: wrap
   padding: 0
-  margin-bottom: 2rem
+  +my(3rem)
   font-size: .9rem
   li
     a
       color: #333
+      display: inline-block
+      +floating-link
   li:not(:last-child)
     opacity: .7
     &::after

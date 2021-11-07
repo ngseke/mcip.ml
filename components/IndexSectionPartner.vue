@@ -2,7 +2,7 @@
 section: .container
   .row
     .col-12
-      h3
+      SectionTitle.mb-5
         fa.mr-3(icon='handshake')
         | 合作夥伴
     .col-12
@@ -25,9 +25,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="sass">
-h3
-  margin-bottom: 3rem
-
 section
   position: relative
   overflow: visible

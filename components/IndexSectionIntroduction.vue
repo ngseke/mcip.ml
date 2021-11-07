@@ -26,8 +26,8 @@ section.introduction: .container
 
       transition(name='slide')
         section(v-if='isLineApp' key=1 :class='getSlideClass(1)')
-          h3 透過樂台計畫#[br]3 分鐘即完成報名
-          p.mb-3
+          SectionTitle 透過樂台計畫#[br]3 分鐘即完成報名
+          p
             | 不需額外下載 App，用 LINE 就能立刻加入
 
           .mb-4.d-flex.flex-column.d-md-block
@@ -38,14 +38,14 @@ section.introduction: .container
               alt='樂台計畫 LINE App QRCode'
             )
         section(v-else-if='isBackstage' key=2 :class='getSlideClass(2)')
-          h3 為音樂賽事量身打造的#[br]解決方案
+          SectionTitle 為音樂賽事量身打造的#[br]解決方案
           ul.pl-4
             li(v-for='feature in backstageFeatures') {{ feature }}
           .pl-1.mb-3
             a(href='https://manage.mcip.ml/' target='_blank') 前往社團管理後台 #[fa.mx-1(icon='external-link-alt')]
 
         section(v-else-if='isCapybara' key=3 :class='getSlideClass(3)')
-          h3 水豚
+          SectionTitle 水豚
           p 水豚是水豚屬下僅存的兩種生物之一。牠是一種半水棲的食草動物，也是世界上體型最大的齧齒類動物。原產於南美洲除了智利以外的所有稀樹草原和叢林中。
 </template>
 

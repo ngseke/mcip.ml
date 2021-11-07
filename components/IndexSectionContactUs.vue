@@ -116,6 +116,8 @@ export default defineComponent({
 <style lang="sass" scoped>
 h3
   font-size: 2rem
+  font-weight: 700
+  margin-bottom: 1.5rem
 
 form
   display: flex
