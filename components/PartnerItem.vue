@@ -1,5 +1,9 @@
 <template lang="pug">
-a.item(:href='getFacebookLink(value.facebookId)' target='_blank')
+a.item(
+  :href='getFacebookLink(value.facebookId)'
+  :title='`至${value.name}的 Facebook 粉絲專頁`'
+  target='_blank'
+)
   img(:src='getImage(value)')
   .info
     .name {{ value.name }}
