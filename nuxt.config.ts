@@ -1,6 +1,8 @@
+import { NuxtConfig } from '@nuxt/types'
+
 const description = '立刻加入樂台計畫 Line App，輕鬆快速報名各個大專院校音樂比賽，亦可關注即時賽況、查看第一手賽事資訊與參加抽獎活動，精彩訊息不漏接！'
 
-export default {
+const config: NuxtConfig = {
   components: true,
   /*
   ** Headers of the page
@@ -63,6 +65,7 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    '@nuxt/typescript-build',
     '@nuxtjs/composition-api/module',
   ],
   /*
@@ -102,8 +105,6 @@ export default {
     ** You can extend webpack config here
     */
     extractCSS: true,
-    extend (config, ctx) {
-    },
   },
   sitemap: {
     gzip: true,
@@ -113,3 +114,5 @@ export default {
     ],
   },
 }
+
+export default config
