@@ -11,13 +11,14 @@ section: .container
           PartnerItem(:value='_')
 </template>
 
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import Partner from '~/types/Partner'
 
 export default defineComponent({
   props: {
     partners: {
-      type: Array,
+      type: Array as PropType<Partner[]>,
       default: null,
     },
   },

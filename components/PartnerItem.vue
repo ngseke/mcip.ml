@@ -10,13 +10,14 @@ a.item(
     small.school {{ value.schoolName }}
 </template>
 
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
-
+<script lang="ts">
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import MobileDetect from 'mobile-detect'
 
+import Partner from '~/types/Partner'
+
 /** 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟) */
-const getFacebookLink = (id) => {
+const getFacebookLink = (id: string) => {
   const device = new MobileDetect(
     process.client
       ? window.navigator.userAgent
@@ -25,10 +26,11 @@ const getFacebookLink = (id) => {
 
   if (device.is('iOS')) return `fb://page/?id=${id}`
   else if (device.is('AndroidOS')) return `fb://page/${id}`
-  else return `https://www.facebook.com/${id}`
+
+  return `https://www.facebook.com/${id}`
 }
 
-const getImage = _ => (
+const getImage = (_: Partner) => (
   _.isUsingCustomImg
     ? _.img
     : `https://graph.facebook.com/${_.facebookId}/picture?height=200&width=200`
@@ -37,7 +39,7 @@ const getImage = _ => (
 export default defineComponent({
   props: {
     value: {
-      type: Object,
+      type: Object as PropType<Partner>,
       default: null,
     },
   },

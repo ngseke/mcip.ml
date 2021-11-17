@@ -16,7 +16,7 @@ section: .container
         fa.ml-3(icon='chevron-right')
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({

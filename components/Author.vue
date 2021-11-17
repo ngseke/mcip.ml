@@ -9,7 +9,7 @@
         | {{ formatDate(date, 'YYYY年MM月DD日') }}
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { formatDate } from '~/modules/date'
 

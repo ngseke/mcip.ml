@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }' v-cloak)
+  nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }' vCloak)
     .container
       nuxt-link.navbar-brand(to='/')
         template(v-if='!hideLogo')
@@ -19,7 +19,7 @@ div
   .mobile-navbar(:class='{ hide: !isShow }')
     a.close(@click.prevent='hide' href='#') ╳
     ul
-      li(v-for='(_, key) in mobileItems')
+      li(v-for='_ in mobileItems')
         nuxt-link.link(:to='_.to' :class='{ active: _.active }') {{ _.name }}
     .divider
     ul
@@ -30,15 +30,17 @@ div
     .overlay(v-if='isShow' @click='hide')
 </template>
 
-<script>
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, useRoute, watch } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref, useRoute, watch, PropType } from '@nuxtjs/composition-api'
 import { throttle } from 'throttle-debounce'
+
+type Item = { name: string, to: string, active?: boolean }
 
 export default defineComponent({
   name: 'Navbar',
   props: {
     items: {
-      type: Array,
+      type: Array as PropType<Item[]>,
       default: () => [
         { name: 'News', to: '/news' },
         { name: 'FAQ', to: '/faq' },
@@ -50,7 +52,7 @@ export default defineComponent({
     },
   },
   setup (props) {
-    const top = ref(null)
+    const top = ref(0)
     const isShow = ref(false)
     const isShrink = ref(false)
 
@@ -72,7 +74,7 @@ export default defineComponent({
 
     onMounted(() => {
       const throttled = throttle(300, () => {
-        const ref = document.scrollingElement.scrollTop
+        const ref = document.scrollingElement?.scrollTop
         top.value = ref != null ? ref : document.documentElement.scrollTop
         isShrink.value = top.value > 250
       })

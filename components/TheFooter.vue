@@ -5,9 +5,7 @@ footer.py-5
       .col-12.col-sm-auto.block
         ul(v-for='(links, lIndex) in list' :key='lIndex')
           li(v-for='(i, key) in links' :key='key')
-            n-link(v-if='i.to' :to='i.to' :target='i.target')
-              fa.mr-2(:icon='i.icon' v-if='i.icon')
-              | {{ i.name }}
+            n-link(v-if='"to" in i' :to='i.to') {{ i.name }}
             a(v-else :href='i.href' :target='i.target')
               fa.mr-2(:icon='i.icon' v-if='i.icon')
               | {{ i.name }}
@@ -26,10 +24,14 @@ footer.py-5
           | .  All rights reserved
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref, useRouter, watch } from '@nuxtjs/composition-api'
 
-const list = [
+type Item =
+  | { name: string, to: string }
+  | { name: string, href: string, target: string, icon: [string, string] }
+
+const list: Item[][] = [
   [
     { name: '首頁', to: '/' },
     { name: '最新消息', to: '/news' },
