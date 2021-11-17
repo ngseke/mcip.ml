@@ -27,7 +27,7 @@ footer.py-5
 </template>
 
 <script>
-import { defineComponent, ref, useRoute, useRouter, watch } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRouter, watch } from '@nuxtjs/composition-api'
 
 const list = [
   [
