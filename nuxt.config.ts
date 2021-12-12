@@ -113,6 +113,14 @@ const config: NuxtConfig = {
       '/l',
     ],
   },
+
+  typescript: {
+    typeCheck: {
+      eslint: {
+        files: './**/*.{ts,js,vue}',
+      },
+    },
+  },
 }
 
 export default config
