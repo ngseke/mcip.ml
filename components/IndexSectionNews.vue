@@ -17,12 +17,13 @@ section: .container
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import NewsList from '~/types/NewsList'
 
 export default defineComponent({
   props: {
     list: {
-      type: Array,
+      type: Array as PropType<NewsList>,
       default: null,
     },
   },

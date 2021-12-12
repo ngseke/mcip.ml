@@ -12,13 +12,13 @@ ul.article-list
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted, PropType, ref } from '@nuxtjs/composition-api'
 import { formatDate } from '~/modules/date'
-import News from '~/types/News'
+import NewsList from '~/types/NewsList'
 
 export default defineComponent({
   props: {
     list: {
       default: null,
-      type: Array as PropType<News[] | null>,
+      type: Array as PropType<NewsList | null>,
     },
     isEnd: {
       default: false,
