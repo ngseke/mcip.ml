@@ -43,6 +43,7 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^7.0.2",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@types/url-join": "^4.0.1",
     "@vue/runtime-dom": "^3.2.26",
     "eslint": "^7.30.0",
     "eslint-config-standard": "^16.0.3",
