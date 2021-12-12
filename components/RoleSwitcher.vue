@@ -10,8 +10,9 @@
     .divider(v-if='index !== list.length - 1')
 </template>
 
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import Role from '~/types/Role'
 
 export default defineComponent({
   props: {
@@ -21,7 +22,7 @@ export default defineComponent({
     },
     list: {
       default: () => [],
-      type: Array,
+      type: Array as PropType<Role[]>,
     },
   },
 })

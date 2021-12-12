@@ -9,15 +9,16 @@ ul.article-list
     a(href='#' @click.prevent='loadMore' v-else) 載入更多
 </template>
 
-<script>
-import { defineComponent, onBeforeUnmount, onMounted, ref } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { defineComponent, onBeforeUnmount, onMounted, PropType, ref } from '@nuxtjs/composition-api'
 import { formatDate } from '~/modules/date'
+import NewsList from '~/types/NewsList'
 
 export default defineComponent({
   props: {
     list: {
       default: null,
-      type: Array,
+      type: Array as PropType<NewsList | null>,
     },
     isEnd: {
       default: false,

@@ -23,14 +23,14 @@ div
 </template>
 
 <script>
-import marked from 'marked'
+import { marked } from 'marked'
 import { throttle } from 'throttle-debounce'
-import { fetch } from '~/modules/static-data'
+import { fetchFaqs } from '~/modules/static-data'
 
 export default {
   async asyncData ({ error }) {
     try {
-      const faqs = await fetch('json/faq.json')
+      const faqs = await fetchFaqs()
 
       return { faqs }
     } catch (e) {

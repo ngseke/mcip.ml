@@ -49,8 +49,9 @@ section.introduction: .container
           p 水豚是水豚屬下僅存的兩種生物之一。牠是一種半水棲的食草動物，也是世界上體型最大的齧齒類動物。原產於南美洲除了智利以外的所有稀樹草原和叢林中。
 </template>
 
-<script>
+<script lang="ts">
 import { computed, defineComponent, ref, useRoute, watch } from '@nuxtjs/composition-api'
+import Role from '~/types/Role'
 
 const backstageFeatures = [
   '眾多賽事齊聚一堂，大幅增加活動曝光',
@@ -58,7 +59,7 @@ const backstageFeatures = [
   '跨平台系統，隨時隨地掌握報名狀況',
 ]
 
-const types = [
+const types: Role[] = [
   { name: '參賽者', value: 1 },
   { name: '學校社團', value: 2 },
 ]
@@ -84,7 +85,8 @@ export default defineComponent({
         : types
     })
 
-    const getSlideClass = value => value <= previousType.value ? 'previous' : 'next'
+    const getSlideClass = (value: number) =>
+      value <= previousType.value ? 'previous' : 'next'
 
     return {
       backstageFeatures,

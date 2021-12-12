@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     '@nuxtjs',
+    '@nuxtjs/eslint-config-typescript',
     'plugin:nuxt/recommended',
     'standard',
   ],
@@ -16,6 +17,8 @@ module.exports = {
     'vue',
   ],
   rules: {
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
     'comma-dangle': ['error', {
       arrays: 'always-multiline',
       objects: 'always-multiline',

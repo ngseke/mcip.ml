@@ -13,7 +13,12 @@
 <script>
 export default {
   layout: 'default',
-  props: ['error'],
+  props: {
+    error: {
+      type: Object,
+      default: null,
+    },
+  },
   head: {
     title: '頁面不存在',
   },

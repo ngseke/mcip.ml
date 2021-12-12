@@ -12,24 +12,25 @@ nuxt-link.news-card(:to='link')
         | {{ time }}
 </template>
 
-<script>
-import { computed, defineComponent } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
 
-import marked from 'marked'
-import htmlToText from 'html-to-text'
+import { marked } from 'marked'
+import { htmlToText } from 'html-to-text'
 
 import { formatDate } from '~/modules/date'
+import News from '~/types/News'
 
 /** 將 markdown 格式文字轉為純文字 */
-const toPlainText = (_) => {
-  _ = _.substring(_.indexOf('\n') + 1)
-  return htmlToText.fromString(marked(_))
+const toPlainText = (markdown: string) => {
+  const firstParagraph = markdown.substring(markdown.indexOf('\n') + 1)
+  return htmlToText(marked(firstParagraph))
 }
 
 export default defineComponent({
   props: {
     value: {
-      type: Object,
+      type: Object as PropType<News>,
       default: null,
     },
   },
@@ -37,7 +38,7 @@ export default defineComponent({
     const title = computed(() => props.value.title)
     const image = computed(() => props.value.image)
     const link = computed(() => `/news/${props.value.id}`)
-    const article = computed(() => toPlainText(props.value.article))
+    const article = computed(() => toPlainText(props.value.article!))
     const author = computed(() => props.value.author)
     const time = computed(() => formatDate(props.value.timestamp))
 

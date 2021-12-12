@@ -16,13 +16,14 @@ section: .container
         fa.ml-3(icon='chevron-right')
 </template>
 
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import NewsList from '~/types/NewsList'
 
 export default defineComponent({
   props: {
     list: {
-      type: Array,
+      type: Array as PropType<NewsList>,
       default: null,
     },
   },

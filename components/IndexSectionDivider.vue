@@ -1,11 +1,9 @@
 <template lang="pug">
 .fill-divider
   .row.no-gutters
-    template(v-for='i in 10')
-      .col-auto: .a: img(src='~/assets/img/logo/logo_symbol-black.svg')
-      .col-auto: .c: img(src='~/assets/img/logo/logo_symbol-white.svg')
-      .col-auto: .b: img(src='~/assets/img/logo/logo_symbol-blue.svg')
-      .col-auto: .d: img(src='~/assets/img/logo/logo_symbol-white.svg')
+    template(v-for='i in 5')
+      .col-auto(v-for='i in ["a", "c", "b", "d"]')
+        div(:class='i'): .img
 </template>
 
 <style lang="sass" scoped>
@@ -44,21 +42,33 @@ $duration: 30s
     +wh($width)
     @include media-breakpoint-down(sm)
       +wh($width-small)
-    img
-      +no-select
-      +wh($width * .5, auto)
+    .img
+      +wh($width * .5)
+      background-size: contain
+      background-repeat: no-repeat
+      background-position: center center
       @include media-breakpoint-down(sm)
         +wh($width-small * .5)
 
   .c
     background-color: $black
+
   .d
     background-color: $secondary1
     animation: hue $duration linear infinite backwards
 
   .c, .d
-    img
-      +wh($width * .7, auto)
+    .img
+      +wh($width * .7)
       @include media-breakpoint-down(sm)
         +wh($width-small * .7)
+
+.a .img
+  background-image: url('~assets/img/logo/logo_symbol-black.svg')
+.b .img
+  background-image: url('~assets/img/logo/logo_symbol-blue.svg')
+.c .img
+  background-image: url('~assets/img/logo/logo_symbol-white.svg')
+.d .img
+  background-image: url('~assets/img/logo/logo_symbol-white.svg')
 </style>
