@@ -9,11 +9,13 @@ type Id = News['id'] | null
 
 const sortByTimestamp = (a: News, b: News) => b.timestamp - a.timestamp
 
+const getUrl = (path: string) => join(API_URL, path)
+
 export async function fetchList (
   after: Id = null,
   limit = 3
 ) {
-  const url = join(API_URL, '/article/app')
+  const url = getUrl('/article/app')
   const params = { after, limit }
   const { data } = (await axios.get<NewsList>(url, { params }))
   const list = data.sort(sortByTimestamp)
@@ -25,7 +27,7 @@ export async function fetchListBrief (
   after: Id = null,
   limit = 9999
 ) {
-  const url = join(API_URL, '/article/app/list')
+  const url = getUrl('/article/app/list')
   const params = { after, limit }
   const { data } = (await axios.get<NewsList>(url, { params }))
   const list = data.sort(sortByTimestamp)
@@ -34,7 +36,7 @@ export async function fetchListBrief (
 }
 
 export async function fetch (id: string) {
-  const url = join(API_URL, '/article/app')
+  const url = getUrl('/article/app')
   const { data } = await axios.get<News>(url, { params: { id } })
   return data
 }
