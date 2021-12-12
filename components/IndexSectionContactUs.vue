@@ -31,8 +31,10 @@ section: .container
 
 <script>
 import { computed, defineComponent, nextTick, reactive, ref, watch, useContext } from '@nuxtjs/composition-api'
+import join from 'url-join'
 
 import { create } from '~/modules/captcha'
+import { API_URL } from '~/modules/config'
 
 const fieldNames = ['name', 'email', 'phone', 'content']
 
@@ -78,9 +80,10 @@ export default defineComponent({
     )
 
     const { $axios } = useContext()
+
     /** 送出聯絡我們表單 */
     const submit = async () => {
-      const url = 'https://us-central1-mc-integration-platform.cloudfunctions.net/firestoreContact'
+      const url = join(API_URL, '/firestoreContact')
 
       errorMessage.value = null
       status.value = statusEnum.submitting

@@ -1,10 +1,9 @@
 import axios from 'axios'
 import join from 'url-join'
-
-const path = 'https://cdn.jsdelivr.net/gh/ngseke/mcip.ml-static@master'
+import { STATIC_DATA_URL } from './config'
 
 export async function fetch (name: string) {
-  const url = join(path, name)
+  const url = join(STATIC_DATA_URL, name)
   const { data } = await axios.get(url)
   return data
 }
