@@ -15,7 +15,7 @@ export async function fetchPartners () {
 }
 
 export async function fetchFaqs () {
-  const url = getUrl('json/partner.json')
+  const url = getUrl('json/faq.json')
   const { data } = await axios.get<Faqs>(url)
   return data
 }
