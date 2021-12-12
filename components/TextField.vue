@@ -1,21 +1,19 @@
 <template lang="pug">
 .form__group
   input.form__field(
-    v-if='!multiline'
-    :value='value'
-    @input="$emit('input', $event.target.value)"
     v-bind='inputBind'
+    v-on='handlers'
+    v-if='!multiline'
   )
   textarea.form__field(
-    v-else
-    :value='value'
-    @input="$emit('input', $event.target.value)"
     v-bind='textareaBind'
+    v-on='handlers'
+    v-else
   )
   label.form__label {{ label }}
 </template>
 
-<script>
+<script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
@@ -50,24 +48,37 @@ export default defineComponent({
       default: false,
     },
   },
-  setup (props) {
-    const inputBind = computed(() => ({
+  setup (props, { emit }) {
+    const handleInput = (e: Event) => {
+      emit('input', (e.target as HTMLInputElement)?.value)
+    }
+
+    const handlers = {
+      input: handleInput,
+    }
+
+    const baseBind = computed(() => ({
       placeholder: props.label,
-      type: props.type,
       required: props.required,
       maxlength: props.max,
+      value: props.value,
+    }))
+
+    const inputBind = computed(() => ({
+      ...baseBind.value,
+      type: props.type,
     }))
 
     const textareaBind = computed(() => ({
-      placeholder: props.label,
-      required: props.required,
+      ...baseBind.value,
       rows: props.rows,
-      maxlength: props.max,
     }))
 
     return {
       inputBind,
       textareaBind,
+      handleInput,
+      handlers,
     }
   },
 })
