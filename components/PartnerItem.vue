@@ -30,10 +30,10 @@ const getFacebookLink = (id: string) => {
   return `https://www.facebook.com/${id}`
 }
 
-const getImage = (_: Partner) => (
-  _.isUsingCustomImg
-    ? _.img
-    : `https://graph.facebook.com/${_.facebookId}/picture?height=200&width=200`
+const getImage = (partner: Partner) => (
+  partner.isUsingCustomImg
+    ? partner.img
+    : `https://graph.facebook.com/${partner.facebookId}/picture?height=200&width=200`
 )
 
 export default defineComponent({

@@ -22,9 +22,9 @@ import { formatDate } from '~/modules/date'
 import News from '~/types/News'
 
 /** 將 markdown 格式文字轉為純文字 */
-const toPlainText = (_: string) => {
-  _ = _.substring(_.indexOf('\n') + 1)
-  return htmlToText(marked(_))
+const toPlainText = (markdown: string) => {
+  const firstParagraph = markdown.substring(markdown.indexOf('\n') + 1)
+  return htmlToText(marked(firstParagraph))
 }
 
 export default defineComponent({
