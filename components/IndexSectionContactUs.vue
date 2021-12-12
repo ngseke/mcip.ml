@@ -81,7 +81,6 @@ export default defineComponent({
 
     const { $axios } = useContext()
 
-    /** 送出聯絡我們表單 */
     const submit = async () => {
       const url = join(API_URL, '/firestoreContact')
 
@@ -90,7 +89,6 @@ export default defineComponent({
 
       try {
         await $axios.$post(url, { ...contact, source: 2, type: 2 })
-        // await (new Promise(x => setTimeout(x, 5000)))
         status.value = statusEnum.success
       } catch (e) {
         errorMessage.value = '發生了一些問題，請稍後再試'
