@@ -105,6 +105,13 @@ const config: NuxtConfig = {
     ** You can extend webpack config here
     */
     extractCSS: true,
+    extend (config) {
+      config.module?.rules.push({
+        include: /node_modules/,
+        test: /\.mjs$/,
+        type: 'javascript/auto',
+      })
+    },
   },
   sitemap: {
     gzip: true,

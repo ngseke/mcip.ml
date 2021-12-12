@@ -17,7 +17,7 @@ main(itemscope itemtype='http://schema.org/Article' )
 </template>
 
 <script>
-import marked from 'marked'
+import { marked } from 'marked'
 import { fetch } from '~/modules/news'
 
 export default {

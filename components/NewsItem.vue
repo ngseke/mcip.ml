@@ -15,8 +15,8 @@ nuxt-link.news-card(:to='link')
 <script>
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 
-import marked from 'marked'
-import htmlToText from 'html-to-text'
+import { marked } from 'marked'
+import { htmlToText } from 'html-to-text'
 
 import { formatDate } from '~/modules/date'
 

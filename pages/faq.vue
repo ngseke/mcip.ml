@@ -23,7 +23,7 @@ div
 </template>
 
 <script>
-import marked from 'marked'
+import { marked } from 'marked'
 import { throttle } from 'throttle-debounce'
 import { fetch } from '~/modules/static-data'
 
