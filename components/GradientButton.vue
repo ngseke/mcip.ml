@@ -17,7 +17,7 @@ button.button(
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
@@ -31,7 +31,7 @@ export default defineComponent({
     },
     type: {
       default: 'button',
-      type: String,
+      type: String as PropType<'button' | 'submit'>,
     },
     disabled: {
       default: false,
