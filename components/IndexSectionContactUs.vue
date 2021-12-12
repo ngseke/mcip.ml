@@ -7,7 +7,7 @@ section: .container
         | 聯絡我們
     .col-12.col-lg-6.offset-lg-1
       transition(name='contact' mode='out-in')
-        form(@submit.prevent='submit' v-if='status !== statusEnum.success')
+        form(@submit.prevent='submit' v-if='status !== Status.success')
           TextField(label='你的大名' required :max='50' v-model.trim='contact.name')
           TextField(type='email' label='Email' required :max='100' v-model.trim='contact.email')
           TextField(type='tel' label='聯絡電話 (可留空)' :max='15' v-model.trim='contact.phone')
@@ -17,8 +17,8 @@ section: .container
               canvas.captcha.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
               TextField.flex-grow-1.mb-0(label='驗證碼 (請輸入阿拉伯數字)' :max='4' v-model.trim='captchaCode')
 
-          GradientButton(className='submit' :disabled='isSubmitDisabled')
-            span(v-if='status === statusEnum.submitting') 傳送中...
+          GradientButton(className='submit' :disabled='isSubmitDisabled' type='submit')
+            span(v-if='status === Status.submitting') 傳送中...
             span(v-else) 送出
 
           small.text-danger(v-if='errorMessage') {{ errorMessage }}
@@ -29,34 +29,33 @@ section: .container
       .peep
 </template>
 
-<script>
-import { computed, defineComponent, nextTick, reactive, ref, watch, useContext } from '@nuxtjs/composition-api'
-import join from 'url-join'
+<script lang="ts">
+import { computed, defineComponent, nextTick, reactive, ref, watch } from '@nuxtjs/composition-api'
 
 import { create } from '~/modules/captcha'
-import { API_URL } from '~/modules/config'
+import { submitContactUsForm } from '~/modules/contact-us'
 
-const fieldNames = ['name', 'email', 'phone', 'content']
+const fieldNames = ['name', 'email', 'phone', 'content'] as const
 
-/** 枚舉狀態 */
-const statusEnum = Object.freeze({
-  default: Symbol('default'),
-  submitting: Symbol('submitting'),
-  success: Symbol('success'),
-})
+enum Status {
+  default,
+  submitting,
+  success,
+  error,
+}
 
 export default defineComponent({
   setup () {
     const contact = reactive({ name: '', email: '', phone: '', content: '' })
     const isCaptchaShow = ref(false)
     const captchaCode = ref(null)
-    const captchaAnswer = ref(null)
-    const status = ref(statusEnum.default)
-    const errorMessage = ref(null)
+    const captchaAnswer = ref<string | null>(null)
+    const status = ref(Status.default)
+    const errorMessage = ref<string | null>(null)
 
     const isSubmitDisabled = computed(() => {
       return (
-        status.value === statusEnum.submitting ||
+        status.value === Status.submitting ||
         captchaCode.value !== captchaAnswer.value
       )
     })
@@ -72,37 +71,31 @@ export default defineComponent({
         if (isCaptchaShow.value) return
         if (fieldNames.filter(i => i !== 'phone').every(i => value[i])) {
           isCaptchaShow.value = true
-          await nextTick().value
+          await nextTick()
           createCaptcha()
         }
       },
       { deep: true }
     )
 
-    const { $axios } = useContext()
-
     const submit = async () => {
-      const url = join(API_URL, '/firestoreContact')
-
       errorMessage.value = null
-      status.value = statusEnum.submitting
-
+      status.value = Status.submitting
+      const body = { ...contact, source: 2, type: 2 }
       try {
-        await $axios.$post(url, { ...contact, source: 2, type: 2 })
-        status.value = statusEnum.success
+        await submitContactUsForm(body)
+        status.value = Status.success
       } catch (e) {
         errorMessage.value = '發生了一些問題，請稍後再試'
-        status.value = statusEnum.error
+        status.value = Status.error
       }
     }
 
     return {
-      fieldNames,
-      statusEnum,
+      Status,
       contact,
       isCaptchaShow,
       captchaCode,
-      captchaAnswer,
       status,
       errorMessage,
       isSubmitDisabled,
