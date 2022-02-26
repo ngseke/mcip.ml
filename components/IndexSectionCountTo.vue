@@ -15,7 +15,7 @@ section.container(v-scroll-reveal='{ beforeReveal: startCountTo, duration: 0 }')
         .label {{ item.label }}
 
     .col-12.text-right
-      small.date 截至 2021 年 11 月
+      small.date {{ date }}
 </template>
 
 <script>
@@ -23,6 +23,7 @@ import { defineComponent, ref } from '@nuxtjs/composition-api'
 import countTo from 'vue-count-to'
 
 const countToOptions = { duration: 1500, autoplay: false }
+const date = '截至 2022 年 2 月'
 const list = [
   {
     label: '樂台計畫總用戶數',
@@ -31,7 +32,7 @@ const list = [
   },
   {
     label: '合作院校社團',
-    value: 25,
+    value: 26,
     suffix: '所',
   },
   {
@@ -56,6 +57,7 @@ export default defineComponent({
       list,
       countToElements,
       startCountTo,
+      date,
     }
   },
 })
