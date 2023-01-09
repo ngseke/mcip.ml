@@ -10,7 +10,7 @@ footer.py-5
               fa.mr-2(:icon='i.icon' v-if='i.icon')
               | {{ i.name }}
         ul
-          li: a(target='_blank' href='https://manage.mcip.ml/') 社團管理後台 #[fa.mx-1(icon='external-link-alt')]
+          li: a(target='_blank' href='https://manage.mcip.app/') 社團管理後台 #[fa.mx-1(icon='external-link-alt')]
 
       .col-12.col-lg-auto.text-lg-right.mt-4
         .logo(
