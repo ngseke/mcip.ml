@@ -1,21 +1,22 @@
 <template lang="pug">
-section.container(v-scroll-reveal='{ beforeReveal: startCountTo, duration: 0 }')
-  .row.justify-content-around(v-cloak)
-    .col-auto(v-for='item in list')
-      .count-to
-        countTo.number(
-          :start-val='10'
-          :end-val='item.value'
-          :suffix='item.isApproximate ? "+" : ""'
-          ref='countToElements'
-          v-bind='countToOptions'
-          v-cloak
-        ) {{ item.value }}{{ item.isApproximate ? "+" : "" }}
-        span.suffix(v-if='item.suffix') {{ item.suffix }}
-        .label {{ item.label }}
+section(v-scroll-reveal='{ beforeReveal: startCountTo, duration: 0 }')
+  .container
+    .row.justify-content-around(v-cloak)
+      .col-auto(v-for='item in list')
+        .count-to
+          countTo.number(
+            :start-val='10'
+            :end-val='item.value'
+            :suffix='item.isApproximate ? "+" : ""'
+            ref='countToElements'
+            v-bind='countToOptions'
+            v-cloak
+          ) {{ item.value }}{{ item.isApproximate ? "+" : "" }}
+          span.suffix(v-if='item.suffix') {{ item.suffix }}
+          .label {{ item.label }}
 
-    .col-12.text-right
-      small.date {{ date }}
+      .col-12.text-right
+        small.date {{ date }}
 </template>
 
 <script>
@@ -64,7 +65,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="sass">
-section
+.container
   position: relative
   overflow: visible !important
   &::before
@@ -73,7 +74,7 @@ section
     background: center / contain no-repeat url('~assets/img/peep/deco1.svg')
     +wh(8rem)
     left: -6rem
-    top: .5rem
+    top: -4rem
     @include media-breakpoint-down(xs)
       display: none
 
