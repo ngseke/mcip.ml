@@ -24,8 +24,8 @@ section.introduction: .container
     .col-12.col-md-7.col-lg-6.order-1.order-md-2
       RoleSwitcher(v-model='type' :list='computedTypes')
 
-      transition(name='slide')
-        section(v-if='isLineApp' key=1 :class='getSlideClass(1)')
+      transition(:name='transitionName')
+        section(v-if='isLineApp' key=1)
           SectionTitle 透過樂台計畫#[br]3 分鐘即完成報名
           p
             | 不需額外下載 App，用 LINE 就能立刻加入
@@ -37,14 +37,14 @@ section.introduction: .container
               src='~/assets/img/line-app-qrcode-shorthand.png'
               alt='樂台計畫 LINE App QRCode'
             )
-        section(v-else-if='isBackstage' key=2 :class='getSlideClass(2)')
+        section(v-else-if='isBackstage' key=2)
           SectionTitle 為音樂賽事量身打造的#[br]解決方案
           ul.pl-4
             li(v-for='feature in backstageFeatures') {{ feature }}
           .pl-1.mb-3
             a(href='https://manage.mcip.app/' target='_blank') 前往社團管理後台 #[fa.mx-1(icon='external-link-alt')]
 
-        section(v-else-if='isCapybara' key=3 :class='getSlideClass(3)')
+        section(v-else-if='isCapybara' key=3)
           SectionTitle 水豚
           p 水豚是水豚屬下僅存的兩種生物之一。牠是一種半水棲的食草動物，也是世界上體型最大的齧齒類動物。原產於南美洲除了智利以外的所有稀樹草原和叢林中。
 </template>
@@ -67,8 +67,6 @@ const types: Role[] = [
 export default defineComponent({
   setup () {
     const type = ref(types[0].value)
-    const previousType = ref(type.value)
-    watch(type, (_, value) => { previousType.value = value })
 
     const isLineApp = computed(() => type.value === 1)
     const isBackstage = computed(() => type.value === 2)
@@ -85,8 +83,10 @@ export default defineComponent({
         : types
     })
 
-    const getSlideClass = (value: number) =>
-      value <= previousType.value ? 'previous' : 'next'
+    const transitionName = ref('slide')
+    watch(type, (newType, oldType) => {
+      transitionName.value = newType > oldType ? 'slide' : 'slide-reverse'
+    })
 
     return {
       backstageFeatures,
@@ -95,7 +95,7 @@ export default defineComponent({
       isLineApp,
       isBackstage,
       isCapybara,
-      getSlideClass,
+      transitionName,
     }
   },
 })
@@ -169,22 +169,28 @@ ul
   li
     margin-bottom: .3rem
 
+$distance: 3rem
 // 切換區塊的動畫
-.slide
-  $distance: 3rem
+.slide, .slide-reverse
   &-enter-active
     transition: $transition
     transition-delay: .05s
   &-leave-active
     transition: $transition
     position: absolute
+  &-enter, &-leave-to
+    opacity: 0
 
+.slide
   &-enter
-    opacity: 0
-    &.previous
-      transform: translateX(-$distance)
-    &.next
-      transform: translateX($distance)
+    transform: translateX($distance)
   &-leave-to
-    opacity: 0
+    transform: translateX(-$distance)
+
+.slide-reverse
+  &-enter
+    transform: translateX(-$distance)
+  &-leave-to
+    transform: translateX($distance)
+
 </style>
