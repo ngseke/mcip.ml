@@ -14,8 +14,10 @@
     "node": "14.x"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^5.12.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/vue-fontawesome": "^2.0.10",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/composition-api": "^0.29.3",
     "@nuxtjs/sitemap": "^2.2.1",
