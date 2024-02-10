@@ -11,7 +11,7 @@
     "generate": "nuxt generate"
   },
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -32,7 +32,6 @@
     "nuxt-sass-resources-loader": "^2.0.5",
     "path": "^0.12.7",
     "pug": "^3.0.1",
-    "pug-plain-loader": "^1.0.0",
     "sass": "^1.43.4",
     "sass-loader": "^10.1.1",
     "throttle-debounce": "^2.1.0",
@@ -51,8 +50,9 @@
     "@types/marked": "^4.0.1",
     "@types/url-join": "^4.0.1",
     "@vue/runtime-dom": "^3.2.26",
-    "eslint": "^7.30.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-nuxt": "^2.0.0"
+    "eslint": "^8.56.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "pug-plain-loader": "^1.1.0"
   }
 }
