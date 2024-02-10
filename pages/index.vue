@@ -3,7 +3,6 @@ div
   TheNavbar(hide-logo)
   main
     IndexSectionHeader
-    //- IndexSectionAttention
     IndexSectionIntroduction
     IndexSectionCountTo
     IndexSectionDivider
