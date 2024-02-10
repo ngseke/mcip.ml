@@ -42,7 +42,9 @@ section.introduction: .container
           ul.pl-4
             li(v-for='feature in backstageFeatures') {{ feature }}
           .pl-1.mb-3
-            a(href='https://manage.mcip.app/' target='_blank') 前往社團管理後台 #[fa.mx-1(icon='external-link-alt')]
+            a(href='https://manage.mcip.app/' target='_blank')
+              | 前往社團管理後台
+              FontAwesomeIcon.mx-1(:icon='faExternalLinkAlt')
 
         section(v-else-if='isCapybara' key=3)
           SectionTitle 水豚
@@ -51,6 +53,8 @@ section.introduction: .container
 
 <script lang="ts">
 import { computed, defineComponent, ref, useRoute, watch } from '@nuxtjs/composition-api'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import Role from '~/types/Role'
 
 const backstageFeatures = [
@@ -65,6 +69,9 @@ const types: Role[] = [
 ]
 
 export default defineComponent({
+  components: {
+    FontAwesomeIcon,
+  },
   setup () {
     const type = ref(types[0].value)
 
@@ -87,7 +94,6 @@ export default defineComponent({
     watch(type, (newType, oldType) => {
       transitionName.value = newType > oldType ? 'slide' : 'slide-reverse'
     })
-
     return {
       backstageFeatures,
       computedTypes,
@@ -96,6 +102,7 @@ export default defineComponent({
       isBackstage,
       isCapybara,
       transitionName,
+      faExternalLinkAlt,
     }
   },
 })

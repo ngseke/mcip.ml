@@ -6,18 +6,29 @@
         h1 {{ error.statusCode }}
         h2 頁面不存在
         GradientButton(className='secondary' to='/')
-          fa.mr-3(icon='arrow-left')
+          FontAwesomeIcon.mr-3(:icon='faArrowLeft')
           | 返回首頁
 </template>
 
 <script>
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 export default {
+  components: {
+    FontAwesomeIcon,
+  },
   layout: 'default',
   props: {
     error: {
       type: Object,
       default: null,
     },
+  },
+  setup () {
+    return {
+      faArrowLeft,
+    }
   },
   head: {
     title: '頁面不存在',

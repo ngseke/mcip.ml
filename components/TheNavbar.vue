@@ -7,7 +7,7 @@ div
           img(src='~/assets/img/logo/logo_panel-white.svg' alt='樂台計畫' v-if='isDark')
         img(src='~/assets/img/logo/logo_panel-black.svg' alt='樂台計畫' v-if='!isDark')
       button.navbar-toggler(type='button' @click.stop='isShow = !isShow')
-        fa(icon='bars')
+        FontAwesomeIcon(:icon='faBars')
       .navbar-content(ref='navbarContent')
         ul.navbar-nav
           li.nav-item(v-for='_ in items')
@@ -15,7 +15,7 @@ div
           li.d-flex.align-items-center(v-if="items.length"): .divider
           li.nav-item
             a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
-              fa.facebook-icon(:icon='["fab", "facebook"]')
+              FontAwesomeIcon.facebook-icon(:icon='faFacebook')
   .mobile-navbar(:class='{ hide: !isShow }')
     a.close(@click.prevent='hide' href='#') ╳
     ul
@@ -25,7 +25,7 @@ div
     ul
       li: nuxt-link.link(to='/line') LINE App
       li: a.link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
-        fa.facebook-icon(:icon='["fab", "facebook"]')
+        FontAwesomeIcon.facebook-icon(:icon='faFacebook')
   transition(name='fade')
     .overlay(v-if='isShow' @click='hide')
 </template>
@@ -33,11 +33,17 @@ div
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref, useRoute, watch, PropType } from '@nuxtjs/composition-api'
 import { throttle } from 'throttle-debounce'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 type Item = { name: string, to: string, active?: boolean }
 
 export default defineComponent({
   name: 'Navbar',
+  components: {
+    FontAwesomeIcon,
+  },
   props: {
     items: {
       type: Array as PropType<Item[]>,
@@ -82,6 +88,7 @@ export default defineComponent({
       window.addEventListener('scroll', throttled)
       onBeforeUnmount(() => window.removeEventListener('scroll', throttled))
     })
+
     return {
       top,
       isShow,
@@ -89,6 +96,8 @@ export default defineComponent({
       isDark,
       mobileItems,
       hide,
+      faBars,
+      faFacebook,
     }
   },
 })

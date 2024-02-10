@@ -3,7 +3,8 @@ main(itemscope itemtype='http://schema.org/Article' )
   Header(className='news')
     .container.news-title
       h1(v-if='data' v-cloak)
-        nuxt-link.back-btn(to='/news' title='返回最新消息列表'): fa(icon='angle-left')
+        nuxt-link.back-btn(to='/news' title='返回最新消息列表')
+          FontAwesomeIcon(:icon='faAngleLeft')
         span(itemprop='headline') {{ data.title }}
 
   section(v-if='data' v-cloak)
@@ -18,10 +19,20 @@ main(itemscope itemtype='http://schema.org/Article' )
 
 <script>
 import { marked } from 'marked'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { fetch } from '~/modules/news'
 
 export default {
+  components: {
+    FontAwesomeIcon,
+  },
   layout: 'news',
+  setup () {
+    return {
+      faAngleLeft,
+    }
+  },
   async asyncData ({ params, error, req }) {
     try {
       const data = await fetch(params.id)
@@ -90,7 +101,6 @@ header.news
   border-radius: 100rem
   outline: none
   transition: background-color .2s
-  font-size: 1.5rem
   flex: 0 0 auto
   &:active
     background-color: rgba(white, .2)

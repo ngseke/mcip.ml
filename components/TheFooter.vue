@@ -5,12 +5,17 @@ footer.py-5
       .col-12.col-sm-auto.block
         ul(v-for='(links, lIndex) in list' :key='lIndex')
           li(v-for='(i, key) in links' :key='key')
-            n-link(v-if='"to" in i' :to='i.to') {{ i.name }}
+            n-link(v-if='"to" in i' :to='i.to')
+              FontAwesomeIcon.mr-2(:icon='i.icon' v-if='i.icon')
+              | {{ i.name }}
             a(v-else :href='i.href' :target='i.target')
-              fa.mr-2(:icon='i.icon' v-if='i.icon')
+              FontAwesomeIcon.mr-2(:icon='i.icon' v-if='i.icon')
               | {{ i.name }}
         ul
-          li: a(target='_blank' href='https://manage.mcip.app/') 社團管理後台 #[fa.mx-1(icon='external-link-alt')]
+          li
+            a(target='_blank' href='https://manage.mcip.app/')
+              | 社團管理後台
+              FontAwesomeIcon.mx-1(:icon='faExternalLinkAlt')
 
       .col-12.col-lg-auto.text-lg-right.mt-4
         .logo(
@@ -26,10 +31,13 @@ footer.py-5
 
 <script lang="ts">
 import { defineComponent, ref, useRouter, watch } from '@nuxtjs/composition-api'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faFacebook, faLine } from '@fortawesome/free-brands-svg-icons'
+import { IconDefinition, faEnvelope, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 
 type Item =
   | { name: string, to: string }
-  | { name: string, href: string, target: string, icon: [string, string] }
+  | { name: string, href: string, target: string, icon: IconDefinition }
 
 const list: Item[][] = [
   [
@@ -42,24 +50,27 @@ const list: Item[][] = [
       name: 'Facebook 粉絲專頁',
       href: 'https://www.facebook.com/mcipApp/',
       target: '_blank',
-      icon: ['fab', 'facebook'],
+      icon: faFacebook,
     },
     {
       name: 'LINE 官方帳號',
       to: '/line',
       target: '_blank',
-      icon: ['fab', 'line'],
+      icon: faLine,
     },
     {
       name: 'mcip.app@gmail.com',
       href: 'mailto:mcip.app@gmail.com',
       target: '_blank',
-      icon: ['fas', 'envelope'],
+      icon: faEnvelope,
     },
   ],
 ]
 
 export default defineComponent({
+  components: {
+    FontAwesomeIcon,
+  },
   setup () {
     const easterEggCount = ref(0)
     const router = useRouter()
@@ -70,10 +81,10 @@ export default defineComponent({
         easterEggCount.value = 0
       }
     })
-
     return {
       list,
       easterEggCount,
+      faExternalLinkAlt,
     }
   },
 })

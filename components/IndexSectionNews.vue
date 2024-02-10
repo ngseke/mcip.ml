@@ -2,7 +2,7 @@
 section: .container
   SectionTitle.mb-5
     nuxt-link.title(to='/news' title='查看更多最新消息')
-      fa.mr-3(icon='newspaper')
+      FontAwesomeIcon.mr-3(:icon='faNewspaper')
       | 最新消息
       span.icon.ml-3 ➔
 
@@ -13,19 +13,30 @@ section: .container
     .col-12.text-right
       nuxt-link(to='/news')
         | 查看更多
-        fa.ml-3(icon='chevron-right')
+        FontAwesomeIcon.ml-3(:icon='faChevronRight')
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faChevronRight, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import NewsList from '~/types/NewsList'
 
 export default defineComponent({
+  components: {
+    FontAwesomeIcon,
+  },
   props: {
     list: {
       type: Array as PropType<NewsList>,
       default: null,
     },
+  },
+  setup () {
+    return {
+      faNewspaper,
+      faChevronRight,
+    }
   },
 })
 </script>

@@ -3,7 +3,7 @@ section: .container
   .row
     .col-12
       SectionTitle.mb-5
-        fa.mr-3(icon='handshake')
+        FontAwesomeIcon.mr-3(:icon='faHandshake')
         | 合作夥伴
     .col-12
       .row
@@ -13,14 +13,24 @@ section: .container
 
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faHandshake } from '@fortawesome/free-solid-svg-icons'
 import Partner from '~/types/Partner'
 
 export default defineComponent({
+  components: {
+    FontAwesomeIcon,
+  },
   props: {
     partners: {
       type: Array as PropType<Partner[]>,
       default: null,
     },
+  },
+  setup () {
+    return {
+      faHandshake,
+    }
   },
 })
 </script>

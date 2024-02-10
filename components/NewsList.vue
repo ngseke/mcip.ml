@@ -5,16 +5,21 @@ ul.article-list
       .title {{ i.title }}
       small {{ formatDate(i.timestamp, 'YYYY年MM月DD日') }}
   li(ref='loadMoreElement' v-if='!isEnd')
-    fa.icon(icon='circle-notch' spin v-if='isLoading')
+    FontAwesomeIcon.icon(:icon='faCircleNotch' spin v-if='isLoading')
     a(href='#' @click.prevent='loadMore' v-else) 載入更多
 </template>
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted, PropType, ref } from '@nuxtjs/composition-api'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { formatDate } from '~/modules/date'
 import NewsList from '~/types/NewsList'
 
 export default defineComponent({
+  components: {
+    FontAwesomeIcon,
+  },
   props: {
     list: {
       default: null,
@@ -40,11 +45,11 @@ export default defineComponent({
       observer.observe(loadMoreElement.value)
       onBeforeUnmount(() => observer.disconnect())
     })
-
     return {
       loadMoreElement,
       loadMore,
       formatDate,
+      faCircleNotch,
     }
   },
 })

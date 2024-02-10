@@ -3,7 +3,7 @@ section: .container
   .row.justify-content-center.align-items-stretch
     .col-12.col-lg-9
       h3
-        fa.mr-3(icon='paper-plane')
+        FontAwesomeIcon.mr-3(:icon='faPaperPlane')
         | 聯絡我們
     .col-12.col-lg-6.offset-lg-1
       transition(name='contact' mode='out-in')
@@ -23,7 +23,7 @@ section: .container
 
           small.text-danger(v-if='errorMessage') {{ errorMessage }}
         .success(v-else)
-          fa.icon(icon='clipboard-check')
+          FontAwesomeIcon.icon(:icon='faClipboardCheck')
           span 謝謝您的來信，我們將會盡快與您聯繫!
     .col-12.col-lg-auto
       .peep
@@ -31,7 +31,8 @@ section: .container
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, reactive, ref, watch } from '@nuxtjs/composition-api'
-
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faClipboardCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { create } from '~/modules/captcha'
 import { submitContactUsForm } from '~/modules/contact-us'
 
@@ -45,6 +46,9 @@ enum Status {
 }
 
 export default defineComponent({
+  components: {
+    FontAwesomeIcon,
+  },
   setup () {
     const contact = reactive({ name: '', email: '', phone: '', content: '' })
     const isCaptchaShow = ref(false)
@@ -102,6 +106,8 @@ export default defineComponent({
       captcha,
       createCaptcha,
       submit,
+      faPaperPlane,
+      faClipboardCheck,
     }
   },
 })
