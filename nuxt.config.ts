@@ -58,7 +58,6 @@ const config: NuxtConfig = {
   */
   plugins: [
     { src: '~/plugins/vue-scroll-reveal', ssr: false },
-    '~/plugins/font-awesome',
     { src: '~plugins/ga.js', mode: 'client' },
   ],
   /*
@@ -77,20 +76,7 @@ const config: NuxtConfig = {
     '@nuxtjs/style-resources',
     '@nuxtjs/sitemap',
     'vue-scrollto/nuxt',
-    'nuxt-fontawesome',
   ],
-  fontawesome: {
-    imports: [
-      {
-        set: '@fortawesome/free-solid-svg-icons',
-        icons: ['fas'],
-      },
-      {
-        set: '@fortawesome/free-brands-svg-icons',
-        icons: ['fab'],
-      },
-    ],
-  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
