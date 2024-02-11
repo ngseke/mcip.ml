@@ -1,58 +1,37 @@
 <template lang="pug">
 ul.article-list
-  li(v-for='i in list')
-    nuxt-link(:to='`/news/${i.id}`')
+  li(v-for='i in list' :key="i.id")
+    NuxtLink(:to='`/news/${i.id}`')
       .title {{ i.title }}
       small {{ formatDate(i.timestamp, 'YYYY年MM月DD日') }}
-  li(ref='loadMoreElement' v-if='!isEnd')
-    FontAwesomeIcon.icon(:icon='faCircleNotch' spin v-if='isLoading')
-    a(href='#' @click.prevent='loadMore' v-else) 載入更多
+  li(v-if='!isEnd')
+    FontAwesomeIcon.icon(v-if='isLoading' :icon='faCircleNotch' spin)
+    a(v-else href='#' @click.prevent='loadMore') 載入更多
 </template>
 
-<script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted, PropType, ref } from '@nuxtjs/composition-api'
+<script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
-import { formatDate } from '~/modules/date'
-import NewsList from '~/types/NewsList'
+import { formatDate } from '~/utils/date'
+import { type NewsList } from '~/types/NewsList'
 
-export default defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-  props: {
-    list: {
-      default: null,
-      type: Array as PropType<NewsList | null>,
-    },
-    isEnd: {
-      default: false,
-      type: Boolean,
-    },
-    isLoading: {
-      default: false,
-      type: Boolean,
-    },
-  },
-  setup (props, { emit }) {
-    const loadMore = () => {
-      if (!props.isLoading) emit('loadMore')
-    }
-
-    const loadMoreElement = ref()
-    onMounted(() => {
-      const observer = new IntersectionObserver(loadMore, { threshold: 1 })
-      observer.observe(loadMoreElement.value)
-      onBeforeUnmount(() => observer.disconnect())
-    })
-    return {
-      loadMoreElement,
-      loadMore,
-      formatDate,
-      faCircleNotch,
-    }
-  },
+const props = withDefaults(defineProps<{
+  list: NewsList | null
+  isEnd: boolean
+  isLoading: boolean
+}>(), {
+  list: null,
+  isEnd: false,
+  isLoading: false,
 })
+
+const emit = defineEmits<{
+  loadMore: []
+}>()
+
+const loadMore = () => {
+  if (!props.isLoading) emit('loadMore')
+}
 </script>
 
 <style lang="sass" scoped>

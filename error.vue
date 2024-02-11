@@ -8,32 +8,21 @@
         GradientButton(className='secondary' to='/')
           FontAwesomeIcon.mr-3(:icon='faArrowLeft')
           | 返回首頁
+  TheFooter
 </template>
 
-<script>
+<script setup lang="ts">
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import type { NuxtError } from '#app'
 
-export default {
-  components: {
-    FontAwesomeIcon,
-  },
-  layout: 'default',
-  props: {
-    error: {
-      type: Object,
-      default: null,
-    },
-  },
-  setup () {
-    return {
-      faArrowLeft,
-    }
-  },
-  head: {
-    title: '頁面不存在',
-  },
-}
+defineProps<{
+  error: NuxtError
+}>()
+
+useHead({
+  title: '頁面不存在',
+})
 </script>
 
 <style scoped lang="sass">

@@ -1,87 +1,65 @@
 <template lang="pug">
 .form__group
   input.form__field(
+    v-if='!multiline'
     v-bind='inputBind'
     v-on='handlers'
-    v-if='!multiline'
   )
   textarea.form__field(
+    v-else
     v-bind='textareaBind'
     v-on='handlers'
-    v-else
   )
   label.form__label {{ label }}
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
-
-export default defineComponent({
-  name: 'TextField',
-  props: {
-    value: {
-      type: String,
-      default: null,
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    type: {
-      type: String,
-      default: 'text',
-    },
-    required: {
-      type: Boolean,
-      default: false,
-    },
-    max: {
-      type: Number,
-      default: null,
-    },
-    rows: {
-      type: Number,
-      default: null,
-    },
-    multiline: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  setup (props, { emit }) {
-    const handleInput = (e: Event) => {
-      emit('input', (e.target as HTMLInputElement)?.value)
-    }
-
-    const handlers = {
-      input: handleInput,
-    }
-
-    const baseBind = computed(() => ({
-      placeholder: props.label,
-      required: props.required,
-      maxlength: props.max,
-      value: props.value,
-    }))
-
-    const inputBind = computed(() => ({
-      ...baseBind.value,
-      type: props.type,
-    }))
-
-    const textareaBind = computed(() => ({
-      ...baseBind.value,
-      rows: props.rows,
-    }))
-
-    return {
-      inputBind,
-      textareaBind,
-      handleInput,
-      handlers,
-    }
-  },
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+  modelValue: string
+  label: string
+  type?: HTMLInputElement['type']
+  required?: boolean
+  max?: number
+  rows?: number
+  multiline?: boolean
+}>(), {
+  modelValue: '',
+  label: '',
+  type: 'text',
+  required: false,
+  max: undefined,
+  rows: undefined,
+  multiline: false,
 })
+
+const emit = defineEmits<{
+  'update:modelValue': [value: string]
+}>()
+
+const handleInput = (e: Event) => {
+  emit('update:modelValue', (e.target as HTMLInputElement)?.value)
+}
+
+const handlers = {
+  input: handleInput,
+}
+
+const baseBind = computed(() => ({
+  placeholder: props.label,
+  required: props.required,
+  maxlength: props.max,
+  value: props.modelValue,
+}))
+
+const inputBind = computed(() => ({
+  ...baseBind.value,
+  type: props.type,
+}))
+
+const textareaBind = computed(() => ({
+  ...baseBind.value,
+  rows: props.rows,
+}))
 </script>
 
 <style scoped lang="sass">

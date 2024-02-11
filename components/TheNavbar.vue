@@ -1,105 +1,80 @@
 <template lang="pug">
 div
-  nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }' vCloak)
+  nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }')
     .container
-      nuxt-link.navbar-brand(to='/')
-        template(v-if='!hideLogo')
-          img(src='~/assets/img/logo/logo_panel-white.svg' alt='樂台計畫' v-if='isDark')
-        img(src='~/assets/img/logo/logo_panel-black.svg' alt='樂台計畫' v-if='!isDark')
+      NuxtLink.navbar-brand(to='/')
+        img(v-if='isDark' src='assets/img/logo/logo_panel-white.svg' alt='樂台計畫')
+        img(v-if='!isDark' src='assets/img/logo/logo_panel-black.svg' alt='樂台計畫')
       button.navbar-toggler(type='button' @click.stop='isShow = !isShow')
         FontAwesomeIcon(:icon='faBars')
-      .navbar-content(ref='navbarContent')
+      .navbar-content
         ul.navbar-nav
-          li.nav-item(v-for='_ in items')
-            nuxt-link.nav-link(:to='_.to' :class='{ active: _.active }') {{ _.name }}
+          li.nav-item(v-for='(item, key) in items' :key='key')
+            NuxtLink.nav-link(:to='item.to' :class='{ active: item.active }') {{ item.name }}
           li.d-flex.align-items-center(v-if="items.length"): .divider
           li.nav-item
             a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
               FontAwesomeIcon.facebook-icon(:icon='faFacebook')
   .mobile-navbar(:class='{ hide: !isShow }')
-    a.close(@click.prevent='hide' href='#') ╳
+    a.close(href='#' @click.prevent='hide') ╳
     ul
-      li(v-for='_ in mobileItems')
-        nuxt-link.link(:to='_.to' :class='{ active: _.active }') {{ _.name }}
+      li(v-for='item in mobileItems' :key='item.name')
+        NuxtLink.link(:to='item.to' :class='{ active: item.active }') {{ item.name }}
     .divider
     ul
-      li: nuxt-link.link(to='/line') LINE App
+      li: NuxtLink.link(to='/line') LINE App
       li: a.link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
         FontAwesomeIcon.facebook-icon(:icon='faFacebook')
-  transition(name='fade')
+  Transition(name='fade')
     .overlay(v-if='isShow' @click='hide')
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, useRoute, watch, PropType } from '@nuxtjs/composition-api'
+<script setup lang="ts">
 import { throttle } from 'throttle-debounce'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-type Item = { name: string, to: string, active?: boolean }
+interface Item { name: string, to: string, active?: boolean }
 
-export default defineComponent({
-  name: 'Navbar',
-  components: {
-    FontAwesomeIcon,
+const props = withDefaults(defineProps<{
+  items?: Item[]
+}>(), {
+  items: () => [
+    { name: 'News', to: '/news' },
+    { name: 'FAQ', to: '/faq' },
+  ],
+})
+
+const top = ref(0)
+const isShow = ref(false)
+const isShrink = ref(false)
+
+const isDark = computed(() => !isShrink.value)
+
+const route = useRoute()
+const mobileItems = computed(() => [
+  {
+    name: 'Home',
+    to: '/',
+    active: route.name === 'index',
   },
-  props: {
-    items: {
-      type: Array as PropType<Item[]>,
-      default: () => [
-        { name: 'News', to: '/news' },
-        { name: 'FAQ', to: '/faq' },
-      ],
-    },
-    hideLogo: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  setup (props) {
-    const top = ref(0)
-    const isShow = ref(false)
-    const isShrink = ref(false)
+  ...props.items,
+])
 
-    const isDark = computed(() => !isShrink.value)
+const hide = () => { isShow.value = false }
 
-    const route = useRoute()
-    const mobileItems = computed(() => [
-      {
-        name: 'Home',
-        to: '/',
-        active: route.value.name === 'index',
-      },
-      ...props.items,
-    ])
+onMounted(() => {
+  watch(() => route.path, hide)
 
-    const hide = () => { isShow.value = false }
+  const throttled = throttle(300, () => {
+    const ref = document.scrollingElement?.scrollTop
+    top.value = ref ?? document.documentElement.scrollTop
+    isShrink.value = top.value > 250
+  })
 
-    watch(() => route.value.path, hide)
-
-    onMounted(() => {
-      const throttled = throttle(300, () => {
-        const ref = document.scrollingElement?.scrollTop
-        top.value = ref != null ? ref : document.documentElement.scrollTop
-        isShrink.value = top.value > 250
-      })
-
-      window.addEventListener('scroll', throttled)
-      onBeforeUnmount(() => window.removeEventListener('scroll', throttled))
-    })
-
-    return {
-      top,
-      isShow,
-      isShrink,
-      isDark,
-      mobileItems,
-      hide,
-      faBars,
-      faFacebook,
-    }
-  },
+  window.addEventListener('scroll', throttled)
+  onBeforeUnmount(() => { window.removeEventListener('scroll', throttled) })
 })
 </script>
 
@@ -257,9 +232,9 @@ $height: 4rem
   background: rgba($black, .5)
 
 .fade
-  &-enter, &-leave-to
+  &-enter-from, &-leave-to
     opacity: 0
-  &-leave, &-enter-to
+  &-leave-from, &-enter-to
     opacity: 1
   &-enter-active, &-leave-active
     transition: all .3s

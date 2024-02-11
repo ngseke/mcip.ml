@@ -1,5 +1,3 @@
-import News from './News'
+import type News from './News'
 
-type NewsList = News[]
-
-export default NewsList
+export type NewsList = News[]

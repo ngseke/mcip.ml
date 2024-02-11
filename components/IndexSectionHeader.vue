@@ -19,7 +19,7 @@ header
   +flex-center
   overflow: hidden auto
   position: relative
-  background: url('~assets/img/background/index.jpg') center center / cover
+  background: url('~/assets/img/background/index.jpg') center center / cover
   background-color: $secondary3
   color: white
   padding-top: 7rem
@@ -58,7 +58,7 @@ header
 
 .peep
   +wh(35rem)
-  background: center / contain no-repeat url('~assets/img/peep/dancing.svg')
+  background: center / contain no-repeat url('~/assets/img/peep/dancing.svg')
   @include media-breakpoint-down(lg)
     +wh(28rem)
   @include media-breakpoint-down(md)

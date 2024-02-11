@@ -1,31 +1,26 @@
 <template lang="pug">
 .switcher
   span.label 我是
-  template(v-for='(item, index) in list')
+  template(v-for='(item, index) in list' :key='item.value')
     a(
       href='#'
-      :class='{ active: value === item.value }'
-      @click.prevent='$emit("input", item.value)'
+      :class='{ active: modelValue === item.value }'
+      @click.prevent='$emit("update:modelValue", item.value)'
     ) {{ item.name }}
     .divider(v-if='index !== list.length - 1')
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import Role from '~/types/Role'
+<script setup lang="ts">
+import type Role from '~/types/Role'
 
-export default defineComponent({
-  props: {
-    value: {
-      default: null,
-      type: Number,
-    },
-    list: {
-      default: () => [],
-      type: Array as PropType<Role[]>,
-    },
-  },
-})
+defineProps<{
+  modelValue: number
+  list: Role[]
+}>()
+
+defineEmits<{
+  'update:modelValue': [value: number]
+}>()
 </script>
 
 <style scoped lang="sass">

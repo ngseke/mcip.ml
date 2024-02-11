@@ -3,8 +3,8 @@ import join from 'url-join'
 
 import { STATIC_DATA_URL } from './config'
 
-import Partners from '~/types/Partners'
-import Faqs from '~/types/Faqs'
+import { type Partners } from '~/types/Partners'
+import { type Faqs } from '~/types/Faqs'
 
 const getUrl = (path: string) => join(STATIC_DATA_URL, path)
 

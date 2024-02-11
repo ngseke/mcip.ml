@@ -1,5 +1,3 @@
-import Faq from './Faq'
+import type Faq from './Faq'
 
-type Faqs = Faq[]
-
-export default Faqs
+export type Faqs = Faq[]

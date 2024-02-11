@@ -24,7 +24,7 @@ section.introduction: .container
     .col-12.col-md-7.col-lg-6.order-1.order-md-2
       RoleSwitcher(v-model='type' :list='computedTypes')
 
-      transition(:name='transitionName')
+      Transition(:name='transitionName')
         section(v-if='isLineApp' key=1)
           SectionTitle 透過樂台計畫#[br]3 分鐘即完成報名
           p
@@ -40,7 +40,7 @@ section.introduction: .container
         section(v-else-if='isBackstage' key=2)
           SectionTitle 為音樂賽事量身打造的#[br]解決方案
           ul.pl-4
-            li(v-for='feature in backstageFeatures') {{ feature }}
+            li(v-for='feature in backstageFeatures' :key='feature') {{ feature }}
           .pl-1.mb-3
             a(href='https://manage.mcip.app/' target='_blank')
               | 前往社團管理後台
@@ -51,11 +51,10 @@ section.introduction: .container
           p 水豚是水豚屬下僅存的兩種生物之一。牠是一種半水棲的食草動物，也是世界上體型最大的齧齒類動物。原產於南美洲除了智利以外的所有稀樹草原和叢林中。
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref, useRoute, watch } from '@nuxtjs/composition-api'
+<script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
-import Role from '~/types/Role'
+import type Role from '~/types/Role'
 
 const backstageFeatures = [
   '眾多賽事齊聚一堂，大幅增加活動曝光',
@@ -68,43 +67,27 @@ const types: Role[] = [
   { name: '學校社團', value: 2 },
 ]
 
-export default defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-  setup () {
-    const type = ref(types[0].value)
+const type = ref(types[0].value)
 
-    const isLineApp = computed(() => type.value === 1)
-    const isBackstage = computed(() => type.value === 2)
-    const isCapybara = computed(() => type.value === 3)
+const isLineApp = computed(() => type.value === 1)
+const isBackstage = computed(() => type.value === 2)
+const isCapybara = computed(() => type.value === 3)
 
-    const route = useRoute()
-    const computedTypes = computed(() => {
-      const shouldShowEasterEgg = Object.keys(route.value.query)
-        .map(i => i.toLowerCase().trim())
-        .includes('capybara')
+const route = useRoute()
+const computedTypes = computed(() => {
+  const shouldShowEasterEgg = Object.keys(route.query)
+    .map(i => i.toLowerCase().trim())
+    .includes('capybara')
 
-      return shouldShowEasterEgg
-        ? [...types, { name: '水豚', value: 3 }]
-        : types
-    })
+  return shouldShowEasterEgg
+    ? [...types, { name: '水豚', value: 3 }]
+    : types
+})
 
-    const transitionName = ref('slide')
-    watch(type, (newType, oldType) => {
-      transitionName.value = newType > oldType ? 'slide' : 'slide-reverse'
-    })
-    return {
-      backstageFeatures,
-      computedTypes,
-      type,
-      isLineApp,
-      isBackstage,
-      isCapybara,
-      transitionName,
-      faExternalLinkAlt,
-    }
-  },
+const transitionName = ref('slide')
+
+watch(type, (newType, oldType) => {
+  transitionName.value = newType > oldType ? 'slide' : 'slide-reverse'
 })
 </script>
 
@@ -123,7 +106,7 @@ export default defineComponent({
   position: absolute
   left: -9rem
   bottom: -4.5rem
-  background: center / contain no-repeat url('~assets/img/peep/man-with-phone.svg')
+  background: center / contain no-repeat url('~/assets/img/peep/man-with-phone.svg')
   +wh(16rem, 100%)
   @include media-breakpoint-down(md)
     display: none
@@ -136,7 +119,7 @@ export default defineComponent({
   position: absolute
   left: -11rem
   bottom: -9rem
-  background: center / contain no-repeat url('~assets/img/peep/man-using-notebook.svg')
+  background: center / contain no-repeat url('~/assets/img/peep/man-using-notebook.svg')
   +wh(21rem, 30rem)
   @include media-breakpoint-down(lg)
     left: -13rem
@@ -185,17 +168,17 @@ $distance: 3rem
   &-leave-active
     transition: $transition
     position: absolute
-  &-enter, &-leave-to
+  &-enter-from, &-leave-to
     opacity: 0
 
 .slide
-  &-enter
+  &-enter-from
     transform: translateX($distance)
   &-leave-to
     transform: translateX(-$distance)
 
 .slide-reverse
-  &-enter
+  &-enter-from
     transform: translateX(-$distance)
   &-leave-to
     transform: translateX($distance)

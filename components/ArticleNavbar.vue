@@ -1,24 +1,22 @@
 <template lang="pug">
 nav.article-navbar
   ul
-    li(v-for='(i, iIndex) in value')
+    li(v-for='(i, iIndex) in value' :key='iIndex')
       a(
-        href='#'
         v-scroll-to='{ el: i.id, offset: -90 }'
+        href='#'
         :class='{ active: getIsActive(iIndex, value) }'
       ) {{ i.title }}
       ul
-        li(v-for='(j, jIndex) in i.children')
+        li(v-for='(j, jIndex) in i.children' :key='jIndex')
           a(
-            href='#'
             v-scroll-to='{ el: j.id, offset: -90 }'
+            href='#'
             :class='{ active: getIsActive(jIndex, i.children) && getIsActive(iIndex, value) }'
           ) {{ j.title }}
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
-
 export default defineComponent({
   name: 'ArticleNavbar',
   props: {

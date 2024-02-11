@@ -11,38 +11,28 @@ button.button(
   :type='type'
   :disabled='disabled'
   :class='className'
-  @click='$emit("click", $event)'
 )
   slot
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-
-export default defineComponent({
-  props: {
-    to: {
-      default: null,
-      type: String,
-    },
-    target: {
-      default: null,
-      type: String,
-    },
-    type: {
-      default: 'button',
-      type: String as PropType<'button' | 'submit'>,
-    },
-    disabled: {
-      default: false,
-      type: Boolean,
-    },
-    className: {
-      default: null,
-      type: String,
-    },
-  },
+<script setup lang="ts">
+withDefaults(defineProps<{
+  to?: string | null
+  target?: string | null
+  type?: 'button' | 'submit'
+  disabled?: boolean
+  className?: string | null
+}>(), {
+  to: null,
+  target: null,
+  type: 'button',
+  disabled: false,
+  className: null,
 })
+
+defineEmits<{
+  click: []
+}>()
 </script>
 
 <style scoped lang="sass">

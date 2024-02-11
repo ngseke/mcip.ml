@@ -11,84 +11,66 @@ div
     .container
       .row.justify-content-center.align-items-start
         .col-12.col-lg-9.col-xl-8
-          section(v-for='group in faqs' ref='sections')
+          section(v-for='(group, groupIndex) in faqs' ref='sections' :key='groupIndex')
             h2(:id='getIdString(group.title)')
               | {{ group.title }}
-            .item(v-for='content in group.content' itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
+            .item(v-for='(content, contentIndex) in group.content' :key="contentIndex" itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
               h3(:id='getIdString(content.question)' itemprop='name') {{ content.question }}
               div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
-                div(v-html='convertMarkdown(content.answer)' itemprop='text')
+                div(itemprop='text' v-html='marked(content.answer)')
         .col.col-xl-3.d-none.d-lg-flex.sticky-top
           ArticleNavbar.scroll-spy-navbar(:value='list')
 </template>
 
-<script>
+<script setup lang="ts">
 import { marked } from 'marked'
 import { throttle } from 'throttle-debounce'
-import { fetchFaqs } from '~/modules/static-data'
+import { fetchFaqs } from '~/utils/static-data'
 
-export default {
-  async asyncData ({ error }) {
-    try {
-      const faqs = await fetchFaqs()
+const navbar = [
+  { name: 'News', to: '/news' },
+  { name: 'FAQ', to: '/faq', active: true },
+]
 
-      return { faqs }
-    } catch (e) {
-      error({ statusCode: e.response.status })
-    }
-  },
-  data () {
-    this.navbar = [
-      { name: 'News', to: '/news' },
-      { name: 'FAQ', to: '/faq', active: true },
-    ]
-    return {
-      list: null,
-    }
-  },
-  head () {
-    return {
-      title: '常見問題',
-      meta: [
-        { hid: 'og:title', property: 'og:title', content: '常見問題 - 樂台計畫' },
-      ],
-    }
-  },
-  mounted () {
-    this.setScrollEvent()
-  },
-  methods: {
-    convertMarkdown (_) {
-      return marked(_)
-    },
-    setScrollEvent () {
-      const { sections } = this.$refs
+const { data: faqs } = await useAsyncData(fetchFaqs)
 
-      const throttled = throttle(100, () => {
-        this.list = sections.map((section) => {
-          const el = section.querySelector('h2')
-          const children = Array.from(section.querySelectorAll('h3')).map(this.getSidebarItem)
+useHead({
+  title: '常見問題',
+  meta: [
+    { hid: 'og:title', property: 'og:title', content: '常見問題 - 樂台計畫' },
+  ],
+})
 
-          return { ...this.getSidebarItem(el), children }
-        })
-      })
+const list = ref<any[] | null>(null)
+const sections = ref<HTMLElement[]>([])
 
-      throttled()
+onMounted(() => {
+  const throttled = throttle(100, () => {
+    list.value = sections.value.map((section) => {
+      const el = section.querySelector('h2')
+      const children = Array.from(section.querySelectorAll('h3')).map(getSidebarItem)
 
-      window.addEventListener('scroll', throttled)
-      this.$once('hook:beforeDestroy', () => window.removeEventListener('scroll', throttled))
-    },
-    getSidebarItem (el) {
-      return {
-        id: `#${el.getAttribute('id')}`,
-        title: el.innerText,
-        top: el.getBoundingClientRect().top - 95,
-      }
-    },
-    getIdString (_) {
-      return _.replace(/ +/g, '-').replace(/\/+/g, '-')
-    },
-  },
+      return { ...getSidebarItem(el), children }
+    })
+  })
+
+  throttled()
+
+  window.addEventListener('scroll', throttled)
+  onBeforeUnmount(() => { window.removeEventListener('scroll', throttled) })
+})
+
+function getSidebarItem (el: HTMLElement | null) {
+  if (!el) return { id: '', title: '', top: 0 }
+  return {
+    id: `#${el.getAttribute('id')}`,
+    title: el.innerText,
+    top: el.getBoundingClientRect().top - 95,
+  }
+}
+
+function getIdString (_: string) {
+  return _.replace(/ +/g, '-').replace(/\/+/g, '-')
 }
 </script>
 
@@ -112,7 +94,7 @@ main.faq
       font-size: 1.5rem
       margin-bottom: .75rem
       font-weight: 700
-    ::v-deep li
+    :deep(li)
       margin-bottom: .5rem
 
 .sticky-top

@@ -6,16 +6,16 @@ section: .container
         FontAwesomeIcon.mr-3(:icon='faPaperPlane')
         | 聯絡我們
     .col-12.col-lg-6.offset-lg-1
-      transition(name='contact' mode='out-in')
-        form(@submit.prevent='submit' v-if='status !== Status.success')
-          TextField(label='你的大名' required :max='50' v-model.trim='contact.name')
-          TextField(type='email' label='Email' required :max='100' v-model.trim='contact.email')
-          TextField(type='tel' label='聯絡電話 (可留空)' :max='15' v-model.trim='contact.phone')
-          TextField(label='內容' multiline required :rows='5' :max='3000' v-model.trim='contact.content')
-          transition(name='contact')
+      Transition(name='contact' mode='out-in')
+        form(v-if='status !== Status.success' @submit.prevent='submit')
+          TextField(v-model.trim='contact.name' label='你的大名' required :max='50')
+          TextField(v-model.trim='contact.email' type='email' label='Email' required :max='100')
+          TextField(v-model.trim='contact.phone' type='tel' label='聯絡電話 (可留空)' :max='15')
+          TextField(v-model.trim='contact.content' label='內容' multiline required :rows='5' :max='3000')
+          Transition(name='contact')
             .d-flex.align-items-center(v-if='isCaptchaShow')
               canvas.captcha.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
-              TextField.flex-grow-1.mb-0(label='驗證碼 (請輸入阿拉伯數字)' :max='4' v-model.trim='captchaCode')
+              TextField.flex-grow-1.mb-0(v-model.trim='captchaCode' label='驗證碼 (請輸入阿拉伯數字)' :max='4')
 
           GradientButton(className='submit' :disabled='isSubmitDisabled' type='submit')
             span(v-if='status === Status.submitting') 傳送中...
@@ -30,11 +30,10 @@ section: .container
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, reactive, ref, watch } from '@nuxtjs/composition-api'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faClipboardCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import { create } from '~/modules/captcha'
-import { submitContactUsForm } from '~/modules/contact-us'
+import { create } from '~/utils/captcha'
+import { submitContactUsForm } from '~/utils/contact-us'
 
 const fieldNames = ['name', 'email', 'phone', 'content'] as const
 
@@ -42,7 +41,7 @@ enum Status {
   default,
   submitting,
   success,
-  error,
+  error
 }
 
 export default defineComponent({
@@ -52,7 +51,7 @@ export default defineComponent({
   setup () {
     const contact = reactive({ name: '', email: '', phone: '', content: '' })
     const isCaptchaShow = ref(false)
-    const captchaCode = ref(null)
+    const captchaCode = ref()
     const captchaAnswer = ref<string | null>(null)
     const status = ref(Status.default)
     const errorMessage = ref<string | null>(null)
@@ -64,8 +63,9 @@ export default defineComponent({
       )
     })
 
-    const captcha = ref()
+    const captcha = ref<HTMLCanvasElement | null>(null)
     const createCaptcha = () => {
+      if (!captcha.value) return
       captchaAnswer.value = create(captcha.value)
     }
 
@@ -142,7 +142,7 @@ form
     color: #777
 
 .contact
-  &-enter
+  &-enter-from
     transform: scale(.9)
     opacity: 0
   &-leave-to
@@ -150,13 +150,13 @@ form
     opacity: 0
   &-enter-active, &-leave-active
     transition: all .3s
-  &-enter-to, &-leave
+  &-enter-to, &-leave-from
     transform: none
     opacity: 1
 
 .peep
   +wh(14rem, 26rem)
-  background: center / contain no-repeat url('~assets/img/peep/woman-explaining.svg')
+  background: center / contain no-repeat url('~/assets/img/peep/woman-explaining.svg')
   margin-left: 3rem
   @include media-breakpoint-down(md)
     display: none
