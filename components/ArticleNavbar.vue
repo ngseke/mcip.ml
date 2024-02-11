@@ -1,42 +1,39 @@
 <template lang="pug">
 nav.article-navbar
-  ul
+  ul(v-if='value')
     li(v-for='(i, iIndex) in value' :key='iIndex')
       a(
-        v-scroll-to='{ el: i.id, offset: -90 }'
-        href='#'
+        :href='i.id'
         :class='{ active: getIsActive(iIndex, value) }'
+        @click.prevent="scroll(i.id)"
       ) {{ i.title }}
       ul
         li(v-for='(j, jIndex) in i.children' :key='jIndex')
           a(
-            v-scroll-to='{ el: j.id, offset: -90 }'
-            href='#'
+            :href='j.id'
             :class='{ active: getIsActive(jIndex, i.children) && getIsActive(iIndex, value) }'
+            @click.prevent="scroll(j.id)"
           ) {{ j.title }}
 </template>
 
-<script>
-export default defineComponent({
-  name: 'ArticleNavbar',
-  props: {
-    value: {
-      default: null,
-      type: Array,
-    },
-  },
-  setup () {
-    const getIsActive = (index, list) => {
-      const current = list[index]
-      const next = list[index + 1]
-
-      return current.top < 0 && ((next && next.top > 0) || !next)
-    }
-    return {
-      getIsActive,
-    }
-  },
+<script setup lang="ts">
+withDefaults(defineProps<{
+  value?: any[] | null
+}>(), {
+  value: null,
 })
+
+const getIsActive = (index: number, list: any[]) => {
+  const current = list[index]
+  const next = list[index + 1]
+
+  return current.top < 0 && ((next && next.top > 0) || !next)
+}
+
+const scroll = (id: string) => {
+  document.querySelector(id)
+    ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+}
 </script>
 
 <style scoped lang="sass">
