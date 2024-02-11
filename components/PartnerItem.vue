@@ -11,10 +11,9 @@ a.item(
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import MobileDetect from 'mobile-detect'
 
-import Partner from '~/types/Partner'
+import type Partner from '~/types/Partner'
 
 /** 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟) */
 const getFacebookLink = (id: string) => {

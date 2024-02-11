@@ -1,5 +1,5 @@
 <template lang="pug">
 div
-  nuxt
+  NuxtPage
   TheFooter
 </template>

@@ -6,23 +6,23 @@
         h1 {{ error.statusCode }}
         h2 頁面不存在
         GradientButton(className='secondary' to='/')
-          fa.mr-3(icon='arrow-left')
+          FontAwesomeIcon.mr-3(:icon='faArrowLeft')
           | 返回首頁
+  TheFooter
 </template>
 
-<script>
-export default {
-  layout: 'default',
-  props: {
-    error: {
-      type: Object,
-      default: null,
-    },
-  },
-  head: {
-    title: '頁面不存在',
-  },
-}
+<script setup lang="ts">
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import type { NuxtError } from '#app'
+
+defineProps<{
+  error: NuxtError
+}>()
+
+useHead({
+  title: '頁面不存在',
+})
 </script>
 
 <style scoped lang="sass">

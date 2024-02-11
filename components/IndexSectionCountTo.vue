@@ -1,16 +1,16 @@
 <template lang="pug">
-section(v-scroll-reveal='{ beforeReveal: startCountTo, duration: 0 }')
+section
   .container
     .row.justify-content-around(v-cloak)
-      .col-auto(v-for='item in list')
+      .col-auto(v-for='item in list' :key='item.label')
         .count-to
-          countTo.number(
+          div.number(
+            v-cloak
+            ref='countToElements'
             :start-val='10'
             :end-val='item.value'
             :suffix='item.isApproximate ? "+" : ""'
-            ref='countToElements'
             v-bind='countToOptions'
-            v-cloak
           ) {{ item.value }}{{ item.isApproximate ? "+" : "" }}
           span.suffix(v-if='item.suffix') {{ item.suffix }}
           .label {{ item.label }}
@@ -20,9 +20,6 @@ section(v-scroll-reveal='{ beforeReveal: startCountTo, duration: 0 }')
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
-import countTo from 'vue-count-to'
-
 const countToOptions = { duration: 1500, autoplay: false }
 const date = '截至 2022 年 2 月'
 const list = [
@@ -44,9 +41,6 @@ const list = [
 ]
 
 export default defineComponent({
-  components: {
-    countTo,
-  },
   setup () {
     const countToElements = ref()
     const startCountTo = () => {
@@ -71,7 +65,7 @@ export default defineComponent({
   &::before
     content: ''
     position: absolute
-    background: center / contain no-repeat url('~assets/img/peep/deco1.svg')
+    background: center / contain no-repeat url('~/assets/img/peep/deco1.svg')
     +wh(8rem)
     left: -6rem
     top: -4rem

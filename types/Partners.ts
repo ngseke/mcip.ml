@@ -1,5 +1,3 @@
-import Partner from '~/types/Partner'
+import type Partner from '~/types/Partner'
 
-type Partners = Partner[]
-
-export default Partners
+export type Partners = Partner[]

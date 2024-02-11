@@ -3,33 +3,40 @@ footer.py-5
   .container
     .row.justify-content-between.align-items-end
       .col-12.col-sm-auto.block
-        ul(v-for='(links, lIndex) in list' :key='lIndex')
-          li(v-for='(i, key) in links' :key='key')
-            n-link(v-if='"to" in i' :to='i.to') {{ i.name }}
-            a(v-else :href='i.href' :target='i.target')
-              fa.mr-2(:icon='i.icon' v-if='i.icon')
-              | {{ i.name }}
+        ul(v-for='(links, i) in list' :key='i')
+          li(v-for='(item, j) in links' :key='j')
+            NuxtLink(v-if='"to" in item' :to='item.to')
+              FontAwesomeIcon.mr-2(v-if='item.icon' :icon='item.icon')
+              | {{ item.name }}
+            a(v-else :href='item.href' :target='item.target')
+              FontAwesomeIcon.mr-2(v-if='item.icon' :icon='item.icon')
+              | {{ item.name }}
         ul
-          li: a(target='_blank' href='https://manage.mcip.app/') 社團管理後台 #[fa.mx-1(icon='external-link-alt')]
+          li
+            a(target='_blank' href='https://manage.mcip.app/')
+              | 社團管理後台
+              FontAwesomeIcon.mx-1(:icon='faExternalLinkAlt')
 
       .col-12.col-lg-auto.text-lg-right.mt-4
         .logo(
-          src='~assets/img/logo/logo_symbol-no-gutter-black.svg'
+          src='~/assets/img/logo/logo_symbol-no-gutter-black.svg'
           @click='easterEggCount += 1'
         )
         div
           | Copyright © 2018 - {{ new Date().getFullYear() }}
           |
-          nuxt-link(to='/') 樂台計畫
+          NuxtLink(to='/') 樂台計畫
           | .  All rights reserved
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useRouter, watch } from '@nuxtjs/composition-api'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faFacebook, faLine } from '@fortawesome/free-brands-svg-icons'
+import { type IconDefinition, faEnvelope, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 
 type Item =
-  | { name: string, to: string }
-  | { name: string, href: string, target: string, icon: [string, string] }
+  | { name: string, to: string, icon?: IconDefinition }
+  | { name: string, href: string, target: string, icon: IconDefinition }
 
 const list: Item[][] = [
   [
@@ -42,24 +49,27 @@ const list: Item[][] = [
       name: 'Facebook 粉絲專頁',
       href: 'https://www.facebook.com/mcipApp/',
       target: '_blank',
-      icon: ['fab', 'facebook'],
+      icon: faFacebook,
     },
     {
       name: 'LINE 官方帳號',
       to: '/line',
       target: '_blank',
-      icon: ['fab', 'line'],
+      icon: faLine,
     },
     {
       name: 'mcip.app@gmail.com',
       href: 'mailto:mcip.app@gmail.com',
       target: '_blank',
-      icon: ['fas', 'envelope'],
+      icon: faEnvelope,
     },
   ],
 ]
 
 export default defineComponent({
+  components: {
+    FontAwesomeIcon,
+  },
   setup () {
     const easterEggCount = ref(0)
     const router = useRouter()
@@ -70,10 +80,10 @@ export default defineComponent({
         easterEggCount.value = 0
       }
     })
-
     return {
       list,
       easterEggCount,
+      faExternalLinkAlt,
     }
   },
 })
@@ -116,7 +126,7 @@ footer
 
 .logo
   +wh(3rem, 2rem)
-  background: url('~assets/img/logo/logo_symbol-no-gutter-black.svg') center center / contain no-repeat
+  background: url('~/assets/img/logo/logo_symbol-no-gutter-black.svg') center center / contain no-repeat
   display: inline-block
   opacity: .45
   margin-bottom: .5rem

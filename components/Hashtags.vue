@@ -1,11 +1,9 @@
 <template lang="pug">
 .d-inline-block
-  span.hashtag(v-for="item in list") {{ item }}
+  span.hashtag(v-for="item in list" :key='item') {{ item }}
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-
 export default defineComponent({
   setup () {
     const list = ['報名繳費', '即時賽況', '賽事資訊']

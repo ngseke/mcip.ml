@@ -10,8 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { formatDate } from '~/modules/date'
+import { formatDate } from '~/utils/date'
 
 export default defineComponent({
   props: {

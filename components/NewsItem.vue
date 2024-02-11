@@ -1,5 +1,5 @@
 <template lang="pug">
-nuxt-link.news-card(:to='link')
+NuxtLink.news-card(:to='link')
   .row.no-gutters.align-items-center
     .col-auto
       img.img(:src='image')
@@ -13,18 +13,17 @@ nuxt-link.news-card(:to='link')
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
-
 import { marked } from 'marked'
 import { htmlToText } from 'html-to-text'
 
-import { formatDate } from '~/modules/date'
-import News from '~/types/News'
+import { formatDate } from '~/utils/date'
+import type News from '~/types/News'
 
 /** 將 markdown 格式文字轉為純文字 */
 const toPlainText = (markdown: string) => {
   const firstParagraph = markdown.substring(markdown.indexOf('\n') + 1)
-  return htmlToText(marked(firstParagraph))
+  const html = marked(firstParagraph)
+  return typeof html === 'string' ? htmlToText(html) : ''
 }
 
 export default defineComponent({
@@ -38,7 +37,7 @@ export default defineComponent({
     const title = computed(() => props.value.title)
     const image = computed(() => props.value.image)
     const link = computed(() => `/news/${props.value.id}`)
-    const article = computed(() => toPlainText(props.value.article!))
+    const article = computed(() => toPlainText(props.value.article ?? ''))
     const author = computed(() => props.value.author)
     const time = computed(() => formatDate(props.value.timestamp))
 

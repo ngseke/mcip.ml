@@ -1,9 +1,9 @@
 <template lang="pug">
 .fill-divider
   .row.no-gutters
-    template(v-for='i in 5')
-      .col-auto(v-for='i in ["a", "c", "b", "d"]')
-        div(:class='i'): .img
+    template(v-for='i in 5' :key='i')
+      .col-auto(v-for='j in ["a", "c", "b", "d"]' :key='j')
+        div(:class='j'): .img
 </template>
 
 <style lang="sass" scoped>
@@ -64,11 +64,11 @@ $duration: 30s
         +wh($width-small * .7)
 
 .a .img
-  background-image: url('~assets/img/logo/logo_symbol-black.svg')
+  background-image: url('~/assets/img/logo/logo_symbol-black.svg')
 .b .img
-  background-image: url('~assets/img/logo/logo_symbol-blue.svg')
+  background-image: url('~/assets/img/logo/logo_symbol-blue.svg')
 .c .img
-  background-image: url('~assets/img/logo/logo_symbol-white.svg')
+  background-image: url('~/assets/img/logo/logo_symbol-white.svg')
 .d .img
-  background-image: url('~assets/img/logo/logo_symbol-white.svg')
+  background-image: url('~/assets/img/logo/logo_symbol-white.svg')
 </style>

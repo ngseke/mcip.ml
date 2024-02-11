@@ -1,15 +1,14 @@
 <template lang="pug">
 ol(itemscope itemtype='http://schema.org/BreadcrumbList')
-  li(v-for='(i, index) in items' v-if='items' itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem')
-    nuxt-link(:to='i.url' itemprop='item' v-if='i.url')
-      span(itemprop='name') {{ i.name }}
-    span(v-else itemprop='name') {{ i.name }}
-    meta(itemprop='position' :content='index + 1')
+  template(v-if='items')
+    li(v-for='(i, index) in items' :key='index' itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem')
+      NuxtLink(v-if='i.url' :to='i.url' itemprop='item')
+        span(itemprop='name') {{ i.name }}
+      span(v-else itemprop='name') {{ i.name }}
+      meta(itemprop='position' :content='index + 1')
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
-
 export default defineComponent({
   name: 'Breadcrumb',
   props: {
