@@ -19,12 +19,13 @@ div
               div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
                 div(itemprop='text' v-html='marked(content.answer)')
         .col.col-xl-3.d-none.d-lg-flex.sticky-top
-          ArticleNavbar.scroll-spy-navbar(:value='list')
+          ArticleSidebar.scroll-spy-navbar(:value='list')
 </template>
 
 <script setup lang="ts">
 import { marked } from 'marked'
 import { throttle } from 'throttle-debounce'
+import type { ArticleSidebarItem } from '~/types/ArticleSidebarItem'
 import { fetchFaqs } from '~/utils/static-data'
 
 const navbar = [
@@ -41,16 +42,17 @@ useHead({
   ],
 })
 
-const list = ref<any[] | null>(null)
+const list = ref<ArticleSidebarItem[] | null>(null)
 const sections = ref<HTMLElement[]>([])
 
 onMounted(() => {
   const throttled = throttle(100, () => {
     list.value = sections.value.map((section) => {
       const el = section.querySelector('h2')
-      const children = Array.from(section.querySelectorAll('h3')).map(getSidebarItem)
+      const children = [...section.querySelectorAll('h3')]
+        .map(el => getSidebarItem(el))
 
-      return { ...getSidebarItem(el), children }
+      return getSidebarItem(el, children)
     })
   })
 
@@ -60,13 +62,14 @@ onMounted(() => {
   onBeforeUnmount(() => { window.removeEventListener('scroll', throttled) })
 })
 
-function getSidebarItem (el: HTMLElement | null) {
+function getSidebarItem (el: HTMLElement | null, children?: ArticleSidebarItem[]) {
   if (!el) return { id: '', title: '', top: 0 }
   return {
     id: `#${el.getAttribute('id')}`,
     title: el.innerText,
     top: el.getBoundingClientRect().top - 95,
-  }
+    children,
+  } satisfies ArticleSidebarItem
 }
 
 function getIdString (_: string) {
