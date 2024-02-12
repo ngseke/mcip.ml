@@ -1,7 +1,7 @@
 <template lang="pug">
 section
   .container
-    .row.justify-content-around(v-cloak)
+    .row.justify-content-around
       .col-auto(v-for='item in list' :key='item.label')
         .count-to
           div.number {{ item.value }}{{ item.isApproximate ? "+" : "" }}
