@@ -3,15 +3,8 @@
   span.hashtag(v-for="item in list" :key='item') {{ item }}
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  setup () {
-    const list = ['報名繳費', '即時賽況', '賽事資訊']
-    return {
-      list,
-    }
-  },
-})
+<script setup lang="ts">
+const list = ['報名繳費', '即時賽況', '賽事資訊']
 </script>
 
 <style scoped lang="sass">

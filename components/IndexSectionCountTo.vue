@@ -4,14 +4,7 @@ section
     .row.justify-content-around(v-cloak)
       .col-auto(v-for='item in list' :key='item.label')
         .count-to
-          div.number(
-            v-cloak
-            ref='countToElements'
-            :start-val='10'
-            :end-val='item.value'
-            :suffix='item.isApproximate ? "+" : ""'
-            v-bind='countToOptions'
-          ) {{ item.value }}{{ item.isApproximate ? "+" : "" }}
+          div.number {{ item.value }}{{ item.isApproximate ? "+" : "" }}
           span.suffix(v-if='item.suffix') {{ item.suffix }}
           .label {{ item.label }}
 
@@ -19,8 +12,7 @@ section
         small.date {{ date }}
 </template>
 
-<script>
-const countToOptions = { duration: 1500, autoplay: false }
+<script setup lang="ts">
 const date = '截至 2022 年 2 月'
 const list = [
   {
@@ -39,23 +31,6 @@ const list = [
     isApproximate: true,
   },
 ]
-
-export default defineComponent({
-  setup () {
-    const countToElements = ref()
-    const startCountTo = () => {
-      countToElements.value?.forEach(ref => ref?.start?.())
-    }
-
-    return {
-      countToOptions,
-      list,
-      countToElements,
-      startCountTo,
-      date,
-    }
-  },
-})
 </script>
 
 <style scoped lang="sass">

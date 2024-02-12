@@ -11,27 +11,14 @@ section: .container
           PartnerItem(:value='partner')
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHandshake } from '@fortawesome/free-solid-svg-icons'
 import type Partner from '~/types/Partner'
 
-export default defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-  props: {
-    partners: {
-      type: Array as PropType<Partner[]>,
-      default: null,
-    },
-  },
-  setup () {
-    return {
-      faHandshake,
-    }
-  },
-})
+defineProps<{
+  partners: Partner[]
+}>()
 </script>
 
 <style scoped lang="sass">

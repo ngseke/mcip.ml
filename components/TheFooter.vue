@@ -29,7 +29,7 @@ footer.py-5
           | .  All rights reserved
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook, faLine } from '@fortawesome/free-brands-svg-icons'
 import { type IconDefinition, faEnvelope, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
@@ -66,26 +66,14 @@ const list: Item[][] = [
   ],
 ]
 
-export default defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-  setup () {
-    const easterEggCount = ref(0)
-    const router = useRouter()
+const easterEggCount = ref(0)
+const router = useRouter()
 
-    watch(easterEggCount, (value) => {
-      if (value >= 5) {
-        router.push({ query: { capybara: null } })
-        easterEggCount.value = 0
-      }
-    })
-    return {
-      list,
-      easterEggCount,
-      faExternalLinkAlt,
-    }
-  },
+watch(easterEggCount, (value) => {
+  if (value >= 5) {
+    router.push({ query: { capybara: null } })
+    easterEggCount.value = 0
+  }
 })
 </script>
 

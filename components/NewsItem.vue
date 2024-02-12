@@ -12,7 +12,7 @@ NuxtLink.news-card(:to='link')
         | {{ time }}
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { marked } from 'marked'
 import { htmlToText } from 'html-to-text'
 
@@ -26,24 +26,16 @@ const toPlainText = (markdown: string) => {
   return typeof html === 'string' ? htmlToText(html) : ''
 }
 
-export default defineComponent({
-  props: {
-    value: {
-      type: Object as PropType<News>,
-      default: null,
-    },
-  },
-  setup (props) {
-    const title = computed(() => props.value.title)
-    const image = computed(() => props.value.image)
-    const link = computed(() => `/news/${props.value.id}`)
-    const article = computed(() => toPlainText(props.value.article ?? ''))
-    const author = computed(() => props.value.author)
-    const time = computed(() => formatDate(props.value.timestamp))
+const props = defineProps<{
+  value: News
+}>()
 
-    return { title, image, link, article, author, time }
-  },
-})
+const title = computed(() => props.value.title)
+const image = computed(() => props.value.image)
+const link = computed(() => `/news/${props.value.id}`)
+const article = computed(() => toPlainText(props.value.article ?? ''))
+const author = computed(() => props.value.author)
+const time = computed(() => formatDate(props.value.timestamp))
 </script>
 
 <style scoped lang="sass">

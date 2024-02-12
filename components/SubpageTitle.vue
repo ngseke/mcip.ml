@@ -5,19 +5,11 @@
     small.en: span {{ en }}
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  props: {
-    zh: {
-      default: null,
-      type: String,
-    },
-    en: {
-      default: null,
-      type: String,
-    },
-  },
-})
+<script setup lang="ts">
+defineProps<{
+  zh?: string
+  en?: string
+}>()
 </script>
 
 <style scoped lang="sass">

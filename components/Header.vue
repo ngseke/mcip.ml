@@ -3,15 +3,10 @@ header(:class='className')
   slot
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  props: {
-    className: {
-      default: null,
-      type: String,
-    },
-  },
-})
+<script setup lang="ts">
+defineProps<{
+  className?: string
+}>()
 </script>
 
 <style scoped lang="sass">

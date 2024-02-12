@@ -9,21 +9,14 @@
         | {{ formatDate(date, 'YYYY年MM月DD日') }}
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { formatDate } from '~/utils/date'
 
-export default defineComponent({
-  props: {
-    avatar: { type: String, default: null },
-    name: { type: String, default: null },
-    date: { type: Number, default: null },
-  },
-  setup () {
-    return {
-      formatDate,
-    }
-  },
-})
+defineProps<{
+  avatar?: string
+  name?: string
+  date?: number
+}>()
 </script>
 
 <style scoped lang="sass">

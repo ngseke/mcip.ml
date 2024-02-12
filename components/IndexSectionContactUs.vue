@@ -29,7 +29,7 @@ section: .container
       .peep
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faClipboardCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { create } from '~/utils/captcha'
@@ -43,74 +43,51 @@ enum Status {
   success,
   error
 }
+const contact = reactive({ name: '', email: '', phone: '', content: '' })
+const isCaptchaShow = ref(false)
+const captchaCode = ref()
+const captchaAnswer = ref<string | null>(null)
+const status = ref(Status.default)
+const errorMessage = ref<string | null>(null)
 
-export default defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-  setup () {
-    const contact = reactive({ name: '', email: '', phone: '', content: '' })
-    const isCaptchaShow = ref(false)
-    const captchaCode = ref()
-    const captchaAnswer = ref<string | null>(null)
-    const status = ref(Status.default)
-    const errorMessage = ref<string | null>(null)
-
-    const isSubmitDisabled = computed(() => {
-      return (
-        status.value === Status.submitting ||
+const isSubmitDisabled = computed(() => {
+  return (
+    status.value === Status.submitting ||
         captchaCode.value !== captchaAnswer.value
-      )
-    })
+  )
+})
 
-    const captcha = ref<HTMLCanvasElement | null>(null)
-    const createCaptcha = () => {
-      if (!captcha.value) return
-      captchaAnswer.value = create(captcha.value)
-    }
+const captcha = ref<HTMLCanvasElement | null>(null)
+const createCaptcha = () => {
+  if (!captcha.value) return
+  captchaAnswer.value = create(captcha.value)
+}
 
-    watch(
-      contact,
-      async (value) => {
-        if (isCaptchaShow.value) return
-        if (fieldNames.filter(i => i !== 'phone').every(i => value[i])) {
-          isCaptchaShow.value = true
-          await nextTick()
-          createCaptcha()
-        }
-      },
-      { deep: true }
-    )
-
-    const submit = async () => {
-      errorMessage.value = null
-      status.value = Status.submitting
-      const body = { ...contact, source: 2, type: 2 }
-      try {
-        await submitContactUsForm(body)
-        status.value = Status.success
-      } catch (e) {
-        errorMessage.value = '發生了一些問題，請稍後再試'
-        status.value = Status.error
-      }
-    }
-
-    return {
-      Status,
-      contact,
-      isCaptchaShow,
-      captchaCode,
-      status,
-      errorMessage,
-      isSubmitDisabled,
-      captcha,
-      createCaptcha,
-      submit,
-      faPaperPlane,
-      faClipboardCheck,
+watch(
+  contact,
+  async (value) => {
+    if (isCaptchaShow.value) return
+    if (fieldNames.filter(i => i !== 'phone').every(i => value[i])) {
+      isCaptchaShow.value = true
+      await nextTick()
+      createCaptcha()
     }
   },
-})
+  { deep: true }
+)
+
+const submit = async () => {
+  errorMessage.value = null
+  status.value = Status.submitting
+  const body = { ...contact, source: 2, type: 2 }
+  try {
+    await submitContactUsForm(body)
+    status.value = Status.success
+  } catch (e) {
+    errorMessage.value = '發生了一些問題，請稍後再試'
+    status.value = Status.error
+  }
+}
 </script>
 
 <style lang="sass" scoped>

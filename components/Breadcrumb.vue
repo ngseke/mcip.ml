@@ -1,23 +1,18 @@
 <template lang="pug">
 ol(itemscope itemtype='http://schema.org/BreadcrumbList')
-  template(v-if='items')
-    li(v-for='(i, index) in items' :key='index' itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem')
-      NuxtLink(v-if='i.url' :to='i.url' itemprop='item')
-        span(itemprop='name') {{ i.name }}
-      span(v-else itemprop='name') {{ i.name }}
-      meta(itemprop='position' :content='index + 1')
+  li(v-for='(i, index) in items' :key='index' itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem')
+    NuxtLink(v-if='i.url' :to='i.url' itemprop='item')
+      span(itemprop='name') {{ i.name }}
+    span(v-else itemprop='name') {{ i.name }}
+    meta(itemprop='position' :content='String(index + 1)')
 </template>
 
-<script>
-export default defineComponent({
-  name: 'Breadcrumb',
-  props: {
-    items: {
-      type: Array,
-      default: null,
-    },
-  },
-})
+<script setup lang="ts">
+interface BreadcrumbItem { name: string, url?: string }
+
+defineProps<{
+  items: BreadcrumbItem[]
+}>()
 </script>
 
 <style lang="sass" scoped>

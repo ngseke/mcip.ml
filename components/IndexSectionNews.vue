@@ -16,28 +16,14 @@ section: .container
         FontAwesomeIcon.ml-3(:icon='faChevronRight')
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faChevronRight, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import { type NewsList } from '~/types/NewsList'
 
-export default defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-  props: {
-    list: {
-      type: Array as PropType<NewsList>,
-      default: null,
-    },
-  },
-  setup () {
-    return {
-      faNewspaper,
-      faChevronRight,
-    }
-  },
-})
+defineProps<{
+  list: NewsList
+}>()
 </script>
 
 <style scoped lang="sass">

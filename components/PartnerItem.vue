@@ -10,22 +10,14 @@ a.item(
     small.school {{ value.schoolName }}
 </template>
 
-<script lang="ts">
-import MobileDetect from 'mobile-detect'
-
+<script setup lang="ts">
 import type Partner from '~/types/Partner'
 
-/** 根據裝置取得不同的 Facebook 粉專連結(為了使用預設內置 app 開啟) */
+defineProps<{
+  value: Partner
+}>()
+
 const getFacebookLink = (id: string) => {
-  const device = new MobileDetect(
-    process.client
-      ? window.navigator.userAgent
-      : ''
-  )
-
-  if (device.is('iOS')) return `fb://page/?id=${id}`
-  else if (device.is('AndroidOS')) return `fb://page/${id}`
-
   return `https://www.facebook.com/${id}`
 }
 
@@ -35,20 +27,6 @@ const getImage = (partner: Partner) => (
     : `https://graph.facebook.com/${partner.facebookId}/picture?height=200&width=200`
 )
 
-export default defineComponent({
-  props: {
-    value: {
-      type: Object as PropType<Partner>,
-      default: null,
-    },
-  },
-  setup () {
-    return {
-      getFacebookLink,
-      getImage,
-    }
-  },
-})
 </script>
 
 <style scoped lang="sass">
@@ -62,10 +40,11 @@ export default defineComponent({
   transform-origin: center center
   +floating-link
   img
-    +wh(3rem, auto)
+    +wh(3rem)
     margin-right: .75rem
     border-radius: 10px
     transition: box-shadow .7s
+    object-fit: cover
   .info
     color: $black
     .name

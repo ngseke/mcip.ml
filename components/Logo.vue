@@ -40,10 +40,7 @@
   </svg>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  name: 'Logo',
-})
+<script setup lang="ts">
 </script>
 
 <style lang="sass" scoped>
