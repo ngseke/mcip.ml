@@ -2,6 +2,12 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
+  },
   "scripts": {
     "build": "vue-tsc && nuxt build",
     "dev": "nuxt dev",
