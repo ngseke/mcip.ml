@@ -53,7 +53,7 @@ const errorMessage = ref<string | null>(null)
 const isSubmitDisabled = computed(() => {
   return (
     status.value === Status.submitting ||
-        captchaCode.value !== captchaAnswer.value
+    captchaCode.value !== captchaAnswer.value
   )
 })
 

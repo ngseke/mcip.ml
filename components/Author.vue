@@ -1,8 +1,7 @@
 <template lang="pug">
 .author
   slot
-    img.avatar(v-if='avatar' :src='avatar')
-    img.avatar(v-else src='~/assets/img/logo/logo-avatar.png')
+    img.avatar(:src='avatar ?? defaultAvatar')
     .info
       .name(itemprop='author') {{ name }}
       .date(itemprop='datePublished' :content='formatDate(date)')
@@ -11,6 +10,7 @@
 
 <script setup lang="ts">
 import { formatDate } from '~/utils/date'
+import defaultAvatar from '~/assets/img/logo/logo-avatar.png'
 
 defineProps<{
   avatar?: string

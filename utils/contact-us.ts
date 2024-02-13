@@ -8,7 +8,7 @@ const getUrl = (path: string) => join(API_URL, path)
 
 export async function submitContactUsForm (body: ContactRequest) {
   const url = getUrl('/firestoreContact')
-  const { data } = (await axios.post<never>(url, body))
+  const { data } = await axios.post<never>(url, body)
 
   return data
 }
