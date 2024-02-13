@@ -1,49 +1,42 @@
-<template lang="pug">
-section: .container
-  SectionTitle.mb-5
-    NuxtLink.title(to='/news' title='查看更多最新消息')
-      FontAwesomeIcon.mr-3(:icon='faNewspaper')
-      | 最新消息
-      span.icon.ml-3 ➔
-
-  .row
-    .col-12.col-md-6.col-lg-4(v-for='item in list' :key='item.id')
-      NewsItem(:value='item')
-
-    .col-12.text-right
-      NuxtLink(to='/news')
-        | 查看更多
-        FontAwesomeIcon.ml-3(:icon='faChevronRight')
-</template>
-
-<script lang="ts">
+<script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faChevronRight, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import { type NewsList } from '~/types/NewsList'
 
-export default defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-  props: {
-    list: {
-      type: Array as PropType<NewsList>,
-      default: null,
-    },
-  },
-  setup () {
-    return {
-      faNewspaper,
-      faChevronRight,
-    }
-  },
-})
+defineProps<{
+  list: NewsList
+}>()
 </script>
+
+<template>
+  <section>
+    <div class="container">
+      <SectionTitle class="mb-5">
+        <NuxtLink class="title" to="/news" title="查看更多最新消息">
+          <FontAwesomeIcon class="mr-3" :icon="faNewspaper" />
+          最新消息
+          <span class="icon ml-3">➔</span>
+        </NuxtLink>
+      </SectionTitle>
+      <div class="row">
+        <div v-for="item in list" :key="item.id" class="col-12 col-md-6 col-lg-4">
+          <NewsItem :value="item" />
+        </div>
+        <div class="col-12 text-right">
+          <NuxtLink to="/news">
+            查看更多
+            <FontAwesomeIcon class="ml-3" :icon="faChevronRight" />
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
 
 <style scoped lang="sass">
 a.title
   transition: all .2s
-  display: inline-block
+  display: inline-flex
   color: $black
   +floating-link
 </style>

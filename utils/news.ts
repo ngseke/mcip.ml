@@ -2,7 +2,7 @@ import axios from 'axios'
 import join from 'url-join'
 
 import { API_URL } from './config'
-import type News from '~/types/News'
+import { type News } from '~/types/News'
 import { type NewsList } from '~/types/NewsList'
 
 type Id = News['id'] | null

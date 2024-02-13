@@ -1,39 +1,12 @@
-<template lang="pug">
-div
-  nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }')
-    .container
-      NuxtLink.navbar-brand(to='/')
-        img(v-if='isDark' src='assets/img/logo/logo_panel-white.svg' alt='樂台計畫')
-        img(v-if='!isDark' src='assets/img/logo/logo_panel-black.svg' alt='樂台計畫')
-      button.navbar-toggler(type='button' @click.stop='isShow = !isShow')
-        FontAwesomeIcon(:icon='faBars')
-      .navbar-content
-        ul.navbar-nav
-          li.nav-item(v-for='(item, key) in items' :key='key')
-            NuxtLink.nav-link(:to='item.to' :class='{ active: item.active }') {{ item.name }}
-          li.d-flex.align-items-center(v-if="items.length"): .divider
-          li.nav-item
-            a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
-              FontAwesomeIcon.facebook-icon(:icon='faFacebook')
-  .mobile-navbar(:class='{ hide: !isShow }')
-    a.close(href='#' @click.prevent='hide') ╳
-    ul
-      li(v-for='item in mobileItems' :key='item.name')
-        NuxtLink.link(:to='item.to' :class='{ active: item.active }') {{ item.name }}
-    .divider
-    ul
-      li: NuxtLink.link(to='/line') LINE App
-      li: a.link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
-        FontAwesomeIcon.facebook-icon(:icon='faFacebook')
-  Transition(name='fade')
-    .overlay(v-if='isShow' @click='hide')
-</template>
-
 <script setup lang="ts">
 import { throttle } from 'throttle-debounce'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { UseFocusTrap } from '@vueuse/integrations/useFocusTrap/component'
+import { useScrollLock, syncRef } from '@vueuse/core'
+import logoWhite from '~/assets/img/logo/logo_panel-white.svg'
+import logoBlack from '~/assets/img/logo/logo_panel-black.svg'
 
 interface Item { name: string, to: string, active?: boolean }
 
@@ -48,9 +21,13 @@ const props = withDefaults(defineProps<{
 
 const top = ref(0)
 const isShow = ref(false)
-const isShrink = ref(false)
+const isFixed = ref(false)
+const isLocked = useScrollLock(process.client ? document.body : null)
 
-const isDark = computed(() => !isShrink.value)
+syncRef(isShow, isLocked)
+
+const isDark = computed(() => !isFixed.value)
+const logoImage = computed(() => (isDark.value ? logoWhite : logoBlack))
 
 const route = useRoute()
 const mobileItems = computed(() => [
@@ -70,13 +47,77 @@ onMounted(() => {
   const throttled = throttle(300, () => {
     const ref = document.scrollingElement?.scrollTop
     top.value = ref ?? document.documentElement.scrollTop
-    isShrink.value = top.value > 250
+    isFixed.value = top.value > 250
   })
 
   window.addEventListener('scroll', throttled)
   onBeforeUnmount(() => { window.removeEventListener('scroll', throttled) })
 })
 </script>
+
+<template>
+  <div>
+    <nav id="nav" class="navbar navbar-expand-md" :class="{ shrink: isFixed, 'navbar-dark': isDark, 'navbar-light': !isDark }">
+      <div class="container">
+        <NuxtLink class="navbar-brand" to="/">
+          <img :src="logoImage" alt="樂台計畫">
+        </NuxtLink>
+
+        <button class="navbar-toggler" type="button" @click.stop="isShow = !isShow">
+          <FontAwesomeIcon :icon="faBars" />
+        </button>
+
+        <div class="navbar-content">
+          <ul class="navbar-nav">
+            <li v-for="(item, key) in items" :key="key" class="nav-item">
+              <NuxtLink class="nav-link" :to="item.to" :class="{ active: item.active }">
+                {{ item.name }}
+              </NuxtLink>
+            </li>
+            <li v-if="items.length" class="d-flex align-items-center">
+              <div class="divider" />
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.facebook.com/mcipApp/" target="_blank" title="樂台計畫 Facebook 粉絲專頁">
+                <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <Transition name="hamburger">
+      <UseFocusTrap v-if="isShow" :options="{ allowOutsideClick:true }" class="mobile-navbar">
+        <a class="close" href="#" @click.prevent="hide">╳</a>
+        <ul>
+          <li v-for="item in mobileItems" :key="item.name">
+            <NuxtLink class="link" :to="item.to" :class="{ active: item.active }">
+              {{ item.name }}
+            </NuxtLink>
+          </li>
+        </ul>
+        <div class="divider" />
+        <ul>
+          <li>
+            <NuxtLink class="link" to="/line">
+              LINE App
+            </NuxtLink>
+          </li>
+          <li>
+            <a class="link" href="https://www.facebook.com/mcipApp/" target="_blank" title="樂台計畫 Facebook 粉絲專頁">
+              <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" />
+            </a>
+          </li>
+        </ul>
+      </UseFocusTrap>
+    </Transition>
+
+    <Transition name="fade">
+      <div v-if="isShow" class="overlay" @click="hide" />
+    </Transition>
+  </div>
+</template>
 
 <style lang="sass" scoped>
 $shrink-bg-color: rgba(#fff, .95)
@@ -162,6 +203,7 @@ $height: 4rem
       background-color: rgba(white, .2)
 
 .mobile-navbar
+  text-align: right
   z-index: 2
   display: none
 
@@ -176,7 +218,7 @@ $height: 4rem
     +hide-scroll-bar
     +shrink-bg
     box-shadow: $big-btn-shadow
-    background-color: rgba($black, .98)
+    background-color: $black
     overflow-y: scroll
     overscroll-behavior: contain
     z-index: 2000
@@ -187,15 +229,11 @@ $height: 4rem
     +wh(80% ,100%)
     max-width: 20rem
     +flex-center
-    transition: transform .4s cubic-bezier(.7,0,.3,1)
-    &.hide
-      transform: translateX(100%)
 
     .link
       display: inline-block
       font-size: 2.5rem
       font-weight: bold
-      transition: transform .3s
       color: white
       &.active
         color: $primary
@@ -205,8 +243,6 @@ $height: 4rem
       margin: .75rem 0
       padding: 0
       width: 100%
-      li
-        overflow: hidden
 
     a.close
       position: absolute
@@ -214,14 +250,15 @@ $height: 4rem
       right: .5rem
       display: flex
       align-items: center
-      font-size: 2rem
+      font-size: 2.5rem
       font-weight: 100
       padding: 1rem
       outline: none
+      color: white
 
     .divider
       width: 100%
-      border-bottom: rgba(white, .7) solid 1px
+      border-bottom: rgba(white, .3) solid 1px
 
 .overlay
   z-index: 1
@@ -230,6 +267,7 @@ $height: 4rem
   right: 0
   +wh(100% ,100%)
   background: rgba($black, .5)
+  backdrop-filter: blur(1px)
 
 .fade
   &-enter-from, &-leave-to
@@ -238,4 +276,12 @@ $height: 4rem
     opacity: 1
   &-enter-active, &-leave-active
     transition: all .3s
+
+.hamburger
+  &-enter-from, &-leave-to
+    transform: translateX(100%)
+  &-leave-from, &-enter-to
+    transform: none
+  &-enter-active, &-leave-active
+    transition: all .25s
 </style>

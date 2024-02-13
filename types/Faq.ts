@@ -1,6 +1,6 @@
-import type QuestionAnswer from './QuestionAnswer'
+import { type QuestionAnswer } from './QuestionAnswer'
 
-export default interface Faq {
+export interface Faq {
   title: string
   content: QuestionAnswer[]
 }

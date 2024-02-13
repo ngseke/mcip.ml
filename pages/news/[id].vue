@@ -1,22 +1,3 @@
-<template lang="pug">
-main(itemscope itemtype='http://schema.org/Article' )
-  Header(className='news')
-    .container.news-title
-      h1(v-if='data' v-cloak)
-        NuxtLink.back-btn(to='/news' title='返回最新消息列表')
-          FontAwesomeIcon(:icon='faAngleLeft')
-        span(itemprop='headline') {{ data.title }}
-
-  section(v-if='data' v-cloak)
-    .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
-      Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `最新消息`, url: `/news` }, { name: data.title }]')
-
-      Author(:name='data.author' :date='data.timestamp')
-
-      img.img-fluid.mb-3(v-if='data.image' :src='data.image' itemprop='image')
-      article.markdown-body(itemprop='articleBody' v-html='marked(data.article ?? "")')
-</template>
-
 <script setup lang="ts">
 import { marked } from 'marked'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -65,6 +46,34 @@ useHead(() => {
   }
 })
 </script>
+
+<template>
+  <main itemscope itemtype="http://schema.org/Article">
+    <Header className="news">
+      <div class="container news-title">
+        <h1 v-if="data">
+          <NuxtLink class="back-btn" to="/news" title="返回最新消息列表">
+            <FontAwesomeIcon :icon="faAngleLeft" />
+          </NuxtLink>
+          <span itemprop="headline">{{ data.title }}</span>
+        </h1>
+      </div>
+    </Header>
+
+    <section v-if="data">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xl-8">
+            <Breadcrumb :items="[ { name: `樂台計畫`, url: `/` }, { name: `最新消息`, url: `/news` }, { name: data.title }]" />
+            <Author :name="data.author" :date="data.timestamp" />
+            <img v-if="data.image" class="img-fluid mb-3" :src="data.image" itemprop="image">
+            <article class="markdown-body" itemprop="articleBody" v-html="marked(data.article ?? '')" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</template>
 
 <style scoped lang="sass">
 header.news

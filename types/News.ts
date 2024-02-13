@@ -1,5 +1,5 @@
 /** 最新消息 */
-export default interface News {
+export interface News {
   id: string
   title: string
   author: string

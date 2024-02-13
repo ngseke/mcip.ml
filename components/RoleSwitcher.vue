@@ -1,17 +1,5 @@
-<template lang="pug">
-.switcher
-  span.label 我是
-  template(v-for='(item, index) in list' :key='item.value')
-    a(
-      href='#'
-      :class='{ active: modelValue === item.value }'
-      @click.prevent='$emit("update:modelValue", item.value)'
-    ) {{ item.name }}
-    .divider(v-if='index !== list.length - 1')
-</template>
-
 <script setup lang="ts">
-import type Role from '~/types/Role'
+import { type Role } from '~/types/Role'
 
 defineProps<{
   modelValue: number
@@ -22,6 +10,20 @@ defineEmits<{
   'update:modelValue': [value: number]
 }>()
 </script>
+
+<template>
+  <div class="switcher">
+    <span class="label">我是</span>
+    <template v-for="(item, index) in list" :key="item.value">
+      <a
+        href="#"
+        :class="{ active: modelValue === item.value }"
+        @click.prevent="$emit('update:modelValue', item.value)"
+      >{{ item.name }}</a>
+      <div v-if="index !== list.length - 1" class="divider" />
+    </template>
+  </div>
+</template>
 
 <style scoped lang="sass">
 .switcher

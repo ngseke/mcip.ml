@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318.27 165.98">
     <g class="shape play">
@@ -39,12 +42,6 @@
     <rect class="cls-1" x="109.75" y="111.09" width="11.7" height="1.93" />
   </svg>
 </template>
-
-<script lang="ts">
-export default defineComponent({
-  name: 'Logo',
-})
-</script>
 
 <style lang="sass" scoped>
 $short: 90

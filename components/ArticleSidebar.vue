@@ -1,29 +1,13 @@
-<template lang="pug">
-nav.article-navbar
-  ul(v-if='value')
-    li(v-for='(i, iIndex) in value' :key='iIndex')
-      a(
-        :href='i.id'
-        :class='{ active: getIsActive(iIndex, value) }'
-        @click.prevent="scroll(i.id)"
-      ) {{ i.title }}
-      ul
-        li(v-for='(j, jIndex) in i.children' :key='jIndex')
-          a(
-            :href='j.id'
-            :class='{ active: getIsActive(jIndex, i.children) && getIsActive(iIndex, value) }'
-            @click.prevent="scroll(j.id)"
-          ) {{ j.title }}
-</template>
-
 <script setup lang="ts">
+import type { ArticleSidebarItem } from '~/types/ArticleSidebarItem'
+
 withDefaults(defineProps<{
-  value?: any[] | null
+  value?: ArticleSidebarItem[] | null
 }>(), {
   value: null,
 })
 
-const getIsActive = (index: number, list: any[]) => {
+const getIsActive = (index: number, list: ArticleSidebarItem[]) => {
   const current = list[index]
   const next = list[index + 1]
 
@@ -36,11 +20,30 @@ const scroll = (id: string) => {
 }
 </script>
 
+<template>
+  <nav class="article-sidebar">
+    <ul v-if="value">
+      <li v-for="(h2, h2Index) in value" :key="h2Index">
+        <a
+          :href="h2.id"
+          :class="{ active: getIsActive(h2Index, value) }"
+          @click.prevent="scroll(h2.id)"
+        >{{ h2.title }}</a>
+        <ul>
+          <li v-for="(h3, h3Index) in h2.children" :key="h3Index">
+            <a :href="h3.id" @click.prevent="scroll(h3.id)">{{ h3.title }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</template>
+
 <style scoped lang="sass">
 $link-color: #666
 $link-active-color: #1e1e1e
 
-nav.article-navbar
+nav.article-sidebar
   ul
     list-style: none
     font-size: 13px

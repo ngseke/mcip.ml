@@ -1,38 +1,38 @@
-<template lang="pug">
-section: .container
-  .row
-    .col-12
-      SectionTitle.mb-5
-        FontAwesomeIcon.mr-3(:icon='faHandshake')
-        | 合作夥伴
-    .col-12
-      .row
-        .col-6.col-md-4.col-lg-3(v-for='partner in partners' :key='partner.name')
-          PartnerItem(:value='partner')
-</template>
-
-<script lang="ts">
+<script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHandshake } from '@fortawesome/free-solid-svg-icons'
-import type Partner from '~/types/Partner'
+import { type Partner } from '~/types/Partner'
 
-export default defineComponent({
-  components: {
-    FontAwesomeIcon,
-  },
-  props: {
-    partners: {
-      type: Array as PropType<Partner[]>,
-      default: null,
-    },
-  },
-  setup () {
-    return {
-      faHandshake,
-    }
-  },
-})
+defineProps<{
+  partners: Partner[]
+}>()
 </script>
+
+<template>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <SectionTitle class="mb-5">
+            <FontAwesomeIcon class="mr-3" :icon="faHandshake" />
+            合作夥伴
+          </SectionTitle>
+        </div>
+        <div class="col-12">
+          <div class="row ">
+            <div
+              v-for="partner in partners"
+              :key="partner.name"
+              class="col-6 col-md-4 col-lg-3 mb-4"
+            >
+              <PartnerItem :value="partner" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
 
 <style scoped lang="sass">
 section

@@ -1,24 +1,22 @@
-<template lang="pug">
-.container.subpage-title
-  h1
-    span.zh: span {{ zh }}
-    small.en: span {{ en }}
-</template>
-
-<script lang="ts">
-export default defineComponent({
-  props: {
-    zh: {
-      default: null,
-      type: String,
-    },
-    en: {
-      default: null,
-      type: String,
-    },
-  },
-})
+<script setup lang="ts">
+defineProps<{
+  zh?: string
+  en?: string
+}>()
 </script>
+
+<template>
+  <div class="container subpage-title">
+    <h1>
+      <span class="zh">
+        <span>{{ zh }}</span>
+      </span>
+      <small class="en">
+        <span>{{ en }}</span>
+      </small>
+    </h1>
+  </div>
+</template>
 
 <style scoped lang="sass">
 @keyframes y-move

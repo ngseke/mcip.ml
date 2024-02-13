@@ -1,18 +1,14 @@
-<template lang="pug">
-header(:class='className')
-  slot
-</template>
-
-<script lang="ts">
-export default defineComponent({
-  props: {
-    className: {
-      default: null,
-      type: String,
-    },
-  },
-})
+<script setup lang="ts">
+defineProps<{
+  className?: string
+}>()
 </script>
+
+<template>
+  <header :class="className">
+    <slot />
+  </header>
+</template>
 
 <style scoped lang="sass">
 header

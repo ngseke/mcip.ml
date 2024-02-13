@@ -1,5 +1,5 @@
 /** 角色 */
-export default interface Role {
+export interface Role {
   name: string
   value: number
 }

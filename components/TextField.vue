@@ -1,18 +1,3 @@
-<template lang="pug">
-.form__group
-  input.form__field(
-    v-if='!multiline'
-    v-bind='inputBind'
-    v-on='handlers'
-  )
-  textarea.form__field(
-    v-else
-    v-bind='textareaBind'
-    v-on='handlers'
-  )
-  label.form__label {{ label }}
-</template>
-
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
   modelValue: string
@@ -61,6 +46,14 @@ const textareaBind = computed(() => ({
   rows: props.rows,
 }))
 </script>
+
+<template>
+  <div class="form__group">
+    <input v-if="!multiline" class="form__field" v-bind="inputBind" v-on="handlers">
+    <textarea v-else class="form__field" v-bind="textareaBind" v-on="handlers" />
+    <label class="form__label">{{ label }}</label>
+  </div>
+</template>
 
 <style scoped lang="sass">
 // ref. https://codepen.io/lucasyem/pen/ZEEYKdj

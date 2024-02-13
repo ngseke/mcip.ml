@@ -1,14 +1,3 @@
-<template lang="pug">
-ul.article-list
-  li(v-for='i in list' :key="i.id")
-    NuxtLink(:to='`/news/${i.id}`')
-      .title {{ i.title }}
-      small {{ formatDate(i.timestamp, 'YYYY年MM月DD日') }}
-  li(v-if='!isEnd')
-    FontAwesomeIcon.icon(v-if='isLoading' :icon='faCircleNotch' spin)
-    a(v-else href='#' @click.prevent='loadMore') 載入更多
-</template>
-
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
@@ -33,6 +22,23 @@ const loadMore = () => {
   if (!props.isLoading) emit('loadMore')
 }
 </script>
+
+<template>
+  <ul class="article-list">
+    <li v-for="i in list" :key="i.id">
+      <NuxtLink :to="`/news/${i.id}`">
+        <div class="title">
+          {{ i.title }}
+        </div>
+        <small>{{ formatDate(i.timestamp, 'YYYY年MM月DD日') }}</small>
+      </NuxtLink>
+    </li>
+    <li v-if="!isEnd">
+      <FontAwesomeIcon v-if="isLoading" class="icon" :icon="faCircleNotch" spin />
+      <a v-else href="#" @click.prevent="loadMore">載入更多</a>
+    </li>
+  </ul>
+</template>
 
 <style lang="sass" scoped>
 ul.article-list
