@@ -21,12 +21,12 @@ const props = withDefaults(defineProps<{
 
 const top = ref(0)
 const isShow = ref(false)
-const isShrink = ref(false)
+const isFixed = ref(false)
 const isLocked = useScrollLock(process.client ? document.body : null)
 
 syncRef(isShow, isLocked)
 
-const isDark = computed(() => !isShrink.value)
+const isDark = computed(() => !isFixed.value)
 const logoImage = computed(() => (isDark.value ? logoWhite : logoBlack))
 
 const route = useRoute()
@@ -47,7 +47,7 @@ onMounted(() => {
   const throttled = throttle(300, () => {
     const ref = document.scrollingElement?.scrollTop
     top.value = ref ?? document.documentElement.scrollTop
-    isShrink.value = top.value > 250
+    isFixed.value = top.value > 250
   })
 
   window.addEventListener('scroll', throttled)
@@ -57,7 +57,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <nav id="nav" class="navbar navbar-expand-md" :class="{ shrink: isShrink, 'navbar-dark': isDark, 'navbar-light': !isDark }">
+    <nav id="nav" class="navbar navbar-expand-md" :class="{ shrink: isFixed, 'navbar-dark': isDark, 'navbar-light': !isDark }">
       <div class="container">
         <NuxtLink class="navbar-brand" to="/">
           <img :src="logoImage" alt="樂台計畫">
