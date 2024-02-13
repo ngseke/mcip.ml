@@ -53,28 +53,47 @@ function getIdString (_: string) {
 }
 </script>
 
-<template lang="pug">
-div
-  TheNavbar(:items='navbar')
-  main.faq(itemscope itemtype='https://schema.org/FAQPage')
-    Header(className='faq')
-      SubpageTitle(zh='常見問題' en='FAQ')
-
-    .container
-      Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
-
-    .container
-      .row.justify-content-center.align-items-start
-        .col-12.col-lg-9.col-xl-8
-          section(v-for='(group, groupIndex) in faqs' ref='sections' :key='groupIndex')
-            h2(:id='getIdString(group.title)')
-              | {{ group.title }}
-            .item(v-for='(content, contentIndex) in group.content' :key="contentIndex" itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
-              h3(:id='getIdString(content.question)' itemprop='name') {{ content.question }}
-              div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
-                div(itemprop='text' v-html='marked(content.answer)')
-        .col.col-xl-3.d-none.d-lg-flex.sticky-top
-          ArticleSidebar.scroll-spy-navbar(:value='list')
+<template>
+  <div>
+    <TheNavbar :items="navbar" />
+    <main class="faq" itemscope itemtype="https://schema.org/FAQPage">
+      <Header className="faq">
+        <SubpageTitle zh="常見問題" en="FAQ" />
+      </Header>
+      <div class="container">
+        <Breadcrumb :items="[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]" />
+      </div>
+      <div class="container">
+        <div class="row justify-content-center align-items-start">
+          <div class="col-12 col-lg-9 col-xl-8">
+            <section v-for="(group, groupIndex) in faqs" ref="sections" :key="groupIndex">
+              <h2 :id="getIdString(group.title)">
+                {{ group.title }}
+              </h2>
+              <div
+                v-for="(content, contentIndex) in group.content"
+                :key="contentIndex"
+                class="item"
+                itemscope
+                itemprop="mainEntity"
+                itemtype="https://schema.org/Question"
+              >
+                <h3 :id="getIdString(content.question)" itemprop="name">
+                  {{ content.question }}
+                </h3>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                  <div itemprop="text" v-html="marked(content.answer)" />
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="col col-xl-3 d-none d-lg-flex sticky-top">
+            <ArticleSidebar class="scroll-spy-navbar" :value="list" />
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <style scoped lang="sass">

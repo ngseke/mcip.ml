@@ -18,21 +18,25 @@ defineEmits<{
 }>()
 </script>
 
-<template lang="pug">
-NuxtLink.button(
-  v-if='to'
-  :target='target'
-  :to="to"
-  :class='className'
-)
-  slot
-button.button(
-  v-else
-  :type='type'
-  :disabled='disabled'
-  :class='className'
-)
-  slot
+<template>
+  <NuxtLink
+    v-if="to"
+    class="button"
+    :target="target"
+    :to="to"
+    :class="className"
+  >
+    <slot />
+  </NuxtLink>
+  <button
+    v-else
+    class="button"
+    :type="type"
+    :disabled="disabled"
+    :class="className"
+  >
+    <slot />
+  </button>
 </template>
 
 <style scoped lang="sass">

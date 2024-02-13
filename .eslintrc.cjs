@@ -7,7 +7,6 @@ module.exports = {
     '@nuxtjs/eslint-config-typescript',
     'standard-with-typescript',
     'plugin:vue/vue3-recommended',
-    'plugin:vue-pug/vue3-recommended',
 
   ],
   overrides: [
@@ -51,7 +50,6 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'vue/html-quotes': 'off',
     'vue/no-v-html': 'off',
-    'vue/max-attributes-per-line': 'off',
     'vue/v-on-event-hyphenation': ['error', 'never', { autofix: true }],
     'vue/attribute-hyphenation': ['error', 'never'],
     'vue/component-tags-order': ['error', {

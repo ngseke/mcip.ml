@@ -47,35 +47,62 @@ onMounted(() => {
 })
 </script>
 
-<template lang="pug">
-div
-  nav#nav.navbar.navbar-expand-md(:class='{ shrink: isShrink, "navbar-dark": isDark, "navbar-light": !isDark }')
-    .container
-      NuxtLink.navbar-brand(to='/')
-        img(v-if='isDark' src='assets/img/logo/logo_panel-white.svg' alt='樂台計畫')
-        img(v-if='!isDark' src='assets/img/logo/logo_panel-black.svg' alt='樂台計畫')
-      button.navbar-toggler(type='button' @click.stop='isShow = !isShow')
-        FontAwesomeIcon(:icon='faBars')
-      .navbar-content
-        ul.navbar-nav
-          li.nav-item(v-for='(item, key) in items' :key='key')
-            NuxtLink.nav-link(:to='item.to' :class='{ active: item.active }') {{ item.name }}
-          li.d-flex.align-items-center(v-if="items.length"): .divider
-          li.nav-item
-            a.nav-link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
-              FontAwesomeIcon.facebook-icon(:icon='faFacebook')
-  .mobile-navbar(:class='{ hide: !isShow }')
-    a.close(href='#' @click.prevent='hide') ╳
-    ul
-      li(v-for='item in mobileItems' :key='item.name')
-        NuxtLink.link(:to='item.to' :class='{ active: item.active }') {{ item.name }}
-    .divider
-    ul
-      li: NuxtLink.link(to='/line') LINE App
-      li: a.link(href='https://www.facebook.com/mcipApp/' target='_blank' title='樂台計畫 Facebook 粉絲專頁')
-        FontAwesomeIcon.facebook-icon(:icon='faFacebook')
-  Transition(name='fade')
-    .overlay(v-if='isShow' @click='hide')
+<template>
+  <div>
+    <nav id="nav" class="navbar navbar-expand-md" :class="{ shrink: isShrink, 'navbar-dark': isDark, 'navbar-light': !isDark }">
+      <div class="container">
+        <NuxtLink class="navbar-brand" to="/">
+          <img v-if="isDark" src="assets/img/logo/logo_panel-white.svg" alt="樂台計畫"><img v-if="!isDark" src="assets/img/logo/logo_panel-black.svg" alt="樂台計畫">
+        </NuxtLink>
+        <button class="navbar-toggler" type="button" @click.stop="isShow = !isShow">
+          <FontAwesomeIcon :icon="faBars" />
+        </button>
+        <div class="navbar-content">
+          <ul class="navbar-nav">
+            <li v-for="(item, key) in items" :key="key" class="nav-item">
+              <NuxtLink class="nav-link" :to="item.to" :class="{ active: item.active }">
+                {{ item.name }}
+              </NuxtLink>
+            </li>
+            <li v-if="items.length" class="d-flex align-items-center">
+              <div class="divider" />
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.facebook.com/mcipApp/" target="_blank" title="樂台計畫 Facebook 粉絲專頁">
+                <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mobile-navbar" :class="{ hide: !isShow }">
+      <a class="close" href="#" @click.prevent="hide">╳</a>
+      <ul>
+        <li v-for="item in mobileItems" :key="item.name">
+          <NuxtLink class="link" :to="item.to" :class="{ active: item.active }">
+            {{ item.name }}
+          </NuxtLink>
+        </li>
+      </ul>
+      <div class="divider" />
+      <ul>
+        <li>
+          <NuxtLink class="link" to="/line">
+            LINE App
+          </NuxtLink>
+        </li>
+        <li>
+          <a class="link" href="https://www.facebook.com/mcipApp/" target="_blank" title="樂台計畫 Facebook 粉絲專頁">
+            <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" /></a>
+        </li>
+      </ul>
+    </div>
+
+    <Transition name="fade">
+      <div v-if="isShow" class="overlay" @click="hide" />
+    </Transition>
+  </div>
 </template>
 
 <style lang="sass" scoped>

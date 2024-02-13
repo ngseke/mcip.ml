@@ -11,16 +11,18 @@ defineEmits<{
 }>()
 </script>
 
-<template lang="pug">
-.switcher
-  span.label 我是
-  template(v-for='(item, index) in list' :key='item.value')
-    a(
-      href='#'
-      :class='{ active: modelValue === item.value }'
-      @click.prevent='$emit("update:modelValue", item.value)'
-    ) {{ item.name }}
-    .divider(v-if='index !== list.length - 1')
+<template>
+  <div class="switcher">
+    <span class="label">我是</span>
+    <template v-for="(item, index) in list" :key="item.value">
+      <a
+        href="#"
+        :class="{ active: modelValue === item.value }"
+        @click.prevent="$emit('update:modelValue', item.value)"
+      >{{ item.name }}</a>
+      <div v-if="index !== list.length - 1" class="divider" />
+    </template>
+  </div>
 </template>
 
 <style scoped lang="sass">

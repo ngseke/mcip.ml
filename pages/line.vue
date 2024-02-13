@@ -16,13 +16,14 @@ useHead({
 })
 </script>
 
-<template lang="pug">
-main
-  img.logo(src="@/assets/img/logo/logo_secondary-small-black.svg")
-  FontAwesomeIcon.icon(:icon="faCircleNotch" spin)
-  | 正在導向至 LINE...
-  br
-  a(href="https://line.me/R/ti/p/11FZvoRuwx") 若未能成功導向請點擊此連結
+<template>
+  <main>
+    <img class="logo" src="@/assets/img/logo/logo_secondary-small-black.svg">
+    <FontAwesomeIcon class="icon" :icon="faCircleNotch" spin />
+    正在導向至 LINE...
+    <br>
+    <a href="https://line.me/R/ti/p/11FZvoRuwx">若未能成功導向請點擊此連結</a>
+  </main>
 </template>
 
 <style scoped lang="sass">

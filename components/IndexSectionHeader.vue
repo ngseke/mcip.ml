@@ -1,17 +1,24 @@
-<template lang="pug">
-header
-  .container
-    .row.justify-content-between.align-items-center
-      .col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5
-        .mb-5
-          .logo
-            Logo(alt='樂台計畫 | 大專院校音樂賽事平台')
-        h2
-          | 由熱情驅動的#[br]音樂賽事#[em 大平台]
-        .mt-3
-          Hashtags
-      .col-12.col-lg.d-flex.justify-content-end
-        .peep
+<template>
+  <header>
+    <div class="container">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <div class="mb-5">
+            <div class="logo">
+              <Logo alt="樂台計畫 | 大專院校音樂賽事平台" />
+            </div>
+          </div>
+          <h2>由熱情驅動的<br>音樂賽事<em>大平台</em></h2>
+          <div class="mt-3">
+            <Hashtags />
+          </div>
+        </div>
+        <div class="col-12 col-lg d-flex justify-content-end">
+          <div class="peep" />
+        </div>
+      </div>
+    </div>
+  </header>
 </template>
 
 <style scoped lang="sass">

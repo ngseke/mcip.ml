@@ -38,57 +38,59 @@ watch(type, (newType, oldType) => {
 })
 </script>
 
-<template lang="pug">
-section.introduction: .container
-  .row.justify-content-around
-    .col-12.col-md-5.col-lg-5.order-2.order-md-1.position-relative
-      .peep-mobile(v-show='isLineApp')
-      .peep-notebook(v-show='isBackstage')
+<template>
+  <section class="introduction">
+    <div class="container">
+      <div class="row justify-content-around">
+        <div class="col-12 col-md-5 col-lg-5 order-2 order-md-1 position-relative">
+          <div v-show="isLineApp" class="peep-mobile" />
+          <div v-show="isBackstage" class="peep-notebook" />
+          <div class="screenshot-area">
+            <img v-show="isLineApp" class="mockup-line-app" src="~/assets/img/screenshot/mockup-line-app.png" alt="Line App 畫面截圖">
+            <img v-show="isBackstage" class="mockup-backstage" src="~/assets/img/screenshot/mockup-backstage.png" alt="管理後台截圖">
+            <img v-show="isCapybara" class="mockup-backstage" src="~/assets/img/screenshot/capybara.jpg">
+          </div>
+        </div>
 
-      .screenshot-area
-        img.mockup-line-app(
-          v-show='isLineApp'
-          src='~/assets/img/screenshot/mockup-line-app.png'
-          alt='Line App 畫面截圖'
-        )
-        img.mockup-backstage(
-          v-show='isBackstage'
-          src='~/assets/img/screenshot/mockup-backstage.png'
-          alt='管理後台截圖'
-        )
-        img.mockup-backstage(
-          v-show='isCapybara'
-          src='~/assets/img/screenshot/capybara.jpg'
-        )
+        <div class="col-12 col-md-7 col-lg-6 order-1 order-md-2">
+          <RoleSwitcher v-model="type" :list="computedTypes" />
 
-    .col-12.col-md-7.col-lg-6.order-1.order-md-2
-      RoleSwitcher(v-model='type' :list='computedTypes')
+          <Transition :name="transitionName">
+            <section v-if="isLineApp" key="1">
+              <SectionTitle>透過樂台計畫<br>3 分鐘即完成報名</SectionTitle>
+              <p>不需額外下載 App，用 LINE 就能立刻加入</p>
+              <div class="mb-4 d-flex flex-column d-md-block">
+                <GradientButton className="line" target="_blank" to="/line">
+                  加入 LINE 官方帳號
+                </GradientButton>
+              </div>
+              <div class="d-none d-md-inline-block">
+                <img class="qrcode" src="~/assets/img/line-app-qrcode-shorthand.png" alt="樂台計畫 LINE App QRCode">
+              </div>
+            </section>
 
-      Transition(:name='transitionName')
-        section(v-if='isLineApp' key=1)
-          SectionTitle 透過樂台計畫#[br]3 分鐘即完成報名
-          p
-            | 不需額外下載 App，用 LINE 就能立刻加入
+            <section v-else-if="isBackstage" key="2">
+              <SectionTitle>為音樂賽事量身打造的<br>解決方案</SectionTitle>
+              <ul class="pl-4">
+                <li v-for="feature in backstageFeatures" :key="feature">
+                  {{ feature }}
+                </li>
+              </ul>
+              <div class="pl-1 mb-3">
+                <a href="https://manage.mcip.app/" target="_blank">前往社團管理後台
+                  <FontAwesomeIcon class="mx-1" :icon="faExternalLinkAlt" /></a>
+              </div>
+            </section>
 
-          .mb-4.d-flex.flex-column.d-md-block
-            GradientButton(className='line' target='_blank' to="/line") 加入 LINE 官方帳號
-          .d-none.d-md-inline-block
-            img.qrcode(
-              src='~/assets/img/line-app-qrcode-shorthand.png'
-              alt='樂台計畫 LINE App QRCode'
-            )
-        section(v-else-if='isBackstage' key=2)
-          SectionTitle 為音樂賽事量身打造的#[br]解決方案
-          ul.pl-4
-            li(v-for='feature in backstageFeatures' :key='feature') {{ feature }}
-          .pl-1.mb-3
-            a(href='https://manage.mcip.app/' target='_blank')
-              | 前往社團管理後台
-              FontAwesomeIcon.mx-1(:icon='faExternalLinkAlt')
-
-        section(v-else-if='isCapybara' key=3)
-          SectionTitle 水豚
-          p 水豚是水豚屬下僅存的兩種生物之一。牠是一種半水棲的食草動物，也是世界上體型最大的齧齒類動物。原產於南美洲除了智利以外的所有稀樹草原和叢林中。
+            <section v-else-if="isCapybara" key="3">
+              <SectionTitle>水豚</SectionTitle>
+              <p>水豚是水豚屬下僅存的兩種生物之一。牠是一種半水棲的食草動物，也是世界上體型最大的齧齒類動物。原產於南美洲除了智利以外的所有稀樹草原和叢林中。</p>
+            </section>
+          </Transition>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped lang="sass">

@@ -19,18 +19,27 @@ const list = [
 ]
 </script>
 
-<template lang="pug">
-section
-  .container
-    .row.justify-content-around
-      .col-auto(v-for='item in list' :key='item.label')
-        .count-to
-          div.number {{ item.value }}{{ item.isApproximate ? "+" : "" }}
-          span.suffix(v-if='item.suffix') {{ item.suffix }}
-          .label {{ item.label }}
-
-      .col-12.text-right
-        small.date {{ date }}
+<template>
+  <section>
+    <div class="container">
+      <div class="row justify-content-around">
+        <div v-for="item in list" :key="item.label" class="col-auto">
+          <div class="count-to">
+            <div class="number">
+              {{ item.value }}{{ item.isApproximate ? "+" : "" }}
+            </div>
+            <span v-if="item.suffix" class="suffix">{{ item.suffix }}</span>
+            <div class="label">
+              {{ item.label }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-right">
+          <small class="date">{{ date }}</small>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped lang="sass">

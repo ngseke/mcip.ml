@@ -59,35 +59,67 @@ const submit = async () => {
 }
 </script>
 
-<template lang="pug">
-section: .container
-  .row.justify-content-center.align-items-stretch
-    .col-12.col-lg-9
-      h3
-        FontAwesomeIcon.mr-3(:icon='faPaperPlane')
-        | 聯絡我們
-    .col-12.col-lg-6.offset-lg-1
-      Transition(name='contact' mode='out-in')
-        form(v-if='status !== Status.success' @submit.prevent='submit')
-          TextField(v-model.trim='contact.name' label='你的大名' required :max='50')
-          TextField(v-model.trim='contact.email' type='email' label='Email' required :max='100')
-          TextField(v-model.trim='contact.phone' type='tel' label='聯絡電話 (可留空)' :max='15')
-          TextField(v-model.trim='contact.content' label='內容' multiline required :rows='5' :max='3000')
-          Transition(name='contact')
-            .d-flex.align-items-center(v-if='isCaptchaShow')
-              canvas.captcha.mr-3(ref='captcha' width='100' height='36' @click='createCaptcha')
-              TextField.flex-grow-1.mb-0(v-model.trim='captchaCode' label='驗證碼 (請輸入阿拉伯數字)' :max='4')
+<template>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center align-items-stretch">
+        <div class="col-12 col-lg-9">
+          <h3>
+            <FontAwesomeIcon class="mr-3" :icon="faPaperPlane" />聯絡我們
+          </h3>
+        </div>
+        <div class="col-12 col-lg-6 offset-lg-1">
+          <Transition name="contact" mode="out-in">
+            <form v-if="status !== Status.success" @submit.prevent="submit">
+              <TextField v-model.trim="contact.name" label="你的大名" required :max="50" />
+              <TextField v-model.trim="contact.email" type="email" label="Email" required :max="100" />
+              <TextField v-model.trim="contact.phone" type="tel" label="聯絡電話 (可留空)" :max="15" />
+              <TextField
+                v-model.trim="contact.content"
+                label="內容"
+                multiline
+                required
+                :rows="5"
+                :max="3000"
+              />
 
-          GradientButton(className='submit' :disabled='isSubmitDisabled' type='submit')
-            span(v-if='status === Status.submitting') 傳送中...
-            span(v-else) 送出
+              <Transition name="contact">
+                <div v-if="isCaptchaShow" class="d-flex align-items-center">
+                  <canvas
+                    ref="captcha"
+                    class="captcha mr-3"
+                    width="100"
+                    height="36"
+                    @click="createCaptcha"
+                  />
+                  <TextField
+                    v-model.trim="captchaCode"
+                    class="flex-grow-1 mb-0"
+                    label="驗證碼 (請輸入阿拉伯數字)"
+                    :max="4"
+                  />
+                </div>
+              </Transition>
 
-          small.text-danger(v-if='errorMessage') {{ errorMessage }}
-        .success(v-else)
-          FontAwesomeIcon.icon(:icon='faClipboardCheck')
-          span 謝謝您的來信，我們將會盡快與您聯繫!
-    .col-12.col-lg-auto
-      .peep
+              <GradientButton className="submit" :disabled="isSubmitDisabled" type="submit">
+                <span v-if="status === Status.submitting">傳送中...</span>
+                <span v-else>送出</span>
+              </GradientButton>
+
+              <small v-if="errorMessage" class="text-danger">{{ errorMessage }}</small>
+            </form>
+
+            <div v-else class="success">
+              <FontAwesomeIcon class="icon" :icon="faClipboardCheck" /><span>謝謝您的來信，我們將會盡快與您聯繫!</span>
+            </div>
+          </Transition>
+        </div>
+        <div class="col-12 col-lg-auto">
+          <div class="peep" />
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style lang="sass" scoped>

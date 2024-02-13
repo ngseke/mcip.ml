@@ -4,9 +4,10 @@ defineProps<{
 }>()
 </script>
 
-<template lang="pug">
-header(:class='className')
-  slot
+<template>
+  <header :class="className">
+    <slot />
+  </header>
 </template>
 
 <style scoped lang="sass">

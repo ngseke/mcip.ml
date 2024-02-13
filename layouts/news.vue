@@ -5,9 +5,10 @@ const navbarItems = [
 ]
 </script>
 
-<template lang="pug">
-div
-  TheNavbar(:items='navbarItems')
-  NuxtPage
-  TheFooter
+<template>
+  <div>
+    <TheNavbar :items="navbarItems" />
+    <NuxtPage />
+    <TheFooter />
+  </div>
 </template>

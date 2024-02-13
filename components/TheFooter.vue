@@ -46,35 +46,39 @@ watch(easterEggCount, (value) => {
 })
 </script>
 
-<template lang="pug">
-footer.py-5
-  .container
-    .row.justify-content-between.align-items-end
-      .col-12.col-sm-auto.block
-        ul(v-for='(links, i) in list' :key='i')
-          li(v-for='(item, j) in links' :key='j')
-            NuxtLink(v-if='"to" in item' :to='item.to')
-              FontAwesomeIcon.mr-2(v-if='item.icon' :icon='item.icon')
-              | {{ item.name }}
-            a(v-else :href='item.href' :target='item.target')
-              FontAwesomeIcon.mr-2(v-if='item.icon' :icon='item.icon')
-              | {{ item.name }}
-        ul
-          li
-            a(target='_blank' href='https://manage.mcip.app/')
-              | 社團管理後台
-              FontAwesomeIcon.mx-1(:icon='faExternalLinkAlt')
+<template>
+  <footer class="py-5">
+    <div class="container">
+      <div class="row justify-content-between align-items-end">
+        <div class="col-12 col-sm-auto block">
+          <ul v-for="(links, i) in list" :key="i">
+            <li v-for="(item, j) in links" :key="j">
+              <NuxtLink v-if="&quot;to&quot; in item" :to="item.to">
+                <FontAwesomeIcon v-if="item.icon" class="mr-2" :icon="item.icon" />{{ item.name }}
+              </NuxtLink><a v-else :href="item.href" :target="item.target">
+                <FontAwesomeIcon v-if="item.icon" class="mr-2" :icon="item.icon" />{{ item.name }}</a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a target="_blank" href="https://manage.mcip.app/">社團管理後台
+                <FontAwesomeIcon class="mx-1" :icon="faExternalLinkAlt" /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 col-lg-auto text-lg-right mt-4">
+          <div class="logo" src="~/assets/img/logo/logo_symbol-no-gutter-black.svg" @click="easterEggCount += 1" />
+          <div>
+            Copyright © 2018 - {{ new Date().getFullYear() }}
 
-      .col-12.col-lg-auto.text-lg-right.mt-4
-        .logo(
-          src='~/assets/img/logo/logo_symbol-no-gutter-black.svg'
-          @click='easterEggCount += 1'
-        )
-        div
-          | Copyright © 2018 - {{ new Date().getFullYear() }}
-          |
-          NuxtLink(to='/') 樂台計畫
-          | .  All rights reserved
+            <NuxtLink to="/">
+              樂台計畫
+            </NuxtLink>.  All rights reserved
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style scoped lang="sass">

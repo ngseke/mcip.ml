@@ -1,10 +1,12 @@
-<template lang="pug">
-h3
-  slot
+<template>
+  <h3>
+    <slot />
+  </h3>
 </template>
 
 <style scoped lang="sass">
 h3
+  display: flex
   font-size: 2.8rem
   font-weight: 700
   line-height: 1.2

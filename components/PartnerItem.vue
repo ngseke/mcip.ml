@@ -17,16 +17,19 @@ const getImage = (partner: Partner) => (
 
 </script>
 
-<template lang="pug">
-a.item(
-  :href='getFacebookLink(value.facebookId)'
-  :title='`至${value.name}的 Facebook 粉絲專頁`'
-  target='_blank'
-)
-  img(:src='getImage(value)')
-  .info
-    .name {{ value.name }}
-    small.school {{ value.schoolName }}
+<template>
+  <a
+    class="item"
+    :href="getFacebookLink(value.facebookId)"
+    :title="`至${value.name}的 Facebook 粉絲專頁`"
+    target="_blank"
+  >
+    <img :src="getImage(value)">
+    <div class="info">
+      <div class="name">{{ value.name }}</div>
+      <small class="school">{{ value.schoolName }}</small>
+    </div>
+  </a>
 </template>
 
 <style scoped lang="sass">

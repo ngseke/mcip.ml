@@ -1,9 +1,19 @@
-<template lang="pug">
-.fill-divider
-  .row.no-gutters
-    template(v-for='i in 5' :key='i')
-      .col-auto(v-for='j in ["a", "c", "b", "d"]' :key='j')
-        div(:class='j'): .img
+<template>
+  <div class="fill-divider">
+    <div class="row no-gutters">
+      <template v-for="i in 5" :key="i">
+        <div
+          v-for="j in ['a', 'c', 'b', 'd']"
+          :key="j"
+          class="col-auto"
+        >
+          <div :class="j">
+            <div class="img" />
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
 </template>
 
 <style lang="sass" scoped>

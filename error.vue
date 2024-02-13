@@ -12,17 +12,21 @@ useHead({
 })
 </script>
 
-<template lang="pug">
-.container
-  .row.justify-content-center.align-items-center
-    .col-12.col-md-8.text-center
-      .not-found
-        h1 {{ error.statusCode }}
-        h2 頁面不存在
-        GradientButton(className='secondary' to='/')
-          FontAwesomeIcon.mr-3(:icon='faArrowLeft')
-          | 返回首頁
-  TheFooter
+<template>
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-md-8 text-center">
+        <div class="not-found">
+          <h1>{{ error.statusCode }}</h1>
+          <h2>頁面不存在</h2>
+          <GradientButton className="secondary" to="/">
+            <FontAwesomeIcon class="mr-3" :icon="faArrowLeft" />返回首頁
+          </GradientButton>
+        </div>
+      </div>
+    </div>
+    <TheFooter />
+  </div>
 </template>
 
 <style scoped lang="sass">

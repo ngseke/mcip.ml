@@ -20,21 +20,23 @@ const scroll = (id: string) => {
 }
 </script>
 
-<template lang="pug">
-nav.article-sidebar
-  ul(v-if='value')
-    li(v-for='(h2, h2Index) in value' :key='h2Index')
-      a(
-        :href='h2.id'
-        :class='{ active: getIsActive(h2Index, value) }'
-        @click.prevent="scroll(h2.id)"
-      ) {{ h2.title }}
-      ul
-        li(v-for='(h3, h3Index) in h2.children' :key='h3Index')
-          a(
-            :href='h3.id'
-            @click.prevent="scroll(h3.id)"
-          ) {{ h3.title }}
+<template>
+  <nav class="article-sidebar">
+    <ul v-if="value">
+      <li v-for="(h2, h2Index) in value" :key="h2Index">
+        <a
+          :href="h2.id"
+          :class="{ active: getIsActive(h2Index, value) }"
+          @click.prevent="scroll(h2.id)"
+        >{{ h2.title }}</a>
+        <ul>
+          <li v-for="(h3, h3Index) in h2.children" :key="h3Index">
+            <a :href="h3.id" @click.prevent="scroll(h3.id)">{{ h3.title }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <style scoped lang="sass">

@@ -9,14 +9,20 @@ defineProps<{
 }>()
 </script>
 
-<template lang="pug">
-.author
-  slot
-    img.avatar(:src='avatar ?? defaultAvatar')
-    .info
-      .name(itemprop='author') {{ name }}
-      .date(itemprop='datePublished' :content='formatDate(date)')
-        | {{ formatDate(date, 'YYYY年MM月DD日') }}
+<template>
+  <div class="author">
+    <slot>
+      <img class="avatar" :src="avatar ?? defaultAvatar">
+      <div class="info">
+        <div class="name" itemprop="author">
+          {{ name }}
+        </div>
+        <div class="date" itemprop="datePublished" :content="formatDate(date)">
+          {{ formatDate(date, 'YYYY年MM月DD日') }}
+        </div>
+      </div>
+    </slot>
+  </div>
 </template>
 
 <style scoped lang="sass">

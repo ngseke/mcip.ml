@@ -2,9 +2,16 @@
 const list = ['報名繳費', '即時賽況', '賽事資訊']
 </script>
 
-<template lang="pug">
-.d-inline-block
-  span.hashtag(v-for="item in list" :key='item') {{ item }}
+<template>
+  <ul class="p-0 m-0">
+    <li
+      v-for="item in list"
+      :key="item"
+      class="hashtag"
+    >
+      {{ item }}
+    </li>
+  </ul>
 </template>
 
 <style scoped lang="sass">

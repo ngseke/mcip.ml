@@ -6,13 +6,23 @@ defineProps<{
 }>()
 </script>
 
-<template lang="pug">
-ol(itemscope itemtype='http://schema.org/BreadcrumbList')
-  li(v-for='(i, index) in items' :key='index' itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem')
-    NuxtLink(v-if='i.url' :to='i.url' itemprop='item')
-      span(itemprop='name') {{ i.name }}
-    span(v-else itemprop='name') {{ i.name }}
-    meta(itemprop='position' :content='String(index + 1)')
+<template>
+  <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+    <li
+      v-for="(i, index) in items"
+      :key="index"
+      itemprop="itemListElement"
+      itemscope
+      itemtype="http://schema.org/ListItem"
+    >
+      <NuxtLink v-if="i.url" :to="i.url" itemprop="item">
+        <span itemprop="name">{{ i.name }}</span>
+      </NuxtLink>
+
+      <span v-else itemprop="name">{{ i.name }}</span>
+      <meta itemprop="position" :content="String(index + 1)">
+    </li>
+  </ol>
 </template>
 
 <style lang="sass" scoped>

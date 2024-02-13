@@ -6,6 +6,6 @@ useHead({
 })
 </script>
 
-<template lang="pug">
-NuxtLayout
+<template>
+  <NuxtLayout />
 </template>

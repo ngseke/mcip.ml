@@ -24,18 +24,27 @@ const author = computed(() => props.value.author)
 const time = computed(() => formatDate(props.value.timestamp))
 </script>
 
-<template lang="pug">
-NuxtLink.news-card(:to='link')
-  .row.no-gutters.align-items-center
-    .col-auto
-      img.img(:src='image')
-    .col.body
-      .title(:title='title') {{ title }}
-      .paragraph {{ article }}
-      .author
-        | {{ author }}
-        span.divider
-        | {{ time }}
+<template>
+  <NuxtLink class="news-card" :to="link">
+    <div class="row no-gutters align-items-center">
+      <div class="col-auto">
+        <img class="img" :src="image">
+      </div>
+      <div class="col body">
+        <div class="title" :title="title">
+          {{ title }}
+        </div>
+        <div class="paragraph">
+          {{ article }}
+        </div>
+        <div class="author">
+          {{ author }}
+          <span class="divider" />
+          {{ time }}
+        </div>
+      </div>
+    </div>
+  </NuxtLink>
 </template>
 
 <style scoped lang="sass">

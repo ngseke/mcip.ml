@@ -6,17 +6,19 @@ const { data: newsList } = await useAsyncData(async () => await fetchList())
 const { data: partners } = await useAsyncData(fetchPartners)
 </script>
 
-<template lang="pug">
-div
-  TheNavbar
-  main
-    IndexSectionHeader
-    IndexSectionIntroduction
-    IndexSectionCountTo
-    IndexSectionDivider
-    IndexSectionNews(v-if='newsList' :list='newsList')
-    IndexSectionPartner(v-if='partners' :partners='partners')
-    IndexSectionContactUs
+<template>
+  <div>
+    <TheNavbar />
+    <main>
+      <IndexSectionHeader />
+      <IndexSectionIntroduction />
+      <IndexSectionCountTo />
+      <IndexSectionDivider />
+      <IndexSectionNews v-if="newsList" :list="newsList" />
+      <IndexSectionPartner v-if="partners" :partners="partners" />
+      <IndexSectionContactUs />
+    </main>
+  </div>
 </template>
 
 <style lang="sass" scoped>

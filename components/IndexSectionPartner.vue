@@ -8,17 +8,30 @@ defineProps<{
 }>()
 </script>
 
-<template lang="pug">
-section: .container
-  .row
-    .col-12
-      SectionTitle.mb-5
-        FontAwesomeIcon.mr-3(:icon='faHandshake')
-        | 合作夥伴
-    .col-12
-      .row
-        .col-6.col-md-4.col-lg-3(v-for='partner in partners' :key='partner.name')
-          PartnerItem(:value='partner')
+<template>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <SectionTitle class="mb-5">
+            <FontAwesomeIcon class="mr-3" :icon="faHandshake" />
+            合作夥伴
+          </SectionTitle>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div
+              v-for="partner in partners"
+              :key="partner.name"
+              class="col-6 col-md-4 col-lg-3"
+            >
+              <PartnerItem :value="partner" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped lang="sass">
