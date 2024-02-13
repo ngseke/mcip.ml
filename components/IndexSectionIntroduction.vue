@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { type Role } from '~/types/Role'
-
-const backstageFeatures = [
-  '眾多賽事齊聚一堂，大幅增加活動曝光',
-  '金流代收服務，即時向參賽者推播繳費結果',
-  '跨平台系統，隨時隨地掌握報名狀況',
-]
 
 const types: Role[] = [
   { name: '參賽者', value: 1 },
@@ -39,12 +31,13 @@ watch(type, (newType, oldType) => {
 </script>
 
 <template>
-  <section class="introduction">
+  <section>
     <div class="container">
       <div class="row justify-content-around">
         <div class="col-12 col-md-5 col-lg-5 order-2 order-md-1 position-relative">
           <div v-show="isLineApp" class="peep-mobile" />
           <div v-show="isBackstage" class="peep-notebook" />
+
           <div class="screenshot-area">
             <img v-show="isLineApp" class="mockup-line-app" src="~/assets/img/screenshot/mockup-line-app.png" alt="Line App 畫面截圖">
             <img v-show="isBackstage" class="mockup-backstage" src="~/assets/img/screenshot/mockup-backstage.png" alt="管理後台截圖">
@@ -56,36 +49,18 @@ watch(type, (newType, oldType) => {
           <RoleSwitcher v-model="type" :list="computedTypes" />
 
           <Transition :name="transitionName">
-            <section v-if="isLineApp" key="1">
-              <SectionTitle>透過樂台計畫<br>3 分鐘即完成報名</SectionTitle>
-              <p>不需額外下載 App，用 LINE 就能立刻加入</p>
-              <div class="mb-4 d-flex flex-column d-md-block">
-                <GradientButton className="line" target="_blank" to="/line">
-                  加入 LINE 官方帳號
-                </GradientButton>
-              </div>
-              <div class="d-none d-md-inline-block">
-                <img class="qrcode" src="~/assets/img/line-app-qrcode-shorthand.png" alt="樂台計畫 LINE App QRCode">
-              </div>
-            </section>
-
-            <section v-else-if="isBackstage" key="2">
-              <SectionTitle>為音樂賽事量身打造的<br>解決方案</SectionTitle>
-              <ul class="pl-4">
-                <li v-for="feature in backstageFeatures" :key="feature">
-                  {{ feature }}
-                </li>
-              </ul>
-              <div class="pl-1 mb-3">
-                <a href="https://manage.mcip.app/" target="_blank">前往社團管理後台
-                  <FontAwesomeIcon class="mx-1" :icon="faExternalLinkAlt" /></a>
-              </div>
-            </section>
-
-            <section v-else-if="isCapybara" key="3">
-              <SectionTitle>水豚</SectionTitle>
-              <p>水豚是水豚屬下僅存的兩種生物之一。牠是一種半水棲的食草動物，也是世界上體型最大的齧齒類動物。原產於南美洲除了智利以外的所有稀樹草原和叢林中。</p>
-            </section>
+            <IndexSectionIntroductionDescriptionLineApp
+              v-if="isLineApp"
+              key="1"
+            />
+            <IndexSectionIntroductionDescriptionBackstage
+              v-else-if="isBackstage"
+              key="2"
+            />
+            <IndexSectionIntroductionDescriptionCapybara
+              v-else-if="isCapybara"
+              key="3"
+            />
           </Transition>
         </div>
       </div>
@@ -94,16 +69,6 @@ watch(type, (newType, oldType) => {
 </template>
 
 <style scoped lang="sass">
-.introduction
-  position: relative
-  overflow: hidden
-
-.qrcode
-  width: 100%
-  height: auto
-  max-width: 7rem
-  margin-right: 2rem
-
 .peep-mobile
   position: absolute
   left: -9rem
@@ -157,10 +122,6 @@ watch(type, (newType, oldType) => {
         max-width: 20rem
         height: auto
 
-ul
-  li
-    margin-bottom: .3rem
-
 $distance: 3rem
 // 切換區塊的動畫
 .slide, .slide-reverse
@@ -184,5 +145,4 @@ $distance: 3rem
     transform: translateX(-$distance)
   &-leave-to
     transform: translateX($distance)
-
 </style>
