@@ -1,19 +1,3 @@
-<template lang="pug">
-main
-  Header(className='news')
-    SubpageTitle(zh='最新消息' en='News')
-
-  section
-    .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
-      Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `最新消息` }]')
-      NewsList(
-        :list='list'
-        :isEnd='isEnd'
-        :isLoading='isLoading'
-        @loadMore='loadMore'
-      )
-</template>
-
 <script setup lang="ts">
 import { fetchListBrief } from '~/utils/news'
 
@@ -54,3 +38,19 @@ async function loadMore () {
 }
 
 </script>
+
+<template lang="pug">
+main
+  Header(className='news')
+    SubpageTitle(zh='最新消息' en='News')
+
+  section
+    .container: .row.justify-content-center: .col-12.col-lg-10.col-xl-8
+      Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `最新消息` }]')
+      NewsList(
+        :list='list'
+        :isEnd='isEnd'
+        :isLoading='isLoading'
+        @loadMore='loadMore'
+      )
+</template>

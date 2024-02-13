@@ -1,27 +1,3 @@
-<template lang="pug">
-div
-  TheNavbar(:items='navbar')
-  main.faq(itemscope itemtype='https://schema.org/FAQPage')
-    Header(className='faq')
-      SubpageTitle(zh='常見問題' en='FAQ')
-
-    .container
-      Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
-
-    .container
-      .row.justify-content-center.align-items-start
-        .col-12.col-lg-9.col-xl-8
-          section(v-for='(group, groupIndex) in faqs' ref='sections' :key='groupIndex')
-            h2(:id='getIdString(group.title)')
-              | {{ group.title }}
-            .item(v-for='(content, contentIndex) in group.content' :key="contentIndex" itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
-              h3(:id='getIdString(content.question)' itemprop='name') {{ content.question }}
-              div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
-                div(itemprop='text' v-html='marked(content.answer)')
-        .col.col-xl-3.d-none.d-lg-flex.sticky-top
-          ArticleSidebar.scroll-spy-navbar(:value='list')
-</template>
-
 <script setup lang="ts">
 import { marked } from 'marked'
 import { throttle } from 'throttle-debounce'
@@ -76,6 +52,30 @@ function getIdString (_: string) {
   return _.replace(/ +/g, '-').replace(/\/+/g, '-')
 }
 </script>
+
+<template lang="pug">
+div
+  TheNavbar(:items='navbar')
+  main.faq(itemscope itemtype='https://schema.org/FAQPage')
+    Header(className='faq')
+      SubpageTitle(zh='常見問題' en='FAQ')
+
+    .container
+      Breadcrumb(:items='[ { name: `樂台計畫`, url: `/` }, { name: `常見問題` }]')
+
+    .container
+      .row.justify-content-center.align-items-start
+        .col-12.col-lg-9.col-xl-8
+          section(v-for='(group, groupIndex) in faqs' ref='sections' :key='groupIndex')
+            h2(:id='getIdString(group.title)')
+              | {{ group.title }}
+            .item(v-for='(content, contentIndex) in group.content' :key="contentIndex" itemscope itemprop='mainEntity' itemtype='https://schema.org/Question')
+              h3(:id='getIdString(content.question)' itemprop='name') {{ content.question }}
+              div(itemscope itemprop='acceptedAnswer' itemtype='https://schema.org/Answer')
+                div(itemprop='text' v-html='marked(content.answer)')
+        .col.col-xl-3.d-none.d-lg-flex.sticky-top
+          ArticleSidebar.scroll-spy-navbar(:value='list')
+</template>
 
 <style scoped lang="sass">
 main.faq

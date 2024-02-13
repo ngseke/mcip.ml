@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { fetchList } from '~/utils/news'
+import { fetchPartners } from '~/utils/static-data'
+
+const { data: newsList } = await useAsyncData(async () => await fetchList())
+const { data: partners } = await useAsyncData(fetchPartners)
+</script>
+
 <template lang="pug">
 div
   TheNavbar
@@ -10,14 +18,6 @@ div
     IndexSectionPartner(v-if='partners' :partners='partners')
     IndexSectionContactUs
 </template>
-
-<script setup lang="ts">
-import { fetchList } from '~/utils/news'
-import { fetchPartners } from '~/utils/static-data'
-
-const { data: newsList } = await useAsyncData(async () => await fetchList())
-const { data: partners } = await useAsyncData(fetchPartners)
-</script>
 
 <style lang="sass" scoped>
 main:deep(> section)

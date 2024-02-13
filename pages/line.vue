@@ -1,12 +1,3 @@
-<template lang="pug">
-main
-  img.logo(src="@/assets/img/logo/logo_secondary-small-black.svg")
-  FontAwesomeIcon.icon(:icon="faCircleNotch" spin)
-  | 正在導向至 LINE...
-  br
-  a(href="https://line.me/R/ti/p/11FZvoRuwx") 若未能成功導向請點擊此連結
-</template>
-
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
@@ -24,6 +15,15 @@ useHead({
   ],
 })
 </script>
+
+<template lang="pug">
+main
+  img.logo(src="@/assets/img/logo/logo_secondary-small-black.svg")
+  FontAwesomeIcon.icon(:icon="faCircleNotch" spin)
+  | 正在導向至 LINE...
+  br
+  a(href="https://line.me/R/ti/p/11FZvoRuwx") 若未能成功導向請點擊此連結
+</template>
 
 <style scoped lang="sass">
 main

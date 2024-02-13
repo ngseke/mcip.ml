@@ -1,17 +1,3 @@
-<template lang="pug">
-section
-  .container
-    .row.justify-content-around
-      .col-auto(v-for='item in list' :key='item.label')
-        .count-to
-          div.number {{ item.value }}{{ item.isApproximate ? "+" : "" }}
-          span.suffix(v-if='item.suffix') {{ item.suffix }}
-          .label {{ item.label }}
-
-      .col-12.text-right
-        small.date {{ date }}
-</template>
-
 <script setup lang="ts">
 const date = '截至 2022 年 2 月'
 const list = [
@@ -32,6 +18,20 @@ const list = [
   },
 ]
 </script>
+
+<template lang="pug">
+section
+  .container
+    .row.justify-content-around
+      .col-auto(v-for='item in list' :key='item.label')
+        .count-to
+          div.number {{ item.value }}{{ item.isApproximate ? "+" : "" }}
+          span.suffix(v-if='item.suffix') {{ item.suffix }}
+          .label {{ item.label }}
+
+      .col-12.text-right
+        small.date {{ date }}
+</template>
 
 <style scoped lang="sass">
 .container

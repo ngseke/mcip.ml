@@ -1,17 +1,3 @@
-<template lang="pug">
-NuxtLink.news-card(:to='link')
-  .row.no-gutters.align-items-center
-    .col-auto
-      img.img(:src='image')
-    .col.body
-      .title(:title='title') {{ title }}
-      .paragraph {{ article }}
-      .author
-        | {{ author }}
-        span.divider
-        | {{ time }}
-</template>
-
 <script setup lang="ts">
 import { marked } from 'marked'
 import { htmlToText } from 'html-to-text'
@@ -37,6 +23,20 @@ const article = computed(() => toPlainText(props.value.article ?? ''))
 const author = computed(() => props.value.author)
 const time = computed(() => formatDate(props.value.timestamp))
 </script>
+
+<template lang="pug">
+NuxtLink.news-card(:to='link')
+  .row.no-gutters.align-items-center
+    .col-auto
+      img.img(:src='image')
+    .col.body
+      .title(:title='title') {{ title }}
+      .paragraph {{ article }}
+      .author
+        | {{ author }}
+        span.divider
+        | {{ time }}
+</template>
 
 <style scoped lang="sass">
 .news-card

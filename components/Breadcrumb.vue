@@ -1,3 +1,11 @@
+<script setup lang="ts">
+interface BreadcrumbItem { name: string, url?: string }
+
+defineProps<{
+  items: BreadcrumbItem[]
+}>()
+</script>
+
 <template lang="pug">
 ol(itemscope itemtype='http://schema.org/BreadcrumbList')
   li(v-for='(i, index) in items' :key='index' itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem')
@@ -6,14 +14,6 @@ ol(itemscope itemtype='http://schema.org/BreadcrumbList')
     span(v-else itemprop='name') {{ i.name }}
     meta(itemprop='position' :content='String(index + 1)')
 </template>
-
-<script setup lang="ts">
-interface BreadcrumbItem { name: string, url?: string }
-
-defineProps<{
-  items: BreadcrumbItem[]
-}>()
-</script>
 
 <style lang="sass" scoped>
 ol

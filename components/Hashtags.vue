@@ -1,11 +1,11 @@
+<script setup lang="ts">
+const list = ['報名繳費', '即時賽況', '賽事資訊']
+</script>
+
 <template lang="pug">
 .d-inline-block
   span.hashtag(v-for="item in list" :key='item') {{ item }}
 </template>
-
-<script setup lang="ts">
-const list = ['報名繳費', '即時賽況', '賽事資訊']
-</script>
 
 <style scoped lang="sass">
 .hashtag

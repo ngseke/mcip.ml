@@ -1,34 +1,3 @@
-<template lang="pug">
-footer.py-5
-  .container
-    .row.justify-content-between.align-items-end
-      .col-12.col-sm-auto.block
-        ul(v-for='(links, i) in list' :key='i')
-          li(v-for='(item, j) in links' :key='j')
-            NuxtLink(v-if='"to" in item' :to='item.to')
-              FontAwesomeIcon.mr-2(v-if='item.icon' :icon='item.icon')
-              | {{ item.name }}
-            a(v-else :href='item.href' :target='item.target')
-              FontAwesomeIcon.mr-2(v-if='item.icon' :icon='item.icon')
-              | {{ item.name }}
-        ul
-          li
-            a(target='_blank' href='https://manage.mcip.app/')
-              | 社團管理後台
-              FontAwesomeIcon.mx-1(:icon='faExternalLinkAlt')
-
-      .col-12.col-lg-auto.text-lg-right.mt-4
-        .logo(
-          src='~/assets/img/logo/logo_symbol-no-gutter-black.svg'
-          @click='easterEggCount += 1'
-        )
-        div
-          | Copyright © 2018 - {{ new Date().getFullYear() }}
-          |
-          NuxtLink(to='/') 樂台計畫
-          | .  All rights reserved
-</template>
-
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook, faLine } from '@fortawesome/free-brands-svg-icons'
@@ -76,6 +45,37 @@ watch(easterEggCount, (value) => {
   }
 })
 </script>
+
+<template lang="pug">
+footer.py-5
+  .container
+    .row.justify-content-between.align-items-end
+      .col-12.col-sm-auto.block
+        ul(v-for='(links, i) in list' :key='i')
+          li(v-for='(item, j) in links' :key='j')
+            NuxtLink(v-if='"to" in item' :to='item.to')
+              FontAwesomeIcon.mr-2(v-if='item.icon' :icon='item.icon')
+              | {{ item.name }}
+            a(v-else :href='item.href' :target='item.target')
+              FontAwesomeIcon.mr-2(v-if='item.icon' :icon='item.icon')
+              | {{ item.name }}
+        ul
+          li
+            a(target='_blank' href='https://manage.mcip.app/')
+              | 社團管理後台
+              FontAwesomeIcon.mx-1(:icon='faExternalLinkAlt')
+
+      .col-12.col-lg-auto.text-lg-right.mt-4
+        .logo(
+          src='~/assets/img/logo/logo_symbol-no-gutter-black.svg'
+          @click='easterEggCount += 1'
+        )
+        div
+          | Copyright © 2018 - {{ new Date().getFullYear() }}
+          |
+          NuxtLink(to='/') 樂台計畫
+          | .  All rights reserved
+</template>
 
 <style scoped lang="sass">
 footer

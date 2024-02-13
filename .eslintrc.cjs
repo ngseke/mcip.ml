@@ -54,5 +54,8 @@ module.exports = {
     'vue/max-attributes-per-line': 'off',
     'vue/v-on-event-hyphenation': ['error', 'never', { autofix: true }],
     'vue/attribute-hyphenation': ['error', 'never'],
+    'vue/component-tags-order': ['error', {
+      order: ['script', 'template', 'style'],
+    }],
   },
 }

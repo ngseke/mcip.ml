@@ -1,3 +1,43 @@
+<script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
+import { type Role } from '~/types/Role'
+
+const backstageFeatures = [
+  '眾多賽事齊聚一堂，大幅增加活動曝光',
+  '金流代收服務，即時向參賽者推播繳費結果',
+  '跨平台系統，隨時隨地掌握報名狀況',
+]
+
+const types: Role[] = [
+  { name: '參賽者', value: 1 },
+  { name: '學校社團', value: 2 },
+]
+
+const type = ref(types[0].value)
+
+const isLineApp = computed(() => type.value === 1)
+const isBackstage = computed(() => type.value === 2)
+const isCapybara = computed(() => type.value === 3)
+
+const route = useRoute()
+const computedTypes = computed(() => {
+  const shouldShowEasterEgg = Object.keys(route.query)
+    .map(i => i.toLowerCase().trim())
+    .includes('capybara')
+
+  return shouldShowEasterEgg
+    ? [...types, { name: '水豚', value: 3 }]
+    : types
+})
+
+const transitionName = ref('slide')
+
+watch(type, (newType, oldType) => {
+  transitionName.value = newType > oldType ? 'slide' : 'slide-reverse'
+})
+</script>
+
 <template lang="pug">
 section.introduction: .container
   .row.justify-content-around
@@ -50,46 +90,6 @@ section.introduction: .container
           SectionTitle 水豚
           p 水豚是水豚屬下僅存的兩種生物之一。牠是一種半水棲的食草動物，也是世界上體型最大的齧齒類動物。原產於南美洲除了智利以外的所有稀樹草原和叢林中。
 </template>
-
-<script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
-import { type Role } from '~/types/Role'
-
-const backstageFeatures = [
-  '眾多賽事齊聚一堂，大幅增加活動曝光',
-  '金流代收服務，即時向參賽者推播繳費結果',
-  '跨平台系統，隨時隨地掌握報名狀況',
-]
-
-const types: Role[] = [
-  { name: '參賽者', value: 1 },
-  { name: '學校社團', value: 2 },
-]
-
-const type = ref(types[0].value)
-
-const isLineApp = computed(() => type.value === 1)
-const isBackstage = computed(() => type.value === 2)
-const isCapybara = computed(() => type.value === 3)
-
-const route = useRoute()
-const computedTypes = computed(() => {
-  const shouldShowEasterEgg = Object.keys(route.query)
-    .map(i => i.toLowerCase().trim())
-    .includes('capybara')
-
-  return shouldShowEasterEgg
-    ? [...types, { name: '水豚', value: 3 }]
-    : types
-})
-
-const transitionName = ref('slide')
-
-watch(type, (newType, oldType) => {
-  transitionName.value = newType > oldType ? 'slide' : 'slide-reverse'
-})
-</script>
 
 <style scoped lang="sass">
 .introduction

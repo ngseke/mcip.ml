@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faHandshake } from '@fortawesome/free-solid-svg-icons'
+import { type Partner } from '~/types/Partner'
+
+defineProps<{
+  partners: Partner[]
+}>()
+</script>
+
 <template lang="pug">
 section: .container
   .row
@@ -10,16 +20,6 @@ section: .container
         .col-6.col-md-4.col-lg-3(v-for='partner in partners' :key='partner.name')
           PartnerItem(:value='partner')
 </template>
-
-<script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faHandshake } from '@fortawesome/free-solid-svg-icons'
-import { type Partner } from '~/types/Partner'
-
-defineProps<{
-  partners: Partner[]
-}>()
-</script>
 
 <style scoped lang="sass">
 section

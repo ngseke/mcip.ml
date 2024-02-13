@@ -1,13 +1,13 @@
-<template lang="pug">
-header(:class='className')
-  slot
-</template>
-
 <script setup lang="ts">
 defineProps<{
   className?: string
 }>()
 </script>
+
+<template lang="pug">
+header(:class='className')
+  slot
+</template>
 
 <style scoped lang="sass">
 header

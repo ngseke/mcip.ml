@@ -1,15 +1,3 @@
-<template lang="pug">
-a.item(
-  :href='getFacebookLink(value.facebookId)'
-  :title='`至${value.name}的 Facebook 粉絲專頁`'
-  target='_blank'
-)
-  img(:src='getImage(value)')
-  .info
-    .name {{ value.name }}
-    small.school {{ value.schoolName }}
-</template>
-
 <script setup lang="ts">
 import { type Partner } from '~/types/Partner'
 
@@ -28,6 +16,18 @@ const getImage = (partner: Partner) => (
 )
 
 </script>
+
+<template lang="pug">
+a.item(
+  :href='getFacebookLink(value.facebookId)'
+  :title='`至${value.name}的 Facebook 粉絲專頁`'
+  target='_blank'
+)
+  img(:src='getImage(value)')
+  .info
+    .name {{ value.name }}
+    small.school {{ value.schoolName }}
+</template>
 
 <style scoped lang="sass">
 .item

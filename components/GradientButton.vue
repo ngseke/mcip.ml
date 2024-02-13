@@ -1,20 +1,3 @@
-<template lang="pug">
-NuxtLink.button(
-  v-if='to'
-  :target='target'
-  :to="to"
-  :class='className'
-)
-  slot
-button.button(
-  v-else
-  :type='type'
-  :disabled='disabled'
-  :class='className'
-)
-  slot
-</template>
-
 <script setup lang="ts">
 withDefaults(defineProps<{
   to?: string | null
@@ -34,6 +17,23 @@ defineEmits<{
   click: []
 }>()
 </script>
+
+<template lang="pug">
+NuxtLink.button(
+  v-if='to'
+  :target='target'
+  :to="to"
+  :class='className'
+)
+  slot
+button.button(
+  v-else
+  :type='type'
+  :disabled='disabled'
+  :class='className'
+)
+  slot
+</template>
 
 <style scoped lang="sass">
 .button

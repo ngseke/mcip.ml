@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faChevronRight, faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { type NewsList } from '~/types/NewsList'
+
+defineProps<{
+  list: NewsList
+}>()
+</script>
+
 <template lang="pug">
 section: .container
   SectionTitle.mb-5
@@ -15,16 +25,6 @@ section: .container
         | 查看更多
         FontAwesomeIcon.ml-3(:icon='faChevronRight')
 </template>
-
-<script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faChevronRight, faNewspaper } from '@fortawesome/free-solid-svg-icons'
-import { type NewsList } from '~/types/NewsList'
-
-defineProps<{
-  list: NewsList
-}>()
-</script>
 
 <style scoped lang="sass">
 a.title

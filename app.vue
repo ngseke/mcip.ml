@@ -1,7 +1,3 @@
-<template lang="pug">
-NuxtLayout
-</template>
-
 <script setup lang="ts">
 useHead({
   titleTemplate: titleChunk => titleChunk
@@ -9,3 +5,7 @@ useHead({
     : '樂台計畫 - 大專院校音樂賽事平台',
 })
 </script>
+
+<template lang="pug">
+NuxtLayout
+</template>

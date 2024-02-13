@@ -1,16 +1,16 @@
-<template lang="pug">
-.container.subpage-title
-  h1
-    span.zh: span {{ zh }}
-    small.en: span {{ en }}
-</template>
-
 <script setup lang="ts">
 defineProps<{
   zh?: string
   en?: string
 }>()
 </script>
+
+<template lang="pug">
+.container.subpage-title
+  h1
+    span.zh: span {{ zh }}
+    small.en: span {{ en }}
+</template>
 
 <style scoped lang="sass">
 @keyframes y-move

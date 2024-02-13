@@ -1,16 +1,3 @@
-<template lang="pug">
-.container
-  .row.justify-content-center.align-items-center
-    .col-12.col-md-8.text-center
-      .not-found
-        h1 {{ error.statusCode }}
-        h2 頁面不存在
-        GradientButton(className='secondary' to='/')
-          FontAwesomeIcon.mr-3(:icon='faArrowLeft')
-          | 返回首頁
-  TheFooter
-</template>
-
 <script setup lang="ts">
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -24,6 +11,19 @@ useHead({
   title: '頁面不存在',
 })
 </script>
+
+<template lang="pug">
+.container
+  .row.justify-content-center.align-items-center
+    .col-12.col-md-8.text-center
+      .not-found
+        h1 {{ error.statusCode }}
+        h2 頁面不存在
+        GradientButton(className='secondary' to='/')
+          FontAwesomeIcon.mr-3(:icon='faArrowLeft')
+          | 返回首頁
+  TheFooter
+</template>
 
 <style scoped lang="sass">
 .not-found
