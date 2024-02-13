@@ -3,6 +3,8 @@ import { throttle } from 'throttle-debounce'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { UseFocusTrap } from '@vueuse/integrations/useFocusTrap/component'
+import { useScrollLock, syncRef } from '@vueuse/core'
 import logoWhite from '~/assets/img/logo/logo_panel-white.svg'
 import logoBlack from '~/assets/img/logo/logo_panel-black.svg'
 
@@ -20,6 +22,9 @@ const props = withDefaults(defineProps<{
 const top = ref(0)
 const isShow = ref(false)
 const isShrink = ref(false)
+const isLocked = useScrollLock(process.client ? document.body : null)
+
+syncRef(isShow, isLocked)
 
 const isDark = computed(() => !isShrink.value)
 const logoImage = computed(() => (isDark.value ? logoWhite : logoBlack))
@@ -82,29 +87,31 @@ onMounted(() => {
       </div>
     </nav>
 
-    <div class="mobile-navbar" :class="{ hide: !isShow }">
-      <a class="close" href="#" @click.prevent="hide">╳</a>
-      <ul>
-        <li v-for="item in mobileItems" :key="item.name">
-          <NuxtLink class="link" :to="item.to" :class="{ active: item.active }">
-            {{ item.name }}
-          </NuxtLink>
-        </li>
-      </ul>
-      <div class="divider" />
-      <ul>
-        <li>
-          <NuxtLink class="link" to="/line">
-            LINE App
-          </NuxtLink>
-        </li>
-        <li>
-          <a class="link" href="https://www.facebook.com/mcipApp/" target="_blank" title="樂台計畫 Facebook 粉絲專頁">
-            <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" />
-          </a>
-        </li>
-      </ul>
-    </div>
+    <Transition name="hamburger">
+      <UseFocusTrap v-if="isShow" :options="{ allowOutsideClick:true }" class="mobile-navbar">
+        <a class="close" href="#" @click.prevent="hide">╳</a>
+        <ul>
+          <li v-for="item in mobileItems" :key="item.name">
+            <NuxtLink class="link" :to="item.to" :class="{ active: item.active }">
+              {{ item.name }}
+            </NuxtLink>
+          </li>
+        </ul>
+        <div class="divider" />
+        <ul>
+          <li>
+            <NuxtLink class="link" to="/line">
+              LINE App
+            </NuxtLink>
+          </li>
+          <li>
+            <a class="link" href="https://www.facebook.com/mcipApp/" target="_blank" title="樂台計畫 Facebook 粉絲專頁">
+              <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" />
+            </a>
+          </li>
+        </ul>
+      </UseFocusTrap>
+    </Transition>
 
     <Transition name="fade">
       <div v-if="isShow" class="overlay" @click="hide" />
@@ -196,6 +203,7 @@ $height: 4rem
       background-color: rgba(white, .2)
 
 .mobile-navbar
+  text-align: right
   z-index: 2
   display: none
 
@@ -210,7 +218,7 @@ $height: 4rem
     +hide-scroll-bar
     +shrink-bg
     box-shadow: $big-btn-shadow
-    background-color: rgba($black, .98)
+    background-color: $black
     overflow-y: scroll
     overscroll-behavior: contain
     z-index: 2000
@@ -221,15 +229,11 @@ $height: 4rem
     +wh(80% ,100%)
     max-width: 20rem
     +flex-center
-    transition: transform .4s cubic-bezier(.7,0,.3,1)
-    &.hide
-      transform: translateX(100%)
 
     .link
       display: inline-block
       font-size: 2.5rem
       font-weight: bold
-      transition: transform .3s
       color: white
       &.active
         color: $primary
@@ -239,8 +243,6 @@ $height: 4rem
       margin: .75rem 0
       padding: 0
       width: 100%
-      li
-        overflow: hidden
 
     a.close
       position: absolute
@@ -248,14 +250,15 @@ $height: 4rem
       right: .5rem
       display: flex
       align-items: center
-      font-size: 2rem
+      font-size: 2.5rem
       font-weight: 100
       padding: 1rem
       outline: none
+      color: white
 
     .divider
       width: 100%
-      border-bottom: rgba(white, .7) solid 1px
+      border-bottom: rgba(white, .3) solid 1px
 
 .overlay
   z-index: 1
@@ -264,6 +267,7 @@ $height: 4rem
   right: 0
   +wh(100% ,100%)
   background: rgba($black, .5)
+  backdrop-filter: blur(1px)
 
 .fade
   &-enter-from, &-leave-to
@@ -272,4 +276,12 @@ $height: 4rem
     opacity: 1
   &-enter-active, &-leave-active
     transition: all .3s
+
+.hamburger
+  &-enter-from, &-leave-to
+    transform: translateX(100%)
+  &-leave-from, &-enter-to
+    transform: none
+  &-enter-active, &-leave-active
+    transition: all .25s
 </style>
