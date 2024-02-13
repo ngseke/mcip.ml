@@ -12,7 +12,7 @@ const { data: partners } = await useAsyncData(fetchPartners)
     <main>
       <IndexSectionHeader />
       <IndexSectionIntroduction />
-      <IndexSectionCountTo />
+      <IndexSectionStats />
       <IndexSectionDivider />
       <IndexSectionNews v-if="newsList" :list="newsList" />
       <IndexSectionPartner v-if="partners" :partners="partners" />
