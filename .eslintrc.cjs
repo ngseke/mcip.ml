@@ -48,7 +48,6 @@ module.exports = {
     }],
 
     'vue/multi-word-component-names': 'off',
-    'vue/html-quotes': 'off',
     'vue/no-v-html': 'off',
     'vue/v-on-event-hyphenation': ['error', 'never', { autofix: true }],
     'vue/attribute-hyphenation': ['error', 'never'],
