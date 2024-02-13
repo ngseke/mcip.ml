@@ -19,11 +19,11 @@ defineProps<{
           </SectionTitle>
         </div>
         <div class="col-12">
-          <div class="row">
+          <div class="row ">
             <div
               v-for="partner in partners"
               :key="partner.name"
-              class="col-6 col-md-4 col-lg-3"
+              class="col-6 col-md-4 col-lg-3 mb-4"
             >
               <PartnerItem :value="partner" />
             </div>

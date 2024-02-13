@@ -28,8 +28,9 @@ const time = computed(() => formatDate(props.value.timestamp))
   <NuxtLink class="news-card" :to="link">
     <div class="row no-gutters align-items-center">
       <div class="col-auto">
-        <img class="img" :src="image">
+        <Avatar class="mr-3" :src="image" size="4rem" />
       </div>
+
       <div class="col body">
         <div class="title" :title="title">
           {{ title }}
@@ -54,31 +55,22 @@ const time = computed(() => formatDate(props.value.timestamp))
   overflow: hidden
   transition: all .3s
   color: $black
-  border-radius: 1.5rem
-  background-color: white
   &:hover
     +floating-link
   &:active
     transform: scale(.97)
 
-  img.img
-    +wh(4rem)
-    border-radius: 1rem
-    object-fit: cover
-    margin-right: 1rem
-
   .body
     display: flex
     flex-direction: column
+    gap: .25rem
     .title
       +line-ellipsis(1)
-      margin-bottom: .25rem
       color: $secondary3
       font-weight: 500
 
     .paragraph
       +line-ellipsis
-      margin-bottom: .3rem
       font-size: .8rem
     .author
       font-size: .8rem
