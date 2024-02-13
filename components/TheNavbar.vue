@@ -3,6 +3,8 @@ import { throttle } from 'throttle-debounce'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import logoWhite from '~/assets/img/logo/logo_panel-white.svg'
+import logoBlack from '~/assets/img/logo/logo_panel-black.svg'
 
 interface Item { name: string, to: string, active?: boolean }
 
@@ -20,6 +22,7 @@ const isShow = ref(false)
 const isShrink = ref(false)
 
 const isDark = computed(() => !isShrink.value)
+const logoImage = computed(() => (isDark.value ? logoWhite : logoBlack))
 
 const route = useRoute()
 const mobileItems = computed(() => [
@@ -52,11 +55,13 @@ onMounted(() => {
     <nav id="nav" class="navbar navbar-expand-md" :class="{ shrink: isShrink, 'navbar-dark': isDark, 'navbar-light': !isDark }">
       <div class="container">
         <NuxtLink class="navbar-brand" to="/">
-          <img v-if="isDark" src="assets/img/logo/logo_panel-white.svg" alt="樂台計畫"><img v-if="!isDark" src="assets/img/logo/logo_panel-black.svg" alt="樂台計畫">
+          <img :src="logoImage" alt="樂台計畫">
         </NuxtLink>
+
         <button class="navbar-toggler" type="button" @click.stop="isShow = !isShow">
           <FontAwesomeIcon :icon="faBars" />
         </button>
+
         <div class="navbar-content">
           <ul class="navbar-nav">
             <li v-for="(item, key) in items" :key="key" class="nav-item">
@@ -69,7 +74,8 @@ onMounted(() => {
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://www.facebook.com/mcipApp/" target="_blank" title="樂台計畫 Facebook 粉絲專頁">
-                <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" /></a>
+                <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" />
+              </a>
             </li>
           </ul>
         </div>
@@ -94,7 +100,8 @@ onMounted(() => {
         </li>
         <li>
           <a class="link" href="https://www.facebook.com/mcipApp/" target="_blank" title="樂台計畫 Facebook 粉絲專頁">
-            <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" /></a>
+            <FontAwesomeIcon class="facebook-icon" :icon="faFacebook" />
+          </a>
         </li>
       </ul>
     </div>
