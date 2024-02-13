@@ -14,16 +14,12 @@
         加入 LINE 官方帳號
       </GradientButton>
     </div>
-    <div class="d-none d-md-inline-block">
-      <img class="qrcode" src="~/assets/img/line-app-qrcode-shorthand.png" alt="樂台計畫 LINE App QRCode">
-    </div>
+
+    <NuxtLink to="/faq">
+      查看常見問題 ➔
+    </NuxtLink>
   </section>
 </template>
 
 <style scoped lang="sass">
-.qrcode
-  width: 100%
-  height: auto
-  max-width: 7rem
-  margin-right: 2rem
 </style>
