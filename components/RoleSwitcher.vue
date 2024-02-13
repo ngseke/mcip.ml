@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type Role from '~/types/Role'
+import { type Role } from '~/types/Role'
 
 defineProps<{
   modelValue: number

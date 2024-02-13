@@ -1,5 +1,5 @@
 /** 合作夥伴 */
-export default interface Partner {
+export interface Partner {
   facebookId: string
   name: string
   schoolName: string

@@ -1,4 +1,4 @@
-export default interface ContactRequest {
+export interface ContactRequest {
   name: string
   email: string
   phone: string

@@ -14,7 +14,7 @@ section: .container
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHandshake } from '@fortawesome/free-solid-svg-icons'
-import type Partner from '~/types/Partner'
+import { type Partner } from '~/types/Partner'
 
 defineProps<{
   partners: Partner[]

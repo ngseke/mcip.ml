@@ -17,7 +17,7 @@ import { marked } from 'marked'
 import { htmlToText } from 'html-to-text'
 
 import { formatDate } from '~/utils/date'
-import type News from '~/types/News'
+import { type News } from '~/types/News'
 
 /** 將 markdown 格式文字轉為純文字 */
 const toPlainText = (markdown: string) => {

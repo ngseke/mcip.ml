@@ -54,7 +54,7 @@ section.introduction: .container
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
-import type Role from '~/types/Role'
+import { type Role } from '~/types/Role'
 
 const backstageFeatures = [
   '眾多賽事齊聚一堂，大幅增加活動曝光',

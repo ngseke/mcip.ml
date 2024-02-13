@@ -11,7 +11,7 @@ a.item(
 </template>
 
 <script setup lang="ts">
-import type Partner from '~/types/Partner'
+import { type Partner } from '~/types/Partner'
 
 defineProps<{
   value: Partner

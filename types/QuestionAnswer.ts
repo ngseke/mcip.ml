@@ -1,4 +1,4 @@
-export default interface QuestionAnswer {
+export interface QuestionAnswer {
   question: string
   answer: string
 }

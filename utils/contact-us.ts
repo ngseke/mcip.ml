@@ -2,7 +2,7 @@ import axios from 'axios'
 import join from 'url-join'
 
 import { API_URL } from './config'
-import type ContactRequest from '~/types/ContactRequest'
+import { type ContactRequest } from '~/types/ContactRequest'
 
 const getUrl = (path: string) => join(API_URL, path)
 
