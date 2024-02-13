@@ -34,16 +34,6 @@ const list: Item[][] = [
     },
   ],
 ]
-
-const easterEggCount = ref(0)
-const router = useRouter()
-
-watch(easterEggCount, (value) => {
-  if (value >= 5) {
-    router.push({ query: { capybara: null } })
-    easterEggCount.value = 0
-  }
-})
 </script>
 
 <template>
@@ -67,7 +57,7 @@ watch(easterEggCount, (value) => {
           </ul>
         </div>
         <div class="col-12 col-lg-auto text-lg-right mt-4">
-          <div class="logo" src="~/assets/img/logo/logo_symbol-no-gutter-black.svg" @click="easterEggCount += 1" />
+          <div class="logo" src="~/assets/img/logo/logo_symbol-no-gutter-black.svg" />
           <div>
             Copyright © 2018 - {{ new Date().getFullYear() }}
 
@@ -120,6 +110,6 @@ footer
   +wh(3rem, 2rem)
   background: url('~/assets/img/logo/logo_symbol-no-gutter-black.svg') center center / contain no-repeat
   display: inline-block
-  opacity: .45
+  opacity: .5
   margin-bottom: .5rem
 </style>

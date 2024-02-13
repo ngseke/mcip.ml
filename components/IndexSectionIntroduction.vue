@@ -10,19 +10,6 @@ const type = ref(types[0].value)
 
 const isLineApp = computed(() => type.value === 1)
 const isBackstage = computed(() => type.value === 2)
-const isCapybara = computed(() => type.value === 3)
-
-const route = useRoute()
-const computedTypes = computed(() => {
-  const shouldShowEasterEgg = Object.keys(route.query)
-    .map(i => i.toLowerCase().trim())
-    .includes('capybara')
-
-  return shouldShowEasterEgg
-    ? [...types, { name: '水豚', value: 3 }]
-    : types
-})
-
 const transitionName = ref('slide')
 
 watch(type, (newType, oldType) => {
@@ -41,12 +28,11 @@ watch(type, (newType, oldType) => {
           <div class="screenshot-area">
             <img v-show="isLineApp" class="mockup-line-app" src="~/assets/img/screenshot/mockup-line-app.png" alt="Line App 畫面截圖">
             <img v-show="isBackstage" class="mockup-backstage" src="~/assets/img/screenshot/mockup-backstage.png" alt="管理後台截圖">
-            <img v-show="isCapybara" class="mockup-backstage" src="~/assets/img/screenshot/capybara.jpg">
           </div>
         </div>
 
         <div class="col-12 col-md-7 col-lg-6 order-1 order-md-2">
-          <RoleSwitcher v-model="type" :list="computedTypes" />
+          <RoleSwitcher v-model="type" :list="types" />
 
           <Transition :name="transitionName">
             <IndexSectionIntroductionDescriptionLineApp
@@ -56,10 +42,6 @@ watch(type, (newType, oldType) => {
             <IndexSectionIntroductionDescriptionBackstage
               v-else-if="isBackstage"
               key="2"
-            />
-            <IndexSectionIntroductionDescriptionCapybara
-              v-else-if="isCapybara"
-              key="3"
             />
           </Transition>
         </div>
