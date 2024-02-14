@@ -21,7 +21,7 @@ const getImage = (partner: Partner) => (
     :title="`至${value.name}的 Facebook 粉絲專頁`"
     target="_blank"
   >
-    <Avatar :src="getImage(value)" />
+    <Avatar :src="getImage(value)" :alt="`${value.name}的 Facebook 粉絲專頁大頭貼照`" />
 
     <span class="info">
       <span class="name">{{ value.name }}</span>

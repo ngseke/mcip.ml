@@ -2,6 +2,7 @@
 const props = defineProps<{
   src?: string
   size?: string
+  alt?: string
 }>()
 
 const imgRef = ref<HTMLImageElement | null>()
@@ -24,7 +25,7 @@ const style = computed(() => ({
 
 <template>
   <div class="wrapper" :style="style" :class="{ hide: !isImageLoaded }">
-    <img ref="imgRef" :src="src" @load="handleLoad">
+    <img ref="imgRef" :alt="alt" :src="src" @load="handleLoad">
   </div>
 </template>
 

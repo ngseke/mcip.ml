@@ -28,7 +28,7 @@ const time = computed(() => formatDate(props.value.timestamp))
   <NuxtLink class="news-card" :to="link">
     <div class="row no-gutters align-items-center">
       <div class="col-auto">
-        <Avatar class="mr-3" :src="image" size="4rem" />
+        <Avatar class="mr-3" :src="image" size="4rem" :alt="title" />
       </div>
 
       <div class="col body">
