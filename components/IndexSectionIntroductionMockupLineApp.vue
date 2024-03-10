@@ -12,7 +12,7 @@
       >
       <img
         class="qrcode"
-        src="~/assets/img/line-app-qrcode-shorthand.png"
+        src="~/assets/img/qrcode.svg"
         alt="樂台計畫 LINE App QRCode"
       >
     </div>
@@ -48,7 +48,7 @@
   +wh(10rem)
   position: absolute
   background-color: white
-  border: 1rem solid white
+  border: .5rem solid white
   border-radius: 1rem
   right: 0
   bottom: 0
