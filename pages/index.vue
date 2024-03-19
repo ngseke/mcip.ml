@@ -16,7 +16,6 @@ const { data: partners } = await useAsyncData(fetchPartners)
       <IndexSectionDivider />
       <IndexSectionNews v-if="newsList" :list="newsList" />
       <IndexSectionPartner v-if="partners" :partners="partners" />
-      <IndexSectionContactUs />
     </main>
   </div>
 </template>
