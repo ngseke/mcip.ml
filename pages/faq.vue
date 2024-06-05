@@ -82,7 +82,7 @@ function getIdString (_: string) {
                   {{ content.question }}
                 </h3>
                 <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                  <div itemprop="text" v-html="marked(content.answer)" />
+                  <div itemprop="text" v-html="marked(content.answer, { breaks: true })" />
                 </div>
               </div>
             </section>
